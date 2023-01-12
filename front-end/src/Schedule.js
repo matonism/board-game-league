@@ -73,7 +73,7 @@ class Schedule extends React.Component {
     }
 
     getScheduleScreen(){
-        if(this.props.schedule){
+        if(this.props.schedule && this.props.schedule.length > 0){
             return (<div>{this.displaySchedule()}</div>)
         }else if(this.props.error){
             return (<div>There was an error loading the schedule</div>)

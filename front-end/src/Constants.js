@@ -1,13 +1,10 @@
 const Constants = {
-    MOCK_STORAGE: false,
-    MOCK_API: false, 
-    // MOCK_STORAGE: true,
+    
     // MOCK_API: true, 
     // SERVER_URL: "http://localhost:4001",
-    HOST_URL: "http://localhost:3000",
+
+    MOCK_API: false, 
     SERVER_URL:  'https://6k70mthaui.execute-api.us-east-2.amazonaws.com',
-    // HOST_URL: "https://brackset.com",
-    // HOST_URL: "http://bracket-generator.s3-website.us-east-2.amazonaws.com",
 
     COOKIE_USER_KEY: 'user',
     COOKIE_USERNAME_KEY: 'username',

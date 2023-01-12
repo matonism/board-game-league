@@ -35,3 +35,32 @@
     /* border-bottom: 0.01rem solid beige; */
     font-variant: petite-caps;
 }
+
+.season-toggle{
+    width: 100%;
+    background-color: cornflowerblue;
+    display: flex;
+    justify-content: end;
+    padding: 0.4rem 0rem;
+}
+
+.season-button{
+    padding: 0.5rem 1.4rem;
+    background-color: aquamarine;
+    border-radius: 0.8rem;
+    margin-left: 0.4rem;
+}
+
+.season-button:last-child{
+    margin-right: 0.4rem;
+}
+
+.season-button.active{
+    background-color: darkblue;
+    color: white;
+}
+
+.season-button:hover{
+    background-color: aliceblue;
+    cursor: pointer;
+}
