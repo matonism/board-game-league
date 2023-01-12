@@ -1,0 +1,32 @@
+
+@font-face {
+    font-family: 'LouisGeorge';
+    src: local('LouisGeorge'), url(./fonts/Louis-George-Cafe.ttf) format('truetype');
+  }
+
+  .bgl-power-cell{
+    padding:0.3rem 0.5rem;
+    text-align: left;
+  }
+
+  .power-ranking-header{
+    padding: 2rem 0 0.4rem;
+    font-size: 2rem;
+  }
+
+  .standings-row-header{
+    text-align: left;
+    padding: 0.5rem;
+    margin-bottom: 2rem;
+    /* font-weight: bold; */
+    font-size: 1.2rem;
+  }
+
+  .bgl-standings-cell.name-cell{
+    text-align: left;
+  }
+
+  .centered-left-text{
+    display: flex; 
+    align-items: center;
+  }

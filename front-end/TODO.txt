@@ -1,0 +1,13 @@
+TODO
+- ensure advancing update works for final main bracket round
+
+FIGURE OUT
+- Restrict MongoDB Access to only API Gateway
+
+DONE
+- make panels more cohesive
+- show loading icon when viewonly mode
+- indicate that bracket is in view only mode
+- update publish panel to fit on mobile
+- enlarge landing page buttons
+- copy link should actually copy to clipboard and show toast

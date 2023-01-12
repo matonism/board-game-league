@@ -1,0 +1,18 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "main": "getLeagueInfo.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.662.0",
+    "dotenv": "^16.0.3",
+    "google": "^2.1.0",
+    "googleapis": "^110.0.0",
+    "node-xlsx": "^0.15.0"
+  },
+  "description": ""
+}
