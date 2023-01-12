@@ -3,11 +3,12 @@ import React from "react";
 import Constants from "./Constants";
 import './DataContainer.css';
 import loadingIcon from './images/loading-icon.gif';
-import {getPowerRankings, getSchedule, getStandings, getResults } from "./callouts/CalloutFactory";
+import {getPowerRankings, getSchedule } from "./callouts/CalloutFactory";
 import Schedule from "./Schedule";
 import Standings from "./Standings";
 import Results from "./Results";
 import PowerRankings from "./PowerRankings";
+import { createScheduleObject, createStandingsObject } from "./DataFormatter";
 
 class DataContainer extends React.Component {
 
@@ -15,7 +16,8 @@ class DataContainer extends React.Component {
         super(props);
         
 
-        this.displayTabsRef = React.createRef();        
+        this.displayTabsRef = React.createRef();     
+        this.seasonToggleRef = React.createRef();   
         this.state = {
             isLoading: true,
             schedule: [],
@@ -23,6 +25,7 @@ class DataContainer extends React.Component {
             powerRankings: {},
             standings: {},
             displayedScreen: 'schedule',
+            season: 2023,
             errors:{
                 schedule: null,
                 results: null,
@@ -31,18 +34,19 @@ class DataContainer extends React.Component {
             }
         };
 
-        this.loadSchedule = this.loadSchedule.bind(this);
-        this.loadPowerRankings = this.loadPowerRankings.bind(this);
-        this.loadResults = this.loadResults.bind(this);
-        this.loadStandings = this.loadStandings.bind(this);
-        this.getCurrentDisplay = this.getCurrentDisplay.bind(this);
+        // this.loadSchedule = this.loadSchedule.bind(this);
+        // this.loadPowerRankings = this.loadPowerRankings.bind(this);
+        // this.loadResults = this.loadResults.bind(this);
+        // this.loadStandings = this.loadStandings.bind(this);
+        // this.getCurrentDisplay = this.getCurrentDisplay.bind(this);
         this.toggleDisplay = this.toggleDisplay.bind(this);
+        this.toggleSeason = this.toggleSeason.bind(this);
            
     }
 
     componentDidMount(){
-        this.loadSchedule();
-        this.loadPowerRankings();
+        this.loadSchedule(this.state.season);
+        this.loadPowerRankings(this.state.season);
         // this.loadResults();
         // this.loadStandings();
     }
@@ -73,162 +77,74 @@ class DataContainer extends React.Component {
     //     }
     // ]
     //static schedule (may include results here as well?)
-    loadSchedule(){
-        getSchedule().then(response => {
-            let schedule = this.createScheduleObject(response);
-            let standings = this.createStandingsObject(schedule);
+    loadSchedule(season){
+        getSchedule(season).then(response => {
+
+            if(response.code === 400){
+                let responseError = this.state.errors;
+                responseError.schedule = 'Schedule info do not exist for this season';
+                
+                this.setState({
+                    errors: responseError,
+                    schedule: null,
+                    standings: null
+                });
+                console.log(response.code);
+                console.log('Could not load power rankings');
+            }else{
+                let schedule = createScheduleObject(response);
+                let standings = createStandingsObject(schedule);
+                
+                this.setState({
+                    schedule: schedule,
+                    standings: standings
+                });
+            }
+
 
         }).catch(error => {
             let responseError = this.state.errors;
             responseError.schedule = error;
             this.setState({
-                errors: responseError
+                errors: responseError,
+                schedule: null,
+                standings: null
             });
-            if(error.code){
-                console.log(error.code);
-                console.log('Could not load schedule');
-            }
+            console.log(error.code);
+            console.log('Could not load schedule');
         });
     }
 
     //static list created by admin
-    loadPowerRankings(){
-        getPowerRankings().then(response => {
-            this.setState({
-                powerRankings: response,
-            });
+    loadPowerRankings(season){
+        getPowerRankings(season).then(response => {
+            if(response.code === 400){
+                let responseError = this.state.errors;
+                responseError.powerRankings = 'Power Rankings do not exist for this season';
+
+                this.setState({
+                    errors: responseError,
+                    powerRankings: null
+                });
+                console.log(response.code);
+                console.log('Could not load power rankings');
+            }else{
+                this.setState({
+                    powerRankings: response,
+                });
+            }
         }).catch(error => {
             let responseError = this.state.errors;
             responseError.powerRankings = error;
             this.setState({
-                errors: responseError
+                errors: responseError,
+                powerRankings: null
             });
-            if(error.code){
-                console.log(error.code);
-                console.log('Could not load power rankings');
-            }
+            console.log(error.code);
+            console.log('Could not load power rankings');
         });
 
     }
-
-    //get 1st place - 4th place for each already played game
-    loadResults(){
-        getResults().then(response => {
-            this.setState({
-                results: response,
-            });
-        }).catch(error => {
-            let responseError = this.state.error;
-            responseError.results = error;
-            this.setState({
-                error: responseError
-            });
-            if(error.code){
-                console.log(error.code);
-                console.log('Could not load results');
-            }
-        });
-
-    }
-
-    //current point totals (might not need.  Can probably just retrieve results and run logic)
-    loadStandings(){
-        getStandings().then(response => {
-            this.setState({
-                standings: response,
-            });
-        }).catch(error => {
-            let responseError = this.state.error;
-            responseError.standings = error;
-            this.setState({
-                error: responseError
-            });
-            if(error.code){
-                console.log(error.code);
-                console.log('Could not load standings');
-            }
-        });
-
-    }
-
-   createScheduleObject(response){
-            let numberOfGamesPerWeek = 4;
-            let numberOfPlayersPerGame = 4;
-            let infoHeaderRows = 1;
-            let rowsBetweenWeeksInSpreadsheet = numberOfGamesPerWeek * 2 + infoHeaderRows;
-            
-            let schedule = [];
-            response.values.forEach((row, rowIndex) => {
-                
-                let rowReference = rowIndex % rowsBetweenWeeksInSpreadsheet;
-                if(rowReference == 0){
-                    schedule.push({
-                        week: row[0], 
-                        game: row[1], 
-                        dates: row[2], 
-                        results: []});
-                }else if(rowReference % 2 === 1){
-                    let placementRow = response.values[rowIndex + 1];
-                    let scheduleToUpdate = schedule[schedule.length - 1];
-                    scheduleToUpdate.results.push([]);
-                    for(let j = 1; j <= numberOfPlayersPerGame; j++){
-                        let groupToUpdate = scheduleToUpdate.results[scheduleToUpdate.results.length-1];
-                        let placement = placementRow[j];
-                        groupToUpdate.push({player: row[j], placement: placement})
-                    }
-                }
-            })
-            this.setState({
-                schedule: schedule,
-            });
-            return schedule;
-   }
-
-   createStandingsObject(schedule){
-        let standings = {};
-        schedule.forEach(week=>{
-            week.results.forEach(group => {
-                group.forEach(performance => {
-                    if(!standings[performance.player]){
-                        standings[performance.player] = 0;
-                    }
-                    if(performance.placement){
-                        standings[performance.player] += this.scoringRubric(performance.placement);
-                    }
-                })
-            })
-        })
-        
-        let standingsArray = Object.keys(standings).map(player => {
-            return {player: player, points: standings[player]};
-        })
-
-
-        standingsArray.sort((a, b) => {
-            if(a.points > b.points) {
-                return -1;
-            }else{
-                return 1;
-            }
-        })
-
-        this.setState({
-            standings: standingsArray
-        })
-
-        return standingsArray;
-   }
-
-   scoringRubric(placement){
-    if(placement == 1){
-        return 3;
-    }else if(placement == 2){
-        return 2;
-    }else if(placement == 3){
-        return 1;
-    }
-    return 0;
-   }
 
     getCurrentDisplay(){
         if(this.state.displayedScreen === 'schedule'){
@@ -262,15 +178,58 @@ class DataContainer extends React.Component {
         })
     }
 
+    getDisplayOptions(){
+        let displayOptions = [];
+        if(this.state.schedule){
+            
+            displayOptions.push((<div data-name="schedule" className="toggle-button active" onClick={this.toggleDisplay}>Schedule</div>));
+            displayOptions.push((<div data-name="standings" className="toggle-button" onClick={this.toggleDisplay}>Standings</div>));
+        }
+
+        if(this.state.powerRankings){
+            displayOptions.push((<div data-name="powerRankings" className="toggle-button" onClick={this.toggleDisplay}>Power Rankings</div>));
+        }
+        return displayOptions;
+    }
+
+    toggleSeason(event){
+        let buttonName = event.target.dataset.name;
+
+        let seasonTabs = this.seasonToggleRef.current.querySelectorAll('.season-button');
+        seasonTabs.forEach((tab) => {
+            if(tab.className.includes(' active')){
+                tab.className = tab.className.replace(' active', '');
+            }
+      
+            if(tab.dataset.name === buttonName){
+                tab.className += ' active';
+            }
+        });
+
+        let previouslySelectedSeason = this.state.season;
+        if(buttonName != previouslySelectedSeason){
+            this.setState({
+                season: buttonName
+            })
+
+            this.loadSchedule(buttonName);
+            this.loadPowerRankings(buttonName);
+        }
+        
+
+    }
+
     render(){
 
         return (
             <>
+            <div className="season-toggle" ref={this.seasonToggleRef}>
+                <div data-name="2023" className="season-button active" onClick={this.toggleSeason}>2023</div>
+                <div data-name="2022" className="season-button" onClick={this.toggleSeason}>2022</div>
+            </div>
             <div className="bgl-header">Board Game League</div>
             <div className="display-tabs" ref={this.displayTabsRef}>
-                <div data-name="schedule" className="toggle-button active" onClick={this.toggleDisplay}>Schedule</div>
-                <div data-name="standings" className="toggle-button" onClick={this.toggleDisplay}>Standings</div>
-                <div data-name="powerRankings" className="toggle-button" onClick={this.toggleDisplay}>Power Rankings</div>
+                {this.getDisplayOptions()}
             </div>
             {this.getCurrentDisplay()}                
             </>

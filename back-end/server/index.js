@@ -8,9 +8,7 @@ var fs = require('fs');
 var url = require('url');
 var bodyParser = require('body-parser');
 var getSchedule = require('./getSchedule.js');
-const getStandings = require('./getStandings.js');
 const getPowerRankings = require('./getPowerRankings.js');
-const getResults = require('./getResults.js');
 
 var app = express();
 //set app view engine

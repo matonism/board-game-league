@@ -8,6 +8,7 @@ const auth = new google.auth.GoogleAuth({
 });
 
 async function getSchedule(queryParams){
+    let season = queryParams.season;
     //Auth client Object
     const authClientObject = await auth.getClient();
     const googleSheetsInstance = google.sheets({ version: "v4", auth: authClientObject });
@@ -17,7 +18,7 @@ async function getSchedule(queryParams){
     const readData = await googleSheetsInstance.spreadsheets.values.get({
         auth, //auth object
         spreadsheetId, // spreadsheet id
-        range: "Schedule!A:E", //range of cells to read from.
+        range: "Schedule-" + season + "!A:E", //range of cells to read from.
     })
 
     return readData.data;
