@@ -1,0 +1,65 @@
+
+@font-face {
+    font-family: 'LouisGeorge';
+    src: local('LouisGeorge'), url(./fonts/Louis-George-Cafe.ttf) format('truetype');
+  }
+
+
+  .bgl-week-table-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .bgl-week-container{
+    padding-top: 1.5rem;
+    padding-bottom: 1rem;
+  }
+
+  .bgl-week-header{
+    font-size: 1.4rem;
+  }
+
+  .bgl-week-subheader{
+    font-size: 0.8rem;
+    font-weight: bold;
+  }
+
+  .bgl-week-table{
+    border-collapse: collapse;
+  }
+
+  .player-row{
+  }
+
+  .placement-row{
+    background-color: antiquewhite;
+    padding-bottom: 1rem;
+    border-bottom: 0.1rem solid gray;
+  }
+
+  .bgl-table-title-cell{
+    font-weight: bold;
+    padding: 0.2rem 1rem;
+    border-right: 0.2rem solid white;
+    vertical-align: bottom;
+  }
+
+  .bgl-table-cell{
+    padding: 0.8rem 0.5rem 0.2rem;
+    vertical-align: bottom;
+  }
+
+  .bgl-table-subtitle-cell{
+    /* font-weight: bold; */
+    padding: 0.3rem 1rem;
+    font-size: 0.8rem;
+    border-right: 0.15rem solid white;
+    vertical-align: bottom;
+  }
+  .bgl-table-placement-cell{
+    padding: 0.3rem 0.5rem;
+    font-size: 0.8rem;
+    vertical-align: bottom;
+  }
+

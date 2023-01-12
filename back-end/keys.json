@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "board-game-league-374421",
+  "private_key_id": "fa3760904540e30bae56fdecf398808032ea940d",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCcYtG7hEx47vmF\neAb9ngW4jj1+tN9630bZPeLV4Vxv+8xpZoVKVVRIhcD01NiXWIpFjdHOXVXP/Her\nwcubT4RImJScmtDHswooAx1jgywrUKMNsnFYI8SzQLgZrgLDzmnETmop+Lt+4Dxg\nvVUg8fdziuxKC0cHJpFv6tXXGwbROGw1jawTT+IMFsDjtlOl7NJgxmzDlbJtpdiG\nz3sNPKyrkvAmSe0u/JrSaNE1w9BZkxIbisMokzypXvJbKD5/9g7jgOaEfvZEi8G6\nWSJNu8cn3txgo1ANLE42NTUFW3odmXNw3tyE6/c/mPbvt0JZOJPm+2kTrS2vfwvh\nggGvFOjFAgMBAAECggEABLDDebrJ2jDp7uQiKr5JpyOsoGdRGNWBQaSx/N7A+XXf\nFDeenobJKJ5KySOCKVke11+3aX34ql/E5ucNq43N83YQgDlcTJ6oDeB41u8ZM2WV\n6MqcZi7Q26lNbEdarpNIFLrfKcoCG6Siz8PJMOjSlnAizqsgbGYIFvtMG+/KVRrI\nID7xiXQN3xL9dsu0XqsNYZGnr8o8+DdFhK20H3KwkjnAE++qXhmoOJNsUw928lpt\nkruqNRgZHoxalmG9jUyupp8/49VqCvnLVMOSTm5va2rcbkng/pKnD7t52oiY5sh3\nl8+KxmS7aV42aYDGJZ/9OdfT1S+DL1CrwkbhfqO4sQKBgQDa3d9CZfFlRy0voer/\nNECh4mW9VlIKWm8zdRMqTlMm7nyXrrsjGfMmdnmZsMLn3JEgEwGJgvkKHz1yEdOp\nBaEjNlLhyxVmjIkdlehoaR2+I36D1C4+tVZSVXOx/95K/0CNvjfrgu3CCwhwSlOo\nSafuygkpP2p/D64zA1s6JFpQVQKBgQC26zKwqB19TlSLo56FFaNNBO8DinkhaonU\nQQqRaiVbcuAj+7xpLWup0SlPGDSDeWxBGu1R5v5XXVA4C8OKkLizlTqpsoq0Bgsb\nDdMKDazyfFwKsxw975uUzCdxh4YZyCQdii7WwqvCwNHoTVZ3qKxYokGZaSyDXnmp\n2kI8sZvmsQKBgFl4j/cNw4Pad+9b6rwO+Uj0SxD+g6U12PWZK4+E21sz7Pz48glk\nZ1DW59jbOKIeObl564vyXao0oSLLhNI4uemyIGmrYoE8fCT7Djn4lq8OxX5Qs+Lw\nsGwSAKzIY3AXLqWDGEsPh/BmIDn/OHm4Oo1UTDBvezKcD2NNQPLgv4bNAoGBAIAR\nimsPOZ5rAlzGUQ2CydP5+VJ0WDziN+AJLdoEBGXTt0TaUt8c8v1xuUdsfg/zKq0m\nqjQm07rdVXX4Ho9cpkTt3aXEoMJMXOgzNKgcTRN1qIfBQavHoBl9GrytE2HntAmO\nnx60K8fucsj/pOOgkBJ6gA1mCslrkykt7CRMggfxAoGAb56/v5lf1pzts4r7/MU7\n/n0mwoHVL6LHExoSg8rIdwYUX43DFjURb83k3k4wYzBgMlN43vfmrmgvf5o0vlsw\nAE5o8OIMFPrHgEpakdvTaAATMInFWNhb+E5yqooznZmiG3OvoraLrrCdFun5Ck5F\nc5t3WaLw96eURvm1aq4uGM8=\n-----END PRIVATE KEY-----\n",
+  "client_email": "board-game-league@board-game-league-374421.iam.gserviceaccount.com",
+  "client_id": "106686230171103028666",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/board-game-league%40board-game-league-374421.iam.gserviceaccount.com"
+}

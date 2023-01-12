@@ -1,0 +1,51 @@
+
+@font-face {
+    font-family: 'LouisGeorge';
+    src: local('LouisGeorge'), url(./fonts/Louis-George-Cafe.ttf) format('truetype');
+  }
+
+.account-info-container{
+    display: flex;
+    width: 100%;
+    align-items: flex-start;
+}
+
+.account-info-nav{
+    margin: 0 1rem 0 1rem;
+}
+
+.account-info-nav-tab{
+    padding: 0.5rem 2rem;
+    margin: 0.25rem 0;
+    border-radius: 0.5rem;
+    font-family: "LouisGeorge";
+    cursor: pointer;
+}
+
+.account-info-nav-tab:hover{
+    background-color: azure;
+}
+
+.account-info-nav-tab.selected{
+    color: white;
+    background-color: #253e4c;
+}
+
+.account-info-content{
+    flex-grow: 2;
+    overflow-y: auto;
+
+}
+
+.premium-indicator{
+
+}
+
+.email-verified-prompt{
+
+}
+
+.date-joined{
+    font-family: "LouisGeorge";
+
+}

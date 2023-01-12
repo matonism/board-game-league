@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/static/css/main.989bdffc.chunk.css",
+    "main.js": "/static/js/main.31c84268.chunk.js",
+    "main.js.map": "/static/js/main.31c84268.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.7f711bc7.js",
+    "runtime-main.js.map": "/static/js/runtime-main.7f711bc7.js.map",
+    "static/js/2.7e4c0fe9.chunk.js": "/static/js/2.7e4c0fe9.chunk.js",
+    "static/js/2.7e4c0fe9.chunk.js.map": "/static/js/2.7e4c0fe9.chunk.js.map",
+    "static/js/3.c5795eee.chunk.js": "/static/js/3.c5795eee.chunk.js",
+    "static/js/3.c5795eee.chunk.js.map": "/static/js/3.c5795eee.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.989bdffc.chunk.css.map": "/static/css/main.989bdffc.chunk.css.map",
+    "static/js/2.7e4c0fe9.chunk.js.LICENSE.txt": "/static/js/2.7e4c0fe9.chunk.js.LICENSE.txt",
+    "static/media/PowerRankings.css": "/static/media/Louis-George-Cafe.eacd8787.ttf",
+    "static/media/loading-icon.11c01773.gif": "/static/media/loading-icon.11c01773.gif"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.7f711bc7.js",
+    "static/js/2.7e4c0fe9.chunk.js",
+    "static/css/main.989bdffc.chunk.css",
+    "static/js/main.31c84268.chunk.js"
+  ]
+}

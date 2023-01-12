@@ -1,0 +1,37 @@
+
+@font-face {
+    font-family: 'LouisGeorge';
+    src: local('LouisGeorge'), url(./fonts/Louis-George-Cafe.ttf) format('truetype');
+  }
+
+  .toggle-button{
+    background-color: beige;
+    flex-grow: 1;
+    padding: 0.4rem 0;
+}
+.toggle-button:hover{
+    background-color:antiquewhite;
+    cursor: pointer;
+    }
+
+.toggle-button.active{
+    background-color: brown;
+    color: white;
+    border-radius: 0 0 1rem 1rem;
+    padding: 0.2rem 0 0.4rem;
+}
+
+.display-tabs{
+    display: flex;
+    justify-content: space-evenly;
+    background-color: beige;
+}
+
+.bgl-header{
+    font-size: 2.6rem;
+    padding: 0.8rem 0;
+    background-color: brown;
+    color: white;
+    /* border-bottom: 0.01rem solid beige; */
+    font-variant: petite-caps;
+}
