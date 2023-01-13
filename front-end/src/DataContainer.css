@@ -60,7 +60,12 @@
     color: white;
 }
 
-.season-button:hover{
-    background-color: aliceblue;
-    cursor: pointer;
+
+
+@media only screen and (min-width: 768px) {    
+    .season-button:hover{
+        background-color: aliceblue;
+        cursor: pointer;
+        color: black;
+    }
 }
