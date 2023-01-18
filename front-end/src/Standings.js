@@ -27,7 +27,7 @@ class Standings extends React.Component {
     displayStandings(){
         
         if(this.props.standings){
-            let tableRows = this.props.standings.map((value, index) => {
+            let tableRows = this.props.standings.regularSeason.map((value, index) => {
                 return (
                     <tr className="bgl-row">
                         <td className="bgl-standings-cell">{index + 1}</td>
@@ -45,7 +45,8 @@ class Standings extends React.Component {
 
             return (
                 <>
-                    <div className="power-ranking-header">BGL Season 2 Standings</div>
+                    {this.displayChampionship()}
+                    <div className="power-ranking-header">BGL {this.props.season} Regular Season</div>
                     <div className="bgl-table-container">
                         <table className="bgl-table">{tableRows}</table>
                     </div>
@@ -54,9 +55,40 @@ class Standings extends React.Component {
         }
     }
 
+    displayChampionship(){
+        if(this.props.standings){
+            let championshipRows = [];
+            if(this.props.standings.championship && this.props.standings.championship.length > 0){
+                championshipRows = this.props.standings.championship.map((value, index) => {
+                    return (
+                        <tr className="bgl-row">
+                            <td className="bgl-standings-cell">{index + 1}</td>
+                            <td className="bgl-standings-cell">{value.player}</td>
+                            <td className="bgl-standings-cell">{value.points}</td>
+                        </tr>
+                    )
+                });
+    
+                championshipRows.unshift((<tr>
+                    <td className="standings-row-header">Position</td>
+                    <td className="standings-row-header">Player</td>
+                    <td className="standings-row-header">Points</td>
+                </tr>))
+
+                return (<>
+                    <div className="power-ranking-header">BGL {this.props.season} Final Standings</div>
+                    <div className="bgl-table-container">
+                        <table className="bgl-table">{championshipRows}</table>
+                    </div>
+                </>)
+
+            }
+        }
+        return (<></>);
+    }
 
     getStandingsScreen(){
-        if(this.props.standings){
+        if(this.props.standings?.regularSeason){
             return this.displayStandings();
         }else if(this.props.error){
             return (<div>There was an error loading the standings</div>)

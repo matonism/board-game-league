@@ -8,7 +8,8 @@ import Schedule from "./Schedule";
 import Standings from "./Standings";
 import Results from "./Results";
 import PowerRankings from "./PowerRankings";
-import { createScheduleObject, createStandingsObject } from "./DataFormatter";
+import Album from "./Album";
+import { createScheduleObject, createStandingsObject, getImageFileNamesToLoad } from "./DataFormatter";
 
 class DataContainer extends React.Component {
 
@@ -24,13 +25,15 @@ class DataContainer extends React.Component {
             results: {},
             powerRankings: {},
             standings: {},
+            album: [],
             displayedScreen: 'schedule',
             season: 2023,
             errors:{
                 schedule: null,
                 results: null,
                 powerRankings: null,
-                standings: null
+                standings: null,
+                album: null
             }
         };
 
@@ -94,6 +97,7 @@ class DataContainer extends React.Component {
             }else{
                 let schedule = createScheduleObject(response);
                 let standings = createStandingsObject(schedule);
+                // let album = getImageFileNamesToLoad(schedule, response);
                 
                 this.setState({
                     schedule: schedule,
@@ -108,7 +112,8 @@ class DataContainer extends React.Component {
             this.setState({
                 errors: responseError,
                 schedule: null,
-                standings: null
+                standings: null,
+                album: null
             });
             console.log(error.code);
             console.log('Could not load schedule');
@@ -154,7 +159,9 @@ class DataContainer extends React.Component {
         } else if(this.state.displayedScreen === 'results'){
             return (<Results schedule={this.state.schedule} error={this.state.errors.results}></Results>);
         } else if(this.state.displayedScreen === 'standings'){
-            return (<Standings standings={this.state.standings} error={this.state.errors.standings}></Standings>);
+            return (<Standings season={this.state.season} standings={this.state.standings} error={this.state.errors.standings}></Standings>);
+        } else if(this.state.displayedScreen === 'album'){
+            return (<Album season={this.state.season} schedule={this.state.schedule} error={this.state.errors.album}></Album>);
         } else {
             return (<Schedule schedule={this.state.schedule} error={this.state.errors.schedule}></Schedule>);
         }
@@ -188,6 +195,10 @@ class DataContainer extends React.Component {
 
         if(this.state.powerRankings){
             displayOptions.push((<div data-name="powerRankings" className="toggle-button" onClick={this.toggleDisplay}>Power Rankings</div>));
+        }
+
+        if(this.state.album){
+            displayOptions.push((<div data-name="album" className="toggle-button" onClick={this.toggleDisplay}>Album</div>));
         }
         return displayOptions;
     }
