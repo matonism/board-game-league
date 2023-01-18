@@ -7,26 +7,33 @@
   .toggle-button{
     background-color: beige;
     flex-grow: 1;
-    padding: 0.4rem 0;
+    padding: 0.4rem 2rem;
 }
 .toggle-button:hover{
     background-color:antiquewhite;
     cursor: pointer;
-    }
+}
 
 .toggle-button.active{
     background-color: brown;
     color: white;
     border-radius: 0 0 1rem 1rem;
-    padding: 0.2rem 0 0.4rem;
+    padding-top: 0.2rem;
+    padding-bottom: 0.4rem;
 }
 
 .display-tabs{
     display: flex;
-    justify-content: space-evenly;
     background-color: beige;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    overflow-x: auto;
+    white-space: nowrap;
 }
 
+.display-tabs::-webkit-scrollbar {
+    display: none;
+}
 .bgl-header{
     font-size: 2.6rem;
     padding: 0.8rem 0;
@@ -43,6 +50,8 @@
     justify-content: end;
     padding: 0.4rem 0rem;
 }
+
+
 
 .season-button{
     padding: 0.5rem 1.4rem;
@@ -67,5 +76,15 @@
         background-color: aliceblue;
         cursor: pointer;
         color: black;
+    }
+
+    .display-tabs{
+        display: flex;
+        justify-content: space-evenly;
+        background-color: beige;
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+        overflow-x: auto;
+        white-space: nowrap;
     }
 }

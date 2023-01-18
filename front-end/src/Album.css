@@ -1,0 +1,143 @@
+
+@font-face {
+    font-family: 'LouisGeorge';
+    src: local('LouisGeorge'), url(./fonts/Louis-George-Cafe.ttf) format('truetype');
+  }
+
+
+  .bgl-week-table-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .bgl-week-container{
+    padding-top: 1.5rem;
+    padding-bottom: 1rem;
+  }
+
+  .bgl-week-header{
+    font-size: 1.4rem;
+  }
+
+  .bgl-week-subheader{
+    font-size: 0.8rem;
+    font-weight: bold;
+  }
+
+  .bgl-week-table{
+    border-collapse: collapse;
+  }
+
+  .player-row{
+  }
+
+  .placement-row{
+    background-color: antiquewhite;
+    padding-bottom: 1rem;
+    border-bottom: 0.1rem solid gray;
+  }
+
+  .bgl-table-title-cell{
+    font-weight: bold;
+    padding: 0.2rem 1rem;
+    border-right: 0.2rem solid white;
+    vertical-align: bottom;
+  }
+
+  .bgl-table-cell{
+    padding: 0.8rem 0.5rem 0.2rem;
+    vertical-align: bottom;
+  }
+
+  .bgl-table-subtitle-cell{
+    /* font-weight: bold; */
+    padding: 0.3rem 1rem;
+    font-size: 0.8rem;
+    border-right: 0.15rem solid white;
+    vertical-align: bottom;
+  }
+  .bgl-table-placement-cell{
+    padding: 0.3rem 0.5rem;
+    font-size: 0.8rem;
+    vertical-align: bottom;
+  }
+
+.hidden{
+    display: none;
+}
+
+.bgl-week-album-container{
+    padding: 1rem;
+    display: flex;
+    justify-content: space-evenly;
+    width: 90%;
+    flex-wrap: wrap;
+}
+
+.image-container{
+
+    padding: 0.2rem;
+}
+
+.gallery-image{
+    max-height: 12rem;
+    border: 0.4rem solid beige;
+}
+
+.gallery-image:hover{
+    cursor: pointer;
+}
+
+.album-container{
+    display: flex;
+    justify-content: center;
+    padding-top: 1.5rem;
+    padding-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+
+.large-image-background{
+    background-color: rgba(0,0,0,0.5);
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    left: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.large-image-container{
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0,0,0.7);
+    display: flex;
+    flex-direction: column;
+    top: 0;
+    left: 0;
+
+}
+.close-large-image-button{
+    height: 2rem;
+    color: white;
+    padding: 1rem;
+    align-self: end;
+    cursor: pointer;
+}
+.large-image-display{
+    max-height: 80%;
+    max-width: 90%;
+    align-self: center;
+}
+.focused-image{
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 1rem;
+    box-shadow: 0.5rem 0.5rem 2rem black;
+}
