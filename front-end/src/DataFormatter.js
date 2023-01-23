@@ -99,6 +99,16 @@ export function createStandingsObject(schedule){
         }
     })
 
+    let mostRecentPlacement = 1;
+    standingsArray.forEach((person, index) => {
+        if(index === 0 || person.points !== standingsArray[index - 1].points){
+            person.placement = index + 1;
+            mostRecentPlacement = index + 1;
+        }else{
+            person.placement = mostRecentPlacement;
+        }
+    })
+
     //championship sorting
     let championshipArray = Object.keys(standings.championship).map(player => {
         return {player: player, points: standings.championship[player]};
@@ -181,10 +191,12 @@ export function getPowerRankingsObjects(powerRankingsResponse){
         powerRankingsResponse.values.forEach((row, rowIndex) => {
             row.forEach((value, columnIndex)=>{
                 if(rowIndex === 0){
-                    powerRankings.push({
-                        label: value,
-                        rankings: []
-                    })
+                    if(powerRankingsResponse.values[rowIndex + 1].length > columnIndex){
+                        powerRankings.push({
+                            label: value,
+                            rankings: []
+                        })
+                    }
                 }else{
                     powerRankings[columnIndex].rankings.push(value);
                 }
