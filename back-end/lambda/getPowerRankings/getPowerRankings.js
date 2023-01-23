@@ -18,7 +18,7 @@ async function getPowerRankings(queryParams){
     const readData = await googleSheetsInstance.spreadsheets.values.get({
         auth, //auth object
         spreadsheetId, // spreadsheet id
-        range: "PowerRankings-" + season + "!A1:A100", //range of cells to read from.
+        range: "PowerRankings-" + season + "!A1:G100", //range of cells to read from.
     })
 
     return readData.data;

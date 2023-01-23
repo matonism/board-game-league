@@ -173,3 +173,23 @@ export function getImageFileNamesToLoad(schedule, response){
     return imageNames
     
 }
+
+export function getPowerRankingsObjects(powerRankingsResponse){
+    let powerRankings = [];
+    if(powerRankingsResponse.values.length > 1){
+
+        powerRankingsResponse.values.forEach((row, rowIndex) => {
+            row.forEach((value, columnIndex)=>{
+                if(rowIndex === 0){
+                    powerRankings.push({
+                        label: value,
+                        rankings: []
+                    })
+                }else{
+                    powerRankings[columnIndex].rankings.push(value);
+                }
+            })
+        })
+    }
+    return powerRankings;
+}
