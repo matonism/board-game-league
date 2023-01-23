@@ -19,3 +19,42 @@
   .power-ranking-header{
     padding: 2rem 0 0.4rem;
   }
+
+  .week-toggle-container{
+    display: flex;
+    justify-content: center;
+    padding: 2rem 0 0 0;
+  }
+
+  .week-toggle-button{
+    background-color: beige;
+    padding: 0.5rem 1rem;
+  }
+
+  .week-toggle-button.active{
+    background-color: brown;
+    color: white;
+  }
+
+  .week-toggle-button:last-child{
+    border-radius: 0 1rem 1rem 0;
+
+  }
+  .week-toggle-button:first-child{
+    border-radius: 1rem 0 0 1rem;
+
+  }
+
+  
+
+@media only screen and (min-width: 768px) {    
+    .week-toggle-button:hover{
+        background-color: antiquewhite;
+        cursor: pointer;
+        color: black;
+    }
+    .week-toggle-button.active:hover{
+        background-color: brown;
+        color: white;
+    }
+}

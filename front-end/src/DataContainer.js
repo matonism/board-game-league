@@ -9,7 +9,7 @@ import Standings from "./Standings";
 import Results from "./Results";
 import PowerRankings from "./PowerRankings";
 import Album from "./Album";
-import { createScheduleObject, createStandingsObject, getImageFileNamesToLoad } from "./DataFormatter";
+import { createScheduleObject, createStandingsObject, getImageFileNamesToLoad, getPowerRankingsObjects } from "./DataFormatter";
 
 class DataContainer extends React.Component {
 
@@ -134,8 +134,9 @@ class DataContainer extends React.Component {
                 console.log(response.code);
                 console.log('Could not load power rankings');
             }else{
+                let powerRankings = getPowerRankingsObjects(response)
                 this.setState({
-                    powerRankings: response,
+                    powerRankings: powerRankings,
                 });
             }
         }).catch(error => {
@@ -155,7 +156,7 @@ class DataContainer extends React.Component {
         if(this.state.displayedScreen === 'schedule'){
             return (<Schedule schedule={this.state.schedule} error={this.state.errors.schedule}></Schedule>);
         } else if(this.state.displayedScreen === 'powerRankings'){
-            return (<PowerRankings powerRankings={this.state.powerRankings} error={this.state.errors.powerRankings}></PowerRankings>);
+            return (<PowerRankings season={this.state.season} powerRankings={this.state.powerRankings} error={this.state.errors.powerRankings}></PowerRankings>);
         } else if(this.state.displayedScreen === 'results'){
             return (<Results schedule={this.state.schedule} error={this.state.errors.results}></Results>);
         } else if(this.state.displayedScreen === 'standings'){
