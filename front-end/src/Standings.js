@@ -30,7 +30,7 @@ class Standings extends React.Component {
             let tableRows = this.props.standings.regularSeason.map((value, index) => {
                 return (
                     <tr className="bgl-row">
-                        <td className="bgl-standings-cell">{index + 1}</td>
+                        <td className="bgl-standings-cell">{value.placement}</td>
                         <td className="bgl-standings-cell">{value.player}</td>
                         <td className="bgl-standings-cell">{value.points}</td>
                     </tr>

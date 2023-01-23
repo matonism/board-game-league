@@ -1,9 +1,9 @@
 const Constants = {
     
-    MOCK_API: true, 
+    // MOCK_API: true, 
     // SERVER_URL: "http://localhost:4001",
 
-    // MOCK_API: false, 
+    MOCK_API: false, 
     SERVER_URL:  'https://6k70mthaui.execute-api.us-east-2.amazonaws.com',
 
     COOKIE_USER_KEY: 'user',
