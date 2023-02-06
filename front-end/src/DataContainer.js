@@ -23,7 +23,7 @@ class DataContainer extends React.Component {
             isLoading: true,
             schedule: [],
             results: {},
-            powerRankings: {},
+            powerRankings: [],
             standings: {},
             album: [],
             displayedScreen: 'schedule',
@@ -48,10 +48,9 @@ class DataContainer extends React.Component {
     }
 
     componentDidMount(){
-        this.loadSchedule(this.state.season);
-        this.loadPowerRankings(this.state.season);
-        // this.loadResults();
-        // this.loadStandings();
+        this.loadNewSeason(this.state.season).then(() => {
+            this.setState({isLoading: false})
+        });
     }
 
 
@@ -80,48 +79,57 @@ class DataContainer extends React.Component {
     //     }
     // ]
     //static schedule (may include results here as well?)
-    loadSchedule(season){
-        getSchedule(season).then(response => {
+    async loadSchedule(season){
+        
+        return new Promise((resolve, reject) => {
 
-            if(response.code === 400){
+            getSchedule(season).then(response => {
+
+                if(response.code === 400){
+                    let responseError = this.state.errors;
+                    responseError.schedule = 'Schedule info do not exist for this season';
+                    
+                    this.setState({
+                        errors: responseError,
+                        schedule: null,
+                        standings: null
+                    });
+                    console.log(response.code);
+                    console.log('Could not load power rankings');
+                }else{
+                    let schedule = createScheduleObject(response);
+                    let standings = createStandingsObject(schedule);
+                    // let album = getImageFileNamesToLoad(schedule, response);
+                    
+                    this.setState({
+                        schedule: schedule,
+                        standings: standings
+                    });
+                }
+                resolve(response);
+
+
+            }).catch(error => {
                 let responseError = this.state.errors;
-                responseError.schedule = 'Schedule info do not exist for this season';
-                
+                responseError.schedule = error;
                 this.setState({
                     errors: responseError,
                     schedule: null,
-                    standings: null
+                    standings: null,
+                    album: null
                 });
-                console.log(response.code);
-                console.log('Could not load power rankings');
-            }else{
-                let schedule = createScheduleObject(response);
-                let standings = createStandingsObject(schedule);
-                // let album = getImageFileNamesToLoad(schedule, response);
-                
-                this.setState({
-                    schedule: schedule,
-                    standings: standings
-                });
-            }
-
-
-        }).catch(error => {
-            let responseError = this.state.errors;
-            responseError.schedule = error;
-            this.setState({
-                errors: responseError,
-                schedule: null,
-                standings: null,
-                album: null
+                console.log(error.code);
+                console.log('Could not load schedule');
+                reject(error);
             });
-            console.log(error.code);
-            console.log('Could not load schedule');
+
         });
     }
 
     //static list created by admin
     loadPowerRankings(season){
+        return new Promise((resolve, reject) => {
+
         getPowerRankings(season).then(response => {
             if(response.code === 400){
                 let responseError = this.state.errors;
@@ -139,6 +147,7 @@ class DataContainer extends React.Component {
                     powerRankings: powerRankings,
                 });
             }
+            resolve(response);
         }).catch(error => {
             let responseError = this.state.errors;
             responseError.powerRankings = error;
@@ -148,12 +157,16 @@ class DataContainer extends React.Component {
             });
             console.log(error.code);
             console.log('Could not load power rankings');
+            reject(error);
         });
+    });
 
     }
 
     getCurrentDisplay(){
-        if(this.state.displayedScreen === 'schedule'){
+        if(this.state.isLoading){
+            return (<div className="loading-icon-container"><img src={loadingIcon} alt="loading"></img></div>)
+        }else if(this.state.displayedScreen === 'schedule'){
             return (<Schedule schedule={this.state.schedule} error={this.state.errors.schedule}></Schedule>);
         } else if(this.state.displayedScreen === 'powerRankings'){
             return (<PowerRankings season={this.state.season} powerRankings={this.state.powerRankings} error={this.state.errors.powerRankings}></PowerRankings>);
@@ -220,17 +233,24 @@ class DataContainer extends React.Component {
 
         let previouslySelectedSeason = this.state.season;
         if(buttonName != previouslySelectedSeason){
+            
             this.setState({
-                season: buttonName
+                isLoading: true,
+                season: buttonName,
+                schedule: [],
+                powerRankings: []
             })
-
-            this.loadSchedule(buttonName);
-            this.loadPowerRankings(buttonName);
+            this.loadNewSeason(buttonName).then(() => {
+                this.setState({isLoading: false});
+            })
         }
         
 
     }
 
+    async loadNewSeason(buttonName){
+        let [scheduleResponse, powerRankingsResponse] = await Promise.all([this.loadSchedule(buttonName), this.loadPowerRankings(buttonName)]);
+    }
     render(){
 
         return (
