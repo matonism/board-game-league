@@ -60,15 +60,17 @@ export function createStandingsObject(schedule){
         regularSeason: {},
         championship: {}
     };
+
     schedule.forEach(week=>{
         if(week.week.toLowerCase() !== 'championship'){ 
             week.results.forEach(group => {
                 group.forEach(performance => {
                     if(!standings.regularSeason[performance.player]){
-                        standings.regularSeason[performance.player] = 0;
+                        standings.regularSeason[performance.player] = {score: 0, gamesPlayed: 0};
                     }
                     if(performance.placement){
-                        standings.regularSeason[performance.player] += scoringRubric(performance.placement);
+                        standings.regularSeason[performance.player].score += scoringRubric(performance.placement);
+                        standings.regularSeason[performance.player].gamesPlayed++;
                     }
                 })
             })
@@ -76,10 +78,11 @@ export function createStandingsObject(schedule){
             week.results.forEach(group => {
                 group.forEach(performance => {
                     if(!standings.championship[performance.player]){
-                        standings.championship[performance.player] = 0;
+                        standings.championship[performance.player] = {score: 0, gamesPlayed: 0};
                     }
                     if(performance.placement){
-                        standings.championship[performance.player] += scoringRubric(performance.placement);
+                        standings.championship[performance.player].score += scoringRubric(performance.placement);
+                        standings.championship[performance.player].gamesPlayed++;
                     }
                 })
             })
@@ -89,7 +92,10 @@ export function createStandingsObject(schedule){
     
     //regular season sorting
     let standingsArray = Object.keys(standings.regularSeason).map(player => {
-        return {player: player, points: standings.regularSeason[player]};
+        let gamesPlayed = standings.regularSeason[player].gamesPlayed;
+        let score = standings.regularSeason[player].score
+        // let strengthOfSchedule = gamesPlayed > 0 ? score / gamesPlayed : 0;
+        return {player: player, points: score, gamesPlayed: gamesPlayed};
     })
     standingsArray.sort((a, b) => {
         if(a.points > b.points) {
@@ -111,7 +117,8 @@ export function createStandingsObject(schedule){
 
     //championship sorting
     let championshipArray = Object.keys(standings.championship).map(player => {
-        return {player: player, points: standings.championship[player]};
+
+        return {player: player, points: standings.championship[player], gamesPlayed: standings.championship[player].gamesPlayed};
     })
     championshipArray.sort((a, b) => {
         if(a.points > b.points) {
@@ -124,6 +131,53 @@ export function createStandingsObject(schedule){
     standings.regularSeason = standingsArray;
     standings.championship = championshipArray;
     return standings;
+}
+
+export function createStrengthOfScheduleObject(schedule, standings){
+
+    let sosObject = {};
+    schedule.forEach(week=>{
+        if(week.week.toLowerCase() !== 'championship'){ 
+            week.results.forEach(group => {
+                group.forEach(performance => {
+
+                    if(!sosObject[performance.player]){
+                        let player = standings.regularSeason.find(standing => { return standing.player === performance.player})
+                        sosObject[performance.player] = {strengthOfScheduleTotal: 0, gamesPlayed: player.gamesPlayed};
+                    }
+                    group.forEach(performance2 => {
+                        if(performance != performance2){
+                            let performance2Player = standings.regularSeason.find(standing => { return standing.player === performance2.player})
+                            let sosValue = performance2Player.gamesPlayed > 0 ? performance2Player.points / performance2Player.gamesPlayed : 0;
+                            if(performance.player === 'Jack'){
+                                console.log(sosValue);
+                            }
+                            sosObject[performance.player].strengthOfScheduleTotal += sosValue;
+                        }
+                    })
+                    
+                })
+            })
+        }
+    })
+
+    Object.keys(sosObject).forEach(player => {
+        sosObject[player].strengthOfSchedule = sosObject[player].strengthOfScheduleTotal / 6 / 3;
+    });
+
+    let sosArray = Object.keys(sosObject).map(sosKey => {
+        let sos = sosObject[sosKey];
+        return {player: sosKey, strengthOfSchedule: sos.strengthOfSchedule};
+    })
+    
+    sosArray.sort((a, b) => {
+        if(a.strengthOfSchedule > b.strengthOfSchedule) {
+            return -1;
+        }else{
+            return 1;
+        }
+    })
+    return sosArray;
 }
 
 function scoringRubric(placement){

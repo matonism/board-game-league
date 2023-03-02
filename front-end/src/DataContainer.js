@@ -9,7 +9,7 @@ import Standings from "./Standings";
 import Results from "./Results";
 import PowerRankings from "./PowerRankings";
 import Album from "./Album";
-import { createScheduleObject, createStandingsObject, getImageFileNamesToLoad, getPowerRankingsObjects } from "./DataFormatter";
+import { createScheduleObject, createStandingsObject, createStrengthOfScheduleObject, getImageFileNamesToLoad, getPowerRankingsObjects } from "./DataFormatter";
 
 class DataContainer extends React.Component {
 
@@ -26,6 +26,7 @@ class DataContainer extends React.Component {
             powerRankings: [],
             standings: {},
             album: [],
+            strengthOfSchedules: [],
             displayedScreen: 'schedule',
             season: 2023,
             errors:{
@@ -33,7 +34,8 @@ class DataContainer extends React.Component {
                 results: null,
                 powerRankings: null,
                 standings: null,
-                album: null
+                album: null,
+                strengthOfSchedules: null
             }
         };
 
@@ -99,12 +101,17 @@ class DataContainer extends React.Component {
                 }else{
                     let schedule = createScheduleObject(response);
                     let standings = createStandingsObject(schedule);
-                    // let album = getImageFileNamesToLoad(schedule, response);
-                    
                     this.setState({
                         schedule: schedule,
                         standings: standings
                     });
+
+                    let strengthOfSchedules = createStrengthOfScheduleObject(schedule, standings);
+                    this.setState({
+                        strengthOfSchedules: strengthOfSchedules
+                    })
+                    // let album = getImageFileNamesToLoad(schedule, response);
+                    
                 }
                 resolve(response);
 
@@ -173,7 +180,7 @@ class DataContainer extends React.Component {
         } else if(this.state.displayedScreen === 'results'){
             return (<Results schedule={this.state.schedule} error={this.state.errors.results}></Results>);
         } else if(this.state.displayedScreen === 'standings'){
-            return (<Standings season={this.state.season} standings={this.state.standings} error={this.state.errors.standings}></Standings>);
+            return (<Standings season={this.state.season} standings={this.state.standings} strengthOfSchedules={this.state.strengthOfSchedules} error={this.state.errors.standings}></Standings>);
         } else if(this.state.displayedScreen === 'album'){
             return (<Album season={this.state.season} schedule={this.state.schedule} error={this.state.errors.album}></Album>);
         } else {

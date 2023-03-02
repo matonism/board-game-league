@@ -87,37 +87,6 @@ class Standings extends React.Component {
         return (<></>);
     }
 
-
-    displayStrengthOfSchedule(){
-        
-        if(this.props.strengthOfSchedules){
-            let tableRows = this.props.strengthOfSchedules.map((value, index) => {
-                let position = index+1;
-                return (
-                    <tr className="bgl-row">
-                        <td className="bgl-standings-cell">{position}</td>
-                        <td className="bgl-standings-cell">{value.player}</td>
-                        <td className="bgl-standings-cell">{Math.round(value.strengthOfSchedule * 100) / 100}</td>
-                    </tr>
-                )
-            });
-
-            tableRows.unshift((<tr>
-                <td className="standings-row-header">Position</td>
-                <td className="standings-row-header">Player</td>
-                <td className="standings-row-header">Avg opp. PPG</td>
-            </tr>))
-
-            return (
-                <>
-                    <div className="power-ranking-header">BGL {this.props.season} Strength of Schedule</div>
-                    <div className="bgl-table-container">
-                        <table className="bgl-table">{tableRows}</table>
-                    </div>
-                </>
-            );
-        }
-    }
     getStandingsScreen(){
         if(this.props.standings?.regularSeason){
             return this.displayStandings();
@@ -128,24 +97,12 @@ class Standings extends React.Component {
         }
     }
 
-    getStrengthOfScheduleScreen(){
-        if(this.props.strengthOfSchedules){
-            return this.displayStrengthOfSchedule();
-        }else if(this.props.error){
-            return (<div>There was an error loading the strength of schedule</div>)
-        }else{
-            return this.loadingScreen();
-        }
-        
-    }
-
     render(){
 
     
         return (
             <>
                 {this.getStandingsScreen()}
-                {this.getStrengthOfScheduleScreen()}
             </>
         );
     }
