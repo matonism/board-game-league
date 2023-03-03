@@ -66,24 +66,26 @@ export function createStandingsObject(schedule){
             week.results.forEach(group => {
                 group.forEach(performance => {
                     if(!standings.regularSeason[performance.player]){
-                        standings.regularSeason[performance.player] = {score: 0, gamesPlayed: 0};
+                        standings.regularSeason[performance.player] = {score: 0, gamesPlayed: 0, gamesToPlay: 0};
                     }
                     if(performance.placement){
                         standings.regularSeason[performance.player].score += scoringRubric(performance.placement);
                         standings.regularSeason[performance.player].gamesPlayed++;
                     }
+                    standings.regularSeason[performance.player].gamesToPlay++;
                 })
             })
         }else{
             week.results.forEach(group => {
                 group.forEach(performance => {
                     if(!standings.championship[performance.player]){
-                        standings.championship[performance.player] = {score: 0, gamesPlayed: 0};
+                        standings.championship[performance.player] = {score: 0, gamesPlayed: 0, gamesToPlay: 0};
                     }
                     if(performance.placement){
                         standings.championship[performance.player].score += scoringRubric(performance.placement);
                         standings.championship[performance.player].gamesPlayed++;
                     }
+                    standings.championship[performance.player].gamesToPlay++;
                 })
             })
         }
@@ -93,9 +95,10 @@ export function createStandingsObject(schedule){
     //regular season sorting
     let standingsArray = Object.keys(standings.regularSeason).map(player => {
         let gamesPlayed = standings.regularSeason[player].gamesPlayed;
-        let score = standings.regularSeason[player].score
+        let score = standings.regularSeason[player].score;
+        let gamesToPlay = standings.regularSeason[player].gamesToPlay;
         // let strengthOfSchedule = gamesPlayed > 0 ? score / gamesPlayed : 0;
-        return {player: player, points: score, gamesPlayed: gamesPlayed};
+        return {player: player, points: score, gamesPlayed: gamesPlayed, gamesToPlay: gamesToPlay};
     })
     standingsArray.sort((a, b) => {
         if(a.points > b.points) {
@@ -117,8 +120,11 @@ export function createStandingsObject(schedule){
 
     //championship sorting
     let championshipArray = Object.keys(standings.championship).map(player => {
+        let gamesPlayed = standings.championship[player].gamesPlayed;
+        let score = standings.championship[player].score;
+        let gamesToPlay = standings.championship[player].gamesToPlay;
 
-        return {player: player, points: standings.championship[player], gamesPlayed: standings.championship[player].gamesPlayed};
+        return {player: player, points: score, gamesPlayed: gamesPlayed, gamesToPlay: gamesToPlay};
     })
     championshipArray.sort((a, b) => {
         if(a.points > b.points) {
@@ -135,15 +141,17 @@ export function createStandingsObject(schedule){
 
 export function createStrengthOfScheduleObject(schedule, standings){
 
+    let gamesPerWeek = 4;
     let sosObject = {};
     schedule.forEach(week=>{
         if(week.week.toLowerCase() !== 'championship'){ 
             week.results.forEach(group => {
+                gamesPerWeek = group.length;
                 group.forEach(performance => {
 
                     if(!sosObject[performance.player]){
                         let player = standings.regularSeason.find(standing => { return standing.player === performance.player})
-                        sosObject[performance.player] = {strengthOfScheduleTotal: 0, gamesPlayed: player.gamesPlayed};
+                        sosObject[performance.player] = {strengthOfScheduleTotal: 0, gamesPlayed: player.gamesPlayed, gamesToPlay: player.gamesToPlay};
                     }
                     group.forEach(performance2 => {
                         if(performance != performance2){
@@ -162,7 +170,7 @@ export function createStrengthOfScheduleObject(schedule, standings){
     })
 
     Object.keys(sosObject).forEach(player => {
-        sosObject[player].strengthOfSchedule = sosObject[player].strengthOfScheduleTotal / 6 / 3;
+        sosObject[player].strengthOfSchedule = sosObject[player].strengthOfScheduleTotal / sosObject[player].gamesToPlay / 3;
     });
 
     let sosArray = Object.keys(sosObject).map(sosKey => {
@@ -175,6 +183,16 @@ export function createStrengthOfScheduleObject(schedule, standings){
             return -1;
         }else{
             return 1;
+        }
+    })
+    
+    let mostRecentPlacement = 1;
+    sosArray.forEach((person, index) => {
+        if(index === 0 || person.strengthOfSchedule !== sosArray[index - 1].strengthOfSchedule){
+            person.placement = index + 1;
+            mostRecentPlacement = index + 1;
+        }else{
+            person.placement = mostRecentPlacement;
         }
     })
     return sosArray;

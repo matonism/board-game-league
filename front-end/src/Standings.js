@@ -92,12 +92,11 @@ class Standings extends React.Component {
         
         if(this.props.strengthOfSchedules){
             let tableRows = this.props.strengthOfSchedules.map((value, index) => {
-                let position = index+1;
                 return (
                     <tr className="bgl-row">
-                        <td className="bgl-standings-cell">{position}</td>
+                        <td className="bgl-standings-cell">{value.placement}</td>
                         <td className="bgl-standings-cell">{value.player}</td>
-                        <td className="bgl-standings-cell">{Math.round(value.strengthOfSchedule * 100) / 100}</td>
+                        <td className="bgl-standings-cell">{Math.round(value.strengthOfSchedule * 1000) / 1000}</td>
                     </tr>
                 )
             });
