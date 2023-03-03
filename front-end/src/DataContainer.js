@@ -245,7 +245,9 @@ class DataContainer extends React.Component {
                 isLoading: true,
                 season: buttonName,
                 schedule: [],
-                powerRankings: []
+                powerRankings: [],
+                standings: [],
+                strengthOfSchedules: []
             })
             this.loadNewSeason(buttonName).then(() => {
                 this.setState({isLoading: false});
