@@ -9,6 +9,7 @@ var url = require('url');
 var bodyParser = require('body-parser');
 var getSchedule = require('./getSchedule.js');
 const getPowerRankings = require('./getPowerRankings.js');
+const getBoardGameInfo = require('./getBoardGameInfo.js');
 
 var app = express();
 //set app view engine
@@ -78,6 +79,17 @@ app.get('/powerRankings', (request, response) => {
         response.status = 400;
         response.send(error);
     })
+});
+
+app.get('/boardGameIds', async (request, response) => {
+    let queryParams = url.parse(request.url, true).query;
+    try{
+        let data = await getBoardGameInfo(queryParams);
+        response.send(data);
+    }catch(error){
+        response.status = 400;
+        response.send(error);
+    }
 });
 
 var PORT = process.env.PORT || 4001;

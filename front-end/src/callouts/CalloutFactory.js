@@ -11,3 +11,7 @@ export function getSchedule(key){
 export function getPowerRankings(key){
     return calloutBuilder.getPowerRankings(key);
 }
+
+export function getBoardGameGeekIds(key){
+    return calloutBuilder.getBoardGameGeekIds(key);
+}

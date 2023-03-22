@@ -1,3 +1,6 @@
+import {getBoardGameGeekIds } from "./callouts/CalloutFactory";
+
+
 export function createScheduleObject(response) {
     let numberOfGamesPerWeek = getNumberOfGamesPerWeek(response);
     let numberOfPlayersPerGame = 4;
@@ -276,4 +279,23 @@ export function getPowerRankingsObjects(powerRankingsResponse){
         })
     }
     return powerRankings;
+}
+
+export async function createBoardGameHyperlinkMap(schedule){
+    let gameNameQueryString = '';
+    schedule.forEach(week=>{
+        if(week.game && week.game != 'TBD'){
+            gameNameQueryString += week.game + ',';
+        }    
+    })
+
+    try{
+        let response = await getBoardGameGeekIds(gameNameQueryString.replaceAll(' ', '+'))
+        console.log(response);
+        return response;
+    }catch(error){
+        console.log('search failed...');
+        console.log(error);
+    }
+    
 }

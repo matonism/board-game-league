@@ -4,6 +4,7 @@ import Constants from "../Constants";
 
 class CalloutBuilder {
 
+
     getLeagueData(key){
         return makeGetCallout(Constants.SERVER_URL + '/boardgameleague', {season: key}, true);
     }
@@ -14,6 +15,11 @@ class CalloutBuilder {
     
     getPowerRankings(key){
         return makeGetCallout(Constants.SERVER_URL + '/powerRankings', {season: key}, true);
+    }
+
+    
+    getBoardGameGeekIds(key){
+        return makeGetCallout(Constants.SERVER_URL + '/boardGameIds', {games: key}, true);
     }
     
 }

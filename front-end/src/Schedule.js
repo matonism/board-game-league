@@ -1,6 +1,7 @@
 import React from "react";
 import './Schedule.css';
 import loadingIcon from './images/loading-icon.gif';
+import openNewTab from './images/open-new-tab-icon.png'
 
 
 class Schedule extends React.Component {
@@ -13,6 +14,7 @@ class Schedule extends React.Component {
 
         this.getScheduleScreen = this.getScheduleScreen.bind(this);
         this.loadingScreen = this.loadingScreen.bind(this);  
+        this.displayOpenNewPageLink = this.displayOpenNewPageLink.bind(this);
     }
 
     componentDidMount(){
@@ -27,9 +29,13 @@ class Schedule extends React.Component {
         console.log(this.props.schedule);
         if(this.props.schedule){
             let scheduleDisplay = this.props.schedule.map(week => {
+                let linkDisplay = this.displayOpenNewPageLink(week.game)
                 return (<>
                     <div className="bgl-week-container">
-                        <div className="bgl-week-header">{week.week + ' - ' + week.game}</div>
+                        <div className="bgl-week-header">
+                            <div>{week.week + ' - ' + week.game}</div>
+                            {linkDisplay}
+                        </div>
                         <div className="bgl-week-subheader">{week.dates}</div>
                         <div className="bgl-week-table-container">
                         <table className="bgl-week-table" cellPadding="0" cellspacing="0">
@@ -80,6 +86,17 @@ class Schedule extends React.Component {
         }else{
             return this.loadingScreen();
         }
+    }
+
+    displayOpenNewPageLink(game){
+        let link = <></>;
+        if(this.props?.boardGameHyperlinkMap){
+            if(this.props?.boardGameHyperlinkMap[game]){
+                let boardGameId = this.props?.boardGameHyperlinkMap[game];
+                link = (<div className="bgg-link-container"><a target="_blank" href={'https://boardgamegeek.com/boardgame/' + boardGameId}><img className="bgg-link" src={openNewTab} alt="opentab"/></a></div>)
+            } 
+        }
+        return link;
     }
 
     render(){

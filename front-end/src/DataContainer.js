@@ -9,7 +9,7 @@ import Standings from "./Standings";
 import Results from "./Results";
 import PowerRankings from "./PowerRankings";
 import Album from "./Album";
-import { createScheduleObject, createStandingsObject, createStrengthOfScheduleObject, getImageFileNamesToLoad, getPowerRankingsObjects } from "./DataFormatter";
+import { createScheduleObject, createStandingsObject, createStrengthOfScheduleObject, getPowerRankingsObjects, createBoardGameHyperlinkMap } from "./DataFormatter";
 
 class DataContainer extends React.Component {
 
@@ -27,6 +27,7 @@ class DataContainer extends React.Component {
             standings: {},
             album: [],
             strengthOfSchedules: [],
+            boardGameHyperlinkMap: {},
             displayedScreen: 'schedule',
             season: 2023,
             errors:{
@@ -110,7 +111,8 @@ class DataContainer extends React.Component {
                     this.setState({
                         strengthOfSchedules: strengthOfSchedules
                     })
-                    // let album = getImageFileNamesToLoad(schedule, response);
+                    
+                    this.setHyperlinkMap(schedule);
                     
                 }
                 resolve(response);
@@ -137,44 +139,48 @@ class DataContainer extends React.Component {
     loadPowerRankings(season){
         return new Promise((resolve, reject) => {
 
-        getPowerRankings(season).then(response => {
-            if(response.code === 400){
-                let responseError = this.state.errors;
-                responseError.powerRankings = 'Power Rankings do not exist for this season';
+            getPowerRankings(season).then(response => {
+                if(response.code === 400){
+                    let responseError = this.state.errors;
+                    responseError.powerRankings = 'Power Rankings do not exist for this season';
 
+                    this.setState({
+                        errors: responseError,
+                        powerRankings: null
+                    });
+                    console.log(response.code);
+                    console.log('Could not load power rankings');
+                }else{
+                    let powerRankings = getPowerRankingsObjects(response)
+                    this.setState({
+                        powerRankings: powerRankings,
+                    });
+                }
+                resolve(response);
+            }).catch(error => {
+                let responseError = this.state.errors;
+                responseError.powerRankings = error;
                 this.setState({
                     errors: responseError,
                     powerRankings: null
                 });
-                console.log(response.code);
+                console.log(error.code);
                 console.log('Could not load power rankings');
-            }else{
-                let powerRankings = getPowerRankingsObjects(response)
-                this.setState({
-                    powerRankings: powerRankings,
-                });
-            }
-            resolve(response);
-        }).catch(error => {
-            let responseError = this.state.errors;
-            responseError.powerRankings = error;
-            this.setState({
-                errors: responseError,
-                powerRankings: null
+                reject(error);
             });
-            console.log(error.code);
-            console.log('Could not load power rankings');
-            reject(error);
         });
-    });
 
     }
 
+    async setHyperlinkMap(schedule){
+        let boardGameHyperlinkMap = await createBoardGameHyperlinkMap(schedule);
+        this.setState({boardGameHyperlinkMap: boardGameHyperlinkMap});
+    }
     getCurrentDisplay(){
         if(this.state.isLoading){
             return (<div className="loading-icon-container"><img src={loadingIcon} alt="loading"></img></div>)
         }else if(this.state.displayedScreen === 'schedule'){
-            return (<Schedule schedule={this.state.schedule} error={this.state.errors.schedule}></Schedule>);
+            return (<Schedule schedule={this.state.schedule} boardGameHyperlinkMap={this.state.boardGameHyperlinkMap} error={this.state.errors.schedule}></Schedule>);
         } else if(this.state.displayedScreen === 'powerRankings'){
             return (<PowerRankings season={this.state.season} powerRankings={this.state.powerRankings} error={this.state.errors.powerRankings}></PowerRankings>);
         } else if(this.state.displayedScreen === 'results'){

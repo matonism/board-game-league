@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/static/css/main.fb4ec5b6.chunk.css",
-    "main.js": "/static/js/main.938eb49d.chunk.js",
-    "main.js.map": "/static/js/main.938eb49d.chunk.js.map",
+    "main.css": "/static/css/main.57c5c843.chunk.css",
+    "main.js": "/static/js/main.0fe7f965.chunk.js",
+    "main.js.map": "/static/js/main.0fe7f965.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.4883ac5b.js",
     "runtime-main.js.map": "/static/js/runtime-main.4883ac5b.js.map",
-    "static/js/2.e9f68db4.chunk.js": "/static/js/2.e9f68db4.chunk.js",
-    "static/js/2.e9f68db4.chunk.js.map": "/static/js/2.e9f68db4.chunk.js.map",
+    "static/js/2.feeb16e3.chunk.js": "/static/js/2.feeb16e3.chunk.js",
+    "static/js/2.feeb16e3.chunk.js.map": "/static/js/2.feeb16e3.chunk.js.map",
     "static/js/3.ac019de5.chunk.js": "/static/js/3.ac019de5.chunk.js",
     "static/js/3.ac019de5.chunk.js.map": "/static/js/3.ac019de5.chunk.js.map",
     "index.html": "/index.html",
-    "static/css/main.fb4ec5b6.chunk.css.map": "/static/css/main.fb4ec5b6.chunk.css.map",
-    "static/js/2.e9f68db4.chunk.js.LICENSE.txt": "/static/js/2.e9f68db4.chunk.js.LICENSE.txt",
+    "static/css/main.57c5c843.chunk.css.map": "/static/css/main.57c5c843.chunk.css.map",
+    "static/js/2.feeb16e3.chunk.js.LICENSE.txt": "/static/js/2.feeb16e3.chunk.js.LICENSE.txt",
     "static/media/1_1.JPG": "/static/media/1_1.8db5a156.JPG",
     "static/media/1_2.JPG": "/static/media/1_2.e85e4f7a.JPG",
     "static/media/1_3.JPG": "/static/media/1_3.8e89f8b5.JPG",
@@ -37,12 +37,13 @@
     "static/media/Album.css": "/static/media/Louis-George-Cafe.eacd8787.ttf",
     "static/media/cancel-icon.b1fc8a4c.png": "/static/media/cancel-icon.b1fc8a4c.png",
     "static/media/championship.JPG": "/static/media/championship.b22b7f1e.JPG",
-    "static/media/loading-icon.11c01773.gif": "/static/media/loading-icon.11c01773.gif"
+    "static/media/loading-icon.11c01773.gif": "/static/media/loading-icon.11c01773.gif",
+    "static/media/open-new-tab-icon.2ee72fa3.png": "/static/media/open-new-tab-icon.2ee72fa3.png"
   },
   "entrypoints": [
     "static/js/runtime-main.4883ac5b.js",
-    "static/js/2.e9f68db4.chunk.js",
-    "static/css/main.fb4ec5b6.chunk.css",
-    "static/js/main.938eb49d.chunk.js"
+    "static/js/2.feeb16e3.chunk.js",
+    "static/css/main.57c5c843.chunk.css",
+    "static/js/main.0fe7f965.chunk.js"
   ]
 }

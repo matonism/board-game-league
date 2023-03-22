@@ -18,6 +18,8 @@
 
   .bgl-week-header{
     font-size: 1.4rem;
+    display: flex;
+    justify-content: center;
   }
 
   .bgl-week-subheader{
@@ -63,3 +65,11 @@
     vertical-align: bottom;
   }
 
+.bgg-link-container{
+    height: 0.8rem;
+    padding-left: 0.5rem;
+}
+.bgg-link{
+    max-height: 100%;
+    cursor: pointer;
+}
