@@ -10,7 +10,7 @@ async function getBoardGameInfo(queryParams){
         games = decodeURIComponent(games).split(',');
     }
 
-    searchResults = {};
+    let searchResults = {};
     //Using standard for loop because forEach cannot handle async await
     for(let i = 0; i < games.length; i++){
         let game = games[i];
@@ -28,9 +28,13 @@ async function getBoardGameInfo(queryParams){
     //TODO: May want to sort by the oldest or newest?
     let gameKeys = Object.keys(searchResults);
     for(let i = 0; i < gameKeys.length; i++){
-        searchResults[gameKeys[i]].elements[0].elements = sortSearchResultsByYearPublished(searchResults[gameKeys[i]].elements[0].elements);
-        response[gameKeys[i]] = searchResults[gameKeys[i]].elements[0].elements[0].attributes.id;
+        console.log(gameKeys[i]);
+        if(searchResults[gameKeys[i]].elements[0].elements){
+            searchResults[gameKeys[i]].elements[0].elements = sortSearchResultsByYearPublished(searchResults[gameKeys[i]].elements[0].elements);
+            response[gameKeys[i]] = searchResults[gameKeys[i]].elements[0].elements[0].attributes.id;
+        }
     }
+    console.log(response);
 
     return response;
 }
@@ -56,24 +60,30 @@ async function getBoardGameInfo(queryParams){
 
 //grab the most recent game
 function sortSearchResultsByYearPublished(gameVersions){
-    console.log(gameVersions[0].elements);
-    gameVersions = gameVersions.sort((a, b) => {
 
-        let yearPublishedA = a.elements.find(element => {return element.name === 'yearpublished'})
-        let yearPublishedB = b.elements.find(element => {return element.name === 'yearpublished'})
-        let gameNameMatchTypeA = a.elements.find(element => {return element.name === 'name'})
-        let gameNameMatchTypeB = b.elements.find(element => {return element.name === 'name'})
+    console.log('gameVersions');
+    console.log(gameVersions);
+    if(gameVersions.length > 1){
+        gameVersions = gameVersions.sort((a, b) => {
 
-        if(gameNameMatchTypeB.attributes.type === 'secondary'){
-            return -1;
-        }else if(gameNameMatchTypeA.attributes.type === 'secondary'){
-            return 1;
-        }else if(yearPublishedA.attributes.value > yearPublishedB.attributes.value){
-            return -1
-        }else{
-            return 1;
-        }
-    });
+            let yearPublishedA = a.elements.find(element => {return element.name === 'yearpublished'})
+            console.log(yearPublishedA);
+            let yearPublishedB = b.elements.find(element => {return element.name === 'yearpublished'})
+            let gameNameMatchTypeA = a.elements.find(element => {return element.name === 'name'})
+            let gameNameMatchTypeB = b.elements.find(element => {return element.name === 'name'})
+
+
+            if(gameNameMatchTypeB.attributes.type === 'secondary'){
+                return -1;
+            }else if(gameNameMatchTypeA.attributes.type === 'secondary'){
+                return 1;
+            }else if(yearPublishedA.attributes.value > yearPublishedB.attributes.value){
+                return -1
+            }else{
+                return 1;
+            }
+        });
+    }
     
     return gameVersions;
 }

@@ -10,7 +10,7 @@ async function getBoardGameInfo(queryParams){
         games = decodeURIComponent(games).split(',');
     }
 
-    searchResults = {};
+    let searchResults = {};
     //Using standard for loop because forEach cannot handle async await
     for(let i = 0; i < games.length; i++){
         let game = games[i];
