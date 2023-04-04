@@ -137,6 +137,16 @@ export function createStandingsObject(schedule){
         }
     })
 
+    mostRecentPlacement = 1;
+    championshipArray.forEach((person, index) => {
+        if(index === 0 || person.points !== championshipArray[index - 1].points){
+            person.placement = index + 1;
+            mostRecentPlacement = index + 1;
+        }else{
+            person.placement = mostRecentPlacement;
+        }
+    })
+
     standings.regularSeason = standingsArray;
     standings.championship = championshipArray;
     return standings;

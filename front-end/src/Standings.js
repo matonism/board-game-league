@@ -62,7 +62,7 @@ class Standings extends React.Component {
                 championshipRows = this.props.standings.championship.map((value, index) => {
                     return (
                         <tr className="bgl-row">
-                            <td className="bgl-standings-cell">{index + 1}</td>
+                            <td className="bgl-standings-cell">{value.placement}</td>
                             <td className="bgl-standings-cell">{value.player}</td>
                             <td className="bgl-standings-cell">{value.points}</td>
                         </tr>
