@@ -5,37 +5,40 @@ var convert = require('xml-js');
 async function getBoardGameInfo(queryParams){
 
     let response = {};
-    let games = queryParams.games;
-    if(games){
-        games = decodeURIComponent(games).split(',');
-    }
+    try{
+        let games = queryParams.games;
+        if(games){
+            games = decodeURIComponent(games).split(',');
+        }
 
-    let searchResults = {};
-    //Using standard for loop because forEach cannot handle async await
-    for(let i = 0; i < games.length; i++){
-        let game = games[i];
-        if(game != 'TBD' && game != ''){
-            try{
-                let XMLResponse = await makeHTTPSRequest('/search/', {query: game.replace(' ', '+'), type: 'boardgame', exact: 1});
-                searchResults[game] = JSON.parse(convert.xml2json(XMLResponse));
-                // let response = xml2json(XMLResponse);
-            }catch(error){
-                console.log(error);
+        let searchResults = {};
+        //Using standard for loop because forEach cannot handle async await
+        for(let i = 0; i < games.length; i++){
+            let game = games[i];
+            if(game != 'TBD' && game != ''){
+                try{
+                    let XMLResponse = await makeHTTPSRequest('/search/', {query: game.replace(' ', '+'), type: 'boardgame', exact: 1});
+                    searchResults[game] = JSON.parse(convert.xml2json(XMLResponse));
+                    // let response = xml2json(XMLResponse);
+                }catch(error){
+                    console.log(error);
+                }
+            }
+        }  
+
+        //TODO: May want to sort by the oldest or newest?
+        let gameKeys = Object.keys(searchResults);
+        for(let i = 0; i < gameKeys.length; i++){
+            console.log(gameKeys[i]);
+            if(searchResults[gameKeys[i]].elements[0].elements){
+                searchResults[gameKeys[i]].elements[0].elements = sortSearchResultsByYearPublished(searchResults[gameKeys[i]].elements[0].elements);
+                response[gameKeys[i]] = searchResults[gameKeys[i]].elements[0].elements[0].attributes.id;
             }
         }
-    }  
-
-    //TODO: May want to sort by the oldest or newest?
-    let gameKeys = Object.keys(searchResults);
-    for(let i = 0; i < gameKeys.length; i++){
-        console.log(gameKeys[i]);
-        if(searchResults[gameKeys[i]].elements[0].elements){
-            searchResults[gameKeys[i]].elements[0].elements = sortSearchResultsByYearPublished(searchResults[gameKeys[i]].elements[0].elements);
-            response[gameKeys[i]] = searchResults[gameKeys[i]].elements[0].elements[0].attributes.id;
-        }
+        console.log(response);
+    }catch(error){
+        throw error;
     }
-    console.log(response);
-
     return response;
 }
 
@@ -73,6 +76,12 @@ function sortSearchResultsByYearPublished(gameVersions){
             let gameNameMatchTypeB = b.elements.find(element => {return element.name === 'name'})
 
 
+            if(!yearPublishedA){
+                return 1;
+            }
+            if(!yearPublishedB){
+                return -1;
+            }
             if(gameNameMatchTypeB.attributes.type === 'secondary'){
                 return -1;
             }else if(gameNameMatchTypeA.attributes.type === 'secondary'){
