@@ -28,6 +28,9 @@ class Results extends React.Component {
         if(this.props.results){
             return (<div>Showing results table</div>)
         }else if(this.props.error){
+            if(this.props.error.message){
+                return (<div>{this.props.error.message}</div>)
+            }
             return (<div>There was an error loading the results</div>)
         }else{
             return this.loadingScreen();

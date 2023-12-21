@@ -25,7 +25,6 @@ class Album extends React.Component {
         
     }
 
-
     loadingScreen(){
         return (<div className="loading-icon-container"><img src={loadingIcon} alt="loading"></img></div>)
     }
@@ -68,10 +67,11 @@ class Album extends React.Component {
                 imageFound = false;
             }
             if(imageFound){
+                imageURL = imageURL.default ? imageURL.default : imageURL;
                 return (
                     <>
                         <div className="image-container">
-                            <img className="gallery-image" src={imageURL.default} onError={this.hideImage} onClick={this.enlargeImage}/>
+                            <img className="gallery-image" src={imageURL} onError={this.hideImage} onClick={this.enlargeImage}/>
                         </div>
                     </>
                 )
@@ -117,6 +117,9 @@ class Album extends React.Component {
             <div className="container">{this.displayAlbum()}</div>
             </>)
         }else if(this.props.error){
+            if(this.props.error.message){
+                return (<div>{this.props.error.message}</div>)
+            }
             return (<div>There was an error loading the album</div>)
         }else{
             return this.loadingScreen();

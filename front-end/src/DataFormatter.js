@@ -2,6 +2,9 @@ import {getBoardGameGeekIds } from "./callouts/CalloutFactory";
 
 
 export function createScheduleObject(response) {
+    if(response?.values?.length > 0 && response.values[0].length === 5){
+        return null;
+    }
     let numberOfGamesPerWeek = getNumberOfGamesPerWeek(response);
     let numberOfPlayersPerGame = 4;
     let infoHeaderRows = 1;
@@ -64,16 +67,17 @@ export function createStandingsObject(schedule){
         championship: {}
     };
 
-    schedule.forEach(week=>{
+    schedule.forEach((week, index)=>{
         if(week.week.toLowerCase() !== 'championship'){ 
             week.results.forEach(group => {
                 group.forEach(performance => {
                     if(!standings.regularSeason[performance.player]){
-                        standings.regularSeason[performance.player] = {score: 0, gamesPlayed: 0, gamesToPlay: 0};
+                        standings.regularSeason[performance.player] = {score: 0, gamesPlayed: 0, gamesToPlay: 0, weeklyScores: new Array(index).fill(0)};
                     }
                     if(performance.placement){
                         standings.regularSeason[performance.player].score += scoringRubric(performance.placement);
                         standings.regularSeason[performance.player].gamesPlayed++;
+                        standings.regularSeason[performance.player].weeklyScores.push(scoringRubric(performance.placement));
                     }
                     standings.regularSeason[performance.player].gamesToPlay++;
                 })
@@ -100,8 +104,9 @@ export function createStandingsObject(schedule){
         let gamesPlayed = standings.regularSeason[player].gamesPlayed;
         let score = standings.regularSeason[player].score;
         let gamesToPlay = standings.regularSeason[player].gamesToPlay;
+        let weeklyScores = standings.regularSeason[player].weeklyScores;
         // let strengthOfSchedule = gamesPlayed > 0 ? score / gamesPlayed : 0;
-        return {player: player, points: score, gamesPlayed: gamesPlayed, gamesToPlay: gamesToPlay};
+        return {player: player, points: score, gamesPlayed: gamesPlayed, gamesToPlay: gamesToPlay, weeklyScores};
     })
     standingsArray.sort((a, b) => {
         if(a.points > b.points) {
@@ -171,7 +176,7 @@ export function createStrengthOfScheduleObject(schedule, standings){
                             let performance2Player = standings.regularSeason.find(standing => { return standing.player === performance2.player})
                             let sosValue = performance2Player.gamesPlayed > 0 ? performance2Player.points / performance2Player.gamesPlayed : 0;
                             if(performance.player === 'Jack'){
-                                console.log(sosValue);
+                                //console.log(sosValue);
                             }
                             sosObject[performance.player].strengthOfScheduleTotal += sosValue;
                         }
@@ -301,7 +306,7 @@ export async function createBoardGameHyperlinkMap(schedule){
 
     try{
         let response = await getBoardGameGeekIds(gameNameQueryString.replaceAll(' ', '+'))
-        console.log(response);
+        //console.log(response);
         return response;
     }catch(error){
         console.log('search failed...');

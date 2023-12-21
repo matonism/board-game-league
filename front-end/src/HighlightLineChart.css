@@ -1,0 +1,10 @@
+.chart-box{
+    width: 100%;
+}
+
+@media only screen and (min-width: 768px) {    
+    .chart-box{
+        max-width: 600px;
+        width: 100%;
+    }
+}

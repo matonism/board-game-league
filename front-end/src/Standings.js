@@ -1,6 +1,8 @@
 import React from "react";
 import './Standings.css';
 import loadingIcon from './images/loading-icon.gif';
+import { getStandingsChartData } from "./utilities/chartDataFormatHelper";
+import HighlightLineChart from "./HighlightLineChart";
 
 
 class Standings extends React.Component {
@@ -10,18 +12,34 @@ class Standings extends React.Component {
         super(props);
         
         this.accountInfoNavRef = React.createRef();
-        this.state = {};
+        this.state = {
+            chartData: null
+        };
 
         this.getStandingsScreen = this.getStandingsScreen.bind(this);
         this.loadingScreen = this.loadingScreen.bind(this);  
     }
 
     componentDidMount(){
+        if(this.props.standings && this.props.standings.regularSeason.length > 0){
+            this.setState({chartData: getStandingsChartData(this.props.standings)})
+        }
     }
 
 
     loadingScreen(){
         return (<div className="loading-icon-container"><img src={loadingIcon} alt="loading"></img></div>)
+    }
+
+    displayChart(){
+        if(this.props.standings && this.state.chartData){
+            return (
+                <div className="chart-container">
+                    <div className="power-ranking-header">Points Tracker</div>
+                    <HighlightLineChart chartData={this.state.chartData}></HighlightLineChart>
+                </div>
+            )
+        }
     }
 
     displayStandings(){
@@ -121,6 +139,9 @@ class Standings extends React.Component {
         if(this.props.standings?.regularSeason){
             return this.displayStandings();
         }else if(this.props.error){
+            if(this.props.error.message){
+                return (<div>{this.props.error.message}</div>)
+            }
             return (<div>There was an error loading the standings</div>)
         }else{
             return this.loadingScreen();
@@ -131,6 +152,9 @@ class Standings extends React.Component {
         if(this.props.strengthOfSchedules){
             return this.displayStrengthOfSchedule();
         }else if(this.props.error){
+            if(this.props.error.message){
+                return (<div>{this.props.error.message}</div>)
+            }
             return (<div>There was an error loading the strength of schedule</div>)
         }else{
             return this.loadingScreen();
@@ -144,6 +168,7 @@ class Standings extends React.Component {
         return (
             <>
                 {this.getStandingsScreen()}
+                {this.displayChart()}
                 {this.getStrengthOfScheduleScreen()}
             </>
         );

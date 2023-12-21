@@ -1,5 +1,6 @@
 TODO
-- ensure advancing update works for final main bracket round
+- Add chart to map out power rankings and standings
+- add +3, -1, etc... to show weekly change in standings and power rankings
 
 FIGURE OUT
 - Restrict MongoDB Access to only API Gateway
@@ -11,3 +12,4 @@ DONE
 - update publish panel to fit on mobile
 - enlarge landing page buttons
 - copy link should actually copy to clipboard and show toast
+- ensure advancing update works for final main bracket round

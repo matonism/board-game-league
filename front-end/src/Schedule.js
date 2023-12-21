@@ -30,21 +30,20 @@ class Schedule extends React.Component {
         if(this.props.schedule){
             let scheduleDisplay = this.props.schedule.map(week => {
                 let linkDisplay = this.displayOpenNewPageLink(week.game)
-                return (<>
-                    <div className="bgl-week-container">
+                return (
+                    <div key={week.game} className="bgl-week-container">
                         <div className="bgl-week-header">
                             <div>{week.week + ' - ' + week.game}</div>
                             {linkDisplay}
                         </div>
                         <div className="bgl-week-subheader">{week.dates}</div>
                         <div className="bgl-week-table-container">
-                        <table className="bgl-week-table" cellPadding="0" cellspacing="0">
-                            {this.getSingleScheduleTable(week)}
+                        <table className="bgl-week-table" cellPadding="0" cellSpacing="0">
+                            
+                                {this.getSingleScheduleTable(week)}
                         </table>
                         </div>        
                     </div>
-                </>
-
                 )
             });
 
@@ -58,22 +57,22 @@ class Schedule extends React.Component {
     getSingleScheduleTable(week){
         return week.results.map((group, index) => {
             return (
-                <>
-                    <tr className="bgl-table-row player-row">
+                <tbody key={"table-" + index}>
+                    <tr key={"player-row-" + index} className="bgl-table-row player-row">
                         <td className="bgl-table-title-cell">Group {index + 1}</td>
                         <td className="bgl-table-cell">{group[0].player}</td>
                         <td className="bgl-table-cell">{group[1].player}</td>
                         <td className="bgl-table-cell">{group[2].player}</td>
                         <td className="bgl-table-cell">{group[3].player}</td>
                     </tr>
-                    <tr className="bgl-table-row placement-row">
+                    <tr  key={"place-row-" + index} className="bgl-table-row placement-row">
                         <td className="bgl-table-subtitle-cell">Placement</td>
                         <td className="bgl-table-placement-cell">{group[0].placement}</td>
                         <td className="bgl-table-placement-cell">{group[1].placement}</td>
                         <td className="bgl-table-placement-cell">{group[2].placement}</td>
                         <td className="bgl-table-placement-cell">{group[3].placement}</td>
                     </tr>
-                </>
+                </tbody>
             )
         })
     }
@@ -82,6 +81,9 @@ class Schedule extends React.Component {
         if(this.props.schedule && this.props.schedule.length > 0){
             return (<div>{this.displaySchedule()}</div>)
         }else if(this.props.error){
+            if(this.props.error.message){
+                return (<div>{this.props.error.message}</div>)
+            }
             return (<div>There was an error loading the schedule</div>)
         }else{
             return this.loadingScreen();

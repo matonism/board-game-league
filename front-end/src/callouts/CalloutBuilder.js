@@ -10,15 +10,17 @@ class CalloutBuilder {
     }
     
     getSchedule(key){
+        console.log('making callout: schedule');
         return makeGetCallout(Constants.SERVER_URL + '/schedule', {season: key}, true);
     }
     
     getPowerRankings(key){
+        console.log('making callout: powerRankings');
         return makeGetCallout(Constants.SERVER_URL + '/powerRankings', {season: key}, true);
     }
-
     
     getBoardGameGeekIds(key){
+        console.log('making callout: BoardGameGeek');
         return makeGetCallout(Constants.SERVER_URL + '/boardGameIds', {games: key}, true);
     }
     
@@ -52,7 +54,7 @@ function makeGetCallout(endpoint, params, isSecure){
             
             if(response.ok){
                 response.clone().json().then(data => {
-                    console.dir(data);
+                    // console.dir(data);
                     resolve(data);
                 }).catch(error => {
                     console.log(error);
