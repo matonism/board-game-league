@@ -24,12 +24,13 @@
     display: flex;
     justify-content: center;
     margin: 0.5rem 0 0.75rem;
-    max-width: 90vw;
+    /* max-width: 90vw; */
     align-self: center;
     /* overflow: auto; */
     /* border-radius: 1rem 1rem 1rem 1rem; */
     /* scroll-snap-type: x mandatory; */
     flex-wrap: wrap;
+    padding: 0 1rem;
   }
 
   .week-toggle-button{    

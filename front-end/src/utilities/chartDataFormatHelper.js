@@ -1,8 +1,4 @@
-import colorList from "./colorList";
 import { getColor, highlightLine } from "./highlightChartSettings";
-
-
-
 
 
 export function getPowerRankingChartData(powerRankings){
@@ -34,10 +30,10 @@ export function getPowerRankingChartData(powerRankings){
             data: rankingData[name],
             // borderWidth: 1,
             backgroundColor: color.fill,
-            borderColor: index == defaultHighlight ? color.line : color.fill,
+            borderColor: index === defaultHighlight ? color.line : color.fill,
             color: color.line,
             // fill: "start",
-            borderWidth: index == defaultHighlight ? 10 : 2,
+            borderWidth: index === defaultHighlight ? 10 : 2,
             onClick: function(event, legendItem) {
               highlightLine(event, this.chart, legendItem.datasetIndex)
             }
@@ -63,7 +59,7 @@ export function getStandingsChartData(standings){
             xAxisLabels = player.weeklyScores.map((score, index) => {
                 return 'Week ' + (index + 1);
             })
-            xAxisLabels.unshift('');
+            xAxisLabels.unshift('Start');
         }
         
         let runningTotal = 0;
@@ -87,10 +83,10 @@ export function getStandingsChartData(standings){
             data: rankingData[name],
             // borderWidth: 1,
             backgroundColor: color.fill,
-            borderColor: index == defaultHighlight ? color.line : color.fill,
+            borderColor: index === defaultHighlight ? color.line : color.fill,
             color: color.line,
             // fill: "start",
-            borderWidth: index == defaultHighlight ? 10 : 2,
+            borderWidth: index === defaultHighlight ? 10 : 2,
             onClick: function(event, legendItem) {
               highlightLine(event, this.chart, legendItem.datasetIndex)
             }

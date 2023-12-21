@@ -14,7 +14,7 @@ export function createScheduleObject(response) {
     response.values.forEach((row, rowIndex) => {
         
         let rowReference = rowIndex % rowsBetweenWeeksInSpreadsheet;
-        if(rowReference == 0){
+        if(rowReference === 0){
             schedule.push({
                 week: row[0], 
                 game: row[1], 
@@ -25,14 +25,20 @@ export function createScheduleObject(response) {
         }else if(rowReference % 2 === 1){
             let placementRow = response.values[rowIndex + 1];
             let scheduleToUpdate = schedule[schedule.length - 1];
-            scheduleToUpdate.results.push([]);
+            // scheduleToUpdate.results.push([]);
+            let newGroup = [];
             for(let j = 1; j <= numberOfPlayersPerGame; j++){
-                let groupToUpdate = scheduleToUpdate.results[scheduleToUpdate.results.length-1];
-                let placement = placementRow[j];
-                groupToUpdate.push({player: row[j], placement: placement})
+                if(row[j]){
+                    let placement = placementRow[j];
+                    newGroup.push({player: row[j], placement: placement})
+                }
+                // let groupToUpdate = scheduleToUpdate.results[scheduleToUpdate.results.length-1];
+            }
+            if(newGroup.length > 0){
+                scheduleToUpdate.results.push(newGroup);
             }
 
-            if(scheduleToUpdate.results[0][0]?.placement){
+            if(scheduleToUpdate.results?.length > 0 && scheduleToUpdate.results[0][0]?.placement){
                 
                 if(scheduleToUpdate.week === 'championship'){
                     scheduleToUpdate.album.push('championship')
@@ -159,12 +165,12 @@ export function createStandingsObject(schedule){
 
 export function createStrengthOfScheduleObject(schedule, standings){
 
-    let gamesPerWeek = 4;
+    // let gamesPerWeek = 4;
     let sosObject = {};
     schedule.forEach(week=>{
         if(week.week.toLowerCase() !== 'championship'){ 
             week.results.forEach(group => {
-                gamesPerWeek = group.length;
+                // gamesPerWeek = group.length;
                 group.forEach(performance => {
 
                     if(!sosObject[performance.player]){
@@ -172,7 +178,7 @@ export function createStrengthOfScheduleObject(schedule, standings){
                         sosObject[performance.player] = {strengthOfScheduleTotal: 0, gamesPlayed: player.gamesPlayed, gamesToPlay: player.gamesToPlay};
                     }
                     group.forEach(performance2 => {
-                        if(performance != performance2){
+                        if(performance !== performance2){
                             let performance2Player = standings.regularSeason.find(standing => { return standing.player === performance2.player})
                             let sosValue = performance2Player.gamesPlayed > 0 ? performance2Player.points / performance2Player.gamesPlayed : 0;
                             if(performance.player === 'Jack'){
@@ -217,14 +223,15 @@ export function createStrengthOfScheduleObject(schedule, standings){
 }
 
 function scoringRubric(placement){
- if(placement == 1){
-     return 3;
- }else if(placement == 2){
-     return 2;
- }else if(placement == 3){
-     return 1;
- }
- return 0;
+    const intPlacement = parseInt(placement)
+    if(intPlacement === 1){
+        return 3;
+    }else if(intPlacement === 2){
+        return 2;
+    }else if(intPlacement === 3){
+        return 1;
+    }
+    return 0;
 }
 
 export function getImageFileNamesToLoad(schedule, response){
@@ -299,7 +306,7 @@ export function getPowerRankingsObjects(powerRankingsResponse){
 export async function createBoardGameHyperlinkMap(schedule){
     let gameNameQueryString = '';
     schedule.forEach(week=>{
-        if(week.game && week.game != 'TBD'){
+        if(week.game && week.game !== 'TBD'){
             gameNameQueryString += week.game + ',';
         }    
     })
@@ -311,6 +318,7 @@ export async function createBoardGameHyperlinkMap(schedule){
     }catch(error){
         console.log('search failed...');
         console.log(error);
+        throw error;
     }
     
 }

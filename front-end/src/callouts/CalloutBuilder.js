@@ -1,6 +1,4 @@
 import Constants from "../Constants";
-// import CookieManager from "../localstorage/CookieManager";
-// let cookieManager = new CookieManager();
 
 class CalloutBuilder {
 
@@ -10,17 +8,17 @@ class CalloutBuilder {
     }
     
     getSchedule(key){
-        console.log('making callout: schedule');
+        // console.log('making callout: schedule');
         return makeGetCallout(Constants.SERVER_URL + '/schedule', {season: key}, true);
     }
     
     getPowerRankings(key){
-        console.log('making callout: powerRankings');
+        // console.log('making callout: powerRankings');
         return makeGetCallout(Constants.SERVER_URL + '/powerRankings', {season: key}, true);
     }
     
     getBoardGameGeekIds(key){
-        console.log('making callout: BoardGameGeek');
+        // console.log('making callout: BoardGameGeek');
         return makeGetCallout(Constants.SERVER_URL + '/boardGameIds', {games: key}, true);
     }
     
@@ -70,80 +68,80 @@ function makeGetCallout(endpoint, params, isSecure){
     })
 }
 
-function makePostCallout(endpoint, body, isSecure){
+// function makePostCallout(endpoint, body, isSecure){
 
-    return new Promise((resolve, reject) => {
+//     return new Promise((resolve, reject) => {
 
-        const url = endpoint;
-        const options = {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json;charset=UTF-8',
-            },
-            body: JSON.stringify(body)
-        };
+//         const url = endpoint;
+//         const options = {
+//             method: 'POST',
+//             headers: {
+//                 'Accept': 'application/json',
+//                 'Content-Type': 'application/json;charset=UTF-8',
+//             },
+//             body: JSON.stringify(body)
+//         };
         
-        // if(isSecure){
-        //     options.headers['x-access-token'] = cookieManager.getValue(Constants.COOKIE_USER_KEY);
-        // }
+//         // if(isSecure){
+//         //     options.headers['x-access-token'] = cookieManager.getValue(Constants.COOKIE_USER_KEY);
+//         // }
 
-        fetch(url, options).then(response => {
-            if(response.ok){
-                response.json().then(data => {
-                    console.dir(data);
-                    resolve(data);
-                }).catch(error => {
-                    console.log(error);
-                    reject(error);
-                });
+//         fetch(url, options).then(response => {
+//             if(response.ok){
+//                 response.json().then(data => {
+//                     console.dir(data);
+//                     resolve(data);
+//                 }).catch(error => {
+//                     console.log(error);
+//                     reject(error);
+//                 });
 
-            }else{
-                response.json().then((errorObj) => reject(errorObj));
-            }
-        }).catch(error => {
-            console.dir(error);
-            reject(error);
-        });
-    })
-}
+//             }else{
+//                 response.json().then((errorObj) => reject(errorObj));
+//             }
+//         }).catch(error => {
+//             console.dir(error);
+//             reject(error);
+//         });
+//     })
+// }
 
-function makePatchCallout(endpoint, body, isSecure){
+// function makePatchCallout(endpoint, body, isSecure){
 
-    return new Promise((resolve, reject) => {
+//     return new Promise((resolve, reject) => {
 
-        const url = endpoint;
-        const options = {
-            method: 'PATCH',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json;charset=UTF-8',
-            },
-            body: JSON.stringify(body)
-        };
+//         const url = endpoint;
+//         const options = {
+//             method: 'PATCH',
+//             headers: {
+//                 'Accept': 'application/json',
+//                 'Content-Type': 'application/json;charset=UTF-8',
+//             },
+//             body: JSON.stringify(body)
+//         };
         
-        // if(isSecure){
-        //     options.headers['x-access-token'] = cookieManager.getValue(Constants.COOKIE_USER_KEY);
-        // }
+//         // if(isSecure){
+//         //     options.headers['x-access-token'] = cookieManager.getValue(Constants.COOKIE_USER_KEY);
+//         // }
 
-        fetch(url, options).then(response => {
-            if(response.ok){
-                response.json().then(data => {
-                    console.dir(data);
-                    resolve(data);
-                }).catch(error => {
-                    console.log(error);
-                    reject(error);
-                });
+//         fetch(url, options).then(response => {
+//             if(response.ok){
+//                 response.json().then(data => {
+//                     console.dir(data);
+//                     resolve(data);
+//                 }).catch(error => {
+//                     console.log(error);
+//                     reject(error);
+//                 });
 
-            }else{
-                response.json().then((errorObj) => reject(errorObj));
-            }
-        }).catch(error => {
-            console.dir(error);
-            reject(error);
-        });
-    })
-}
+//             }else{
+//                 response.json().then((errorObj) => reject(errorObj));
+//             }
+//         }).catch(error => {
+//             console.dir(error);
+//             reject(error);
+//         });
+//     })
+// }
 
 export default CalloutBuilder;

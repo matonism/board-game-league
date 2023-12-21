@@ -26,12 +26,12 @@ class Schedule extends React.Component {
     }
 
     displaySchedule(){
-        console.log(this.props.schedule);
+        // console.log(this.props.schedule);
         if(this.props.schedule){
-            let scheduleDisplay = this.props.schedule.map(week => {
+            let scheduleDisplay = this.props.schedule.map((week, index) => {
                 let linkDisplay = this.displayOpenNewPageLink(week.game)
                 return (
-                    <div key={week.game} className="bgl-week-container">
+                    <div key={this.props.season + index} className="bgl-week-container">
                         <div className="bgl-week-header">
                             <div>{week.week + ' - ' + week.game}</div>
                             {linkDisplay}
@@ -95,7 +95,7 @@ class Schedule extends React.Component {
         if(this.props?.boardGameHyperlinkMap){
             if(this.props?.boardGameHyperlinkMap[game]){
                 let boardGameId = this.props?.boardGameHyperlinkMap[game];
-                link = (<div className="bgg-link-container"><a target="_blank" href={'https://boardgamegeek.com/boardgame/' + boardGameId}><img className="bgg-link" src={openNewTab} alt="opentab"/></a></div>)
+                link = (<div className="bgg-link-container"><a target="_blank" rel="noreferrer" href={'https://boardgamegeek.com/boardgame/' + boardGameId}><img className="bgg-link" src={openNewTab} alt="opentab"/></a></div>)
             } 
         }
         return link;

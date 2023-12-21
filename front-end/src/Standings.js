@@ -47,7 +47,7 @@ class Standings extends React.Component {
         if(this.props.standings){
             let tableRows = this.props.standings.regularSeason.map((value, index) => {
                 return (
-                    <tr className="bgl-row">
+                    <tr key={"bgl-row-" + index} className="bgl-row">
                         <td className="bgl-standings-cell">{value.placement}</td>
                         <td className="bgl-standings-cell">{value.player}</td>
                         <td className="bgl-standings-cell">{value.points}</td>
@@ -55,18 +55,25 @@ class Standings extends React.Component {
                 )
             });
 
-            tableRows.unshift((<tr>
-                <td className="standings-row-header">Position</td>
-                <td className="standings-row-header">Player</td>
-                <td className="standings-row-header">Points</td>
-            </tr>))
+            tableRows.unshift((
+                <tr key='bgl-table-header'>
+                    <td className="standings-row-header">Position</td>
+                    <td className="standings-row-header">Player</td>
+                    <td className="standings-row-header">Points</td>
+                </tr>
+            ))
 
             return (
                 <>
                     {this.displayChampionship()}
                     <div className="power-ranking-header">BGL {this.props.season} Regular Season</div>
                     <div className="bgl-table-container">
-                        <table className="bgl-table">{tableRows}</table>
+                        
+                        <table className="bgl-table">
+                            <tbody>
+                                {tableRows}
+                            </tbody>
+                        </table>
                     </div>
                 </>
             );
@@ -79,7 +86,7 @@ class Standings extends React.Component {
             if(this.props.standings.championship && this.props.standings.championship.length > 0){
                 championshipRows = this.props.standings.championship.map((value, index) => {
                     return (
-                        <tr className="bgl-row">
+                        <tr key={"bgl-champ-row-" + index} className="bgl-row">
                             <td className="bgl-standings-cell">{value.placement}</td>
                             <td className="bgl-standings-cell">{value.player}</td>
                             <td className="bgl-standings-cell">{value.points}</td>
@@ -87,7 +94,7 @@ class Standings extends React.Component {
                     )
                 });
     
-                championshipRows.unshift((<tr>
+                championshipRows.unshift((<tr key="champ-header">
                     <td className="standings-row-header">Position</td>
                     <td className="standings-row-header">Player</td>
                     <td className="standings-row-header">Points</td>
@@ -96,7 +103,11 @@ class Standings extends React.Component {
                 return (<>
                     <div className="power-ranking-header">BGL {this.props.season} Final Standings</div>
                     <div className="bgl-table-container">
-                        <table className="bgl-table">{championshipRows}</table>
+                        <table className="bgl-table">
+                            <tbody>
+                                {championshipRows}
+                            </tbody>
+                        </table>
                     </div>
                 </>)
 
@@ -111,7 +122,7 @@ class Standings extends React.Component {
         if(this.props.strengthOfSchedules){
             let tableRows = this.props.strengthOfSchedules.map((value, index) => {
                 return (
-                    <tr className="bgl-row">
+                    <tr key={"sos-row-" + index} className="bgl-row">
                         <td className="bgl-standings-cell">{value.placement}</td>
                         <td className="bgl-standings-cell">{value.player}</td>
                         <td className="bgl-standings-cell">{Math.round(value.strengthOfSchedule * 1000) / 1000}</td>
@@ -119,7 +130,7 @@ class Standings extends React.Component {
                 )
             });
 
-            tableRows.unshift((<tr>
+            tableRows.unshift((<tr key="sos-row-header">
                 <td className="standings-row-header">Position</td>
                 <td className="standings-row-header">Player</td>
                 <td className="standings-row-header">Avg opp. PPG</td>
@@ -129,7 +140,9 @@ class Standings extends React.Component {
                 <>
                     <div className="power-ranking-header">BGL {this.props.season} Strength of Schedule</div>
                     <div className="bgl-table-container">
-                        <table className="bgl-table">{tableRows}</table>
+                        <table className="bgl-table">
+                            <tbody>{tableRows}</tbody>
+                        </table>
                     </div>
                 </>
             );

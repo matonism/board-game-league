@@ -1,33 +1,35 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import './PowerRankings.css';
 import loadingIcon from './images/loading-icon.gif';
-import ChartBuilder from "./ChartBuilder";
+// import ChartBuilder from "./ChartBuilder";
 import { getPowerRankingChartData } from "./utilities/chartDataFormatHelper";
 import HighlightLineChart from "./HighlightLineChart";
 
 
 const PowerRankings = props => {
 
-    // const [week, setWeek] = useState(props.powerRankings ? props.powerRankings.length - 1 : 0);
-    // const [chartData, setChartData] = useState(getPowerRankingChartData(props.powerRankings)); 
-    const [week, setWeek] = useState(props.powerRankings.length - 1);
+    //When the power rankings tab is selected - then the season changes, and then changes back, a render occurs with updated props before the state has a chance to update
+    //which can lead to a week=6 while powerRankings only have 1 week of data
+
+    const [week, setWeek] = useState(props.powerRankings ? props.powerRankings.length - 1 : 0);
     const [chartData, setChartData] = useState(getPowerRankingChartData(props.powerRankings)); 
 
+    //if powerrankings change, update week.  This only happens after the initial render though
+    //https://stackoverflow.com/questions/65979341/usestate-does-not-update-the-value-on-component-re-render
     useEffect(() => {
         setWeek(props.powerRankings.length - 1);
         setChartData(getPowerRankingChartData(props.powerRankings));
     }, [props.powerRankings])
 
 
-
     function displayWeekToggle(){
         if(props.powerRankings.length > 1){
             let rows = props.powerRankings.map((weekEntry, index) => {
                 let className = "week-toggle-button";
-                if(week == index){
+                if(week === index){
                     className += " active";
                 }
-                return (<div key={weekEntry.label} className={className} data-name={index} key={weekEntry.label} onClick={toggleActiveWeek}>{weekEntry.label}</div>)
+                return (<div key={weekEntry.label} className={className} data-name={index} onClick={toggleActiveWeek}>{weekEntry.label}</div>)
             })
             return (
                 <div className="week-toggle-container">
@@ -48,7 +50,7 @@ const PowerRankings = props => {
 
     function displayPowerRankings(){
         
-        if(props.powerRankings){
+        if(props.powerRankings && week < props.powerRankings.length){
             let tableRows = props.powerRankings[week].rankings.map((value, index) => {
                 return (
                     <tr key={index} className="bgl-row">
@@ -87,7 +89,7 @@ const PowerRankings = props => {
 
 
     function getPowerRankingsScreen(){
-        if(props.powerRankings && props.powerRankings.length > 0 && (week !== null) && week < props.powerRankings.length){
+        if(canDisplayWeeklyPowerRankings()){
             let display = [displayPowerRankings(), displayChart()];
             return display;
         }else if(props.error){
@@ -99,7 +101,14 @@ const PowerRankings = props => {
             return loadingScreen();
         }
     }
+    
 
+    function canDisplayWeeklyPowerRankings(){
+        if(props.powerRankings && props.powerRankings.length > 0 && week !== null && week >= 0 && week < props.powerRankings.length){
+            return true;
+        }
+        return false;
+    }
 
     
     return (

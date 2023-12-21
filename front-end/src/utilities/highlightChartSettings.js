@@ -1,7 +1,7 @@
 import colorList from "./colorList"; 
 
 export function formatChartJSObject(params){
-    const {xAxisLabels, datasets, options} = params;
+    const {xAxisLabels, datasets} = params;
     return {
         type: 'line',
         data: {
@@ -29,9 +29,11 @@ export function formatChartJSObject(params){
                         usePointStyle: true,
                         pointStyle: 'line',
                         font: {
-                            size: 10
+                            size: 10,
+                            weight: "bold",
+                            family: "'LouisGeorge','Helvetica Neue', 'Helvetica', 'Arial', sans-serif"
                         },
-                        // boxWidth: 20,
+                        boxWidth: 100,
                         sort: (a, b) => {
                             return a.text < b.text ? -1 : 1;
                         }
@@ -63,9 +65,12 @@ export function formatChartJSObject(params){
                         //         return ''
                         //     }
                         // }
-                        // font: {
-                        //     size: 8
-                        // }
+                        font: {
+                            size: 10,
+                            weight: "bold",
+                            family: "'LouisGeorge','Helvetica Neue', 'Helvetica', 'Arial', sans-serif"
+                        },
+                        backdropColor:'rgba(255, 100, 255, 0.75)'
                     },
                     max: datasets.length + 1,
                     min:0,
@@ -75,7 +80,9 @@ export function formatChartJSObject(params){
                 x: {
                     ticks: {
                         font: {
-                            size: 10
+                            size: 10,
+                            weight: "bold",
+                            family: "'LouisGeorge','Helvetica Neue', 'Helvetica', 'Arial', sans-serif"
                         }
                     },
 
@@ -120,12 +127,12 @@ export function highlightLine(event, myChart, line){
 
     // selectedLine = line
     if(areClickedLinesHighlighted(clickedLines, myChart)){
-        const chartDataObject = myChart.config.data.datasets.forEach((dataset, index) => {
+        myChart.config.data.datasets.forEach((dataset, index) => {
             dataset.borderColor = getColor(index).line
             dataset.borderWidth = 3
         })
     }else{
-        const chartDataObject = myChart.config.data.datasets.forEach((dataset, index) => {
+        myChart.config.data.datasets.forEach((dataset, index) => {
             dataset.borderColor = getColor(index).fill
             dataset.borderWidth = 3
         })

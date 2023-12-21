@@ -1,23 +1,17 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import {Chart} from "chart.js/auto";
 import './HighlightLineChart.css';
 import {formatChartJSObject, highlightLine} from "./utilities/highlightChartSettings";
-import useTraceUpdate from "./UseTrace";
 
 const HighlightLineChart = props => {
 
     const chartRef = useRef();
     const chartObj = useRef(null);
 
-    // useTraceUpdate(props);
-
-    // if(props.chartData){
     useEffect(() => {
 
         let chart = chartObj?.current;
-        // if(chart){
-        //     chart.destroy();
-        // }
+        
         if(!chart && props.chartData){
             const chartSetup = formatChartJSObject(props.chartData);
             if(props.reverse){
@@ -31,23 +25,14 @@ const HighlightLineChart = props => {
 
         }
 
-    }, [props.chartData])
+    }, [props.chartData, props.reverse])
 
 
-
-
-        
-    // }
-
-
-
-    // if(chart){
-        return (
-            <div className="chart-box">
-                <canvas ref={chartRef}>Chart</canvas>
-            </div>
-        );
-    // }
+    return (
+        <div className="chart-box">
+            <canvas ref={chartRef}>Chart</canvas>
+        </div>
+    );
 
     
     function canvasClickHandler(event, chart){    

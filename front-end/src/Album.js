@@ -21,28 +21,22 @@ class Album extends React.Component {
         this.enlargeImage = this.enlargeImage.bind(this);  
     }
 
-    componentDidMount(){
-        
-    }
-
     loadingScreen(){
         return (<div className="loading-icon-container"><img src={loadingIcon} alt="loading"></img></div>)
     }
 
     displayAlbum(){
-        console.log(this.props.schedule);
+        // console.log(this.props.schedule);
         if(this.props.schedule){
-            let albumDisplay = this.props.schedule.map(week => {
-                return (<>
-                    <div className="album-container">
+            let albumDisplay = this.props.schedule.map((week, index) => {
+                return (
+                    <div key={index} className="album-container">
                         <div className="bgl-week-header">{week.week + ' - ' + week.game}</div>
                         <div className="bgl-week-subheader">{week.dates}</div>
                         <div className="bgl-week-album-container">
                             {this.getSingleWeekAlbum(week, this.props.season)}
                         </div>        
                     </div>
-                </>
-
                 )
             });
 
@@ -50,7 +44,7 @@ class Album extends React.Component {
             return albumDisplay;
         }
 
-        return (<div>could not load album</div>);
+        return (<div key="album-error">could not load album</div>);
     }
 
     getSingleWeekAlbum(week, season){
@@ -59,7 +53,7 @@ class Album extends React.Component {
             let imageURL = '';
             try{
                 if(week.week.toLowerCase() === 'championship'){
-                    imageURL = require("./images/" + season + '/' + 'championship' + '.JPG');
+                    imageURL = require("./images/" + season + '/championship.JPG');
                 }else{
                     imageURL = require("./images/" + season + '/' + image + '.JPG');
                 }
@@ -69,15 +63,13 @@ class Album extends React.Component {
             if(imageFound){
                 imageURL = imageURL.default ? imageURL.default : imageURL;
                 return (
-                    <>
-                        <div className="image-container">
-                            <img className="gallery-image" src={imageURL} onError={this.hideImage} onClick={this.enlargeImage}/>
-                        </div>
-                    </>
+                    <div key={"image-"+index} className="image-container">
+                        <img className="gallery-image" alt="gallery" src={imageURL} onError={this.hideImage} onClick={this.enlargeImage}/>
+                    </div>
                 )
             }
 
-            return (<></>);
+            return (<div key="album-error"></div>);
         })
     }
 
@@ -95,9 +87,9 @@ class Album extends React.Component {
         if(this.state.largeImage !== null){
             return (<div className="large-image-background">
                 <div className="large-image-container">
-                    <img src={cancelIcon} className="close-large-image-button" onClick={this.closeLargeImageDisplay}></img>
+                    <img src={cancelIcon} alt="cancel" className="close-large-image-button" onClick={this.closeLargeImageDisplay}></img>
                     <div className="large-image-display">
-                        <img className="focused-image" src={this.state.largeImage} onClick={this.closeLargeImageDisplay}/>
+                        <img className="focused-image" alt="focused-gallery" src={this.state.largeImage} onClick={this.closeLargeImageDisplay}/>
                     </div>
                 </div>
             </div>)
