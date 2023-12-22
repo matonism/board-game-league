@@ -262,7 +262,7 @@ const DataContainer = props => {
             <div data-name="2023" className={"season-button " + (season === '2023' ? 'active' : '')} onClick={toggleSeason}>2023</div>
             <div data-name="2022" className={"season-button " + (season === '2022' ? 'active' : '')} onClick={toggleSeason}>2022</div>
         </div>
-        <div className="bgl-header">Board Game Leaue</div>
+        <div className="bgl-header">Board Game League</div>
         <div className="display-tabs" ref={displayTabsRef}>
             {getDisplayOptions()}
         </div>
