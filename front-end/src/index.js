@@ -5,6 +5,8 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { createRoot } from 'react-dom/client';
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+// import PullToRefresh from 'pulltorefreshjs';
+
 
 const queryClient = new QueryClient();
 
@@ -17,6 +19,18 @@ root.render(
         </QueryClientProvider>
     </React.StrictMode>
 );
+
+// const standalone = navigator.standalone || window.matchMedia("(display-mode: standalone)").matches;
+// if (standalone) {
+//     PullToRefresh.init({
+//         onRefresh() {
+//             // console.log('refreshing')
+//             window.location.reload();
+//         },
+//     });
+// }
+
+
 // ReactDOM.render(
 //   document.getElementById('root')
 // );
