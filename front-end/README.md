@@ -124,3 +124,6 @@ To add https:
     - You can do this from ACM by clicking Create records in Route53
     - This is needed to verify ownership
 - Add Certificate to Route53 Domain
+    - Make sure your Route53 Domain Names Nameservers match your Route53 Hosted Zone Nameservers
+- Add Certificate to Route53 config along with CNAME records (www.example.com, example.com)
+- Ensure your Cloudfront -> Behavior -> edit shows that HTTP redirects to HTTPS
