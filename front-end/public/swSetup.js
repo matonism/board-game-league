@@ -5,7 +5,7 @@
 //refreshing as desired. 
 //I am not sure if the presence of a service worker at one point in time caused this, but it seemed like my phone just stopped caching
 
-if('serviceWorker' in navigator && false){
+if('serviceWorker' in navigator){
     navigator.serviceWorker.register('/sw.js', { scope: '/'}).then((registration) => {
         //registration.addEventListener("updatefound", () => {
         //    window.location.reload();

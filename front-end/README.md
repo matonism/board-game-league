@@ -101,3 +101,17 @@ The stack is as follows
 Front End - React/NodeJS
 Back End - NodeJS/Lambda
 Navigation/URL Service - API Gateway
+
+
+
+
+To toggle between development and production
+- open a terminal in command prompt (not powershell)
+- run: SET NODE_ENV=development
+
+How to create-react-app with service-worker
+- npx create-react-app my-app --template cra-template-pwa
+
+How to serve a static version of a react app
+- npm install -g serve
+- serve -s build

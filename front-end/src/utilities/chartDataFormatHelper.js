@@ -75,6 +75,11 @@ export function getStandingsChartData(standings){
 
 
     })
+
+    if(!Object.keys(rankingData) || Object.keys(rankingData).length === 0){
+        return null;
+    }
+
     let defaultHighlight = parseInt(Math.random() * (Object.keys(rankingData).length - 1))
     const datasets = Object.keys(rankingData).map((name, index) => {
         const color = getColor(index);

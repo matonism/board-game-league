@@ -18,7 +18,9 @@ const Constants = {
     SCREEN_OPEN_POLL: "Open Poll",
     SCREEN_POLL_RESULTS: "Poll Complete",
     RECENT_POLL_COOKIE_PREFIX: "recent-poll-",
-    LOCAL_SUBMISSION_EXPIRATION: 24 * 14 //two weeks 
+    LOCAL_SUBMISSION_EXPIRATION: 24 * 14, //two weeks 
+
+    LOCAL_STORAGE_INSTALL_NOTIFICATION: 'install-notification'
 }
 
 export default Constants;

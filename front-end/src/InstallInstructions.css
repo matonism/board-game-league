@@ -1,0 +1,130 @@
+.pwa-install-prompt {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    background-color: white;
+    /* margin: 1rem; */
+    /* color: #fff; */
+    /* padding: 16px; */
+    display: flex;
+    justify-content: center;
+    /* flex-direction: column; */
+    align-items: center;
+    z-index: 9999;
+    /* background-image: linear-gradient( to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 100% ); */
+    animation: slide-in 0.3s ease-out;
+  }
+  
+  @keyframes slide-in {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+  
+  .pwa-install-prompt button {
+    /* Base button styles */
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.2s ease-in-out;
+  
+    /* Hover effect */
+    &:hover {
+      background-color: #2980b9;
+    }
+  }
+  
+  /* Platform-specific styles */
+  
+  .pwa-install-prompt[data-platform="ios"] {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+  
+  .pwa-install-prompt[data-platform="android"] {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .share-icon{    
+    max-height: 1.5rem;
+    box-shadow: 1px 1px 5px gray;
+    margin: 0 0.25rem -0.5rem;
+    padding: 0.25rem 0.2rem;
+    border-radius: 0.25rem;
+  }
+
+
+  .install-modal-content{
+    padding: 0 1rem 1rem;
+    text-align: left;
+  }
+
+  .install-modal-close-button{
+    text-align: right;
+    font-size: 2rem;
+  }
+
+
+  /* .install-logo-container{
+    transform: translateY(0);
+    opacity: 1;
+  } */
+
+  .install-logo-container{
+    position: absolute;
+    /* left: 0; */
+    /* right: 0; */
+    margin: auto;
+    /* height: 80px; */
+    width: 5rem;
+    /* z-index: 10000; */
+    transform: translateY(-50%);
+  }
+
+  .install-logo{
+    max-height: 4rem;
+    border-radius: 1rem;
+  }
+
+  
+.large-image-background{
+    background-color: rgba(0,0,0,0.5);
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    left: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.instruction-list-item{
+    padding-top: 0.75rem;
+    padding-left: 0.5rem;
+}
+.instruction-list-header{
+    font-size: 1.5rem;
+}
+
+.list-number{
+    background-color: gray;
+    color: white;
+    display: inline-block;
+    border-radius: 2rem;
+    font-weight: bold;
+    width: 1rem;
+    height: 1rem;
+    text-align: center;
+    padding: 0.5rem;
+    margin-right: 0.5rem;
+}

@@ -50,6 +50,7 @@
   .bgl-table-cell{
     padding: 0.8rem 0.5rem 0.2rem;
     vertical-align: bottom;
+    text-wrap: nowrap;
   }
 
   .bgl-table-subtitle-cell{

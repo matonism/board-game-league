@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { createRoot } from 'react-dom/client';
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 // import PullToRefresh from 'pulltorefreshjs';
+// import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
 
 const queryClient = new QueryClient();
@@ -39,3 +40,4 @@ root.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+// serviceWorkerRegistration.register();

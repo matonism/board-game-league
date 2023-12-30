@@ -11,6 +11,7 @@ import Album from "./Album";
 import { createScheduleObject, createStandingsObject, createStrengthOfScheduleObject, getPowerRankingsObjects, createBoardGameHyperlinkMap } from "./DataFormatter";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { setActiveTabClass } from "./utilities/activeTabSelector";
+import InstallInstructions from "./InstallInstructions";
 
 
 //options
@@ -43,7 +44,7 @@ const DataContainer = props => {
     const [displayedScreen, setDisplayedScreen] = useState('schedule');
 
     //Toggle the default number to set the default season
-    const [season, setSeason] = useState("2023");
+    const [season, setSeason] = useState("2024");
 
     const [errors, setErrors] = useState({
         schedule: null,
@@ -266,7 +267,8 @@ const DataContainer = props => {
         <div className="display-tabs" ref={displayTabsRef}>
             {getDisplayOptions()}
         </div>
-        {getCurrentDisplay()}                
+        {getCurrentDisplay()}     
+        <InstallInstructions></InstallInstructions>           
         </>
     );
     

@@ -4,7 +4,6 @@ import loadingIcon from './images/loading-icon.gif';
 import { getStandingsChartData } from "./utilities/chartDataFormatHelper";
 import HighlightLineChart from "./HighlightLineChart";
 
-
 class Standings extends React.Component {
 
 
@@ -25,6 +24,13 @@ class Standings extends React.Component {
             this.setState({chartData: getStandingsChartData(this.props.standings)})
         }
     }
+    
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.standings !== this.props.standings) {
+            this.setState({chartData: getStandingsChartData(this.props.standings)})
+        }
+    }
+
 
 
     loadingScreen(){

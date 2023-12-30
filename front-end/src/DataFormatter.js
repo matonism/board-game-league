@@ -30,7 +30,7 @@ export function createScheduleObject(response) {
             for(let j = 1; j <= numberOfPlayersPerGame; j++){
                 if(row[j]){
                     let placement = placementRow[j];
-                    newGroup.push({player: row[j], placement: placement})
+                    newGroup.push({player: row[j].trim(), placement: placement})
                 }
                 // let groupToUpdate = scheduleToUpdate.results[scheduleToUpdate.results.length-1];
             }
@@ -77,28 +77,30 @@ export function createStandingsObject(schedule){
         if(week.week.toLowerCase() !== 'championship'){ 
             week.results.forEach(group => {
                 group.forEach(performance => {
-                    if(!standings.regularSeason[performance.player]){
-                        standings.regularSeason[performance.player] = {score: 0, gamesPlayed: 0, gamesToPlay: 0, weeklyScores: new Array(index).fill(0)};
+                    let player = performance.player.trim();
+                    if(!standings.regularSeason[player]){
+                        standings.regularSeason[player] = {score: 0, gamesPlayed: 0, gamesToPlay: 0, weeklyScores: new Array(index).fill(0)};
                     }
                     if(performance.placement){
-                        standings.regularSeason[performance.player].score += scoringRubric(performance.placement);
-                        standings.regularSeason[performance.player].gamesPlayed++;
-                        standings.regularSeason[performance.player].weeklyScores.push(scoringRubric(performance.placement));
+                        standings.regularSeason[player].score += scoringRubric(performance.placement);
+                        standings.regularSeason[player].gamesPlayed++;
+                        standings.regularSeason[player].weeklyScores.push(scoringRubric(performance.placement));
                     }
-                    standings.regularSeason[performance.player].gamesToPlay++;
+                    standings.regularSeason[player].gamesToPlay++;
                 })
             })
         }else{
             week.results.forEach(group => {
                 group.forEach(performance => {
-                    if(!standings.championship[performance.player]){
-                        standings.championship[performance.player] = {score: 0, gamesPlayed: 0, gamesToPlay: 0};
+                    let player = performance.player.trim();
+                    if(!standings.championship[player]){
+                        standings.championship[player] = {score: 0, gamesPlayed: 0, gamesToPlay: 0};
                     }
                     if(performance.placement){
-                        standings.championship[performance.player].score += scoringRubric(performance.placement);
-                        standings.championship[performance.player].gamesPlayed++;
+                        standings.championship[player].score += scoringRubric(performance.placement);
+                        standings.championship[player].gamesPlayed++;
                     }
-                    standings.championship[performance.player].gamesToPlay++;
+                    standings.championship[player].gamesToPlay++;
                 })
             })
         }
