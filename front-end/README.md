@@ -115,3 +115,12 @@ How to create-react-app with service-worker
 How to serve a static version of a react app
 - npm install -g serve
 - serve -s build
+
+To add https:
+- Procur Route53 Domain Name
+- Create Cloudfront distribution
+- Create Certificate with ACM
+    - Add the provided DNS records to the Route53 Hosted Zone
+    - You can do this from ACM by clicking Create records in Route53
+    - This is needed to verify ownership
+- Add Certificate to Route53 Domain

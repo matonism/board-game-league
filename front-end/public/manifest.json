@@ -25,8 +25,17 @@
       "sizes": "512x512"
     }
   ],
-  "start_url": ".",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "background_color": "#ffffff",
+  "related_applications": [{
+    "platform": "webapp",
+    "url": "http://localhost:3000/manifest.json"
+  },
+  {
+    "platform": "webapp",
+    "url": "https://d2t8tspm3ivm4j.cloudfront.net/manifest.json"
+  }]
 }

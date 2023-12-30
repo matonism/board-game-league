@@ -1,8 +1,9 @@
 .pwa-install-prompt {
     position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100vw;
+    bottom: 5vw;
+    left: 5vw;
+    width: 90vw;
+    border-radius: 1rem;
     background-color: white;
     /* margin: 1rem; */
     /* color: #fff; */
@@ -65,7 +66,7 @@
 
   .install-modal-content{
     padding: 0 1rem 1rem;
-    text-align: left;
+    text-align: center;
   }
 
   .install-modal-close-button{
@@ -111,6 +112,18 @@
 .instruction-list-item{
     padding-top: 0.75rem;
     padding-left: 0.5rem;
+    display: flex;
+    align-items: center;
+    line-height: 1.5rem;
+    text-align: left;
+}
+.install-button-container{
+    padding-top: 0.75rem;
+    padding-left: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.5rem;
 }
 .instruction-list-header{
     font-size: 1.5rem;
@@ -122,9 +135,10 @@
     display: inline-block;
     border-radius: 2rem;
     font-weight: bold;
-    width: 1rem;
+    min-width: 1rem;
     height: 1rem;
     text-align: center;
     padding: 0.5rem;
     margin-right: 0.5rem;
+    line-height: 1rem;
 }
