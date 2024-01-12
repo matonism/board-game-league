@@ -26,7 +26,7 @@ const PowerRankings = props => {
         if(props.powerRankings.length > 1){
             let rows = props.powerRankings.map((weekEntry, index) => {
                 let className = "week-toggle-button";
-                if(week === index){
+                if(parseInt(week) === index){
                     className += " active";
                 }
                 return (<div key={weekEntry.label} className={className} data-name={index} onClick={toggleActiveWeek}>{weekEntry.label}</div>)

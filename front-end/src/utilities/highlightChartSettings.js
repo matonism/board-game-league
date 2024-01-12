@@ -1,7 +1,7 @@
 import colorList from "./colorList"; 
 
 export function formatChartJSObject(params){
-    const {xAxisLabels, datasets} = params;
+    const {xAxisLabels, datasets, max} = params;
     return {
         type: 'line',
         data: {
@@ -72,7 +72,7 @@ export function formatChartJSObject(params){
                         },
                         backdropColor:'rgba(255, 100, 255, 0.75)'
                     },
-                    max: datasets.length + 1,
+                    max: max ? max : datasets.length + 1,
                     min:0,
                     text: "Power Rankings"
 

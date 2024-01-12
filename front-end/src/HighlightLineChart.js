@@ -7,12 +7,18 @@ const HighlightLineChart = props => {
 
     const chartRef = useRef();
     const chartObj = useRef(null);
+    const chartData = useRef(null);
+
 
     useEffect(() => {
 
         let chart = chartObj?.current;
-        
+        if(chartData.current && chartData.current !== props.chartData){
+            chart.destroy();
+            chart = null;
+        }
         if(!chart && props.chartData){
+            
             const chartSetup = formatChartJSObject(props.chartData);
             if(props.reverse){
                 chartSetup.options.scales.y.reverse = true;
@@ -22,6 +28,7 @@ const HighlightLineChart = props => {
                 canvasClickHandler(event, chartObj?.current);
                 console.log('clicked');
             }
+            chartData.current = props.chartData;
 
         }
 

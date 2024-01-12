@@ -5,10 +5,10 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { createRoot } from 'react-dom/client';
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
-// import PullToRefresh from 'pulltorefreshjs';
+import PullToRefresh from 'pulltorefreshjs';
 // import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
-
+let refreshCount = 0;
 const queryClient = new QueryClient();
 
 const container = document.getElementById('root');
@@ -21,15 +21,23 @@ root.render(
     </React.StrictMode>
 );
 
-// const standalone = navigator.standalone || window.matchMedia("(display-mode: standalone)").matches;
-// if (standalone) {
-//     PullToRefresh.init({
-//         onRefresh() {
-//             // console.log('refreshing')
-//             window.location.reload();
-//         },
-//     });
-// }
+const standalone = navigator.standalone || window.matchMedia("(display-mode: standalone)").matches;
+if (standalone) {
+    PullToRefresh.init({
+        onRefresh() {
+            // console.log('refreshing')
+            // window.location.reload();
+
+            if(refreshCount < 2){
+                queryClient.invalidateQueries();
+                refreshCount++;
+                setTimeout(() => {
+                    refreshCount--;
+                }, 10000)
+            }
+        },
+    });
+}
 
 
 // ReactDOM.render(

@@ -80,8 +80,12 @@ export function getStandingsChartData(standings){
         return null;
     }
 
+    let max = 0;
     let defaultHighlight = parseInt(Math.random() * (Object.keys(rankingData).length - 1))
     const datasets = Object.keys(rankingData).map((name, index) => {
+        if(rankingData[name][rankingData[name].length-1] + 1 > max){
+            max = rankingData[name][rankingData[name].length-1] + 1;
+        }
         const color = getColor(index);
         return {
             label: name,
@@ -99,5 +103,5 @@ export function getStandingsChartData(standings){
         }
     });
 
-    return {datasets, xAxisLabels}
+    return {datasets, xAxisLabels, max}
 }
