@@ -2,9 +2,9 @@
 @font-face {
     font-family: 'LouisGeorge';
     src: local('LouisGeorge'), url(./fonts/Louis-George-Cafe.ttf) format('truetype');
-  }
+}
 
-  .toggle-button{
+.toggle-button{
     background-color: beige;
     flex-grow: 1;
     padding: 0.4rem 2rem;
@@ -40,7 +40,8 @@
     background-color: brown;
     color: white;
     /* border-bottom: 0.01rem solid beige; */
-    font-variant: petite-caps;
+    /* font-variant: petite-caps; */
+    font-variant-caps: small-caps;
 }
 
 .season-toggle{
