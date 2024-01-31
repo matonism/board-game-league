@@ -55,7 +55,15 @@ export function getStandingsChartData(standings){
     let xAxisLabels;
     let rankingData = {};
     standings.regularSeason.forEach((player, index) => {
+
         if(!xAxisLabels){
+            xAxisLabels = player.weeklyScores.map((score, index) => {
+                return 'Week ' + (index + 1);
+            })
+            xAxisLabels.unshift('Start');
+        }
+
+        if(player.weeklyScores.length >= xAxisLabels.length){
             xAxisLabels = player.weeklyScores.map((score, index) => {
                 return 'Week ' + (index + 1);
             })

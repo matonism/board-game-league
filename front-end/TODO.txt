@@ -1,15 +1,17 @@
 TODO
-- Add chart to map out power rankings and standings
+- add playoff weeks 
+- Consider scaling up with logins for different leagues
 - add +3, -1, etc... to show weekly change in standings and power rankings
-- Pull to refresh callouts
-    - use debouncing if making our callouts
-    - consider setting background color of app
 - implement service worker to cache the app so it works offline
 
 FIGURE OUT
 - Restrict MongoDB Access to only API Gateway
 
 DONE
+- Pull to refresh callouts
+    - use debouncing if making our callouts
+    - consider setting background color of app
+- Add chart to map out power rankings and standings
 - make panels more cohesive
 - show loading icon when viewonly mode
 - indicate that bracket is in view only mode
