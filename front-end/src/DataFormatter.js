@@ -38,7 +38,8 @@ export function createScheduleObject(response) {
                 scheduleToUpdate.results.push(newGroup);
             }
 
-            if(scheduleToUpdate.results?.length > 0 && scheduleToUpdate.results[0][0]?.placement){
+            //For album, we need to match the naming convention (ex: 2_3) to the given week (2) and given group (3)
+            if(scheduleToUpdate.results?.length > 0 && scheduleToUpdate.results[scheduleToUpdate.results.length-1][0]?.placement){
                 
                 if(scheduleToUpdate.week === 'championship'){
                     scheduleToUpdate.album.push('championship')
