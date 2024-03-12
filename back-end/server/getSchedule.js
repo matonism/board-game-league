@@ -7,14 +7,12 @@ const auth = new google.auth.GoogleAuth({
     scopes: "https://www.googleapis.com/auth/spreadsheets" //url to spreadsheets API
 });
 
-async function getSchedule(queryParams){
+async function getSchedule(queryParams){    
     let season = queryParams.season;
-
+    
     //Auth client Object
     const authClientObject = await auth.getClient();
     const googleSheetsInstance = google.sheets({ version: "v4", auth: authClientObject });
-    
-    //TODO: move this env variables
     const spreadsheetId = process.env.DOCUMENT_ID;
     //Read front the spreadsheet
     const readData = await googleSheetsInstance.spreadsheets.values.get({

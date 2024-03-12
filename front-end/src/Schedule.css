@@ -29,6 +29,7 @@
 
   .bgl-week-table{
     border-collapse: collapse;
+    min-width: 24rem;
   }
 
   .player-row{
@@ -73,4 +74,10 @@
 .bgg-link{
     max-height: 100%;
     cursor: pointer;
+}
+
+@media screen and (max-width: 600px) {
+    .bgl-week-table{
+        min-width: 95vw;
+    }
 }

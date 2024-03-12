@@ -65,6 +65,7 @@ app.get('/schedule', (request, response) => {
     getSchedule(queryParams).then(data => {
         response.send(data);
     }).catch(error => {
+        console.log(error);
         response.status = 400;
         response.send(error);
     })

@@ -15,7 +15,11 @@ async function getPowerRankings(queryParams){
     const googleSheetsInstance = google.sheets({ version: "v4", auth: authClientObject });
     
     //TODO: move this env variables
-    const spreadsheetId = "1DLPFwTuEH2UdI7PkHZGisB2PUCXv8xFnm_aV5q8xvLw";
+    //This is real live data
+    // const spreadsheetId = "1DLPFwTuEH2UdI7PkHZGisB2PUCXv8xFnm_aV5q8xvLw";
+
+    //This is test data
+    const spreadsheetId = process.env.DOCUMENT_ID;
     //Read front the spreadsheet
     const readData = await googleSheetsInstance.spreadsheets.values.get({
         auth, //auth object

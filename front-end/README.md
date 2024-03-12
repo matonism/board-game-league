@@ -127,3 +127,15 @@ To add https:
     - Make sure your Route53 Domain Names Nameservers match your Route53 Hosted Zone Nameservers
 - Add Certificate to Route53 config along with CNAME records (www.example.com, example.com)
 - Ensure your Cloudfront -> Behavior -> edit shows that HTTP redirects to HTTPS
+
+
+To point AWS Hosted Zone (Domain Name) to an S3 bucket
+- Register a domain name (Route 53)
+    - Allow the Hosted Zone to get created automatically
+- Create a S3 bucket with the same name as the domain name including the extension (S3)
+    - ex: DN: michaelmatonis.com - Bucket Name must be "michaelmatonis.com"
+    - Allow public access
+    - Navigate to properties tab after creation 
+        - Scroll to the bottom and enable static website hosting
+- Return to Route 53 and create an "A" record on the hosted zone
+    - Configure to point to your newly created S3 bucket

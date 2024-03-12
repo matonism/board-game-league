@@ -11,10 +11,19 @@ export function createScheduleObject(response) {
     let rowsBetweenWeeksInSpreadsheet = numberOfGamesPerWeek * 2 + infoHeaderRows;
     
     let schedule = [];
-    response.values.forEach((row, rowIndex) => {
-        
+    let playoffRowStart = 0;
+
+    for(let rowIndex = 0; rowIndex < response.values.length; rowIndex++){
+
+        let row = response.values[rowIndex];
         let rowReference = rowIndex % rowsBetweenWeeksInSpreadsheet;
         if(rowReference === 0){
+
+            if(row[0].toLowerCase().includes('championship') || row[0].toLowerCase().includes('playoff')){
+                playoffRowStart = rowIndex;
+                break;
+            }
+
             schedule.push({
                 week: row[0], 
                 game: row[1], 
@@ -48,7 +57,54 @@ export function createScheduleObject(response) {
                 }
             }
         }
-    });
+    }
+
+    //Playoffs and championship setup
+    let rowsBetweenChampionshipWeeks = 1 * 2 + infoHeaderRows;
+    for(let rowIndex = playoffRowStart; rowIndex < response.values.length; rowIndex++){
+        let row = response.values[rowIndex];
+        let rowReference = rowIndex % rowsBetweenChampionshipWeeks;
+        if(rowReference === 0){
+            schedule.push({
+                week: row[0], 
+                game: row[1], 
+                dates: row[2], 
+                results: [],
+                album: []
+            });
+        }else if(rowReference % 2 === 1){
+            let placementRow = response.values[rowIndex + 1];
+            let scheduleToUpdate = schedule[schedule.length - 1];
+            // scheduleToUpdate.results.push([]);
+            let newGroup = [];
+            for(let j = 1; j <= numberOfPlayersPerGame; j++){
+                if(row[j]){
+                    let placement = placementRow[j];
+                    newGroup.push({player: row[j].trim(), placement: placement})
+                }
+                // let groupToUpdate = scheduleToUpdate.results[scheduleToUpdate.results.length-1];
+            }
+            if(newGroup.length > 0){
+                scheduleToUpdate.results.push(newGroup);
+            }
+
+            //For album, we need to match the naming convention (ex: 2_3) to the given week (2) and given group (3)
+            if(scheduleToUpdate.results?.length > 0 && scheduleToUpdate.results[scheduleToUpdate.results.length-1][0]?.placement){
+                
+                if(scheduleToUpdate.week === 'championship'){
+                    scheduleToUpdate.album.push('championship')
+                }else if(scheduleToUpdate.week.includes('playoff')){
+                    scheduleToUpdate.album.push(scheduleToUpdate.week.replaceAll(' ', '_'));
+                }else{
+                    scheduleToUpdate.album.push(schedule.length + '_' + scheduleToUpdate.results.length)
+                }
+            }
+        }
+    }
+    // response.values.forEach((row, rowIndex) => {
+        
+        
+    // });
 
     return schedule;
 }
@@ -68,6 +124,22 @@ function getNumberOfGamesPerWeek(scheduleResponse){
     return numberOfRowsBetweenWeeks/2;
 }
 
+export function isRegularSeason(weekLabel){
+    if(weekLabel.toLowerCase().includes('championship') || weekLabel.toLowerCase().includes('playoff')){
+        return false;
+    }else if(weekLabel.toLowerCase().includes('week')){
+        return true;
+    }
+    return false;
+}
+
+export function isChampionship(weekLabel){
+    if(weekLabel.toLowerCase().includes('championship')){
+        return true;
+    }
+    return false;
+}
+
 export function createStandingsObject(schedule){
     let standings = {
         regularSeason: {},
@@ -75,7 +147,7 @@ export function createStandingsObject(schedule){
     };
 
     schedule.forEach((week, index)=>{
-        if(week.week.toLowerCase() !== 'championship'){ 
+        if(isRegularSeason(week.week.toLowerCase())){ 
             week.results.forEach(group => {
                 group.forEach(performance => {
                     let player = performance.player.trim();
@@ -90,7 +162,7 @@ export function createStandingsObject(schedule){
                     standings.regularSeason[player].gamesToPlay++;
                 })
             })
-        }else{
+        }else if(isChampionship(week.week.toLowerCase())){
             week.results.forEach(group => {
                 group.forEach(performance => {
                     let player = performance.player.trim();
@@ -171,7 +243,7 @@ export function createStrengthOfScheduleObject(schedule, standings){
     // let gamesPerWeek = 4;
     let sosObject = {};
     schedule.forEach(week=>{
-        if(week.week.toLowerCase() !== 'championship'){ 
+        if(isRegularSeason(week.week.toLowerCase())){ 
             week.results.forEach(group => {
                 // gamesPerWeek = group.length;
                 group.forEach(performance => {
@@ -184,9 +256,6 @@ export function createStrengthOfScheduleObject(schedule, standings){
                         if(performance !== performance2){
                             let performance2Player = standings.regularSeason.find(standing => { return standing.player === performance2.player})
                             let sosValue = performance2Player.gamesPlayed > 0 ? performance2Player.points / performance2Player.gamesPlayed : 0;
-                            if(performance.player === 'Jack'){
-                                //console.log(sosValue);
-                            }
                             sosObject[performance.player].strengthOfScheduleTotal += sosValue;
                         }
                     })
@@ -237,11 +306,13 @@ function scoringRubric(placement){
     return 0;
 }
 
+
+//TODO: Evaluate this for updates to playoff images
 export function getImageFileNamesToLoad(schedule, response){
     let mostPossibleImages = 0;
     let championshipPlayed = false;
     schedule.forEach(week=>{
-        if(week.week.toLowerCase() !== 'championship'){ 
+        if(isRegularSeason(week.week.toLowerCase())){ 
             week.results.forEach(group => {
                 let performance = group[0];
                 if(performance?.placement){
