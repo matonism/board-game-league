@@ -192,18 +192,51 @@ export function createStandingsObject(schedule){
     standingsArray.sort((a, b) => {
         if(a.points > b.points) {
             return -1;
-        }else{
+        }else if(b.points > a.points){
+            return 1;
+        }else if(Math.max(...a.weeklyScores) > Math.max(...b.weeklyScores)){
+            return -1;
+        }else if(Math.max(...a.weeklyScores) < Math.max(...b.weeklyScores)){
+            return 1;
+        }else if(Math.max(...a.weeklyScores) > 0){
+            let max = Math.max(...a.weeklyScores);
+            while(max > 0){
+                if(getPlacementCount(a, max) > getPlacementCount(b, max)){
+                    return -1;
+                }else if(getPlacementCount(a, max) < getPlacementCount(b, max)){
+                    return 1;
+                }
+                max--;
+            }
             return 1;
         }
     })
 
     let mostRecentPlacement = 1;
     standingsArray.forEach((person, index) => {
+
         if(index === 0 || person.points !== standingsArray[index - 1].points){
             person.placement = index + 1;
             mostRecentPlacement = index + 1;
         }else{
-            person.placement = mostRecentPlacement;
+            let arePlacementsIdentical = true;
+            let a = person;
+            let b = standingsArray[index - 1];
+            let max = Math.max(...b.weeklyScores);
+            while(max > 0){
+                if(getPlacementCount(a, max) > getPlacementCount(b, max)){
+                    arePlacementsIdentical = false;
+                }else if(getPlacementCount(a, max) < getPlacementCount(b, max)){
+                    arePlacementsIdentical = false;
+                }
+                max--;
+            }
+            if(arePlacementsIdentical){
+                person.placement = mostRecentPlacement;
+            }else{
+                person.placement = index + 1;
+                mostRecentPlacement = index + 1;
+            }
         }
     })
 
@@ -236,6 +269,10 @@ export function createStandingsObject(schedule){
     standings.regularSeason = standingsArray;
     standings.championship = championshipArray;
     return standings;
+}
+
+export function getPlacementCount(player, placement){
+    return player.weeklyScores.filter(score => score === placement).length;
 }
 
 export function createStrengthOfScheduleObject(schedule, standings){
