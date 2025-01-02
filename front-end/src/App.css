@@ -1,3 +1,19 @@
+:root {
+    --primary-font: 'LouisGeorge';
+    /* --primary-background-color: #e3e3e3a5; */
+    /* --primary-background-color: red; */
+    --primary-background-color: beige;
+    --brackset-primary-color: #2c7399;
+    --brackset-secondary-color: #3F915F;
+    --brackset-error-color: #992c2c;
+    --brackset-white-space-color: brown;
+    --brackset-white-space-hover-color: azure;
+    --secondary-background-color: #4a4d4e;
+    --brackset-dark-theme-color: #253e4c;
+    --svg-white-filter: invert(100%) sepia(9%) saturate(5300%) hue-rotate(292deg) brightness(114%) contrast(91%);
+
+}
+
 .App {
     text-align: center;
     display: flex;

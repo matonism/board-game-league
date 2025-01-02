@@ -2,6 +2,8 @@ import React from "react";
 import './Album.css';
 import loadingIcon from './images/loading-icon.gif';
 import cancelIcon from './images/cancel-icon.png';
+import openNewTab from './images/open-new-tab-icon.png'
+import driveIcon from './images/google-drive-icon-min.png'
 
 
 class Album extends React.Component {
@@ -27,7 +29,8 @@ class Album extends React.Component {
 
     displayAlbum(){
         // console.log(this.props.schedule);
-        if(this.props.schedule){
+
+        if(this.props.schedule && new Date().getFullYear().toString() === this.props.season){
             let albumDisplay = this.props.schedule.map((week, index) => {
                 return (
                     <div key={index} className="album-container">
@@ -42,6 +45,27 @@ class Album extends React.Component {
 
             
             return albumDisplay;
+        }else if(this.props.schedule && new Date().getFullYear().toString() !== this.props.season){
+            return (
+                <div className="album-link-container">
+                    <div className="drive-instructions">
+                        For previous seasons, all game session memories can be found at the following google drive link
+                    </div>
+                    <a href="https://drive.google.com/drive/folders/1zOWEFt7MSUv5o3mPXpXA3UNQaOUVtExC?usp=drive_link" target="_blank" className="album-link">
+                        <div className="album-link-button">
+                            
+                            <div className="drive-link-container">
+                                <img className="drive-link" src={driveIcon}></img>
+                            </div>
+                            Google Drive 
+                            <div className="bgg-link-container">
+                                <img className="bgg-link" src={openNewTab}></img>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            )
+            
         }
 
         return (<div key="album-error">could not load album</div>);

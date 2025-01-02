@@ -1,5 +1,4 @@
 TODO
-- add playoff weeks 
 - Consider scaling up with logins for different leagues
 - add +3, -1, etc... to show weekly change in standings and power rankings
 - implement service worker to cache the app so it works offline
@@ -8,6 +7,9 @@ FIGURE OUT
 - Restrict MongoDB Access to only API Gateway
 
 DONE
+- Add 2025 season
+- move past images to use a link to google drive
+- add playoff weeks 
 - Pull to refresh callouts
     - use debouncing if making our callouts
     - consider setting background color of app

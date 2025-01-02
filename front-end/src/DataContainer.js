@@ -44,7 +44,7 @@ const DataContainer = props => {
     const [displayedScreen, setDisplayedScreen] = useState('schedule');
 
     //Toggle the default number to set the default season
-    const [season, setSeason] = useState("2024");
+    const [season, setSeason] = useState("2025");
 
     const [errors, setErrors] = useState({
         schedule: null,
@@ -259,6 +259,7 @@ const DataContainer = props => {
     return (
         <>
         <div className="season-toggle" ref={seasonToggleRef}>
+            <div data-name="2025" className={"season-button " + (season === '2025' ? 'active' : '')} onClick={toggleSeason}>2025</div>
             <div data-name="2024" className={"season-button " + (season === '2024' ? 'active' : '')} onClick={toggleSeason}>2024</div>
             <div data-name="2023" className={"season-button " + (season === '2023' ? 'active' : '')} onClick={toggleSeason}>2023</div>
             <div data-name="2022" className={"season-button " + (season === '2022' ? 'active' : '')} onClick={toggleSeason}>2022</div>

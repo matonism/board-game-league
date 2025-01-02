@@ -139,3 +139,13 @@ To point AWS Hosted Zone (Domain Name) to an S3 bucket
         - Scroll to the bottom and enable static website hosting
 - Return to Route 53 and create an "A" record on the hosted zone
     - Configure to point to your newly created S3 bucket
+
+
+To use a custom domain for api gateway (this is useful for same domain restrictions like httponly cookies for refresh tokens)
+- Register a domain name
+- AWS Certificate manager for *.domainname.com
+- API Gateway -> Custom Domain Names -> Create
+    - type in api.domainname.com
+    - select certificate 
+- Identify API Gateway Domain Name under Endpoint Configuration
+- Paste it to a CNAME record on the related hosted zone

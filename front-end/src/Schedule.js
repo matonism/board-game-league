@@ -2,6 +2,7 @@ import React from "react";
 import './Schedule.css';
 import loadingIcon from './images/loading-icon.gif';
 import openNewTab from './images/open-new-tab-icon.png'
+import ScheduleTableRow from "./ScheduleTableRow";
 
 
 class Schedule extends React.Component {
@@ -39,7 +40,6 @@ class Schedule extends React.Component {
                         <div className="bgl-week-subheader">{week.dates}</div>
                         <div className="bgl-week-table-container">
                         <table className="bgl-week-table" cellPadding="0" cellSpacing="0">
-                            
                                 {this.getSingleScheduleTable(week)}
                         </table>
                         </div>        
@@ -57,22 +57,7 @@ class Schedule extends React.Component {
     getSingleScheduleTable(week){
         return week.results.map((group, index) => {
             return (
-                <tbody key={"table-" + index}>
-                    <tr key={"player-row-" + index} className="bgl-table-row player-row">
-                        <td className="bgl-table-title-cell">Group {index + 1}</td>
-                        <td className="bgl-table-cell">{group[0].player}</td>
-                        <td className="bgl-table-cell">{group[1].player}</td>
-                        <td className="bgl-table-cell">{group[2].player}</td>
-                        <td className="bgl-table-cell">{group[3].player}</td>
-                    </tr>
-                    <tr  key={"place-row-" + index} className="bgl-table-row placement-row">
-                        <td className="bgl-table-subtitle-cell">Placement</td>
-                        <td className="bgl-table-placement-cell">{group[0].placement}</td>
-                        <td className="bgl-table-placement-cell">{group[1].placement}</td>
-                        <td className="bgl-table-placement-cell">{group[2].placement}</td>
-                        <td className="bgl-table-placement-cell">{group[3].placement}</td>
-                    </tr>
-                </tbody>
+                <ScheduleTableRow key={'group-' + index} week={week} group={group} season={this.props.season} index={index}></ScheduleTableRow>
             )
         })
     }

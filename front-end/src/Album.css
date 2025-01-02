@@ -141,3 +141,44 @@
     border-radius: 1rem;
     box-shadow: 0.5rem 0.5rem 2rem black;
 }
+.album-link-container{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    min-height: 10rem;
+    flex-direction: column;
+}
+.album-link{
+    text-decoration: none;
+    display: flex;
+}
+.album-link-button{
+    padding: 1rem 1.5rem;
+    color: black;
+    background-color: white;
+    border-radius: 1rem;
+    display: flex;
+    border: 1px solid black;
+}
+
+.bgg-link-container{
+    height: 1rem;
+    padding-left: 0.5rem;
+}
+.bgg-link{
+    max-height: 100%;
+    cursor: pointer;
+}
+.drive-link-container{
+    height: 1.2rem;
+    padding-right: 0.5rem;
+}
+.drive-link{
+    max-height: 100%;
+    cursor: pointer;
+}
+
+.drive-instructions{
+    padding: 1.5rem 0;
+}
