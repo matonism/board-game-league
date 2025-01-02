@@ -16,7 +16,7 @@ const ScheduleTableRow = props => {
     }
 
     function getScheduleUI(){
-        let startingDate = props.week.dates.split('-').length > 1 ? new Date(props.week.dates.split('-')[0].trim() + '/' + props.season) : null;
+        let startingDate = props.week.dates?.split('-').length > 1 ? new Date(props.week.dates.split('-')[0].trim() + '/' + props.season) : null;
 
         if(displaySchedule && startingDate){
             return (

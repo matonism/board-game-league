@@ -84,6 +84,9 @@ ensure the public can read all the files by assigning manual permissions
 enable static website hosting under the bucket's properties
 follow new link generated for static website hosting
 
+- Alternatively 
+aws s3 sync ./build  s3://board-game-league --acl public-read
+
 To handle React Router in S3:
 Navigate to static website hosting settings under properties in S3 bucket
 set the error document to index.js or index.html (whichever you are using above)
