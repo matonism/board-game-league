@@ -30,3 +30,16 @@
     display: flex; 
     align-items: center;
   }
+
+  .historical-data-button-container{
+    padding: 2rem 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  .historical-data-button{
+    cursor: pointer;
+    padding: 1rem;
+    color: white;
+    background-color: brown;
+  }

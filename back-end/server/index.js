@@ -10,6 +10,7 @@ var bodyParser = require('body-parser');
 var getSchedule = require('./getSchedule.js');
 const getPowerRankings = require('./getPowerRankings.js');
 const getBoardGameInfo = require('./getBoardGameInfo.js');
+const getHistoricalData = require('./getHistoricalData.js');
 
 var app = express();
 //set app view engine
@@ -86,6 +87,17 @@ app.get('/boardGameIds', async (request, response) => {
     let queryParams = url.parse(request.url, true).query;
     try{
         let data = await getBoardGameInfo(queryParams);
+        response.send(data);
+    }catch(error){
+        response.status = 400;
+        response.send(error);
+    }
+});
+
+app.get('/historicalData', async (request, response) => {
+    let queryParams = url.parse(request.url, true).query;
+    try{
+        let data = await getHistoricalData(queryParams);
         response.send(data);
     }catch(error){
         response.status = 400;

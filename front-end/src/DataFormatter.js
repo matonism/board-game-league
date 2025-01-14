@@ -433,3 +433,235 @@ export async function createBoardGameHyperlinkMap(schedule){
     }
     
 }
+
+export function createHistoricalDataObject(data){
+
+    let schedules = [];
+
+    data.valueRanges.forEach(sheet => {
+        schedules.push(createScheduleObject(sheet));
+    })
+
+    console.log(schedules);
+    // let analysisObject = {
+    //     name: '',
+    //     headToHead: {
+    //         'Richie' : {
+    //             W: 1,
+    //             L: 2,
+    //             gamesPlayed: 3,
+    //             winRate: 33.3
+    //         }
+    //     },
+        // W:
+        // L:
+        // gamesPlayed: 
+        // winRate: 
+
+    // };
+
+    let analysisObject = {};
+    let postSeasonObject = {};
+
+    schedules.forEach((schedule, scheduleIndex) => {
+        
+        schedule.forEach(week=>{
+            if(isRegularSeason(week.week.toLowerCase())){ 
+                week.results.forEach(group => {
+                    // gamesPerWeek = group.length;
+                    group.forEach(performance => {
+
+                        if(performance.placement){
+                            if(!analysisObject[performance.player]){
+                                analysisObject[performance.player] = {
+                                    name: performance.player,
+                                    gamesPlayed: 0,
+                                    placements: {first: 0, second: 0, third: 0, fourth: 0},
+                                    headToHead: {},
+                                    averagePosition: 0
+                                }
+                                // let player = standings.regularSeason.find(standing => { return standing.player === performance.player})
+                                // sosObject[performance.player] = {strengthOfScheduleTotal: 0, gamesPlayed: player.gamesPlayed, gamesToPlay: player.gamesToPlay};
+                            }
+
+                            analysisObject[performance.player].gamesPlayed++;
+                            if(performance.placement === "1"){
+                                analysisObject[performance.player].placements.first++;
+                            }else if(performance.placement === "2"){
+                                analysisObject[performance.player].placements.second++;
+                            }else if(performance.placement === "3"){
+                                analysisObject[performance.player].placements.third++;
+                            }else if(performance.placement === "4"){
+                                analysisObject[performance.player].placements.fourth++;
+                            }
+                            analysisObject[performance.player].averagePosition = ((analysisObject[performance.player].averagePosition * (analysisObject[performance.player].gamesPlayed - 1)) + parseInt(performance.placement)) / analysisObject[performance.player].gamesPlayed;
+
+                            group.forEach(performance2 => {
+                                if(performance !== performance2){
+                                    if(!analysisObject[performance.player].headToHead[performance2.player]){
+                                        analysisObject[performance.player].headToHead[performance2.player] = {
+                                            name: performance2.player,
+                                            wins: 0,
+                                            losses: 0,
+                                            winRate: 0,
+                                            gamesPlayed: 0
+                                        }
+                                    }
+                                    let headToHead = analysisObject[performance.player].headToHead[performance2.player];
+                                    headToHead.gamesPlayed++;
+
+                                    if(performance.placement > performance2.placement){
+                                        headToHead.losses++;
+                                    }else{
+                                        headToHead.wins++;
+                                    }
+                                    
+                                    headToHead.winRate = (headToHead.wins / headToHead.gamesPlayed);
+                                }
+                            })
+                        }
+                        
+                    })
+                })
+            }else{
+                week.results.forEach(group => {
+                    // gamesPerWeek = group.length;
+                    group.forEach(performance => {
+
+                        if(performance.placement){
+                            if(!postSeasonObject[performance.player]){
+                                postSeasonObject[performance.player] = {
+                                    name: performance.player,
+                                    gamesPlayed: 0,
+                                    placements: {first: 0, second: 0, third: 0, fourth: 0},
+                                    headToHead: {},
+                                    averagePosition: 0,
+                                    championships: 0,
+                                    championshipAppearances: 0,
+                                    playoffAppearances: 0,
+                                    appearanceArray: []
+                                }
+                            }
+
+                            if(!postSeasonObject[performance.player].appearanceArray.includes(scheduleIndex)){
+                                postSeasonObject[performance.player].appearanceArray.push(scheduleIndex);
+                                postSeasonObject[performance.player].playoffAppearances++;
+                            }
+                            postSeasonObject[performance.player].gamesPlayed++;
+                            if(isChampionship(week.week.toLowerCase())){
+                                postSeasonObject[performance.player].championshipAppearances++;
+                            }
+                            if(performance.placement === "1"){
+                                postSeasonObject[performance.player].placements.first++;
+                                
+                                if(isChampionship(week.week.toLowerCase())){
+                                    postSeasonObject[performance.player].championships++;
+                                }
+                            }else if(performance.placement === "2"){
+                                postSeasonObject[performance.player].placements.second++;
+                            }else if(performance.placement === "3"){
+                                postSeasonObject[performance.player].placements.third++;
+                            }else if(performance.placement === "4"){
+                                postSeasonObject[performance.player].placements.fourth++;
+                            }
+                            postSeasonObject[performance.player].averagePosition = ((postSeasonObject[performance.player].averagePosition * (postSeasonObject[performance.player].gamesPlayed - 1)) + parseInt(performance.placement)) / postSeasonObject[performance.player].gamesPlayed;
+
+                            group.forEach(performance2 => {
+                                if(performance !== performance2){
+                                    if(!postSeasonObject[performance.player].headToHead[performance2.player]){
+                                        postSeasonObject[performance.player].headToHead[performance2.player] = {
+                                            name: performance2.player,
+                                            wins: 0,
+                                            losses: 0,
+                                            winRate: 0,
+                                            gamesPlayed: 0
+                                        }
+                                    }
+                                    let headToHead = postSeasonObject[performance.player].headToHead[performance2.player];
+                                    headToHead.gamesPlayed++;
+
+                                    if(performance.placement > performance2.placement){
+                                        headToHead.losses++;
+                                    }else{
+                                        headToHead.wins++;
+                                    }
+                                    
+                                    headToHead.winRate = (headToHead.wins / headToHead.gamesPlayed);
+                                }
+                            })
+                        }
+                        
+                    })
+                })
+
+
+            }
+        })
+    })
+
+    
+    Object.values(analysisObject).forEach(player => {
+        let headToHeadArray = Object.values(player.headToHead).sort((a, b) => {
+            if(a.gamesPlayed > b.gamesPlayed) {
+                return -1;
+            }else if(a.gamesPlayed < b.gamesPlayed){
+                return 1;
+            }else{
+                if(a.winRate > b.winRate){
+                    return -1
+                }else{
+                    return 1;
+                }
+            }
+        })
+        player.headToHead = headToHeadArray;
+    })
+
+    let analysisArray = Object.values(analysisObject).sort((a, b) => {
+        if(a.averagePosition < b.averagePosition) {
+            return -1;
+        }else{
+            return 1;
+        }
+    })
+    
+    
+    Object.values(postSeasonObject).forEach(player => {
+        let headToHeadArray = Object.values(player.headToHead).sort((a, b) => {
+            if(a.gamesPlayed > b.gamesPlayed) {
+                return -1;
+            }else if(a.gamesPlayed < b.gamesPlayed){
+                return 1;
+            }else{
+                if(a.winRate > b.winRate){
+                    return -1
+                }else{
+                    return 1;
+                }
+            }
+        })
+        player.headToHead = headToHeadArray;
+    })
+    
+    let postSeasonArray = Object.values(postSeasonObject).sort((a, b) => {
+        if(a.championships > b.championships) {
+            return -1;
+        }else if(a.championships < b.championships){
+            return 1;
+        }else if(a.championshipAppearances > b.championshipAppearances){
+            return -1
+        }else if(a.championshipAppearances < b.championshipAppearances){
+            return 1;
+        }else if(a.playoffAppearances > b.playoffAppearances){
+            return -1
+        }else{
+            return 1;
+        }
+    })
+
+    return {
+        regularSeason: analysisArray,
+        postSeason: postSeasonArray
+    };
+
+}

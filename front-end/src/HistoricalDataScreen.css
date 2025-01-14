@@ -1,0 +1,163 @@
+.historical-data-section-header:first-child{
+    padding: 1rem 0 1rem;
+}
+.historical-data-section-header{
+    font-size: 1.5rem;
+    padding: 3rem 0 1rem;
+}
+
+.historical-data-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* padding-top: 1rem; */
+}
+
+
+.historical-row{
+    display: flex;
+}
+
+.historical-row.header-row{
+    border-bottom: 1px solid black;
+}
+.historical-row-container{
+    display: flex;
+    flex-direction: column;
+}
+.historical-row-container.row-container-1{
+
+}
+
+.historical-row-container.row-container-2{
+    background-color: #f0e7c5;
+}
+
+.historical-row-container.active{
+    background-color: azure !important;
+}
+
+.historical-row.row-1{
+
+}
+
+.historical-row.row-2{
+    background-color: azure;
+}
+
+.historical-cell.header-cell{
+    font-weight: bold;
+    font-size: 0.9rem;    
+    font-weight: bold;
+    display: flex;
+    font-size: 0.9rem !important;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.highlight-cell{
+}
+
+.historical-cell{
+    padding: 0.5rem;
+    width: 2.5rem;
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.first-column{
+    font-size: 1.2rem;
+    width: 6rem;
+    font-weight: bold;
+}
+.second-column{
+    font-weight: bold;
+    /* background-color: aliceblue; */
+    width: 5rem;
+    font-size: 1.2rem;
+}
+.third-column{
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+
+.head-to-head-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 0;
+    /* display: none; */
+    overflow: hidden;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    background-color: white;
+}
+.historical-row-container.active .head-to-head-container{
+    height: 30rem;
+    padding-bottom: 1rem;
+    margin: 0.5rem 2rem 1rem;
+    overflow: auto;
+}
+
+.head-to-head-header{
+    font-size: 1.2rem;
+    padding: 1rem 0 1rem;
+    font-weight: bold;
+}
+
+
+.historical-row.postseason .historical-cell{
+    width: 6rem;
+}
+
+@media screen and (max-width: 600px) {
+        
+    .historical-row.postseason  .historical-cell{
+        width: 5rem;
+    }
+    .historical-cell.header-cell{
+        font-weight: bold;
+        display: flex;
+        font-size: 0.6rem !important;
+        justify-content: center;
+        align-items: flex-end;
+    }
+
+    .highlight-cell{
+    }
+
+    .historical-cell{
+        padding: 0.5rem 0.15rem;
+        width: 2.5rem;
+        font-size: 0.75rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .first-column{
+        font-size: 1rem;
+        width: 5rem;
+        font-weight: bold;
+    }
+    .second-column{
+        font-weight: bold;
+        /* background-color: aliceblue; */
+        /* width: 3rem; */
+        font-size: 1rem;
+    }
+    .third-column{
+        font-weight: bold;
+        font-size: 1rem;
+    }
+    .historical-row-container.active .head-to-head-container{
+        height: 19rem;
+        padding-bottom: 1rem;
+        margin: 0.5rem 1rem 1rem;
+        overflow: auto;
+    }
+}

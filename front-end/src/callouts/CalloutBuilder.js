@@ -21,6 +21,10 @@ class CalloutBuilder {
         // console.log('making callout: BoardGameGeek');
         return makeGetCallout(Constants.SERVER_URL + '/boardGameIds', {games: key}, true);
     }
+    getHistoricalData(data){
+        // console.log('making callout: getHistoricalData');
+        return makeGetCallout(Constants.SERVER_URL + '/historicalData', {seasons: data}, true);
+    }
     
 }
 

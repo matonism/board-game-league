@@ -7,6 +7,7 @@
     font-size: 1.5rem;
     padding: 1rem;
     border-bottom: 1px solid black;
+    color: white;
 }
 .detail-header-spacer{
     width: 2.75rem;
@@ -47,7 +48,8 @@
     box-shadow: 1px 1px 8px black;
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
+    /* flex-grow: 1;  */
+    /* min-width: 30rem; */
 }
 .detail-panel-button-container{
     display: flex;
@@ -105,6 +107,8 @@
 
     .detail-panel{    
         height: 100%;
+        max-width: 100%;
+        width: 100%;
     }
 }
 
@@ -116,7 +120,7 @@
 
     .detail-panel-background.right .detail-panel{    
         margin-right: 1rem;
-        max-width: 400px;
+        max-width: 80%;
         height: 95%;
     }
 
@@ -126,7 +130,7 @@
 
     .detail-panel-background.left .detail-panel{    
         margin-left: 1rem;
-        max-width: 400px;
+        max-width: 80%;
         height: 95%;
     }
 
@@ -135,7 +139,10 @@
     }
 
     .detail-panel-background.center .detail-panel{    
-        max-width: 400px;
+        max-width: 80%;
         height: 95%;
+    }
+    .detail-panel{    
+        min-width: 30rem;
     }
 }

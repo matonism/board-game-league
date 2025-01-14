@@ -4,6 +4,10 @@
     src: local('LouisGeorge'), url(./fonts/Louis-George-Cafe.ttf) format('truetype');
 }
 
+.noscroll { 
+    overflow: hidden;
+}
+
 .toggle-button{
     background-color: beige;
     flex-grow: 1;

@@ -21,7 +21,9 @@ const Constants = {
     RECENT_POLL_COOKIE_PREFIX: "recent-poll-",
     LOCAL_SUBMISSION_EXPIRATION: 24 * 14, //two weeks 
 
-    LOCAL_STORAGE_INSTALL_NOTIFICATION: 'brackset-install-notification'
+    LOCAL_STORAGE_INSTALL_NOTIFICATION: 'brackset-install-notification',
+
+    SEASONS: ['2025', '2024', '2023', '2022']
 }
 
 export default Constants;

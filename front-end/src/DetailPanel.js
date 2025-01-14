@@ -1,8 +1,9 @@
 import React from "react";
 import './DetailPanel.css';
-import cancelIcon from './utilities/images/cancel-icon.png';
-import backIcon from './utilities/images/right-arrow.png';
+import cancelIcon from './images/cancel-icon-white.png';
+import backIcon from './images/right-arrow.png';
 
+//props: alignment, closePanel, showClose, showBack, headerText, hideFooter, shouldDisplay
 const DetailPanel = props => {
     const alignment = props.alignment ? props.alignment : 'center';
 
@@ -56,6 +57,7 @@ const DetailPanel = props => {
         if(props.noPadding){
             styles += ' no-padding';
         }
+        return styles;
     }
 
     let panelBackgroundClass = 'detail-panel-background';

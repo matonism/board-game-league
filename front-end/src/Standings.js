@@ -1,57 +1,55 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import './Standings.css';
 import loadingIcon from './images/loading-icon.gif';
 import { getStandingsChartData } from "./utilities/chartDataFormatHelper";
 import HighlightLineChart from "./HighlightLineChart";
+import DetailPanel from "./DetailPanel";
+import HistoricalDataScreen from "./HistoricalDataScreen";
+import { freezeBody, unfreezeBody } from "./utilities/domUtilities";
 
-class Standings extends React.Component {
+const Standings = props => {
 
+    const [chartData, setChartData] = useState(null);
+    const [showHistoricalData, setShowHistoricalData] = useState(false);
 
-    constructor(props){
-        super(props);
-        
-        this.accountInfoNavRef = React.createRef();
-        this.state = {
-            chartData: null
-        };
-
-        this.getStandingsScreen = this.getStandingsScreen.bind(this);
-        this.loadingScreen = this.loadingScreen.bind(this);  
-    }
-
-    componentDidMount(){
-        if(this.props.standings && this.props.standings.regularSeason.length > 0){
-            this.setState({chartData: getStandingsChartData(this.props.standings)})
+    useEffect(() => {
+        if(props.standings && props.standings.regularSeason.length > 0){
+            setChartData(getStandingsChartData(props.standings));
         }
-    }
+    }, [props.standings])
+    // componentDidMount(){
+        // if(props.standings && props.standings.regularSeason.length > 0){
+        // }
+    // }
     
-    componentDidUpdate(prevProps, prevState) {
-        if (prevProps.standings !== this.props.standings) {
-            this.setState({chartData: getStandingsChartData(this.props.standings)})
-        }
-    }
+    // componentDidUpdate(prevProps, prevState) {
+    // useEffect
+        // if (prevProps.standings !== props.standings) {
+        //     setChartData(getStandingsChartData(props.standings));
+        // }
+    // }
 
 
 
-    loadingScreen(){
+    function loadingScreen(){
         return (<div className="loading-icon-container"><img src={loadingIcon} alt="loading"></img></div>)
     }
 
-    displayChart(){
-        if(this.props.standings && this.state.chartData){
+    function displayChart(){
+        if(props.standings && chartData){
             return (
                 <div className="chart-container">
                     <div className="power-ranking-header">Points Tracker</div>
-                    <HighlightLineChart chartData={this.state.chartData}></HighlightLineChart>
+                    <HighlightLineChart chartData={chartData}></HighlightLineChart>
                 </div>
             )
         }
     }
 
-    displayStandings(){
+    function displayStandings(){
         
-        if(this.props.standings){
-            let tableRows = this.props.standings.regularSeason.map((value, index) => {
+        if(props.standings){
+            let tableRows = props.standings.regularSeason.map((value, index) => {
                 return (
                     <tr key={"bgl-row-" + index} className="bgl-row">
                         <td className="bgl-standings-cell">{value.placement}</td>
@@ -71,8 +69,8 @@ class Standings extends React.Component {
 
             return (
                 <>
-                    {this.displayChampionship()}
-                    <div className="power-ranking-header">BGL {this.props.season} Regular Season</div>
+                    {displayChampionship()}
+                    <div className="power-ranking-header">BGL {props.season} Regular Season</div>
                     <div className="bgl-table-container">
                         
                         <table className="bgl-table">
@@ -86,11 +84,11 @@ class Standings extends React.Component {
         }
     }
 
-    displayChampionship(){
-        if(this.props.standings){
+    function displayChampionship(){
+        if(props.standings){
             let championshipRows = [];
-            if(this.props.standings.championship && this.props.standings.championship.length > 0){
-                championshipRows = this.props.standings.championship.map((value, index) => {
+            if(props.standings.championship && props.standings.championship.length > 0){
+                championshipRows = props.standings.championship.map((value, index) => {
                     return (
                         <tr key={"bgl-champ-row-" + index} className="bgl-row">
                             <td className="bgl-standings-cell">{value.placement}</td>
@@ -107,7 +105,7 @@ class Standings extends React.Component {
                 </tr>))
 
                 return (<>
-                    <div className="power-ranking-header">BGL {this.props.season} Final Standings</div>
+                    <div className="power-ranking-header">BGL {props.season} Final Standings</div>
                     <div className="bgl-table-container">
                         <table className="bgl-table">
                             <tbody>
@@ -123,10 +121,10 @@ class Standings extends React.Component {
     }
 
 
-    displayStrengthOfSchedule(){
+    function displayStrengthOfSchedule(){
         
-        if(this.props.strengthOfSchedules){
-            let tableRows = this.props.strengthOfSchedules.map((value, index) => {
+        if(props.strengthOfSchedules){
+            let tableRows = props.strengthOfSchedules.map((value, index) => {
                 return (
                     <tr key={"sos-row-" + index} className="bgl-row">
                         <td className="bgl-standings-cell">{value.placement}</td>
@@ -144,7 +142,7 @@ class Standings extends React.Component {
 
             return (
                 <>
-                    <div className="power-ranking-header">BGL {this.props.season} Strength of Schedule</div>
+                    <div className="power-ranking-header">BGL {props.season} Strength of Schedule</div>
                     <div className="bgl-table-container">
                         <table className="bgl-table">
                             <tbody>{tableRows}</tbody>
@@ -154,44 +152,62 @@ class Standings extends React.Component {
             );
         }
     }
-    getStandingsScreen(){
-        if(this.props.standings?.regularSeason){
-            return this.displayStandings();
-        }else if(this.props.error){
-            if(this.props.error.message){
-                return (<div>{this.props.error.message}</div>)
+    function getStandingsScreen(){
+        if(props.standings?.regularSeason){
+            return displayStandings();
+        }else if(props.error){
+            if(props.error.message){
+                return (<div>{props.error.message}</div>)
             }
             return (<div>There was an error loading the standings</div>)
         }else{
-            return this.loadingScreen();
+            return loadingScreen();
         }
     }
 
-    getStrengthOfScheduleScreen(){
-        if(this.props.strengthOfSchedules){
-            return this.displayStrengthOfSchedule();
-        }else if(this.props.error){
-            if(this.props.error.message){
-                return (<div>{this.props.error.message}</div>)
+    function getStrengthOfScheduleScreen(){
+        if(props.strengthOfSchedules){
+            return displayStrengthOfSchedule();
+        }else if(props.error){
+            if(props.error.message){
+                return (<div>{props.error.message}</div>)
             }
             return (<div>There was an error loading the strength of schedule</div>)
         }else{
-            return this.loadingScreen();
+            return loadingScreen();
         }
         
     }
 
-    render(){
 
-    
+    function showHistoricalDataButton(){
         return (
-            <>
-                {this.getStandingsScreen()}
-                {this.displayChart()}
-                {this.getStrengthOfScheduleScreen()}
-            </>
-        );
+            <div className="historical-data-button-container">
+                <div className="historical-data-button" onClick={() => {setShowHistoricalData(true); freezeBody();}}>View Historical Data</div>
+            </div>
+        )
     }
+    
+    function historicalDataDisplay(){
+        //props: alignment, closePanel, showClose, showBack, headerText, hideFooter, shouldDisplay
+
+            return (
+                <DetailPanel headerText="Historical Data" showClose="true" hideFooter="true" showBack="true" shouldDisplay={showHistoricalData} closePanel={() => {setShowHistoricalData(false); unfreezeBody()}}>
+                    <HistoricalDataScreen></HistoricalDataScreen>
+                </DetailPanel>
+            )
+    }
+
+    return (
+        <>
+            {historicalDataDisplay()}
+            {getStandingsScreen()}
+            {displayChart()}
+            {getStrengthOfScheduleScreen()}
+            {showHistoricalDataButton()}
+        </>
+    );
+    
 }
 
 export default Standings;

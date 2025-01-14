@@ -29,13 +29,13 @@ async function getBoardGameInfo(queryParams){
         //TODO: May want to sort by the oldest or newest?
         let gameKeys = Object.keys(searchResults);
         for(let i = 0; i < gameKeys.length; i++){
-            console.log(gameKeys[i]);
+            // console.log(gameKeys[i]);
             if(searchResults[gameKeys[i]].elements[0].elements){
                 searchResults[gameKeys[i]].elements[0].elements = sortSearchResultsByYearPublished(searchResults[gameKeys[i]].elements[0].elements);
                 response[gameKeys[i]] = searchResults[gameKeys[i]].elements[0].elements[0].attributes.id;
             }
         }
-        console.log(response);
+        // console.log(response);
     }catch(error){
         throw error;
     }
@@ -64,13 +64,13 @@ async function getBoardGameInfo(queryParams){
 //grab the most recent game
 function sortSearchResultsByYearPublished(gameVersions){
 
-    console.log('gameVersions');
-    console.log(gameVersions);
+    // console.log('gameVersions');
+    // console.log(gameVersions);
     if(gameVersions.length > 1){
         gameVersions = gameVersions.sort((a, b) => {
 
             let yearPublishedA = a.elements.find(element => {return element.name === 'yearpublished'})
-            console.log(yearPublishedA);
+            // console.log(yearPublishedA);
             let yearPublishedB = b.elements.find(element => {return element.name === 'yearpublished'})
             let gameNameMatchTypeA = a.elements.find(element => {return element.name === 'name'})
             let gameNameMatchTypeB = b.elements.find(element => {return element.name === 'name'})
