@@ -67,6 +67,26 @@
     padding: 0 1rem 1rem;
   }
 
+  /* .bgl-power-cell.name-cell{
+    width: 6rem;
+    text-align: center;
+  } */
+
+  .bgl-power-cell.positive{
+    color: green;
+  }
+  .bgl-power-cell.positive::before{
+    content: '\25B2';
+  }
+
+   
+
+   .bgl-power-cell.negative{
+    color: brown;
+  }
+  .bgl-power-cell.negative::before{
+    content: '\25BC';
+  }
   
 
 @media only screen and (min-width: 768px) {    

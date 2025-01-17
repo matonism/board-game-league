@@ -52,10 +52,21 @@ const PowerRankings = props => {
         
         if(props.powerRankings && week < props.powerRankings.length){
             let tableRows = props.powerRankings[week].rankings.map((value, index) => {
+                
+                if(week > 0){
+                    return (
+                        <tr key={index} className="bgl-row">
+                            <td className="bgl-power-cell">{index + 1}</td>
+                            <td className="bgl-power-cell name-cell">{value.name}</td>
+                            <td className={"bgl-power-cell " + (value.delta > 0 ? "positive" : (value.delta === 0 ? "" :  "negative"))}>{value.delta === 0 ? "" : Math.abs(value.delta)}</td>
+                        </tr>
+                    )
+
+                }
                 return (
                     <tr key={index} className="bgl-row">
                         <td className="bgl-power-cell">{index + 1}</td>
-                        <td className="bgl-power-cell">{value}</td>
+                        <td className="bgl-power-cell">{value.name}</td>
                     </tr>
                 )
             });

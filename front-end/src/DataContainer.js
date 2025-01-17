@@ -258,7 +258,7 @@ const DataContainer = props => {
    
     function getSeasonButtons(){
         return Constants.SEASONS.map(seasonOption => {
-            return <div data-name={seasonOption} className={"season-button " + (season === seasonOption ? 'active' : '')} onClick={toggleSeason}>{seasonOption}</div>
+            return <div key={"season-option-" + seasonOption} data-name={seasonOption} className={"season-button " + (season === seasonOption ? 'active' : '')} onClick={toggleSeason}>{seasonOption}</div>
         })
     }
 

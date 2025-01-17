@@ -210,6 +210,7 @@ export function createStandingsObject(schedule){
             }
             return 1;
         }
+        return 1;
     })
 
     let mostRecentPlacement = 1;
@@ -396,20 +397,33 @@ export function getPowerRankingsObjects(powerRankingsResponse){
     let powerRankings = [];
     if(powerRankingsResponse.values.length > 1){
 
-        powerRankingsResponse.values.forEach((row, rowIndex) => {
-            row.forEach((value, columnIndex)=>{
-                if(rowIndex === 0){
-                    if(powerRankingsResponse.values[rowIndex + 1].length > columnIndex){
-                        powerRankings.push({
-                            label: value,
-                            rankings: []
-                        })
+        if(powerRankingsResponse.values[0].length > 0){
+            let previousRankings = [];
+
+            for(let columnIndex = 0; columnIndex < powerRankingsResponse.values[0].length; columnIndex++){
+                for(let rowIndex = 0; rowIndex < powerRankingsResponse.values.length; rowIndex++){
+                    if(powerRankingsResponse.values[1].length > columnIndex){
+                    let value = powerRankingsResponse.values[rowIndex][columnIndex].trim();
+                    if(rowIndex === 0){
+                            powerRankings.push({
+                                label: value,
+                                rankings: []
+                            })
+                        previousRankings.push({});
+                    }else{
+                        previousRankings[columnIndex][value] = rowIndex;
+                        if(columnIndex>0){ 
+                            powerRankings[columnIndex].rankings.push({name: value, delta: previousRankings[columnIndex-1][value] - rowIndex});
+                        }else{
+                            powerRankings[columnIndex].rankings.push({name: value, delta: null});
+                        }
                     }
-                }else{
-                    powerRankings[columnIndex].rankings.push(value);
+                    
                 }
-            })
-        })
+                }
+            }
+
+        }
     }
     return powerRankings;
 }

@@ -6,24 +6,22 @@ import shareIcon from "./images/ios-chrome-more-button.svg";
 import addToHomeScreenIcon from "./images/ios-safari-add-to-home-screen-button.svg";
 import logo from "./images/bgl-logo-192.png";
 
-const HOURS_TO_DISABLE = 1;
 //Android browser
     //Check if installed
-    //if not, show prompt (if it hasn't been deferred within the past hour)
+    //if not, show prompt (if it hasn't been deferred)
 //Windows desktop
     //Check if installed
-    //if not, show prompt (if it hasn't been deferred within the past hour)
+    //if not, show prompt (if it hasn't been deferred)
 //IOS browser
-    //Check if deferred in the past hour
+    //Check if deferred
     //otherwise, show prompt
 //Standalone PWA
     //Hide prompt
 
 
-function InstallInstructions() {
+function InstallInstructionsPermanentDefer() {
     const [isInstalled, setIsInstalled] = useState(false);
-    // const [hasBeenDeferred, setHasBeenDeferred] = useState(false);
-    const [deferredTime, setDeferredTime] = useState(localStorage.getItem(Constants.LOCAL_STORAGE_INSTALL_NOTIFICATION));
+    const [hasBeenDeferred, setHasBeenDeferred] = useState(localStorage.getItem(Constants.LOCAL_STORAGE_INSTALL_NOTIFICATION));
     const [isInstallableAndroid, setIsInstallableAndroid] = useState(false);
 
     //********************************** PLATFORM CHECK FUNCTIONS ***********************************/
@@ -91,13 +89,10 @@ function InstallInstructions() {
     }
 
     function onCloseClick() {
-        if (hasDeferralExpired(localStorage.getItem(Constants.LOCAL_STORAGE_INSTALL_NOTIFICATION))) {
-            let deferralExpirationDate = new Date();
-            deferralExpirationDate.setTime((new Date()).setTime(new Date().getTime() + (HOURS_TO_DISABLE*60*60*1000)));
-            localStorage.setItem(Constants.LOCAL_STORAGE_INSTALL_NOTIFICATION, deferralExpirationDate.toString());
-            setDeferredTime(localStorage.getItem(Constants.LOCAL_STORAGE_INSTALL_NOTIFICATION));
+        if (localStorage.getItem(Constants.LOCAL_STORAGE_INSTALL_NOTIFICATION) === null) {
+            localStorage.setItem(Constants.LOCAL_STORAGE_INSTALL_NOTIFICATION, "true");
         }
-        // setHasBeenDeferred(true);
+        setHasBeenDeferred(true);
     }
 
 
@@ -151,19 +146,9 @@ function InstallInstructions() {
     }
 
     function displayPrompt() {
-        if (!isInstalled && !isStandalone() && hasDeferralExpired()) {
+        if (!isInstalled && !isStandalone() && !hasBeenDeferred) {
             return getPlatformSpecificPrompt();
         }
-    }
-
-    function hasDeferralExpired() {
-        let deferralDate = deferredTime;
-        return (deferralDate === null || !isParsableDate(deferralDate) || Date.now() > Date.parse(deferralDate));
-    }
-
-    function isParsableDate(str) {
-        const timestamp = Date.parse(str);
-        return !isNaN(timestamp);
     }
 
     let markup = displayPrompt();
@@ -181,4 +166,4 @@ function InstallInstructions() {
     }
 }
 
-export default InstallInstructions;
+export default InstallInstructionsPermanentDefer;

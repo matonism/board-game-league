@@ -14,7 +14,7 @@ export function getPowerRankingChartData(powerRankings){
         
         week.rankings.forEach((person, ranking) => {
             const readableRanking = ranking+1;
-            const key = person.trim();
+            const key = person.name.trim();
             if(Object.keys(rankingData).includes(key)){
                 rankingData[key].push(readableRanking);
             }else{
