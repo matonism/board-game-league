@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 // import InputBox from './InputBox';
 import './DataContainer.css';
 import loadingIcon from './images/loading-icon.gif';
+import infoIcon from './images/information-button-white.png';
 import {getPowerRankings, getSchedule } from "./callouts/CalloutFactory";
 import Schedule from "./Schedule";
 import Standings from "./Standings";
@@ -13,6 +14,10 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { setActiveTabClass } from "./utilities/activeTabSelector";
 import InstallInstructions from "./InstallInstructions";
 import Constants from "./Constants";
+import Panel from "./Panel";
+import { freezeBody, unfreezeBody } from "./utilities/domUtilities";
+import InfoPanel from "./InfoPanel";
+import LeagueInfo from "./LeagueInfo";
 
 
 //options
@@ -43,6 +48,7 @@ const DataContainer = props => {
     });
     const [powerRankings, setPowerRankings] = useState(null);
     const [displayedScreen, setDisplayedScreen] = useState('schedule');
+    const [showLeagueInfo, setShowLeagueInfo] = useState(checkDeferredInstructions());
 
     //Toggle the default number to set the default season
     const [season, setSeason] = useState(Constants.SEASONS[0]);
@@ -168,7 +174,12 @@ const DataContainer = props => {
     }, [powerRankingsResponse.status, powerRankingsResponse.data, powerRankingsResponse.error, powerRankingsResponse.isError, powerRankingsResponse.isSuccess]);
 
 
-    
+    function checkDeferredInstructions(){
+        if(!localStorage.getItem(Constants.LOCAL_STORAGE_LEAGUE_INFO_DEFERRED)){
+            freezeBody();
+        }
+        return !localStorage.getItem(Constants.LOCAL_STORAGE_LEAGUE_INFO_DEFERRED);
+    }
 
     function getCurrentDisplay(){
         if(scheduleResponse.isFetching || powerRankingsResponse.isFetching){
@@ -262,16 +273,33 @@ const DataContainer = props => {
         })
     }
 
+    function deferLeagueInfoModal(){
+        localStorage.setItem(Constants.LOCAL_STORAGE_LEAGUE_INFO_DEFERRED, true);
+    }
+
+    
+    function leagueInfoDisplay(){
+        return (
+            <InfoPanel headerText="" showClose="true" hideHeader="true" hideFooter="true" showBack="true" shouldDisplay={showLeagueInfo} closePanel={() => {setShowLeagueInfo(false); unfreezeBody(); deferLeagueInfoModal()}}>
+                {<LeagueInfo></LeagueInfo>}
+            </InfoPanel>
+        )
+    }
+
     return (
         <>
-        <div className="season-toggle" ref={seasonToggleRef}>
-            {getSeasonButtons()}
+        <div className="season-toggle-header">
+            <img src={infoIcon} alt="about-bgl" class='information-icon' onClick={() => {setShowLeagueInfo(true)}}></img>
+            <div className="season-toggle" ref={seasonToggleRef}>
+                {getSeasonButtons()}
+            </div>
         </div>
         <div className="bgl-header">Board Game League</div>
         <div className="display-tabs" ref={displayTabsRef}>
             {getDisplayOptions()}
         </div>
         {getCurrentDisplay()}     
+        {leagueInfoDisplay()}
         <InstallInstructions></InstallInstructions>           
         </>
     );

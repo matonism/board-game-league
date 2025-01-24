@@ -16,6 +16,7 @@
 
 .historical-row{
     display: flex;
+    justify-content: space-between;
 }
 
 .historical-row.header-row{
@@ -35,6 +36,14 @@
 
 .historical-row-container.active{
     background-color: azure !important;
+}
+
+.historical-row-container .arrow-column::before{
+    content: '\25B6';
+}
+
+.historical-row-container.active .arrow-column::before{
+    content: '\25BC';
 }
 
 .historical-row.row-1{
@@ -114,6 +123,10 @@
     width: 6rem;
 }
 
+.table-container{
+    padding-bottom: 1rem;
+}
+
 @media screen and (max-width: 600px) {
         
     .historical-row.postseason  .historical-cell{
@@ -159,5 +172,20 @@
         padding-bottom: 1rem;
         margin: 0.5rem 1rem 1rem;
         overflow: auto;
+    }
+
+    
+    .historical-row.matchup-analytics  .historical-cell{
+        width: 3.6rem;
+    }
+
+    
+    .game-performance .historical-cell{
+        width: 4.5rem;
+    }
+
+    
+    .historical-row.matchup-analytics  .historical-cell.first-column{
+        width: 4.5rem;
     }
 }

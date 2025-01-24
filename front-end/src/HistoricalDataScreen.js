@@ -5,8 +5,12 @@ import { getHistoricalData } from "./callouts/CalloutFactory";
 import Constants from "./Constants";
 import { useQuery } from "@tanstack/react-query";
 import { createHistoricalDataObject } from "./DataFormatter";
-import PostseasonTable from "./PostseasonTable";
-import RegularSeasonTable from "./RegularSeasonTable";
+import ExpandableDataTable from "./ExpandableDataTable";
+import GamePerformanceTable from "./GamePerformanceTable";
+import RegularSeasonPerformanceColumns from "./RegularSeasonPerformanceColumns";
+import PostseasonPerformanceColumns from "./PostseasonPerformanceColumns";
+import HeadToHeadTable from "./HeadToHeadTable";
+import MatchupAnalyticsColumns from "./MatchupAnalyticsColumns";
 
 const HistoricalDataScreen = props => {
         
@@ -54,8 +58,39 @@ const HistoricalDataScreen = props => {
             return (<div className="historical-data-container">Something went wrong. Try again later</div>)
         }else if(historicalData){
             return (<div className="historical-data-container">
-                <RegularSeasonTable data={historicalData.regularSeason}></RegularSeasonTable>
-                <PostseasonTable data={historicalData.postSeason}></PostseasonTable>
+
+                <ExpandableDataTable 
+                    header="Regular Season Performance" 
+                    variant="regularSeason" 
+                    columnSchema={RegularSeasonPerformanceColumns} 
+                    data={historicalData.regularSeason}
+                    getSubtable={(player) => <GamePerformanceTable variant="regular-season-game-perf" player={player}></GamePerformanceTable>
+                    }
+                ></ExpandableDataTable>
+
+                <ExpandableDataTable 
+                    header="Postseason Performance" 
+                    variant="postseason" 
+                    columnSchema={PostseasonPerformanceColumns} 
+                    data={historicalData.postSeason}
+                    getSubtable={(player) => <GamePerformanceTable variant="postseason-game-perf" player={player}></GamePerformanceTable>}
+                ></ExpandableDataTable>
+
+                <ExpandableDataTable 
+                    header="Regular Season Matchup Analytics" 
+                    variant="matchup-analytics" 
+                    columnSchema={MatchupAnalyticsColumns} 
+                    data={historicalData.regularSeason}
+                    getSubtable={(player) => <HeadToHeadTable variant="regular-season-head-to-head" player={player}></HeadToHeadTable>}
+                ></ExpandableDataTable>
+
+                <ExpandableDataTable 
+                    header="Postseason Matchup Analytics" 
+                    variant="matchup-analytics" 
+                    columnSchema={MatchupAnalyticsColumns} 
+                    data={historicalData.postSeason}
+                    getSubtable={(player) => <HeadToHeadTable variant="postseason-head-to-head" player={player}></HeadToHeadTable>}
+                ></ExpandableDataTable>
             </div>)
         }
     }

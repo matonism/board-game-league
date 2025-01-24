@@ -8,6 +8,19 @@
     overflow: hidden;
 }
 
+.information-icon{
+    max-height: 1rem;
+    padding: 0 0.25rem 0 0.75rem;
+}
+
+.season-toggle-header{
+    display: flex;
+    align-items: center;
+    background-color: cornflowerblue;
+    overflow-x: auto;
+    min-width: 100%;
+    justify-content: space-between;
+}
 .toggle-button{
     background-color: beige;
     flex-grow: 1;
@@ -49,8 +62,8 @@
 }
 
 .season-toggle{
-    width: 100%;
-    background-color: cornflowerblue;
+    /* width: 100%; */
+    /* background-color: cornflowerblue; */
     display: flex;
     justify-content: flex-end;
     padding: 0.4rem 0rem;

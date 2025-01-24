@@ -22,6 +22,7 @@ const Constants = {
     LOCAL_SUBMISSION_EXPIRATION: 24 * 14, //two weeks 
 
     LOCAL_STORAGE_INSTALL_NOTIFICATION: 'bgl-install-notification',
+    LOCAL_STORAGE_LEAGUE_INFO_DEFERRED: 'bgl-information-modal-deferred',
 
     SEASONS: ['2025', '2024', '2023', '2022']
 }

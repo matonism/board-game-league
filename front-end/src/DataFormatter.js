@@ -450,41 +450,26 @@ export async function createBoardGameHyperlinkMap(schedule){
 
 export function createHistoricalDataObject(data){
 
-    let schedules = [];
+    let schedules = {};
 
     data.valueRanges.forEach(sheet => {
-        schedules.push(createScheduleObject(sheet));
+        let scheduleYear = sheet.range.split('-')[1].split('\'')[0];
+        schedules[scheduleYear] = createScheduleObject(sheet);
     })
 
     console.log(schedules);
-    // let analysisObject = {
-    //     name: '',
-    //     headToHead: {
-    //         'Richie' : {
-    //             W: 1,
-    //             L: 2,
-    //             gamesPlayed: 3,
-    //             winRate: 33.3
-    //         }
-    //     },
-        // W:
-        // L:
-        // gamesPlayed: 
-        // winRate: 
-
-    // };
 
     let analysisObject = {};
     let postSeasonObject = {};
-
-    schedules.forEach((schedule, scheduleIndex) => {
+    Object.keys(schedules).forEach((year) => {
         
+        let schedule = schedules[year];
+
         schedule.forEach(week=>{
             if(isRegularSeason(week.week.toLowerCase())){ 
                 week.results.forEach(group => {
                     // gamesPerWeek = group.length;
                     group.forEach(performance => {
-
                         if(performance.placement){
                             if(!analysisObject[performance.player]){
                                 analysisObject[performance.player] = {
@@ -492,13 +477,18 @@ export function createHistoricalDataObject(data){
                                     gamesPlayed: 0,
                                     placements: {first: 0, second: 0, third: 0, fourth: 0},
                                     headToHead: {},
-                                    averagePosition: 0
+                                    averagePosition: 0,
+                                    gamePerformance: [],
+                                    opponents: [],
+                                    uniqueOpponents: [],
+                                    points: 0
                                 }
                                 // let player = standings.regularSeason.find(standing => { return standing.player === performance.player})
                                 // sosObject[performance.player] = {strengthOfScheduleTotal: 0, gamesPlayed: player.gamesPlayed, gamesToPlay: player.gamesToPlay};
                             }
 
                             analysisObject[performance.player].gamesPlayed++;
+                            analysisObject[performance.player].gamePerformance.push({game: week.game, season: year, week: week.week, placement: performance.placement});
                             if(performance.placement === "1"){
                                 analysisObject[performance.player].placements.first++;
                             }else if(performance.placement === "2"){
@@ -509,6 +499,8 @@ export function createHistoricalDataObject(data){
                                 analysisObject[performance.player].placements.fourth++;
                             }
                             analysisObject[performance.player].averagePosition = ((analysisObject[performance.player].averagePosition * (analysisObject[performance.player].gamesPlayed - 1)) + parseInt(performance.placement)) / analysisObject[performance.player].gamesPlayed;
+
+                            analysisObject[performance.player].points += scoringRubric(performance.placement);
 
                             group.forEach(performance2 => {
                                 if(performance !== performance2){
@@ -529,8 +521,13 @@ export function createHistoricalDataObject(data){
                                     }else{
                                         headToHead.wins++;
                                     }
-                                    
+
                                     headToHead.winRate = (headToHead.wins / headToHead.gamesPlayed);
+
+                                    analysisObject[performance.player].opponents.push(performance2.player);
+                                    if(!analysisObject[performance.player].uniqueOpponents.includes(performance2.player)){
+                                        analysisObject[performance.player].uniqueOpponents.push(performance2.player);
+                                    }
                                 }
                             })
                         }
@@ -553,14 +550,20 @@ export function createHistoricalDataObject(data){
                                     championships: 0,
                                     championshipAppearances: 0,
                                     playoffAppearances: 0,
-                                    appearanceArray: []
+                                    appearanceArray: [],
+                                    gamePerformance: [],
+                                    opponents: [],
+                                    uniqueOpponents: [],
+                                    points: 0
                                 }
                             }
 
-                            if(!postSeasonObject[performance.player].appearanceArray.includes(scheduleIndex)){
-                                postSeasonObject[performance.player].appearanceArray.push(scheduleIndex);
+                            if(!postSeasonObject[performance.player].appearanceArray.includes(year)){
+                                postSeasonObject[performance.player].appearanceArray.push(year);
                                 postSeasonObject[performance.player].playoffAppearances++;
                             }
+                            
+                            postSeasonObject[performance.player].gamePerformance.push({game: week.game, week: week.week, season: year, placement: performance.placement});
                             postSeasonObject[performance.player].gamesPlayed++;
                             if(isChampionship(week.week.toLowerCase())){
                                 postSeasonObject[performance.player].championshipAppearances++;
@@ -579,6 +582,7 @@ export function createHistoricalDataObject(data){
                                 postSeasonObject[performance.player].placements.fourth++;
                             }
                             postSeasonObject[performance.player].averagePosition = ((postSeasonObject[performance.player].averagePosition * (postSeasonObject[performance.player].gamesPlayed - 1)) + parseInt(performance.placement)) / postSeasonObject[performance.player].gamesPlayed;
+                            postSeasonObject[performance.player].points += scoringRubric(performance.placement);
 
                             group.forEach(performance2 => {
                                 if(performance !== performance2){
@@ -601,6 +605,11 @@ export function createHistoricalDataObject(data){
                                     }
                                     
                                     headToHead.winRate = (headToHead.wins / headToHead.gamesPlayed);
+                                    
+                                    postSeasonObject[performance.player].opponents.push(performance2.player);
+                                    if(!postSeasonObject[performance.player].uniqueOpponents.includes(performance2.player)){
+                                        postSeasonObject[performance.player].uniqueOpponents.push(performance2.player);
+                                    }
                                 }
                             })
                         }
@@ -614,7 +623,19 @@ export function createHistoricalDataObject(data){
     })
 
     
+    //DEFAULT SORTING
     Object.values(analysisObject).forEach(player => {
+
+        player.roundedAveragePosition = Math.round(player.averagePosition * 100) / 100;
+        player.averageScore = Math.round((player.points / player.gamesPlayed) * 100) / 100;
+        player.uniqueOpponentsTotal = player.uniqueOpponents.length;
+        player.opponentsTotal = player.opponents.length;
+        let opponentAverageScoreSum = 0;
+        player.opponents.forEach(opp => {
+            opponentAverageScoreSum += analysisObject[opp].points / analysisObject[opp].gamesPlayed;
+        })
+        player.averageOpponentStrength = Math.round((opponentAverageScoreSum / player.opponentsTotal) * 100) / 100;
+
         let headToHeadArray = Object.values(player.headToHead).sort((a, b) => {
             if(a.gamesPlayed > b.gamesPlayed) {
                 return -1;
@@ -631,6 +652,23 @@ export function createHistoricalDataObject(data){
         player.headToHead = headToHeadArray;
     })
 
+    Object.values(analysisObject).forEach(player => {
+        let gamePerformance = Object.values(player.gamePerformance).sort((a, b) => {
+            if(a.season > b.season) {
+                return -1;
+            }else if(a.season < b.season){
+                return 1;
+            }else{
+                if(a.week > b.week){
+                    return -1
+                }else{
+                    return 1;
+                }
+            }
+        })
+        player.gamePerformance = gamePerformance;
+    })
+
     let analysisArray = Object.values(analysisObject).sort((a, b) => {
         if(a.averagePosition < b.averagePosition) {
             return -1;
@@ -641,6 +679,19 @@ export function createHistoricalDataObject(data){
     
     
     Object.values(postSeasonObject).forEach(player => {
+        
+        player.roundedAveragePosition = Math.round(player.averagePosition * 100) / 100;
+        player.averageScore = Math.round((player.points / player.gamesPlayed) * 100) / 100;
+        player.uniqueOpponentsTotal = player.uniqueOpponents.length;
+        player.opponentsTotal = player.opponents.length;
+        let opponentAverageScoreSum = 0;
+        player.opponents.forEach(opp => {
+            opponentAverageScoreSum += postSeasonObject[opp].points / postSeasonObject[opp].gamesPlayed;
+        })
+        player.averageOpponentStrength = Math.round((opponentAverageScoreSum / player.opponentsTotal) * 100) / 100;
+
+
+
         let headToHeadArray = Object.values(player.headToHead).sort((a, b) => {
             if(a.gamesPlayed > b.gamesPlayed) {
                 return -1;
@@ -656,6 +707,24 @@ export function createHistoricalDataObject(data){
         })
         player.headToHead = headToHeadArray;
     })
+
+    Object.values(postSeasonObject).forEach(player => {
+        let gamePerformance = Object.values(player.gamePerformance).sort((a, b) => {
+            if(a.season > b.season) {
+                return -1;
+            }else if(a.season < b.season){
+                return 1;
+            }else{
+                if(a.week > b.week){
+                    return -1
+                }else{
+                    return 1;
+                }
+            }
+        })
+        player.gamePerformance = gamePerformance;
+    })
+
     
     let postSeasonArray = Object.values(postSeasonObject).sort((a, b) => {
         if(a.championships > b.championships) {

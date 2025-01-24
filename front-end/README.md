@@ -87,6 +87,15 @@ follow new link generated for static website hosting
 - Alternatively 
 aws s3 sync ./build  s3://board-game-league --acl public-read
 
+To Invalidate Cloudfront cache:
+
+aws cloudfront create-invalidation --distribution-id $DISTRIBUTION_ID --paths '/*'
+aws cloudfront create-invalidation --distribution-id E31VRL2B3BY883 --paths '/*'
+
+To Check the status of an invalidation
+aws cloudfront get-invalidation --id $INVALIDATION_ID --distribution-id $DISTRIBUTION_ID
+aws cloudfront get-invalidation --id I10IUY1DM8ULYOO6O0FG3LCE61 --distribution-id E31VRL2B3BY883
+
 To handle React Router in S3:
 Navigate to static website hosting settings under properties in S3 bucket
 set the error document to index.js or index.html (whichever you are using above)

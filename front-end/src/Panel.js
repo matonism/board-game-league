@@ -1,8 +1,7 @@
 import React from "react";
 import './Panel.css';
-import Constants from "utilities/js/Constants";
-
-const cancelIcon = Constants.ICON_CANCEL;
+// import Constants from "utilities/js/Constants";
+import cancelIcon from './images/cancel-icon-white.png';
 
 
 class Panel extends React.Component {

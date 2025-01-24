@@ -1,0 +1,31 @@
+
+.league-info-header{
+    font-size: 1.95rem;
+    /* text-align: justify; */
+    /* font-weight: bold; */
+    padding: 0.5rem 0;
+}
+
+.league-info-description{
+    padding: 0.5rem 0;
+    font-size: 1.1rem;
+}
+
+.league-info-prompt{
+    font-weight: bold;
+    padding-bottom: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.league-info-section{
+    text-align: left;
+    padding: 1rem 0;
+}
+
+.league-info-list-item{
+    padding-bottom: 0.25rem;
+}
+
+.league-info-link{
+    color: rgb(26, 26, 90)
+}
