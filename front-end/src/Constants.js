@@ -24,7 +24,7 @@ const Constants = {
     LOCAL_STORAGE_INSTALL_NOTIFICATION: 'bgl-install-notification',
     LOCAL_STORAGE_LEAGUE_INFO_DEFERRED: 'bgl-information-modal-deferred',
 
-    SEASONS: ['2025', '2024', '2023', '2022']
+    SEASONS: ['2026', '2025', '2024', '2023', '2022']
 }
 
 export default Constants;

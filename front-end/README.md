@@ -92,15 +92,15 @@ To Invalidate Cloudfront cache:
 aws cloudfront create-invalidation --distribution-id $DISTRIBUTION_ID --paths '/*'
 aws cloudfront create-invalidation --distribution-id E31VRL2B3BY883 --paths '/*'
 
-To Check the status of an invalidation
+## To Check the status of an invalidation
 aws cloudfront get-invalidation --id $INVALIDATION_ID --distribution-id $DISTRIBUTION_ID
 aws cloudfront get-invalidation --id I10IUY1DM8ULYOO6O0FG3LCE61 --distribution-id E31VRL2B3BY883
 
-To handle React Router in S3:
+## To handle React Router in S3:
 Navigate to static website hosting settings under properties in S3 bucket
 set the error document to index.js or index.html (whichever you are using above)
 
-To upload server to lambda:
+## To upload server to lambda:
 Set up AWS Gateway for HTTP (not REST - this may work, but I could not find a way initially)
 Add CORS policies to AWS Gateway
 Wrap express server in serverless framework
@@ -109,7 +109,7 @@ zip the files needed and upload them to lambda
 Add CORS policies to AWS Gateway
 
 
-The stack is as follows
+## The stack is as follows
 Front End - React/NodeJS
 Back End - NodeJS/Lambda
 Navigation/URL Service - API Gateway
@@ -117,18 +117,18 @@ Navigation/URL Service - API Gateway
 
 
 
-To toggle between development and production
+## To toggle between development and production
 - open a terminal in command prompt (not powershell)
 - run: SET NODE_ENV=development
 
-How to create-react-app with service-worker
+## How to create-react-app with service-worker
 - npx create-react-app my-app --template cra-template-pwa
 
-How to serve a static version of a react app
+## How to serve a static version of a react app
 - npm install -g serve
 - serve -s build
 
-To add https:
+## To add https:
 - Procur Route53 Domain Name
 - Create Cloudfront distribution
 - Create Certificate with ACM
@@ -141,7 +141,7 @@ To add https:
 - Ensure your Cloudfront -> Behavior -> edit shows that HTTP redirects to HTTPS
 
 
-To point AWS Hosted Zone (Domain Name) to an S3 bucket
+## To point AWS Hosted Zone (Domain Name) to an S3 bucket
 - Register a domain name (Route 53)
     - Allow the Hosted Zone to get created automatically
 - Create a S3 bucket with the same name as the domain name including the extension (S3)
@@ -153,7 +153,7 @@ To point AWS Hosted Zone (Domain Name) to an S3 bucket
     - Configure to point to your newly created S3 bucket
 
 
-To use a custom domain for api gateway (this is useful for same domain restrictions like httponly cookies for refresh tokens)
+## To use a custom domain for api gateway (this is useful for same domain restrictions like httponly cookies for refresh tokens)
 - Register a domain name
 - AWS Certificate manager for *.domainname.com
 - API Gateway -> Custom Domain Names -> Create

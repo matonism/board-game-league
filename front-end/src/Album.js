@@ -30,7 +30,8 @@ class Album extends React.Component {
     displayAlbum(){
         // console.log(this.props.schedule);
 
-        if(this.props.schedule && new Date().getFullYear().toString() === this.props.season){
+        //NOTE: Turning off this display for now and just sharing a link to the google drive
+        if(this.props.schedule && new Date().getFullYear().toString() === this.props.season && false){
             let albumDisplay = this.props.schedule.map((week, index) => {
                 return (
                     <div key={index} className="album-container">
@@ -45,11 +46,11 @@ class Album extends React.Component {
 
             
             return albumDisplay;
-        }else if(this.props.schedule && new Date().getFullYear().toString() !== this.props.season){
+        }else if(this.props.schedule){
             return (
                 <div className="album-link-container">
                     <div className="drive-instructions">
-                        For previous seasons, all game session memories can be found at the following google drive link
+                        To relive your board game experience, all game session memories can be found at the following google drive link
                     </div>
                     <a href="https://drive.google.com/drive/folders/1zOWEFt7MSUv5o3mPXpXA3UNQaOUVtExC?usp=drive_link" target="_blank" className="album-link">
                         <div className="album-link-button">

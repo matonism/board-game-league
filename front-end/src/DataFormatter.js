@@ -454,7 +454,10 @@ export function createHistoricalDataObject(data){
 
     data.valueRanges.forEach(sheet => {
         let scheduleYear = sheet.range.split('-')[1].split('\'')[0];
-        schedules[scheduleYear] = createScheduleObject(sheet);
+        let scheduleObject = createScheduleObject(sheet);
+        if(scheduleObject){
+            schedules[scheduleYear] = scheduleObject;
+        }
     })
 
     console.log(schedules);
