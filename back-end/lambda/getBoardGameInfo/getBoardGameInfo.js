@@ -108,8 +108,20 @@ async function makeHTTPSRequest(path, params){
             url += '?'
         )
 
+        const options = {
+            hostname: 'https://boardgamegeek.com',
+            port: 443,
+            path: '/xmlapi2' + path + Object.keys(params).reduce((currentValue, nextValue) => currentValue += nextValue + '=' + params[nextValue] + '&',''),
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + process.env.BGG_TOKEN // Add the Authorization header
+            }
+        };
+
+        options.path = options.path.replaceAll(' ', '+');
+
         let dataString = '';
-        const req = https.get(url, function(res) {
+        const req = https.get(options, function(res) {
             res.on('data', chunk => {
                 dataString += chunk;
             });

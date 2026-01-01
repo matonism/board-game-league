@@ -1,5 +1,6 @@
 import React from "react";
 import "./LeagueInfo.css";
+import bggLogo from './images/powered_by_K_01_SM.png';
 
 //props: alignment, closePanel, showClose, showBack, headerText, hideFooter, shouldDisplay
 const LeagueInfo = props => {
@@ -109,6 +110,7 @@ const LeagueInfo = props => {
         Talk to the commissioner
         </div>
         
+        <img src={bggLogo} className="board-game-geek-info"></img>
         </div>
     );
 }
