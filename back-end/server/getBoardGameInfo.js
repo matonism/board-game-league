@@ -1,6 +1,13 @@
 const https = require('https');
 var convert = require('xml-js');
 
+//Mapping Game Names to Id's in board game geek
+//This is specifically for games that share a name with multiple other games, where we cannot rely on the most recent published date among them
+//Not doing this for every game because I don't want to maintain it each time new games get added
+//I just want to address one-off isses as they appear
+const gamesToIds = {
+    "Harvest": "395623"
+}
 
 async function getBoardGameInfo(queryParams){
 
@@ -17,7 +24,7 @@ async function getBoardGameInfo(queryParams){
             let game = games[i];
             if(game != 'TBD' && game != ''){
                 try{
-                    let XMLResponse = await makeHTTPSRequest('/search/', {query: game.replace(' ', '+'), type: 'boardgame', exact: 1});
+                    let XMLResponse = await makeHTTPSRequest('/search/', {query: game.replaceAll(' ', '+'), type: 'boardgame', exact: 1});
                     searchResults[game] = JSON.parse(convert.xml2json(XMLResponse));
                     // let response = xml2json(XMLResponse);
                 }catch(error){
@@ -31,14 +38,21 @@ async function getBoardGameInfo(queryParams){
         for(let i = 0; i < gameKeys.length; i++){
             // console.log(gameKeys[i]);
             if(searchResults[gameKeys[i]].elements[0].elements){
-                searchResults[gameKeys[i]].elements[0].elements = sortSearchResultsByYearPublished(searchResults[gameKeys[i]].elements[0].elements);
+                if(gameKeys[i] == 'Harvest'){
+                    console.log(searchResults[gameKeys[i]].elements[0].elements);
+                }
+                if(Object.keys(gamesToIds).includes(gameKeys[i])){
+                    searchResults[gameKeys[i]].elements[0].elements = sortByIdMatch(searchResults[gameKeys[i]].elements[0].elements, gamesToIds[gameKeys[i]]);
+                }else{
+                    searchResults[gameKeys[i]].elements[0].elements = sortSearchResultsByYearPublished(searchResults[gameKeys[i]].elements[0].elements);
+                }
                 response[gameKeys[i]] = searchResults[gameKeys[i]].elements[0].elements[0].attributes.id;
             }
         }
         // console.log(response);
     }catch(error){
         throw error;
-    }
+    }            
     return response;
 }
 
@@ -97,6 +111,20 @@ function sortSearchResultsByYearPublished(gameVersions){
     return gameVersions;
 }
 
+function sortByIdMatch(gameVersions, gameId){
+    if(gameVersions.length > 1){
+        gameVersions = gameVersions.sort((a, b) => {
+
+            if(a?.attributes?.id === gameId){
+                return -1;
+            }else{
+                return 1;
+            }
+        });
+    }
+    
+    return gameVersions;
+}
 
 async function makeHTTPSRequest(path, params){
     const response = await new Promise((resolve, reject) => {

@@ -1,4 +1,4 @@
-import {getBoardGameGeekIds } from "./callouts/CalloutFactory";
+// import {getBoardGameGeekIds } from "./callouts/CalloutFactory";
 
 
 export function createScheduleObject(response) {
@@ -23,14 +23,14 @@ export function createScheduleObject(response) {
                 playoffRowStart = rowIndex;
                 break;
             }
-
+            console.log(row);
             schedule.push({
                 week: row[0], 
                 game: row[1], 
                 dates: row[2],
-                headlines: row[3],
                 results: [],
-                album: []
+                album: [],
+                headlines: row[3]
             });
         }else if(rowReference % 2 === 1){
             let placementRow = response.values[rowIndex + 1];
@@ -429,25 +429,25 @@ export function getPowerRankingsObjects(powerRankingsResponse){
     return powerRankings;
 }
 
-export async function createBoardGameHyperlinkMap(schedule){
-    let gameNameQueryString = '';
-    schedule.forEach(week=>{
-        if(week.game && week.game !== 'TBD'){
-            gameNameQueryString += week.game + ',';
-        }    
-    })
+// export async function createBoardGameHyperlinkMap(schedule){
+//     let gameNameQueryString = '';
+//     schedule.forEach(week=>{
+//         if(week.game && week.game !== 'TBD'){
+//             gameNameQueryString += week.game + ',';
+//         }    
+//     })
 
-    try{
-        let response = await getBoardGameGeekIds(gameNameQueryString.replaceAll(' ', '+'))
-        //console.log(response);
-        return response;
-    }catch(error){
-        console.log('search failed...');
-        console.log(error);
-        throw error;
-    }
+//     try{
+//         let response = await getBoardGameGeekIds(gameNameQueryString.replaceAll(' ', '+'))
+//         //console.log(response);
+//         return response;
+//     }catch(error){
+//         console.log('search failed...');
+//         console.log(error);
+//         throw error;
+//     }
     
-}
+// }
 
 export function createHistoricalDataObject(data){
 
@@ -461,7 +461,7 @@ export function createHistoricalDataObject(data){
         }
     })
 
-    console.log(schedules);
+    // console.log(schedules);
 
     let analysisObject = {};
     let postSeasonObject = {};
@@ -748,7 +748,25 @@ export function createHistoricalDataObject(data){
 
     return {
         regularSeason: analysisArray,
-        postSeason: postSeasonArray
+        postSeason: postSeasonArray,
+        schedules: schedules
     };
+
+}
+
+export function getAllGames(schedules){
+
+    let allGames = '';
+    Object.keys(schedules).forEach(year => {
+        let currentSchedule = schedules[year];
+        currentSchedule.forEach(week=>{
+            let game = week.game;
+            if(!allGames.includes(game)){
+                allGames += game + ',';
+            }
+        })
+    })
+
+    return allGames;
 
 }

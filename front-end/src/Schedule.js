@@ -2,6 +2,7 @@ import React from "react";
 import './Schedule.css';
 import loadingIcon from './images/loading-icon.gif';
 import openNewTab from './images/open-new-tab-icon.png'
+import openHeadlines from './images/news-icon.png';
 import ScheduleTableRow from "./ScheduleTableRow";
 
 
@@ -30,14 +31,18 @@ class Schedule extends React.Component {
         // console.log(this.props.schedule);
         if(this.props.schedule){
             let scheduleDisplay = this.props.schedule.map((week, index) => {
-                let linkDisplay = this.displayOpenNewPageLink(week.game)
+                let linkDisplay = this.displayOpenNewPageLink(week.game);
+                let headlinesDisplay = this.displayHeadlinesLink(week);
                 return (
                     <div key={this.props.season + index} className="bgl-week-container">
                         <div className="bgl-week-header">
                             <div>{week.week + ' - ' + week.game}</div>
                             {linkDisplay}
                         </div>
-                        <div className="bgl-week-subheader">{week.dates}</div>
+                        <div className="bgl-week-subheader">
+                            <div>{week.dates}</div>
+                            {headlinesDisplay}
+                        </div>
                         <div className="bgl-week-table-container">
                         <table className="bgl-week-table" cellPadding="0" cellSpacing="0">
                                 {this.getSingleScheduleTable(week)}
@@ -83,6 +88,14 @@ class Schedule extends React.Component {
                 link = (<div className="bgg-link-container"><a target="_blank" rel="noreferrer" href={'https://boardgamegeek.com/boardgame/' + boardGameId}><img className="bgg-link" src={openNewTab} alt="opentab"/></a></div>)
             } 
         }
+        return link;
+    }
+
+    displayHeadlinesLink(week){
+        let link = <></>;
+        if(week.headlines){
+            link = (<div className="headlines-link-container"><a target="_blank" rel="noreferrer" href={week.headlines}><img className="bgg-link" src={openHeadlines} alt="openheadlines"/></a></div>)
+        } 
         return link;
     }
 

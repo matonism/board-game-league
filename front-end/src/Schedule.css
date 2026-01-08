@@ -23,6 +23,8 @@
   }
 
   .bgl-week-subheader{
+    display: flex;
+    justify-content: center;
     font-size: 0.8rem;
     font-weight: bold;
   }
@@ -74,6 +76,10 @@
 .bgg-link{
     max-height: 100%;
     cursor: pointer;
+}
+.headlines-link-container{
+    height: 0.75rem;
+    padding-left: 0.25rem;
 }
 
 @media screen and (max-width: 600px) {
