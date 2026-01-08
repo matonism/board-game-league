@@ -136,12 +136,11 @@ async function makeHTTPSRequest(path, params){
             currentValue += nextValue + '=' + params[nextValue] + '&',
             url += '?'
         )
-
+        
         const options = {
-            hostname: 'https://boardgamegeek.com',
+            hostname: 'boardgamegeek.com',
             port: 443,
-            path: '/xmlapi2' + path + Object.keys(params).reduce((currentValue, nextValue) => currentValue += nextValue + '=' + params[nextValue] + '&',''),
-            method: 'GET',
+            path: '/xmlapi2' + path + '?' + Object.keys(params).reduce((currentValue, nextValue) => currentValue += nextValue + '=' + params[nextValue] + '&',''),
             headers: {
                 'Authorization': 'Bearer ' + process.env.BGG_TOKEN // Add the Authorization header
             }
@@ -149,20 +148,29 @@ async function makeHTTPSRequest(path, params){
 
         options.path = options.path.replaceAll(' ', '+');
 
-        let dataString = '';
-        const req = https.get(options, function(res) {
-            res.on('data', chunk => {
-                dataString += chunk;
+        try{
+            let dataString = '';
+            const req = https.get(options, function(res) {
+                console.log(res.statusCode);
+                if (res.statusCode < 200 || res.statusCode >= 300) {
+                    console.error(`Request Failed. Status Code: ${res.statusCode}`);
+                }
+                res.on('data', chunk => {
+                    dataString += chunk;
+                });
+                res.on('end', () => {
+                    resolve(dataString);
+                });
             });
-            res.on('end', () => {
-                resolve(dataString);
+            
+            req.on('error', (e) => {
+                console.error(e);
+                reject(e);
             });
-        });
-        
-        req.on('error', (e) => {
-            reject(e);
-            console.error(e);
-        });
+        }catch(error){
+            console.log(error);
+            reject(error);
+        }
     })
 
     return response;
