@@ -7,7 +7,35 @@ var convert = require('xml-js');
 //Not doing this for every game because I don't want to maintain it each time new games get added
 //I just want to address one-off isses as they appear
 const gamesToIds = {
-    "Harvest": "395623"
+    "Harvest": "395623",
+    'Ticket to Ride': '9209',
+    'Catan': '13',
+    'Splendor': '148228',
+    'Sushi Go Party!': '192291',
+    'Monopoly': '36611',
+    'Small World': '40692',
+    '7 Wonders': '68448',
+    'Imhotep': '191862',
+    'Carcassonne': '822',
+    'Tokaido': '123540',
+    'Azul': '230802',
+    'Sagrada': '199561',
+    'Evolution': '155703',
+    'Dominion': '36218',
+    'Juicy Fruits': '325698',
+    'The Quacks of Quedlinburg': '244521',
+    'Calico': '283155',
+    'Cascadia': '295947',
+    'The Quest for El Dorado': '217372',
+    'The Isle of Cats': '281259',
+    'Disney: A Goofy Movie Game': '358026',
+    'Citadels': '205398',
+    'Bonsai': '366994',
+    'Heat: Pedal to the Metal': '366013',
+    'Cubitos': '298069',
+    'Modern Art': '118',
+    'Wingspan': '266192',
+    'Wondrous Creatures': '400366'
 }
 
 async function getBoardGameInfo(queryParams){

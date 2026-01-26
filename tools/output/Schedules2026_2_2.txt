@@ -2386,76 +2386,103 @@
             "results": [
                 [
                     {
-                        "player": "Richie"
+                        "player": "Richie",
+                        "placement": "4"
                     },
                     {
-                        "player": "Ashley"
+                        "player": "Ashley",
+                        "placement": "1"
                     },
                     {
-                        "player": "Cody"
+                        "player": "Cody",
+                        "placement": "2"
                     },
                     {
-                        "player": "Sam"
+                        "player": "Sam",
+                        "placement": "3"
                     }
                 ],
                 [
                     {
-                        "player": "Michael"
+                        "player": "Michael",
+                        "placement": "1"
                     },
                     {
-                        "player": "Nick"
+                        "player": "Nick",
+                        "placement": "2"
                     },
                     {
-                        "player": "Emma"
+                        "player": "Emma",
+                        "placement": "3"
                     },
                     {
-                        "player": "Carly"
+                        "player": "Carly",
+                        "placement": "4"
                     }
                 ],
                 [
                     {
-                        "player": "Rachel M"
+                        "player": "Rachel M",
+                        "placement": "2"
                     },
                     {
-                        "player": "Ryan"
+                        "player": "Ryan",
+                        "placement": "4"
                     },
                     {
-                        "player": "Josh"
+                        "player": "Josh",
+                        "placement": "3"
                     },
                     {
-                        "player": "Austin"
+                        "player": "Austin",
+                        "placement": "1"
                     }
                 ],
                 [
                     {
-                        "player": "Rachel F"
+                        "player": "Rachel F",
+                        "placement": "2"
                     },
                     {
-                        "player": "Tyler"
+                        "player": "Tyler",
+                        "placement": "3"
                     },
                     {
-                        "player": "Brittany"
+                        "player": "Brittany",
+                        "placement": "1"
                     },
                     {
-                        "player": "Jack M"
+                        "player": "Jack M",
+                        "placement": "4"
                     }
                 ],
                 [
                     {
-                        "player": "Steve"
+                        "player": "Steve",
+                        "placement": "3"
                     },
                     {
-                        "player": "Jack C"
+                        "player": "Jack C",
+                        "placement": "2"
                     },
                     {
-                        "player": "Ian"
+                        "player": "Ian",
+                        "placement": "1"
                     },
                     {
-                        "player": "Dan"
+                        "player": "Dan",
+                        "placement": "4"
                     }
                 ]
             ],
-            "album": []
+            "album": [
+                "1_1",
+                "1_2",
+                "1_3",
+                "1_4",
+                "1_5"
+            ],
+            "headlines": "https://docs.google.com/document/d/1ZMV9EDGojElNipeUadkdqlK7qE7ldTrRBBGH166Zzek/edit?tab=t.0"
         },
         {
             "week": "Week 2",
@@ -2492,16 +2519,20 @@
                 ],
                 [
                     {
-                        "player": "Steve"
+                        "player": "Steve",
+                        "placement": "4"
                     },
                     {
-                        "player": "Emma"
+                        "player": "Emma",
+                        "placement": "2"
                     },
                     {
-                        "player": "Jack M"
+                        "player": "Jack M",
+                        "placement": "1"
                     },
                     {
-                        "player": "Rachel F"
+                        "player": "Rachel F",
+                        "placement": "3"
                     }
                 ],
                 [
@@ -2520,24 +2551,32 @@
                 ],
                 [
                     {
-                        "player": "Josh"
+                        "player": "Josh",
+                        "placement": "3"
                     },
                     {
-                        "player": "Cody"
+                        "player": "Cody",
+                        "placement": "2"
                     },
                     {
-                        "player": "Tyler"
+                        "player": "Tyler",
+                        "placement": "4"
                     },
                     {
-                        "player": "Nick"
+                        "player": "Nick",
+                        "placement": "1"
                     }
                 ]
             ],
-            "album": []
+            "album": [
+                "2_3",
+                "2_5"
+            ],
+            "headlines": "https://docs.google.com/document/d/1ZMV9EDGojElNipeUadkdqlK7qE7ldTrRBBGH166Zzek/edit?usp=drivesdk"
         },
         {
             "week": "Week 3",
-            "game": "TBD",
+            "game": "Wroth",
             "dates": "02/02 - 02/15",
             "results": [
                 [

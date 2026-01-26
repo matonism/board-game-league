@@ -1,0 +1,3140 @@
+{
+    "2022": [
+        {
+            "week": "Week 1",
+            "game": "Ticket to Ride",
+            "groups": [
+                {
+                    "location": "Brian & Ryan",
+                    "players": [
+                        {
+                            "player": "Brian",
+                            "home": true
+                        },
+                        {
+                            "player": "Dan",
+                            "home": false
+                        },
+                        {
+                            "player": "Ryan",
+                            "home": true
+                        },
+                        {
+                            "player": "Josh",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Nick & Rachel F",
+                    "players": [
+                        {
+                            "player": "Nick",
+                            "home": false
+                        },
+                        {
+                            "player": "Austin",
+                            "home": false
+                        },
+                        {
+                            "player": "Richie",
+                            "home": false
+                        },
+                        {
+                            "player": "Rachel F",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Luke & Becca",
+                    "players": [
+                        {
+                            "player": "Michael",
+                            "home": false
+                        },
+                        {
+                            "player": "Luke",
+                            "home": false
+                        },
+                        {
+                            "player": "Becca",
+                            "home": false
+                        },
+                        {
+                            "player": "Ashley",
+                            "home": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "week": "Week 2",
+            "game": "Catan",
+            "groups": [
+                {
+                    "location": "Josh & Austin",
+                    "players": [
+                        {
+                            "player": "Luke",
+                            "home": false
+                        },
+                        {
+                            "player": "Josh",
+                            "home": false
+                        },
+                        {
+                            "player": "Austin",
+                            "home": false
+                        },
+                        {
+                            "player": "Rachel F",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Michael & Ashley",
+                    "players": [
+                        {
+                            "player": "Nick",
+                            "home": false
+                        },
+                        {
+                            "player": "Ashley",
+                            "home": false
+                        },
+                        {
+                            "player": "Becca",
+                            "home": false
+                        },
+                        {
+                            "player": "Dan",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Michael & Ashley",
+                    "players": [
+                        {
+                            "player": "Michael",
+                            "home": false
+                        },
+                        {
+                            "player": "Ryan",
+                            "home": false
+                        },
+                        {
+                            "player": "Richie",
+                            "home": false
+                        },
+                        {
+                            "player": "Brian",
+                            "home": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "week": "Week 3",
+            "game": "Splendor",
+            "groups": [
+                {
+                    "location": "Luke & Becca",
+                    "players": [
+                        {
+                            "player": "Rachel F",
+                            "home": false
+                        },
+                        {
+                            "player": "Becca",
+                            "home": false
+                        },
+                        {
+                            "player": "Ryan",
+                            "home": false
+                        },
+                        {
+                            "player": "Ashley",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Luke & Becca",
+                    "players": [
+                        {
+                            "player": "Richie",
+                            "home": false
+                        },
+                        {
+                            "player": "Luke",
+                            "home": false
+                        },
+                        {
+                            "player": "Dan",
+                            "home": false
+                        },
+                        {
+                            "player": "Josh",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Michael & Ashley",
+                    "players": [
+                        {
+                            "player": "Austin",
+                            "home": false
+                        },
+                        {
+                            "player": "Michael",
+                            "home": false
+                        },
+                        {
+                            "player": "Allie",
+                            "home": false
+                        },
+                        {
+                            "player": "Nick",
+                            "home": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "week": "Week 4",
+            "game": "Sushi Go Party!",
+            "groups": [
+                {
+                    "location": "Josh & Austin",
+                    "players": [
+                        {
+                            "player": "Michael",
+                            "home": false
+                        },
+                        {
+                            "player": "Ryan",
+                            "home": false
+                        },
+                        {
+                            "player": "Austin",
+                            "home": false
+                        },
+                        {
+                            "player": "Josh",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Nick & Rachel F",
+                    "players": [
+                        {
+                            "player": "Nick",
+                            "home": false
+                        },
+                        {
+                            "player": "Dan",
+                            "home": false
+                        },
+                        {
+                            "player": "Allie",
+                            "home": false
+                        },
+                        {
+                            "player": "Luke",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Nick & Rachel F",
+                    "players": [
+                        {
+                            "player": "Rachel F",
+                            "home": false
+                        },
+                        {
+                            "player": "Ashley",
+                            "home": false
+                        },
+                        {
+                            "player": "Richie",
+                            "home": false
+                        },
+                        {
+                            "player": "Becca",
+                            "home": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "week": "Week 5",
+            "game": "Monopoly",
+            "groups": [
+                {
+                    "location": "Michael & Ashley",
+                    "players": [
+                        {
+                            "player": "Richie",
+                            "home": false
+                        },
+                        {
+                            "player": "Nick",
+                            "home": false
+                        },
+                        {
+                            "player": "Ryan",
+                            "home": false
+                        },
+                        {
+                            "player": "Michael",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Josh & Austin",
+                    "players": [
+                        {
+                            "player": "Luke",
+                            "home": false
+                        },
+                        {
+                            "player": "Dan",
+                            "home": false
+                        },
+                        {
+                            "player": "Austin",
+                            "home": false
+                        },
+                        {
+                            "player": "Becca",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Allie",
+                    "players": [
+                        {
+                            "player": "Josh",
+                            "home": false
+                        },
+                        {
+                            "player": "Allie",
+                            "home": false
+                        },
+                        {
+                            "player": "Rachel F",
+                            "home": false
+                        },
+                        {
+                            "player": "Ashley",
+                            "home": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "week": "Week 6",
+            "game": "Small World",
+            "groups": [
+                {
+                    "location": "Josh & Austin",
+                    "players": [
+                        {
+                            "player": "Dan",
+                            "home": false
+                        },
+                        {
+                            "player": "Richie",
+                            "home": false
+                        },
+                        {
+                            "player": "Austin",
+                            "home": false
+                        },
+                        {
+                            "player": "Josh",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Michael & Ashley",
+                    "players": [
+                        {
+                            "player": "Ashley",
+                            "home": false
+                        },
+                        {
+                            "player": "Becca",
+                            "home": false
+                        },
+                        {
+                            "player": "Michael",
+                            "home": false
+                        },
+                        {
+                            "player": "Allie",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Nick & Rachel F",
+                    "players": [
+                        {
+                            "player": "Nick",
+                            "home": false
+                        },
+                        {
+                            "player": "Ryan",
+                            "home": false
+                        },
+                        {
+                            "player": "Luke",
+                            "home": false
+                        },
+                        {
+                            "player": "Rachel F",
+                            "home": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "week": "Championship",
+            "game": "7 Wonders",
+            "groups": [
+                {
+                    "location": "Richie",
+                    "players": [
+                        {
+                            "player": "Michael",
+                            "home": false
+                        },
+                        {
+                            "player": "Nick",
+                            "home": false
+                        },
+                        {
+                            "player": "Richie",
+                            "home": false
+                        },
+                        {
+                            "player": "Luke",
+                            "home": false
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "2023": [
+        {
+            "week": "Week 1",
+            "game": "Imhotep",
+            "dates": "01/09 - 01/22",
+            "groups": [
+                {
+                    "location": "Nick & Rachel F",
+                    "players": [
+                        {
+                            "player": "Michael",
+                            "home": false
+                        },
+                        {
+                            "player": "Richie",
+                            "home": false
+                        },
+                        {
+                            "player": "Nick",
+                            "home": false
+                        },
+                        {
+                            "player": "Luke",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Michael & Ashley",
+                    "players": [
+                        {
+                            "player": "Ashley",
+                            "home": false
+                        },
+                        {
+                            "player": "Allie",
+                            "home": false
+                        },
+                        {
+                            "player": "Rachel F",
+                            "home": false
+                        },
+                        {
+                            "player": "Carly",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Dan",
+                    "players": [
+                        {
+                            "player": "Austin",
+                            "home": false
+                        },
+                        {
+                            "player": "Dan",
+                            "home": false
+                        },
+                        {
+                            "player": "Tyler",
+                            "home": false
+                        },
+                        {
+                            "player": "Jack M",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Josh",
+                    "players": [
+                        {
+                            "player": "Josh",
+                            "home": false
+                        },
+                        {
+                            "player": "Ryan",
+                            "home": false
+                        },
+                        {
+                            "player": "Rachel M",
+                            "home": false
+                        },
+                        {
+                            "player": "Steve",
+                            "home": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "week": "Week 2",
+            "game": "Carcassonne",
+            "dates": "01/23 - 02/05",
+            "groups": [
+                {
+                    "location": "Allie",
+                    "players": [
+                        {
+                            "player": "Rachel M",
+                            "home": false
+                        },
+                        {
+                            "player": "Richie",
+                            "home": false
+                        },
+                        {
+                            "player": "Austin",
+                            "home": false
+                        },
+                        {
+                            "player": "Allie",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Dan",
+                    "players": [
+                        {
+                            "player": "Steve",
+                            "home": false
+                        },
+                        {
+                            "player": "Tyler",
+                            "home": false
+                        },
+                        {
+                            "player": "Dan",
+                            "home": false
+                        },
+                        {
+                            "player": "Luke",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Michael & Ashley",
+                    "players": [
+                        {
+                            "player": "Michael",
+                            "home": false
+                        },
+                        {
+                            "player": "Ashley",
+                            "home": false
+                        },
+                        {
+                            "player": "Ryan",
+                            "home": false
+                        },
+                        {
+                            "player": "Jack M",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Nick & Rachel F",
+                    "players": [
+                        {
+                            "player": "Carly",
+                            "home": false
+                        },
+                        {
+                            "player": "Rachel F",
+                            "home": false
+                        },
+                        {
+                            "player": "Nick",
+                            "home": false
+                        },
+                        {
+                            "player": "Josh",
+                            "home": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "week": "Week 3",
+            "game": "Tokaido",
+            "dates": "02/06 - 02/19",
+            "groups": [
+                {
+                    "location": "Michael & Ashley",
+                    "players": [
+                        {
+                            "player": "Rachel M",
+                            "home": false
+                        },
+                        {
+                            "player": "Michael",
+                            "home": false
+                        },
+                        {
+                            "player": "Rachel F",
+                            "home": false
+                        },
+                        {
+                            "player": "Ryan",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Michael & Ashley",
+                    "players": [
+                        {
+                            "player": "Steve",
+                            "home": false
+                        },
+                        {
+                            "player": "Ashley",
+                            "home": false
+                        },
+                        {
+                            "player": "Carly",
+                            "home": false
+                        },
+                        {
+                            "player": "Austin",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Luke",
+                    "players": [
+                        {
+                            "player": "Tyler",
+                            "home": false
+                        },
+                        {
+                            "player": "Richie",
+                            "home": false
+                        },
+                        {
+                            "player": "Josh",
+                            "home": false
+                        },
+                        {
+                            "player": "Luke",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Nick & Rachel F",
+                    "players": [
+                        {
+                            "player": "Jack M",
+                            "home": false
+                        },
+                        {
+                            "player": "Nick",
+                            "home": false
+                        },
+                        {
+                            "player": "Dan",
+                            "home": false
+                        },
+                        {
+                            "player": "Allie",
+                            "home": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "week": "Week 4",
+            "game": "Azul",
+            "dates": "02/20 - 03/05",
+            "groups": [
+                {
+                    "location": "Nick & Rachel F",
+                    "players": [
+                        {
+                            "player": "Rachel M",
+                            "home": false
+                        },
+                        {
+                            "player": "Jack M",
+                            "home": false
+                        },
+                        {
+                            "player": "Ashley",
+                            "home": false
+                        },
+                        {
+                            "player": "Nick",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Nick & Rachel F",
+                    "players": [
+                        {
+                            "player": "Steve",
+                            "home": false
+                        },
+                        {
+                            "player": "Richie",
+                            "home": false
+                        },
+                        {
+                            "player": "Dan",
+                            "home": false
+                        },
+                        {
+                            "player": "Rachel F",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Austin",
+                    "players": [
+                        {
+                            "player": "Tyler",
+                            "home": false
+                        },
+                        {
+                            "player": "Josh",
+                            "home": false
+                        },
+                        {
+                            "player": "Michael",
+                            "home": false
+                        },
+                        {
+                            "player": "Austin",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Allie",
+                    "players": [
+                        {
+                            "player": "Allie",
+                            "home": false
+                        },
+                        {
+                            "player": "Luke",
+                            "home": false
+                        },
+                        {
+                            "player": "Carly",
+                            "home": false
+                        },
+                        {
+                            "player": "Ryan",
+                            "home": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "week": "Week 5",
+            "game": "7 Wonders",
+            "dates": "03/06 - 03/19",
+            "groups": [
+                {
+                    "location": "Michael & Ashley",
+                    "players": [
+                        {
+                            "player": "Rachel M",
+                            "home": false
+                        },
+                        {
+                            "player": "Richie",
+                            "home": false
+                        },
+                        {
+                            "player": "Ashley",
+                            "home": false
+                        },
+                        {
+                            "player": "Dan",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Michael & Ashley",
+                    "players": [
+                        {
+                            "player": "Steve",
+                            "home": false
+                        },
+                        {
+                            "player": "Michael",
+                            "home": false
+                        },
+                        {
+                            "player": "Tyler",
+                            "home": false
+                        },
+                        {
+                            "player": "Luke",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Nick & Rachel F",
+                    "players": [
+                        {
+                            "player": "Rachel F",
+                            "home": false
+                        },
+                        {
+                            "player": "Jack M",
+                            "home": false
+                        },
+                        {
+                            "player": "Ryan",
+                            "home": false
+                        },
+                        {
+                            "player": "Nick",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Austin",
+                    "players": [
+                        {
+                            "player": "Allie",
+                            "home": false
+                        },
+                        {
+                            "player": "Carly",
+                            "home": false
+                        },
+                        {
+                            "player": "Josh",
+                            "home": false
+                        },
+                        {
+                            "player": "Austin",
+                            "home": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "week": "Week 6",
+            "game": "Sagrada",
+            "dates": "03/20 - 04/02",
+            "groups": [
+                {
+                    "location": "Michael & Ashley",
+                    "players": [
+                        {
+                            "player": "Rachel M",
+                            "home": false
+                        },
+                        {
+                            "player": "Steve",
+                            "home": false
+                        },
+                        {
+                            "player": "Jack M",
+                            "home": false
+                        },
+                        {
+                            "player": "Michael",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Tapster",
+                    "players": [
+                        {
+                            "player": "Dan",
+                            "home": false
+                        },
+                        {
+                            "player": "Carly",
+                            "home": false
+                        },
+                        {
+                            "player": "Nick",
+                            "home": false
+                        },
+                        {
+                            "player": "Austin",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "DNP",
+                    "players": [
+                        {
+                            "player": "Allie",
+                            "home": false
+                        },
+                        {
+                            "player": "Ryan",
+                            "home": false
+                        },
+                        {
+                            "player": "Josh",
+                            "home": false
+                        },
+                        {
+                            "player": "Luke",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Nick & Rachel F",
+                    "players": [
+                        {
+                            "player": "Rachel F",
+                            "home": false
+                        },
+                        {
+                            "player": "Ashley",
+                            "home": false
+                        },
+                        {
+                            "player": "Tyler",
+                            "home": false
+                        },
+                        {
+                            "player": "Richie",
+                            "home": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "week": "Championship",
+            "game": "Evolution",
+            "dates": "05/12",
+            "groups": [
+                {
+                    "location": "Richie",
+                    "players": [
+                        {
+                            "player": "Nick",
+                            "home": false
+                        },
+                        {
+                            "player": "Michael",
+                            "home": false
+                        },
+                        {
+                            "player": "Austin",
+                            "home": false
+                        },
+                        {
+                            "player": "Rachel M",
+                            "home": false
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "2024": [
+        {
+            "week": "Week 1",
+            "game": "Dominion",
+            "dates": "01/01 - 01/14",
+            "groups": [
+                {
+                    "location": "Tyler",
+                    "players": [
+                        {
+                            "player": "Richie",
+                            "home": false
+                        },
+                        {
+                            "player": "Tyler",
+                            "home": false
+                        },
+                        {
+                            "player": "Cody",
+                            "home": false
+                        },
+                        {
+                            "player": "Allie",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Michael & Ashley",
+                    "players": [
+                        {
+                            "player": "Jack M",
+                            "home": false
+                        },
+                        {
+                            "player": "Emma",
+                            "home": false
+                        },
+                        {
+                            "player": "Rachel M",
+                            "home": false
+                        },
+                        {
+                            "player": "Michael",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Michael & Ashley",
+                    "players": [
+                        {
+                            "player": "Ashley",
+                            "home": false
+                        },
+                        {
+                            "player": "Jennie",
+                            "home": false
+                        },
+                        {
+                            "player": "Ryan",
+                            "home": false
+                        },
+                        {
+                            "player": "Dan",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Nick & Rachel F",
+                    "players": [
+                        {
+                            "player": "Carly",
+                            "home": false
+                        },
+                        {
+                            "player": "Rachel F",
+                            "home": false
+                        },
+                        {
+                            "player": "Josh",
+                            "home": false
+                        },
+                        {
+                            "player": "Ian",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Nick & Rachel F",
+                    "players": [
+                        {
+                            "player": "Austin",
+                            "home": false
+                        },
+                        {
+                            "player": "Nick",
+                            "home": false
+                        },
+                        {
+                            "player": "Steve",
+                            "home": false
+                        },
+                        {
+                            "player": "Sam",
+                            "home": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "week": "Week 2",
+            "game": "Juicy Fruits",
+            "dates": "01/15 - 01/28",
+            "groups": [
+                {
+                    "location": "Michael & Ashley",
+                    "players": [
+                        {
+                            "player": "Richie",
+                            "home": false
+                        },
+                        {
+                            "player": "Emma",
+                            "home": false
+                        },
+                        {
+                            "player": "Michael",
+                            "home": false
+                        },
+                        {
+                            "player": "Jennie",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Michael & Ashley",
+                    "players": [
+                        {
+                            "player": "Rachel M",
+                            "home": false
+                        },
+                        {
+                            "player": "Ashley",
+                            "home": false
+                        },
+                        {
+                            "player": "Josh",
+                            "home": false
+                        },
+                        {
+                            "player": "Cody",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Austin & Carly",
+                    "players": [
+                        {
+                            "player": "Austin",
+                            "home": false
+                        },
+                        {
+                            "player": "Tyler",
+                            "home": false
+                        },
+                        {
+                            "player": "Carly",
+                            "home": false
+                        },
+                        {
+                            "player": "Rachel F",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Rachel M & Steve",
+                    "players": [
+                        {
+                            "player": "Jack M",
+                            "home": false
+                        },
+                        {
+                            "player": "Ian",
+                            "home": false
+                        },
+                        {
+                            "player": "Steve",
+                            "home": false
+                        },
+                        {
+                            "player": "Sam",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Nick & Rachel F",
+                    "players": [
+                        {
+                            "player": "Ryan",
+                            "home": false
+                        },
+                        {
+                            "player": "Allie",
+                            "home": false
+                        },
+                        {
+                            "player": "Nick",
+                            "home": false
+                        },
+                        {
+                            "player": "Dan",
+                            "home": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "week": "Week 3",
+            "game": "The Quacks of Quedlinburg",
+            "dates": "01/29 - 02/12",
+            "groups": [
+                {
+                    "location": "Nick & Rachel F",
+                    "players": [
+                        {
+                            "player": "Richie",
+                            "home": false
+                        },
+                        {
+                            "player": "Dan",
+                            "home": false
+                        },
+                        {
+                            "player": "Rachel F",
+                            "home": false
+                        },
+                        {
+                            "player": "Ashley",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Rachel M & Steve",
+                    "players": [
+                        {
+                            "player": "Steve",
+                            "home": false
+                        },
+                        {
+                            "player": "Emma",
+                            "home": false
+                        },
+                        {
+                            "player": "Tyler",
+                            "home": false
+                        },
+                        {
+                            "player": "Ryan",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Austin & Carly",
+                    "players": [
+                        {
+                            "player": "Allie",
+                            "home": false
+                        },
+                        {
+                            "player": "Jennie",
+                            "home": false
+                        },
+                        {
+                            "player": "Cody",
+                            "home": false
+                        },
+                        {
+                            "player": "Carly",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Nick & Rachel F",
+                    "players": [
+                        {
+                            "player": "Nick",
+                            "home": false
+                        },
+                        {
+                            "player": "Jack M",
+                            "home": false
+                        },
+                        {
+                            "player": "Michael",
+                            "home": false
+                        },
+                        {
+                            "player": "Josh",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Rachel M & Steve",
+                    "players": [
+                        {
+                            "player": "Austin",
+                            "home": false
+                        },
+                        {
+                            "player": "Ian",
+                            "home": false
+                        },
+                        {
+                            "player": "Sam",
+                            "home": false
+                        },
+                        {
+                            "player": "Rachel M",
+                            "home": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "week": "Week 4",
+            "game": "Calico",
+            "dates": "02/13 - 02/25",
+            "groups": [
+                {
+                    "location": "Rachel M & Steve",
+                    "players": [
+                        {
+                            "player": "Richie",
+                            "home": false
+                        },
+                        {
+                            "player": "Jack M",
+                            "home": false
+                        },
+                        {
+                            "player": "Rachel M",
+                            "home": false
+                        },
+                        {
+                            "player": "Ian",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Nick & Rachel F",
+                    "players": [
+                        {
+                            "player": "Jennie",
+                            "home": false
+                        },
+                        {
+                            "player": "Tyler",
+                            "home": false
+                        },
+                        {
+                            "player": "Rachel F",
+                            "home": false
+                        },
+                        {
+                            "player": "Cody",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Nick & Rachel F",
+                    "players": [
+                        {
+                            "player": "Nick",
+                            "home": false
+                        },
+                        {
+                            "player": "Ashley",
+                            "home": false
+                        },
+                        {
+                            "player": "Michael",
+                            "home": false
+                        },
+                        {
+                            "player": "Austin",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Josh",
+                    "players": [
+                        {
+                            "player": "Allie",
+                            "home": false
+                        },
+                        {
+                            "player": "Ryan",
+                            "home": false
+                        },
+                        {
+                            "player": "Sam",
+                            "home": false
+                        },
+                        {
+                            "player": "Josh",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Rachel M & Steve",
+                    "players": [
+                        {
+                            "player": "Dan",
+                            "home": false
+                        },
+                        {
+                            "player": "Carly",
+                            "home": false
+                        },
+                        {
+                            "player": "Steve",
+                            "home": false
+                        },
+                        {
+                            "player": "Emma",
+                            "home": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "week": "Week 5",
+            "game": "Cascadia",
+            "dates": "02/26 - 03/10",
+            "groups": [
+                {
+                    "location": "Ian & Jennie",
+                    "players": [
+                        {
+                            "player": "Richie",
+                            "home": false
+                        },
+                        {
+                            "player": "Josh",
+                            "home": false
+                        },
+                        {
+                            "player": "Jennie",
+                            "home": false
+                        },
+                        {
+                            "player": "Ian",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Nick & Rachel F",
+                    "players": [
+                        {
+                            "player": "Jack M",
+                            "home": false
+                        },
+                        {
+                            "player": "Emma",
+                            "home": false
+                        },
+                        {
+                            "player": "Rachel F",
+                            "home": false
+                        },
+                        {
+                            "player": "Ashley",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Rachel M & Steve",
+                    "players": [
+                        {
+                            "player": "Steve",
+                            "home": false
+                        },
+                        {
+                            "player": "Rachel M",
+                            "home": false
+                        },
+                        {
+                            "player": "Ryan",
+                            "home": false
+                        },
+                        {
+                            "player": "Nick",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Austin & Carly",
+                    "players": [
+                        {
+                            "player": "Michael",
+                            "home": false
+                        },
+                        {
+                            "player": "Cody",
+                            "home": false
+                        },
+                        {
+                            "player": "Carly",
+                            "home": false
+                        },
+                        {
+                            "player": "Sam",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Austin & Carly",
+                    "players": [
+                        {
+                            "player": "Tyler",
+                            "home": false
+                        },
+                        {
+                            "player": "Dan",
+                            "home": false
+                        },
+                        {
+                            "player": "Austin",
+                            "home": false
+                        },
+                        {
+                            "player": "Allie",
+                            "home": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "week": "Week 6",
+            "game": "The Quest for El Dorado",
+            "dates": "03/11 - 03/24",
+            "groups": [
+                {
+                    "location": "Cody",
+                    "players": [
+                        {
+                            "player": "Richie",
+                            "home": false
+                        },
+                        {
+                            "player": "Emma",
+                            "home": false
+                        },
+                        {
+                            "player": "Sam",
+                            "home": false
+                        },
+                        {
+                            "player": "Cody",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Michael & Ashley",
+                    "players": [
+                        {
+                            "player": "Rachel M",
+                            "home": false
+                        },
+                        {
+                            "player": "Steve",
+                            "home": false
+                        },
+                        {
+                            "player": "Michael",
+                            "home": false
+                        },
+                        {
+                            "player": "Ashley",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Austin & Carly",
+                    "players": [
+                        {
+                            "player": "Carly",
+                            "home": false
+                        },
+                        {
+                            "player": "Allie",
+                            "home": false
+                        },
+                        {
+                            "player": "Austin",
+                            "home": false
+                        },
+                        {
+                            "player": "Jack M",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Nick & Rachel F",
+                    "players": [
+                        {
+                            "player": "Josh",
+                            "home": false
+                        },
+                        {
+                            "player": "Dan",
+                            "home": false
+                        },
+                        {
+                            "player": "Nick",
+                            "home": false
+                        },
+                        {
+                            "player": "Rachel F",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Ian & Jennie",
+                    "players": [
+                        {
+                            "player": "Ryan",
+                            "home": false
+                        },
+                        {
+                            "player": "Tyler",
+                            "home": false
+                        },
+                        {
+                            "player": "Ian",
+                            "home": false
+                        },
+                        {
+                            "player": "Jennie",
+                            "home": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "week": "Playoff 1",
+            "game": "The Isle of Cats",
+            "dates": "4/8",
+            "groups": [
+                {
+                    "location": "Nick & Rachel F",
+                    "players": [
+                        {
+                            "player": "Richie",
+                            "home": false
+                        },
+                        {
+                            "player": "Rachel F",
+                            "home": false
+                        },
+                        {
+                            "player": "Austin",
+                            "home": false
+                        },
+                        {
+                            "player": "Ryan",
+                            "home": false
+                        }
+                    ]
+                }
+            ],
+            "album": [
+                "7_1"
+            ]
+        },
+        {
+            "week": "Playoff 2",
+            "game": "Disney: A Goofy Movie Game",
+            "dates": "04/09/24",
+            "groups": [
+                {
+                    "location": "Cody",
+                    "players": [
+                        {
+                            "player": "Cody",
+                            "home": false
+                        },
+                        {
+                            "player": "Nick",
+                            "home": false
+                        },
+                        {
+                            "player": "Michael",
+                            "home": false
+                        },
+                        {
+                            "player": "Carly",
+                            "home": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "week": "Championship",
+            "game": "Citadels",
+            "dates": "04/27",
+            "groups": [
+                {
+                    "location": "Richie",
+                    "players": [
+                        {
+                            "player": "Carly",
+                            "home": false
+                        },
+                        {
+                            "player": "Cody",
+                            "home": false
+                        },
+                        {
+                            "player": "Austin",
+                            "home": false
+                        },
+                        {
+                            "player": "Richie",
+                            "home": false
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "2025": [
+        {
+            "week": "Week 1",
+            "game": "Catan",
+            "dates": "01/02 - 01/19",
+            "groups": [
+                {
+                    "location": "Richie",
+                    "players": [
+                        {
+                            "player": "Richie",
+                            "home": false
+                        },
+                        {
+                            "player": "Josh",
+                            "home": false
+                        },
+                        {
+                            "player": "Ryan",
+                            "home": false
+                        },
+                        {
+                            "player": "Jack C",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Grandma Matonis",
+                    "players": [
+                        {
+                            "player": "Rachel M",
+                            "home": false
+                        },
+                        {
+                            "player": "Sam",
+                            "home": false
+                        },
+                        {
+                            "player": "Ashley",
+                            "home": false
+                        },
+                        {
+                            "player": "Steve",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Michael & Ashley",
+                    "players": [
+                        {
+                            "player": "Jack M",
+                            "home": false
+                        },
+                        {
+                            "player": "Emma",
+                            "home": false
+                        },
+                        {
+                            "player": "Michael",
+                            "home": false
+                        },
+                        {
+                            "player": "Carly",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Nick & Rachel F",
+                    "players": [
+                        {
+                            "player": "Cody",
+                            "home": false
+                        },
+                        {
+                            "player": "Nick",
+                            "home": false
+                        },
+                        {
+                            "player": "Brittany",
+                            "home": false
+                        },
+                        {
+                            "player": "Rachel F",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Dan",
+                    "players": [
+                        {
+                            "player": "Austin",
+                            "home": false
+                        },
+                        {
+                            "player": "Tyler",
+                            "home": false
+                        },
+                        {
+                            "player": "Dan",
+                            "home": false
+                        },
+                        {
+                            "player": "Ian",
+                            "home": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "week": "Week 2",
+            "game": "Bonsai",
+            "dates": "01/20 - 02/02",
+            "groups": [
+                {
+                    "location": "Mike Matonis Sr.",
+                    "players": [
+                        {
+                            "player": "Richie",
+                            "home": false
+                        },
+                        {
+                            "player": "Rachel M",
+                            "home": false
+                        },
+                        {
+                            "player": "Emma",
+                            "home": false
+                        },
+                        {
+                            "player": "Sam",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Tyler",
+                    "players": [
+                        {
+                            "player": "Jack C",
+                            "home": false
+                        },
+                        {
+                            "player": "Tyler",
+                            "home": false
+                        },
+                        {
+                            "player": "Steve",
+                            "home": false
+                        },
+                        {
+                            "player": "Michael",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Austin & Carly",
+                    "players": [
+                        {
+                            "player": "Cody",
+                            "home": false
+                        },
+                        {
+                            "player": "Jack M",
+                            "home": false
+                        },
+                        {
+                            "player": "Carly",
+                            "home": false
+                        },
+                        {
+                            "player": "Dan",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Nick & Rachel F",
+                    "players": [
+                        {
+                            "player": "Brittany",
+                            "home": false
+                        },
+                        {
+                            "player": "Austin",
+                            "home": false
+                        },
+                        {
+                            "player": "Rachel F",
+                            "home": false
+                        },
+                        {
+                            "player": "Ryan",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Nick & Rachel F",
+                    "players": [
+                        {
+                            "player": "Nick",
+                            "home": false
+                        },
+                        {
+                            "player": "Ashley",
+                            "home": false
+                        },
+                        {
+                            "player": "Ian",
+                            "home": false
+                        },
+                        {
+                            "player": "Josh",
+                            "home": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "week": "Week 3",
+            "game": "Heat: Pedal to the Metal",
+            "dates": "02/03 - 02/16",
+            "groups": [
+                {
+                    "location": "Rachel M & Steve",
+                    "players": [
+                        {
+                            "player": "Richie",
+                            "home": false
+                        },
+                        {
+                            "player": "Steve",
+                            "home": false
+                        },
+                        {
+                            "player": "Brittany",
+                            "home": false
+                        },
+                        {
+                            "player": "Josh",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Rachel M & Steve",
+                    "players": [
+                        {
+                            "player": "Rachel M",
+                            "home": false
+                        },
+                        {
+                            "player": "Michael",
+                            "home": false
+                        },
+                        {
+                            "player": "Emma",
+                            "home": false
+                        },
+                        {
+                            "player": "Austin",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Jack C",
+                    "players": [
+                        {
+                            "player": "Jack C",
+                            "home": false
+                        },
+                        {
+                            "player": "Ian",
+                            "home": false
+                        },
+                        {
+                            "player": "Jack M",
+                            "home": false
+                        },
+                        {
+                            "player": "Sam",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Austin & Carly",
+                    "players": [
+                        {
+                            "player": "Ashley",
+                            "home": false
+                        },
+                        {
+                            "player": "Carly",
+                            "home": false
+                        },
+                        {
+                            "player": "Ryan",
+                            "home": false
+                        },
+                        {
+                            "player": "Rachel F",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Tapster",
+                    "players": [
+                        {
+                            "player": "Tyler",
+                            "home": false
+                        },
+                        {
+                            "player": "Cody",
+                            "home": false
+                        },
+                        {
+                            "player": "Nick",
+                            "home": false
+                        },
+                        {
+                            "player": "Dan",
+                            "home": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "week": "Week 4",
+            "game": "Cubitos",
+            "dates": "02/17 - 03/02",
+            "groups": [
+                {
+                    "location": "Richie",
+                    "players": [
+                        {
+                            "player": "Richie",
+                            "home": false
+                        },
+                        {
+                            "player": "Emma",
+                            "home": false
+                        },
+                        {
+                            "player": "Dan",
+                            "home": false
+                        },
+                        {
+                            "player": "Austin",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Rachel M & Steve",
+                    "players": [
+                        {
+                            "player": "Rachel M",
+                            "home": false
+                        },
+                        {
+                            "player": "Jack M",
+                            "home": false
+                        },
+                        {
+                            "player": "Tyler",
+                            "home": false
+                        },
+                        {
+                            "player": "Brittany",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Nick & Rachel F",
+                    "players": [
+                        {
+                            "player": "Steve",
+                            "home": false
+                        },
+                        {
+                            "player": "Ian",
+                            "home": false
+                        },
+                        {
+                            "player": "Nick",
+                            "home": false
+                        },
+                        {
+                            "player": "Ryan",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Michael & Ashley",
+                    "players": [
+                        {
+                            "player": "Ashley",
+                            "home": false
+                        },
+                        {
+                            "player": "Carly",
+                            "home": false
+                        },
+                        {
+                            "player": "Jack C",
+                            "home": false
+                        },
+                        {
+                            "player": "Michael",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Nick & Rachel F",
+                    "players": [
+                        {
+                            "player": "Sam",
+                            "home": false
+                        },
+                        {
+                            "player": "Cody",
+                            "home": false
+                        },
+                        {
+                            "player": "Josh",
+                            "home": false
+                        },
+                        {
+                            "player": "Rachel F",
+                            "home": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "week": "Week 5",
+            "game": "Modern Art",
+            "dates": "03/03 - 03/16",
+            "groups": [
+                {
+                    "location": "Nick & Rachel F",
+                    "players": [
+                        {
+                            "player": "Richie",
+                            "home": false
+                        },
+                        {
+                            "player": "Rachel M",
+                            "home": false
+                        },
+                        {
+                            "player": "Nick",
+                            "home": false
+                        },
+                        {
+                            "player": "Carly",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Rachel M & Steve",
+                    "players": [
+                        {
+                            "player": "Jack C",
+                            "home": false
+                        },
+                        {
+                            "player": "Dan",
+                            "home": false
+                        },
+                        {
+                            "player": "Ryan",
+                            "home": false
+                        },
+                        {
+                            "player": "Steve",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Nick & Rachel F",
+                    "players": [
+                        {
+                            "player": "Sam",
+                            "home": false
+                        },
+                        {
+                            "player": "Rachel F",
+                            "home": false
+                        },
+                        {
+                            "player": "Austin",
+                            "home": false
+                        },
+                        {
+                            "player": "Josh",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Michael & Ashley",
+                    "players": [
+                        {
+                            "player": "Emma",
+                            "home": false
+                        },
+                        {
+                            "player": "Ashley",
+                            "home": false
+                        },
+                        {
+                            "player": "Brittany",
+                            "home": false
+                        },
+                        {
+                            "player": "Ian",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Michael & Ashley",
+                    "players": [
+                        {
+                            "player": "Tyler",
+                            "home": false
+                        },
+                        {
+                            "player": "Cody",
+                            "home": false
+                        },
+                        {
+                            "player": "Michael",
+                            "home": false
+                        },
+                        {
+                            "player": "Jack M",
+                            "home": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "week": "Week 6",
+            "game": "Wingspan",
+            "dates": "03/17 - 03/30",
+            "groups": [
+                {
+                    "location": "Richie",
+                    "players": [
+                        {
+                            "player": "Richie",
+                            "home": false
+                        },
+                        {
+                            "player": "Jack C",
+                            "home": false
+                        },
+                        {
+                            "player": "Sam",
+                            "home": false
+                        },
+                        {
+                            "player": "Tyler",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Rachel M & Steve",
+                    "players": [
+                        {
+                            "player": "Rachel M",
+                            "home": false
+                        },
+                        {
+                            "player": "Steve",
+                            "home": false
+                        },
+                        {
+                            "player": "Ashley",
+                            "home": false
+                        },
+                        {
+                            "player": "Michael",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Austin & Carly",
+                    "players": [
+                        {
+                            "player": "Austin",
+                            "home": false
+                        },
+                        {
+                            "player": "Carly",
+                            "home": false
+                        },
+                        {
+                            "player": "Cody",
+                            "home": false
+                        },
+                        {
+                            "player": "Brittany",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Dan",
+                    "players": [
+                        {
+                            "player": "Ian",
+                            "home": false
+                        },
+                        {
+                            "player": "Josh",
+                            "home": false
+                        },
+                        {
+                            "player": "Ryan",
+                            "home": false
+                        },
+                        {
+                            "player": "Dan",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Nick & Rachel F",
+                    "players": [
+                        {
+                            "player": "Nick",
+                            "home": false
+                        },
+                        {
+                            "player": "Rachel F",
+                            "home": false
+                        },
+                        {
+                            "player": "Jack M",
+                            "home": false
+                        },
+                        {
+                            "player": "Emma",
+                            "home": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "week": "Playoff 1",
+            "game": "Harvest",
+            "dates": "04/07 - 04/20",
+            "groups": [
+                {
+                    "location": "Rachel M & Steve",
+                    "players": [
+                        {
+                            "player": "Rachel M",
+                            "home": false
+                        },
+                        {
+                            "player": "Michael",
+                            "home": false
+                        },
+                        {
+                            "player": "Jack M",
+                            "home": false
+                        },
+                        {
+                            "player": "Ashley",
+                            "home": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "week": "Playoff 2",
+            "game": "Dominion",
+            "dates": "04/07 - 04/20",
+            "groups": [
+                {
+                    "location": "Tapster",
+                    "players": [
+                        {
+                            "player": "Sam",
+                            "home": false
+                        },
+                        {
+                            "player": "Richie",
+                            "home": false
+                        },
+                        {
+                            "player": "Ian",
+                            "home": false
+                        },
+                        {
+                            "player": "Dan",
+                            "home": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "week": "Championship",
+            "game": "Wondrous Creatures",
+            "dates": "05/24",
+            "groups": [
+                {
+                    "location": "Richie",
+                    "players": [
+                        {
+                            "player": "Richie",
+                            "home": false
+                        },
+                        {
+                            "player": "Michael",
+                            "home": false
+                        },
+                        {
+                            "player": "Ian",
+                            "home": false
+                        },
+                        {
+                            "player": "Ashley",
+                            "home": false
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "2026": [
+        {
+            "week": "Week 1",
+            "game": "Ticket to Ride",
+            "dates": "01/01 - 01/18",
+            "groups": [
+                {
+                    "location": "Brittany & Cody",
+                    "players": [
+                        {
+                            "player": "Richie",
+                            "home": false
+                        },
+                        {
+                            "player": "Ashley",
+                            "home": false
+                        },
+                        {
+                            "player": "Cody",
+                            "home": false
+                        },
+                        {
+                            "player": "Sam",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Nick & Rachel F",
+                    "players": [
+                        {
+                            "player": "Michael",
+                            "home": false
+                        },
+                        {
+                            "player": "Nick",
+                            "home": false
+                        },
+                        {
+                            "player": "Emma",
+                            "home": false
+                        },
+                        {
+                            "player": "Carly",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Rachel M & Steve",
+                    "players": [
+                        {
+                            "player": "Rachel M",
+                            "home": false
+                        },
+                        {
+                            "player": "Ryan",
+                            "home": false
+                        },
+                        {
+                            "player": "Josh",
+                            "home": false
+                        },
+                        {
+                            "player": "Austin",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Nick & Rachel F",
+                    "players": [
+                        {
+                            "player": "Rachel F",
+                            "home": false
+                        },
+                        {
+                            "player": "Tyler",
+                            "home": false
+                        },
+                        {
+                            "player": "Brittany",
+                            "home": false
+                        },
+                        {
+                            "player": "Jack M",
+                            "home": false
+                        }
+                    ]
+                },
+                {
+                    "location": "Tapster",
+                    "players": [
+                        {
+                            "player": "Steve",
+                            "home": false
+                        },
+                        {
+                            "player": "Jack C",
+                            "home": false
+                        },
+                        {
+                            "player": "Ian",
+                            "home": false
+                        },
+                        {
+                            "player": "Dan",
+                            "home": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "week": "Week 2",
+            "game": "Carcassonne",
+            "dates": "01/19 - 02/01",
+            "groups": [
+                {
+                    "location": "TBD",
+                    "players": [
+                        {
+                            "player": "Richie"
+                        },
+                        {
+                            "player": "Ian"
+                        },
+                        {
+                            "player": "Brittany"
+                        },
+                        {
+                            "player": "Jack C"
+                        }
+                    ]
+                },
+                {
+                    "location": "TBD",
+                    "players": [
+                        {
+                            "player": "Michael"
+                        },
+                        {
+                            "player": "Ashley"
+                        },
+                        {
+                            "player": "Austin"
+                        },
+                        {
+                            "player": "Carly"
+                        }
+                    ]
+                },
+                {
+                    "location": "Jack M & Emma",
+                    "players": [
+                        {
+                            "player": "Steve"
+                        },
+                        {
+                            "player": "Emma"
+                        },
+                        {
+                            "player": "Jack M"
+                        },
+                        {
+                            "player": "Rachel F"
+                        }
+                    ]
+                },
+                {
+                    "location": "TBD",
+                    "players": [
+                        {
+                            "player": "Rachel M"
+                        },
+                        {
+                            "player": "Sam"
+                        },
+                        {
+                            "player": "Dan"
+                        },
+                        {
+                            "player": "Ryan"
+                        }
+                    ]
+                },
+                {
+                    "location": "TBD",
+                    "players": [
+                        {
+                            "player": "Josh"
+                        },
+                        {
+                            "player": "Cody"
+                        },
+                        {
+                            "player": "Tyler"
+                        },
+                        {
+                            "player": "Nick"
+                        }
+                    ]
+                }
+            ],
+            "album": []
+        },
+        {
+            "week": "Week 3",
+            "game": "TBD",
+            "dates": "02/02 - 02/15",
+            "groups": [
+                {
+                    "location": "SampleLocation",
+                    "players": [
+                        {
+                            "player": "Rachel M"
+                        },
+                        {
+                            "player": "Steve"
+                        },
+                        {
+                            "player": "Ian"
+                        },
+                        {
+                            "player": "Ashley"
+                        }
+                    ]
+                },
+                {
+                    "location": "SampleLocation",
+                    "players": [
+                        {
+                            "player": "Richie"
+                        },
+                        {
+                            "player": "Michael"
+                        },
+                        {
+                            "player": "Josh"
+                        },
+                        {
+                            "player": "Jack M"
+                        }
+                    ]
+                },
+                {
+                    "location": "SampleLocation",
+                    "players": [
+                        {
+                            "player": "Nick"
+                        },
+                        {
+                            "player": "Brittany"
+                        },
+                        {
+                            "player": "Jack C"
+                        },
+                        {
+                            "player": "Carly"
+                        }
+                    ]
+                },
+                {
+                    "location": "SampleLocation",
+                    "players": [
+                        {
+                            "player": "Rachel F"
+                        },
+                        {
+                            "player": "Ryan"
+                        },
+                        {
+                            "player": "Dan"
+                        },
+                        {
+                            "player": "Tyler"
+                        }
+                    ]
+                },
+                {
+                    "location": "SampleLocation",
+                    "players": [
+                        {
+                            "player": "Sam"
+                        },
+                        {
+                            "player": "Emma"
+                        },
+                        {
+                            "player": "Cody"
+                        },
+                        {
+                            "player": "Austin"
+                        }
+                    ]
+                }
+            ],
+            "album": []
+        },
+        {
+            "week": "Week 4",
+            "game": "The Quacks of Quedlinburg",
+            "dates": "02/16 - 03/01",
+            "groups": [
+                {
+                    "location": "SampleLocation",
+                    "players": [
+                        {
+                            "player": "Richie"
+                        },
+                        {
+                            "player": "Dan"
+                        },
+                        {
+                            "player": "Jack C"
+                        },
+                        {
+                            "player": "Nick"
+                        }
+                    ]
+                },
+                {
+                    "location": "SampleLocation",
+                    "players": [
+                        {
+                            "player": "Ryan"
+                        },
+                        {
+                            "player": "Michael"
+                        },
+                        {
+                            "player": "Ian"
+                        },
+                        {
+                            "player": "Cody"
+                        }
+                    ]
+                },
+                {
+                    "location": "SampleLocation",
+                    "players": [
+                        {
+                            "player": "Jack M"
+                        },
+                        {
+                            "player": "Austin"
+                        },
+                        {
+                            "player": "Sam"
+                        },
+                        {
+                            "player": "Josh"
+                        }
+                    ]
+                },
+                {
+                    "location": "SampleLocation",
+                    "players": [
+                        {
+                            "player": "Rachel F"
+                        },
+                        {
+                            "player": "Brittany"
+                        },
+                        {
+                            "player": "Ashley"
+                        },
+                        {
+                            "player": "Steve"
+                        }
+                    ]
+                },
+                {
+                    "location": "SampleLocation",
+                    "players": [
+                        {
+                            "player": "Carly"
+                        },
+                        {
+                            "player": "Rachel M"
+                        },
+                        {
+                            "player": "Emma"
+                        },
+                        {
+                            "player": "Tyler"
+                        }
+                    ]
+                }
+            ],
+            "album": []
+        },
+        {
+            "week": "Week 5",
+            "game": "Heat: Pedal to the Metal",
+            "dates": "03/02 - 03/15",
+            "groups": [
+                {
+                    "location": "SampleLocation",
+                    "players": [
+                        {
+                            "player": "Michael"
+                        },
+                        {
+                            "player": "Rachel F"
+                        },
+                        {
+                            "player": "Josh"
+                        },
+                        {
+                            "player": "Jack C"
+                        }
+                    ]
+                },
+                {
+                    "location": "SampleLocation",
+                    "players": [
+                        {
+                            "player": "Tyler"
+                        },
+                        {
+                            "player": "Nick"
+                        },
+                        {
+                            "player": "Sam"
+                        },
+                        {
+                            "player": "Ian"
+                        }
+                    ]
+                },
+                {
+                    "location": "SampleLocation",
+                    "players": [
+                        {
+                            "player": "Richie"
+                        },
+                        {
+                            "player": "Brittany"
+                        },
+                        {
+                            "player": "Emma"
+                        },
+                        {
+                            "player": "Ryan"
+                        }
+                    ]
+                },
+                {
+                    "location": "SampleLocation",
+                    "players": [
+                        {
+                            "player": "Dan"
+                        },
+                        {
+                            "player": "Austin"
+                        },
+                        {
+                            "player": "Jack M"
+                        },
+                        {
+                            "player": "Ashley"
+                        }
+                    ]
+                },
+                {
+                    "location": "SampleLocation",
+                    "players": [
+                        {
+                            "player": "Cody"
+                        },
+                        {
+                            "player": "Carly"
+                        },
+                        {
+                            "player": "Steve"
+                        },
+                        {
+                            "player": "Rachel M"
+                        }
+                    ]
+                }
+            ],
+            "album": []
+        },
+        {
+            "week": "Week 6",
+            "game": "TBD",
+            "dates": "03/16 - 03/29",
+            "groups": [
+                {
+                    "location": "SampleLocation",
+                    "players": [
+                        {
+                            "player": "Ashley"
+                        },
+                        {
+                            "player": "Rachel M"
+                        },
+                        {
+                            "player": "Rachel F"
+                        },
+                        {
+                            "player": "Emma"
+                        }
+                    ]
+                },
+                {
+                    "location": "SampleLocation",
+                    "players": [
+                        {
+                            "player": "Michael"
+                        },
+                        {
+                            "player": "Richie"
+                        },
+                        {
+                            "player": "Steve"
+                        },
+                        {
+                            "player": "Tyler"
+                        }
+                    ]
+                },
+                {
+                    "location": "SampleLocation",
+                    "players": [
+                        {
+                            "player": "Austin"
+                        },
+                        {
+                            "player": "Carly"
+                        },
+                        {
+                            "player": "Brittany"
+                        },
+                        {
+                            "player": "Cody"
+                        }
+                    ]
+                },
+                {
+                    "location": "SampleLocation",
+                    "players": [
+                        {
+                            "player": "Nick"
+                        },
+                        {
+                            "player": "Ian"
+                        },
+                        {
+                            "player": "Josh"
+                        },
+                        {
+                            "player": "Dan"
+                        }
+                    ]
+                },
+                {
+                    "location": "SampleLocation",
+                    "players": [
+                        {
+                            "player": "Jack M"
+                        },
+                        {
+                            "player": "Jack C"
+                        },
+                        {
+                            "player": "Sam"
+                        },
+                        {
+                            "player": "Ryan"
+                        }
+                    ]
+                }
+            ],
+            "album": []
+        },
+        {
+            "week": "Playoff 1",
+            "game": "TBD",
+            "dates": "TBD",
+            "groups": [],
+            "album": []
+        },
+        {
+            "week": "Playoff 2",
+            "game": "TBD",
+            "dates": "TBD",
+            "groups": [],
+            "album": []
+        },
+        {
+            "week": "Championship",
+            "game": "TBD",
+            "dates": "TBD",
+            "groups": [],
+            "album": []
+        }
+    ]
+}

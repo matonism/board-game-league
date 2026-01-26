@@ -1,10 +1,13 @@
 // import {getBoardGameGeekIds } from "./callouts/CalloutFactory";
+import locations from "./locations.json" with {type: 'json'};
 
 
 export function createScheduleObject(response) {
     if(response?.values?.length > 0 && response.values[0].length === 5){
         return null;
     }
+                
+    let year = sheet.range.split('-')[1].split('\'')[0];
     let numberOfGamesPerWeek = getNumberOfGamesPerWeek(response);
     let numberOfPlayersPerGame = 4;
     let infoHeaderRows = 1;
@@ -13,10 +16,13 @@ export function createScheduleObject(response) {
     let schedule = [];
     let playoffRowStart = 0;
 
+    //Regular Season
     for(let rowIndex = 0; rowIndex < response.values.length; rowIndex++){
 
         let row = response.values[rowIndex];
         let rowReference = rowIndex % rowsBetweenWeeksInSpreadsheet;
+
+        //Weekly title rows in spreadsheet
         if(rowReference === 0){
 
             if(row[0].toLowerCase().includes('championship') || row[0].toLowerCase().includes('playoff')){
@@ -32,31 +38,34 @@ export function createScheduleObject(response) {
                 album: [],
                 headlines: row[3]
             });
+        
+        //Group rows & placement rows
         }else if(rowReference % 2 === 1){
             let placementRow = response.values[rowIndex + 1];
             let scheduleToUpdate = schedule[schedule.length - 1];
-            // scheduleToUpdate.results.push([]);
+
             let newGroup = [];
             for(let j = 1; j <= numberOfPlayersPerGame; j++){
                 if(row[j]){
                     let placement = placementRow[j];
                     newGroup.push({player: row[j].trim(), placement: placement})
                 }
-                // let groupToUpdate = scheduleToUpdate.results[scheduleToUpdate.results.length-1];
             }
+
             if(newGroup.length > 0){
-                scheduleToUpdate.results.push(newGroup);
+                let location = locations[year][schedule.length-1].groups[scheduleToUpdate.results.length].location;
+                scheduleToUpdate.results.push({location: location, players: newGroup});
             }
 
             //For album, we need to match the naming convention (ex: 2_3) to the given week (2) and given group (3)
-            if(scheduleToUpdate.results?.length > 0 && scheduleToUpdate.results[scheduleToUpdate.results.length-1][0]?.placement){
+            // if(scheduleToUpdate.results?.length > 0 && scheduleToUpdate.results[scheduleToUpdate.results.length-1][0]?.placement){
                 
-                if(scheduleToUpdate.week === 'championship'){
-                    scheduleToUpdate.album.push('championship')
-                }else{
-                    scheduleToUpdate.album.push(schedule.length + '_' + scheduleToUpdate.results.length)
-                }
-            }
+            //     if(scheduleToUpdate.week === 'championship'){
+            //         scheduleToUpdate.album.push('championship')
+            //     }else{
+            //         scheduleToUpdate.album.push(schedule.length + '_' + scheduleToUpdate.results.length)
+            //     }
+            // }
         }
     }
 
@@ -85,8 +94,10 @@ export function createScheduleObject(response) {
                 }
                 // let groupToUpdate = scheduleToUpdate.results[scheduleToUpdate.results.length-1];
             }
+
             if(newGroup.length > 0){
-                scheduleToUpdate.results.push(newGroup);
+                let location = locations[year][schedule.length-1].groups[scheduleToUpdate.results.length].location;
+                scheduleToUpdate.results.push({location: location, players: newGroup});
             }
 
             //For album, we need to match the naming convention (ex: 2_3) to the given week (2) and given group (3)
@@ -469,10 +480,11 @@ export function createHistoricalDataObject(data){
         
         let schedule = schedules[year];
 
-        schedule.forEach(week=>{
+        schedule.forEach((week, weekIndex)=>{
             if(isRegularSeason(week.week.toLowerCase())){ 
-                week.results.forEach(group => {
+                week.results.forEach((group, groupIndex) => {
                     // gamesPerWeek = group.length;
+                    let location = locations[year][weekIndex].groups[groupIndex].location;
                     group.forEach(performance => {
                         if(performance.placement){
                             if(!analysisObject[performance.player]){
@@ -485,14 +497,20 @@ export function createHistoricalDataObject(data){
                                     gamePerformance: [],
                                     opponents: [],
                                     uniqueOpponents: [],
-                                    points: 0
+                                    points: 0,
+                                    homeGames: 0
                                 }
                                 // let player = standings.regularSeason.find(standing => { return standing.player === performance.player})
                                 // sosObject[performance.player] = {strengthOfScheduleTotal: 0, gamesPlayed: player.gamesPlayed, gamesToPlay: player.gamesToPlay};
                             }
 
+                            let isHomeGame = location.includes(performance.player);
+                            if(isHomeGame){
+                                analysisObject[performance.player].homeGames++;
+                            }
+
                             analysisObject[performance.player].gamesPlayed++;
-                            analysisObject[performance.player].gamePerformance.push({game: week.game, season: year, week: week.week, placement: performance.placement});
+                            analysisObject[performance.player].gamePerformance.push({game: week.game, season: year, week: week.week, placement: performance.placement, home: isHomeGame, location: location});
                             if(performance.placement === "1"){
                                 analysisObject[performance.player].placements.first++;
                             }else if(performance.placement === "2"){
@@ -514,12 +532,14 @@ export function createHistoricalDataObject(data){
                                             wins: 0,
                                             losses: 0,
                                             winRate: 0,
-                                            gamesPlayed: 0
+                                            gamesPlayed: 0,
+                                            games: []
                                         }
                                     }
                                     let headToHead = analysisObject[performance.player].headToHead[performance2.player];
                                     headToHead.gamesPlayed++;
 
+                                    headToHead.games.push({name: week.game, year: year, placement: performance.placement, opponentPlacement: performance2.placement})
                                     if(performance.placement > performance2.placement){
                                         headToHead.losses++;
                                     }else{
@@ -539,8 +559,9 @@ export function createHistoricalDataObject(data){
                     })
                 })
             }else{
-                week.results.forEach(group => {
+                week.results.forEach((group, groupIndex) => {
                     // gamesPerWeek = group.length;
+                    let location = locations[year][weekIndex].groups[groupIndex].location;
                     group.forEach(performance => {
 
                         if(performance.placement){
@@ -558,8 +579,15 @@ export function createHistoricalDataObject(data){
                                     gamePerformance: [],
                                     opponents: [],
                                     uniqueOpponents: [],
-                                    points: 0
+                                    points: 0,
+                                    homeGames: 0
                                 }
+                            }
+                            
+
+                            let isHomeGame = location.includes(performance.player);
+                            if(isHomeGame){
+                                postSeasonObject[performance.player].homeGames++;
                             }
 
                             if(!postSeasonObject[performance.player].appearanceArray.includes(year)){
@@ -567,7 +595,7 @@ export function createHistoricalDataObject(data){
                                 postSeasonObject[performance.player].playoffAppearances++;
                             }
                             
-                            postSeasonObject[performance.player].gamePerformance.push({game: week.game, week: week.week, season: year, placement: performance.placement});
+                            postSeasonObject[performance.player].gamePerformance.push({game: week.game, week: week.week, season: year, placement: performance.placement, home: isHomeGame, location: location});
                             postSeasonObject[performance.player].gamesPlayed++;
                             if(isChampionship(week.week.toLowerCase())){
                                 postSeasonObject[performance.player].championshipAppearances++;
@@ -596,11 +624,13 @@ export function createHistoricalDataObject(data){
                                             wins: 0,
                                             losses: 0,
                                             winRate: 0,
-                                            gamesPlayed: 0
+                                            gamesPlayed: 0,
+                                            games: []
                                         }
                                     }
                                     let headToHead = postSeasonObject[performance.player].headToHead[performance2.player];
                                     headToHead.gamesPlayed++;
+                                    headToHead.games.push({name: week.game, year: year, placement: performance.placement, opponentPlacement: performance2.placement})
 
                                     if(performance.placement > performance2.placement){
                                         headToHead.losses++;

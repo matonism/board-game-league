@@ -90,7 +90,8 @@
         ],
         "rating": "4.374",
         "difficulty": "1.5263"
-    },"Small World": {
+    },
+    "Small World": {
         "description": "In Small World, players vie for conquest and control of a world that is simply too small to accommodate them all.\n\nDesigned by Philippe Keyaerts as a fantasy follow-up to his award-winning Vinci, Small World is inhabited by a zany cast of characters such as dwarves, wizards, amazons, giants, orcs, and even humans, who use their troops to occupy territory and conquer adjacent lands in order to push the other races off the face of the earth.\n\nPicking the right combination from the 14 different fantasy races and 20 unique special powers, players rush to expand their empires - often at the expense of weaker neighbors. Yet they must also know when to push their own over-extended civilization into decline and ride a new one to victory!\n\nOn each turn, you either use the multiple tiles of your chosen race (type of creatures) to occupy adjacent (normally) territories - possibly defeating weaker enemy races along the way, or you give up on your race letting it go \"into decline\". A race in decline is designated by flipping the tiles over to their black-and-white side.\n\nAt the end of your turn, you score one point (coin) for each territory your races occupy. You may have one active race and one race in decline on the board at the same time. Your occupation total can vary depending on the special abilities of your race and the territories they occupy. After the final round, the player with the most coins wins.\n\nClarifications: available in a pinned forum post.\n\n",
         "categories": [
             "Fantasy",
@@ -531,19 +532,20 @@
         ],
         "rating": "8.00497",
         "difficulty": "2.4762"
-    },"Harvest": {
-        "description": "\t\t\t\t\n\t\t\t\t\n\t\t\t\t\tIntroduction:Harbustaz (from Proto-Germanic: harbustaz, meaning \"harvest\" or \"autumn\") is a drawless game for two players: Black and White. It is played on the hexes (cells) of an initially empty hexagonal board. The recommended board size is 5 cells per side, but boards with 4 or 6 cells are also valid. Each player has access to a sufficient supply of stackable pieces of their own color in two types: peasants and seeds.\n\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\tDefinitions:\n     A peasant is a set of pieces located in the same cell. A single piece is also a peasant.\n     To harvest a seed is to incorporate it into a peasant, so that the seed ceases to be a seed and becomes part of the peasant.\n     A territory is a maximal set of empty cells surrounded by stones of any color. You own a territory if more than half of the stones surrounding it are of your color. \n\n\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\tTurns:Black plays first, and then turns alternate. On your turn, perform one of the following actions:\n\n\n     Move your peasant in a straight line a distance equal to its height to an empty cell or a cell occupied by a friendly seed to harvest it. Upon moving, the peasant increases its height by 1 and uses an extra piece from the board to grow. If the peasant harvests a seed, it uses the seed to grow instead of taking a piece from the board.\n     Sow a friendly seed in an empty cell in a straight line from your peasant to an empty cell at a distance equal to the height of your peasant. Then remove a piece from your peasant unless the peasant is 1 height.\n     Pass your turn.\n\n\nYou can move a peasant or sow seeds through friendly pieces.\n\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\tEnd of the game:The game ends when both players pass in consecutive turns. At the end of the game, each player counts the number of empty cells in friendly territories, and the player who made the last action receives an additional half point. The player with the highest score wins.\n\nTo balance the game, before starting, the first player places two peasants of height 1, one black and one white, and the second player chooses a side. This balancing method is called the two-piece pie rule.\n\n&ndash;description from the designer\n\n",
+    },
+    "Harvest": {
+        "description": "Salutations, neighbor, and welcome to Furroughfield, the Commonwealth of Free Beasts! Ours is a budding farm town with soil ripe for planting.\n\nIn Harvest, you take on the role of a farmer, each with their own unique penchant for working the land, and choose a farmhouse with its own special round-to-round benefit. Each round, you draft sunrise cards that give you a one-time income and determine turn order for the round. Following that turn order, move your wheelbarrows around town to gather resources that you'll use to manage your fields. Plant seeds, tend the land, and harvest crops to make money and score points. Clear land to expand your farm, and construct buildings that make your land more efficient and give you endgame bonuses. By the end of harvest season, the farmer with the most points wins!\n\n&mdash;description from the publisher\n\n",
         "categories": [
-            "Abstract Strategy"
+            "Animals",
+            "Farming"
         ],
         "mechanics": [
-            "Area Majority / Influence",
-            "Chaining",
-            "Pattern Building",
-            "Pattern Recognition"
+            "Open Drafting",
+            "Variable Player Powers",
+            "Worker Placement"
         ],
-        "rating": "9",
-        "difficulty": "0"
+        "rating": "7.41112",
+        "difficulty": "2.5968"
     },
     "Wondrous Creatures": {
         "description": "Welcome to the world full of fantastic creatures! You are an admirer, a creature enthusiast who will join the journey of forming the world&rsquo;s leading creature reserve.\n\nTo win Wondrous Creatures, you must create the most harmonious reserve. To do this, you will need to collect various Creature Cards and Eggs in your reserve. As each Creature Card holds its own unique ability, it's important to bring cards into your reserve that fit and synergize with your strategy. Additionally, it is very important to create a reserve that helps complete the Achievements faster than other players.\n\n\n    The worker placement mechanism provides an intriguing Hex Puzzle experience. Your deployed worker interacts with surrounding icons to bring in resources or cards, and activate special effects! \n     Your workers hold their own unique abilities. As you progress through the game, unlock their abilities and strengthen your workers!\n     As the game progresses, powerful special effects are newly placed on the map. Get creative and use these special effects to unleash your very own powerful combos! \n     Collect and combine 100+ different creature cards. Every creature holds its own distinctive ability and provides a deep strategic tableau building experience. \n\n\nThe goal of Wondrous Creatures is to be the player with the highest Victory Points (VPs) at the end of the game.\n\n--description from the designer\n\n",
@@ -563,5 +565,26 @@
         ],
         "rating": "8.07171",
         "difficulty": "3.0298"
+    },
+    "Wroth": {
+        "description": "Wroth is an area control board game that can be played competitively, cooperatively, or solo.\n\nPlayers choose a faction and vie for control of the island of Wroth by drafting action dice to gain resources, deploying and moving troops, and attacking the opposition - all while trying to hold key positions and dominate the region. Wroth rewards cunning troop management and the clever use of your faction&rsquo;s elite troops and powerful once-per-game abilities. Each faction has asymmetric abilities so what works for one won't necessarily work for another.\n\nThe game ends after a round when one faction reaches 30 victory points or completes a scenario-based mission, depending on the game mode.\n\nWroth can be taught in 10-15 minutes, and is playable in roughly an hour.\n\n&mdash;description from the publisher\n\n",
+        "categories": [
+            "Fantasy",
+            "Territory Building"
+        ],
+        "mechanics": [
+            "Action Drafting",
+            "Area Majority / Influence",
+            "Cooperative Game",
+            "Dice Rolling",
+            "Die Icon Resolution",
+            "Moving Multiple Units",
+            "Once-Per-Game Abilities",
+            "Open Drafting",
+            "Solo / Solitaire Game",
+            "Variable Player Powers"
+        ],
+        "rating": "7.47943",
+        "difficulty": "2.2632"
     }
 }
