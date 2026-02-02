@@ -7,7 +7,7 @@ export function createScheduleObject(response) {
         return null;
     }
                 
-    let year = sheet.range.split('-')[1].split('\'')[0];
+    let year = response.range.split('-')[1].split('\'')[0];
     let numberOfGamesPerWeek = getNumberOfGamesPerWeek(response);
     let numberOfPlayersPerGame = 4;
     let infoHeaderRows = 1;
@@ -101,16 +101,16 @@ export function createScheduleObject(response) {
             }
 
             //For album, we need to match the naming convention (ex: 2_3) to the given week (2) and given group (3)
-            if(scheduleToUpdate.results?.length > 0 && scheduleToUpdate.results[scheduleToUpdate.results.length-1][0]?.placement){
+            // if(scheduleToUpdate.results?.length > 0 && scheduleToUpdate.results[scheduleToUpdate.results.length-1][0]?.placement){
                 
-                if(scheduleToUpdate.week === 'championship'){
-                    scheduleToUpdate.album.push('championship')
-                }else if(scheduleToUpdate.week.includes('playoff')){
-                    scheduleToUpdate.album.push(scheduleToUpdate.week.replaceAll(' ', '_'));
-                }else{
-                    scheduleToUpdate.album.push(schedule.length + '_' + scheduleToUpdate.results.length)
-                }
-            }
+            //     if(scheduleToUpdate.week === 'championship'){
+            //         scheduleToUpdate.album.push('championship')
+            //     }else if(scheduleToUpdate.week.includes('playoff')){
+            //         scheduleToUpdate.album.push(scheduleToUpdate.week.replaceAll(' ', '_'));
+            //     }else{
+            //         scheduleToUpdate.album.push(schedule.length + '_' + scheduleToUpdate.results.length)
+            //     }
+            // }
         }
     }
     // response.values.forEach((row, rowIndex) => {
@@ -161,7 +161,7 @@ export function createStandingsObject(schedule){
     schedule.forEach((week, index)=>{
         if(isRegularSeason(week.week.toLowerCase())){ 
             week.results.forEach(group => {
-                group.forEach(performance => {
+                group.players.forEach(performance => {
                     let player = performance.player.trim();
                     if(!standings.regularSeason[player]){
                         standings.regularSeason[player] = {score: 0, gamesPlayed: 0, gamesToPlay: 0, weeklyScores: new Array(index).fill(0)};
@@ -176,7 +176,7 @@ export function createStandingsObject(schedule){
             })
         }else if(isChampionship(week.week.toLowerCase())){
             week.results.forEach(group => {
-                group.forEach(performance => {
+                group.players.forEach(performance => {
                     let player = performance.player.trim();
                     if(!standings.championship[player]){
                         standings.championship[player] = {score: 0, gamesPlayed: 0, gamesToPlay: 0};
@@ -296,13 +296,13 @@ export function createStrengthOfScheduleObject(schedule, standings){
         if(isRegularSeason(week.week.toLowerCase())){ 
             week.results.forEach(group => {
                 // gamesPerWeek = group.length;
-                group.forEach(performance => {
+                group.players.forEach(performance => {
 
                     if(!sosObject[performance.player]){
                         let player = standings.regularSeason.find(standing => { return standing.player === performance.player})
                         sosObject[performance.player] = {strengthOfScheduleTotal: 0, gamesPlayed: player.gamesPlayed, gamesToPlay: player.gamesToPlay};
                     }
-                    group.forEach(performance2 => {
+                    group.players.forEach(performance2 => {
                         if(performance !== performance2){
                             let performance2Player = standings.regularSeason.find(standing => { return standing.player === performance2.player})
                             let sosValue = performance2Player.gamesPlayed > 0 ? performance2Player.points / performance2Player.gamesPlayed : 0;
@@ -364,14 +364,14 @@ export function getImageFileNamesToLoad(schedule, response){
     schedule.forEach(week=>{
         if(isRegularSeason(week.week.toLowerCase())){ 
             week.results.forEach(group => {
-                let performance = group[0];
+                let performance = group.players[0];
                 if(performance?.placement){
                     mostPossibleImages++;
                 }
             })
         }else{
             week.results.forEach(group => {
-                let performance = group[0];
+                let performance = group.players[0];
                 if(performance?.placement){
                     championshipPlayed = true;
                 }
@@ -484,8 +484,8 @@ export function createHistoricalDataObject(data){
             if(isRegularSeason(week.week.toLowerCase())){ 
                 week.results.forEach((group, groupIndex) => {
                     // gamesPerWeek = group.length;
-                    let location = locations[year][weekIndex].groups[groupIndex].location;
-                    group.forEach(performance => {
+                    let location = group.location;//locations[year][weekIndex].groups[groupIndex].location;
+                    group.players.forEach(performance => {
                         if(performance.placement){
                             if(!analysisObject[performance.player]){
                                 analysisObject[performance.player] = {
@@ -524,7 +524,7 @@ export function createHistoricalDataObject(data){
 
                             analysisObject[performance.player].points += scoringRubric(performance.placement);
 
-                            group.forEach(performance2 => {
+                            group.players.forEach(performance2 => {
                                 if(performance !== performance2){
                                     if(!analysisObject[performance.player].headToHead[performance2.player]){
                                         analysisObject[performance.player].headToHead[performance2.player] = {
@@ -561,8 +561,8 @@ export function createHistoricalDataObject(data){
             }else{
                 week.results.forEach((group, groupIndex) => {
                     // gamesPerWeek = group.length;
-                    let location = locations[year][weekIndex].groups[groupIndex].location;
-                    group.forEach(performance => {
+                    let location = group.location;//locations[year][weekIndex].groups[groupIndex].location;
+                    group.players.forEach(performance => {
 
                         if(performance.placement){
                             if(!postSeasonObject[performance.player]){
@@ -616,7 +616,7 @@ export function createHistoricalDataObject(data){
                             postSeasonObject[performance.player].averagePosition = ((postSeasonObject[performance.player].averagePosition * (postSeasonObject[performance.player].gamesPlayed - 1)) + parseInt(performance.placement)) / postSeasonObject[performance.player].gamesPlayed;
                             postSeasonObject[performance.player].points += scoringRubric(performance.placement);
 
-                            group.forEach(performance2 => {
+                            group.players.forEach(performance2 => {
                                 if(performance !== performance2){
                                     if(!postSeasonObject[performance.player].headToHead[performance2.player]){
                                         postSeasonObject[performance.player].headToHead[performance2.player] = {

@@ -9,6 +9,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "@google-cloud/local-auth": "^3.0.1",
     "dotenv": "^17.2.3",
     "fs": "^0.0.1-security",
     "googleapis": "^169.0.0",

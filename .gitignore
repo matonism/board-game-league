@@ -9,3 +9,5 @@ node_modules
 /index.zip
 build
 keys.json
+credentials.json
+token.json
