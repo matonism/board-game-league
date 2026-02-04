@@ -94,7 +94,7 @@ aws cloudfront create-invalidation --distribution-id E31VRL2B3BY883 --paths '/*'
 
 ## To Check the status of an invalidation
 aws cloudfront get-invalidation --id $INVALIDATION_ID --distribution-id $DISTRIBUTION_ID
-aws cloudfront get-invalidation --id I8M4CX4RC0FGBMITUDC1XU50OL --distribution-id E31VRL2B3BY883
+aws cloudfront get-invalidation --id I9GBF2U88UP0EVNRULX0DZGEAC --distribution-id E31VRL2B3BY883
 
 ## To handle React Router in S3:
 Navigate to static website hosting settings under properties in S3 bucket

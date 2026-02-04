@@ -1,0 +1,2701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week-over-Week Deltas — Historic Events</title>
+    <style>
+        :root {
+            --primary: #1e40af;
+            --bg: #f1f5f9;
+            --surface: #ffffff;
+            --text: #1e293b;
+            --border: #e2e8f0;
+            --new-leader: #15803d;
+            --climb: #0d9488;
+            --drop: #b91c1c;
+            --scorer: #7c3aed;
+        }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; }
+        .container { max-width: 1000px; margin: 0 auto; }
+        header { text-align: center; margin-bottom: 28px; }
+        h1 { margin: 0; color: var(--primary); font-size: 1.75rem; }
+        .subtitle { color: #64748b; font-size: 0.95rem; margin-top: 6px; }
+        .tabs { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; justify-content: center; }
+        .tab-btn { padding: 10px 18px; border: none; background: var(--surface); cursor: pointer; border-radius: 8px; font-weight: 600; color: #64748b; box-shadow: 0 1px 3px rgba(0,0,0,0.08); transition: all 0.2s; }
+        .tab-btn:hover { background: #e0f2fe; color: var(--primary); }
+        .tab-btn.active { background: var(--primary); color: white; }
+        .season-timeline { display: none; }
+        .season-timeline.active { display: block; }
+        .week-card { background: var(--surface); border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border: 1px solid var(--border); }
+        .week-card h3 { margin: 0 0 14px 0; color: var(--primary); font-size: 1.15rem; }
+        .week-events { margin-bottom: 16px; }
+        .event-card { padding: 10px 14px; border-radius: 8px; margin-bottom: 8px; border-left: 4px solid #94a3b8; }
+        .event-card.event-new_leader { border-left-color: var(--new-leader); background: #dcfce7; }
+        .event-card.event-first_time_first { border-left-color: var(--new-leader); background: #dcfce7; }
+        .event-card.event-tied_for_first { border-left-color: #ca8a04; background: #fef9c3; }
+        .event-card.event-biggest_climb { border-left-color: var(--climb); background: #ccfbf1; }
+        .event-card.event-biggest_drop { border-left-color: var(--drop); background: #fee2e2; }
+        .event-card.event-top_weekly_scorer { border-left-color: var(--scorer); background: #ede9fe; }
+        .event-card.event-career_points_threshold { border-left-color: #0d9488; background: #ccfbf1; }
+        .event-card.event-new_rookie_record { border-left-color: #ca8a04; background: #fef9c3; }
+        .event-card.event-head_to_head_tie_broken { border-left-color: #2563eb; background: #dbeafe; }
+        .event-card.event-all_time_leaderboard_move { border-left-color: #059669; background: #d1fae5; }
+        .event-card strong { display: block; margin-bottom: 4px; }
+        .event-card p { margin: 0; font-size: 0.95em; color: #475569; }
+        .no-events { color: #94a3b8; font-style: italic; font-size: 0.9em; }
+        .mini-standings { width: 100%; max-width: 320px; border-collapse: collapse; font-size: 0.9em; }
+        .mini-standings th { text-align: left; color: #64748b; font-weight: 600; padding: 6px 8px 6px 0; border-bottom: 1px solid var(--border); }
+        .mini-standings td { padding: 6px 8px 6px 0; border-bottom: 1px solid #f1f5f9; }
+        .mini-standings tbody tr:last-child td { border-bottom: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Week-over-Week Historic Events</h1>
+            <p class="subtitle">Events that happened in the previous week (standings and rank changes)</p>
+        </header>
+        <div class="tabs">
+        <button type="button" class="tab-btn season-tab" data-season="2022">Season 2022</button>
+        <button type="button" class="tab-btn season-tab" data-season="2023">Season 2023</button>
+        <button type="button" class="tab-btn season-tab" data-season="2024">Season 2024</button>
+        <button type="button" class="tab-btn season-tab" data-season="2025">Season 2025</button>
+        <button type="button" class="tab-btn season-tab" data-season="2026">Season 2026</button></div>
+        <div class="season-timeline" data-season="2022">
+                <div class="week-card" data-season="2022">
+                    <h3>After Week 1</h3>
+                    <div class="week-events">
+                    <div class="event-card event-first_time_first">
+                        <strong>First time in first place this season</strong>
+                        <p>Brian took the lead for the first time this season.</p>
+                    </div>
+                    <div class="event-card event-tied_for_first">
+                        <strong>Tied for first place</strong>
+                        <p>Brian and Nick and Michael are tied at the top with 3 points.</p>
+                    </div></div>
+                    <table class="mini-standings">
+                        <thead><tr><th>#</th><th>Player</th><th>Pts</th><th>G</th></tr></thead>
+                        <tbody><tr><td>1</td><td>Brian</td><td>3</td><td>1</td></tr><tr><td>2</td><td>Nick</td><td>3</td><td>1</td></tr><tr><td>3</td><td>Michael</td><td>3</td><td>1</td></tr><tr><td>4</td><td>Dan</td><td>2</td><td>1</td></tr><tr><td>5</td><td>Austin</td><td>2</td><td>1</td></tr></tbody>
+                    </table>
+                </div>
+                <div class="week-card" data-season="2022">
+                    <h3>After Week 2</h3>
+                    <div class="week-events">
+                    <div class="event-card event-new_leader">
+                        <strong>New #1 in the standings</strong>
+                        <p>Nick overtook Brian for first place.</p>
+                    </div>
+                    <div class="event-card event-tied_for_first">
+                        <strong>Tied for first place</strong>
+                        <p>Nick and Michael are tied at the top with 6 points.</p>
+                    </div>
+                    <div class="event-card event-biggest_climb">
+                        <strong>Biggest rise in the standings</strong>
+                        <p>Ryan jumped 3 spot(s) (7 → 4).</p>
+                    </div>
+                    <div class="event-card event-biggest_drop">
+                        <strong>Biggest drop in the standings</strong>
+                        <p>Brian fell 3 spot(s) (1 → 4).</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Nick is now 1st in "Points Leaders".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Luke is now 2nd in "Points Leaders".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Brian is now 3rd in "Points Leaders".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Nick is now 1st in "Most 1st Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Brian is now 2nd in "Most 1st Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Dan is now 3rd in "Most 1st Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Richie is now 1st in "Most 3rd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Ryan is now 2nd in "Most 3rd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Brian is now 3rd in "Most 3rd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Rachel F is now 1st in "Most 4th Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Ryan is now 3rd in "Most 4th Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Nick is now 1st in "Top Half Finishes (1st/2nd)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Brian is now 2nd in "Top Half Finishes (1st/2nd)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Richie is now 3rd in "Top Half Finishes (1st/2nd)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Richie is now 1st in "Bottom Half Finishes (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Nick is now 3rd in "Bottom Half Finishes (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Nick is now 1st in "Longest Win Streak".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Brian is now 2nd in "Longest Win Streak".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Dan is now 3rd in "Longest Win Streak".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Ryan is now 1st in "Longest Streak w/o 4th".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Brian is now 2nd in "Longest Streak w/o 4th".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Rachel F is now 3rd in "Longest Streak w/o 4th".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Nick is now 1st in "Longest Top Half Streak (1st/2nd)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Brian is now 2nd in "Longest Top Half Streak (1st/2nd)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Richie is now 3rd in "Longest Top Half Streak (1st/2nd)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Nick is now 3rd in "Longest Winless Streak".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Richie is now 1st in "Longest Bottom Half Streak (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Nick is now 3rd in "Longest Bottom Half Streak (3rd/4th)".</p>
+                    </div></div>
+                    <table class="mini-standings">
+                        <thead><tr><th>#</th><th>Player</th><th>Pts</th><th>G</th></tr></thead>
+                        <tbody><tr><td>1</td><td>Nick</td><td>6</td><td>2</td></tr><tr><td>2</td><td>Michael</td><td>6</td><td>2</td></tr><tr><td>3</td><td>Luke</td><td>5</td><td>2</td></tr><tr><td>4</td><td>Brian</td><td>3</td><td>2</td></tr><tr><td>5</td><td>Ryan</td><td>3</td><td>2</td></tr></tbody>
+                    </table>
+                </div>
+                <div class="week-card" data-season="2022">
+                    <h3>After Week 3</h3>
+                    <div class="week-events">
+                    <div class="event-card event-new_leader">
+                        <strong>New #1 in the standings</strong>
+                        <p>Michael overtook Nick for first place.</p>
+                    </div>
+                    <div class="event-card event-biggest_climb">
+                        <strong>Biggest rise in the standings</strong>
+                        <p>Rachel F jumped 4 spot(s) (12 → 8).</p>
+                    </div>
+                    <div class="event-card event-biggest_drop">
+                        <strong>Biggest drop in the standings</strong>
+                        <p>Brian fell 4 spot(s) (4 → 8).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Becca now leads the head-to-head vs Ashley (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Michael is now 1st in "Points Leaders".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Nick is now 3rd in "Points Leaders".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Luke is now 1st in "Most 2nd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Dan is now 2nd in "Most 2nd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Brian is now 3rd in "Most 2nd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Ryan is now 1st in "Most 3rd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Dan is now 2nd in "Most 3rd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Josh is now 1st in "Most 4th Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Michael is now 1st in "Top Half Finishes (1st/2nd)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Nick is now 2nd in "Top Half Finishes (1st/2nd)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Brian is now 3rd in "Top Half Finishes (1st/2nd)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Dan is now 1st in "Bottom Half Finishes (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Michael is now 3rd in "Bottom Half Finishes (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Nick is now 2nd in "Longest Streak w/o 4th".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Brian is now 3rd in "Longest Streak w/o 4th".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Michael is now 1st in "Longest Top Half Streak (1st/2nd)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Nick is now 2nd in "Longest Top Half Streak (1st/2nd)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Brian is now 3rd in "Longest Top Half Streak (1st/2nd)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Austin is now 2nd in "Longest Winless Streak".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Brian is now 3rd in "Longest Winless Streak".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Dan is now 1st in "Longest Bottom Half Streak (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Michael is now 3rd in "Longest Bottom Half Streak (3rd/4th)".</p>
+                    </div></div>
+                    <table class="mini-standings">
+                        <thead><tr><th>#</th><th>Player</th><th>Pts</th><th>G</th></tr></thead>
+                        <tbody><tr><td>1</td><td>Michael</td><td>8</td><td>3</td></tr><tr><td>2</td><td>Luke</td><td>7</td><td>3</td></tr><tr><td>3</td><td>Nick</td><td>6</td><td>3</td></tr><tr><td>4</td><td>Austin</td><td>6</td><td>3</td></tr><tr><td>5</td><td>Richie</td><td>5</td><td>3</td></tr></tbody>
+                    </table>
+                </div>
+                <div class="week-card" data-season="2022">
+                    <h3>After Week 4</h3>
+                    <div class="week-events">
+                    <div class="event-card event-biggest_climb">
+                        <strong>Biggest rise in the standings</strong>
+                        <p>Rachel F jumped 3 spot(s) (8 → 5).</p>
+                    </div>
+                    <div class="event-card event-biggest_drop">
+                        <strong>Biggest drop in the standings</strong>
+                        <p>Becca fell 3 spot(s) (6 → 9).</p>
+                    </div>
+                    <div class="event-card event-career_points_threshold">
+                        <strong>Career points milestone: 10</strong>
+                        <p>Michael reached 11 career points (crossed 10).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tied</strong>
+                        <p>Becca and Ashley are now tied head-to-head (2–2 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Nick is now 2nd in "Points Leaders".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Austin is now 3rd in "Points Leaders".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Rachel F is now 2nd in "Most 1st Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Brian is now 3rd in "Most 1st Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Dan is now 1st in "Most 2nd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Josh is now 2nd in "Most 2nd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Richie is now 1st in "Most 3rd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Ryan is now 2nd in "Most 3rd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Dan is now 3rd in "Most 3rd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Rachel F is now 2nd in "Most 4th Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Brian is now 3rd in "Most 4th Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Dan is now 3rd in "Top Half Finishes (1st/2nd)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Josh is now 1st in "Bottom Half Finishes (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Dan is now 2nd in "Bottom Half Finishes (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Brian is now 3rd in "Bottom Half Finishes (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Luke is now 2nd in "Longest Streak w/o 4th".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Dan is now 3rd in "Longest Streak w/o 4th".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Luke is now 2nd in "Longest Top Half Streak (1st/2nd)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Nick is now 3rd in "Longest Top Half Streak (1st/2nd)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Michael is now 1st in "Fastest to 10 Career Points (# Games)".</p>
+                    </div></div>
+                    <table class="mini-standings">
+                        <thead><tr><th>#</th><th>Player</th><th>Pts</th><th>G</th></tr></thead>
+                        <tbody><tr><td>1</td><td>Michael</td><td>11</td><td>4</td></tr><tr><td>2</td><td>Nick</td><td>9</td><td>4</td></tr><tr><td>3</td><td>Austin</td><td>7</td><td>4</td></tr><tr><td>4</td><td>Luke</td><td>7</td><td>4</td></tr><tr><td>5</td><td>Ryan</td><td>6</td><td>4</td></tr></tbody>
+                    </table>
+                </div>
+                <div class="week-card" data-season="2022">
+                    <h3>After Week 5</h3>
+                    <div class="week-events">
+                    <div class="event-card event-new_leader">
+                        <strong>New #1 in the standings</strong>
+                        <p>Nick overtook Michael for first place.</p>
+                    </div>
+                    <div class="event-card event-tied_for_first">
+                        <strong>Tied for first place</strong>
+                        <p>Nick and Michael are tied at the top with 11 points.</p>
+                    </div>
+                    <div class="event-card event-biggest_climb">
+                        <strong>Biggest rise in the standings</strong>
+                        <p>Josh jumped 3 spot(s) (12 → 9).</p>
+                    </div>
+                    <div class="event-card event-biggest_drop">
+                        <strong>Biggest drop in the standings</strong>
+                        <p>Austin fell 2 spot(s) (3 → 5).</p>
+                    </div>
+                    <div class="event-card event-career_points_threshold">
+                        <strong>Career points milestone: 10</strong>
+                        <p>Nick reached 11 career points (crossed 10).</p>
+                    </div>
+                    <div class="event-card event-career_points_threshold">
+                        <strong>Career points milestone: 10</strong>
+                        <p>Luke reached 10 career points (crossed 10).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Luke now leads the head-to-head vs Dan (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Nick is now 1st in "Points Leaders".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Luke is now 2nd in "Points Leaders".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Richie is now 3rd in "Points Leaders".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Nick is now 1st in "Average Points per Game (min 5 games)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Luke is now 2nd in "Average Points per Game (min 5 games)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Richie is now 3rd in "Average Points per Game (min 5 games)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Richie is now 2nd in "Most 1st Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Ryan is now 2nd in "Most 2nd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Josh is now 3rd in "Most 2nd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Ryan is now 1st in "Most 3rd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Becca is now 2nd in "Most 3rd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Nick is now 1st in "Top Half Finishes (1st/2nd)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Dan is now 2nd in "Top Half Finishes (1st/2nd)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Ryan is now 3rd in "Top Half Finishes (1st/2nd)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Becca is now 1st in "Bottom Half Finishes (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Ryan is now 2nd in "Bottom Half Finishes (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Dan is now 3rd in "Bottom Half Finishes (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Michael is now 2nd in "Longest Streak w/o 4th".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Dan is now 3rd in "Longest Top Half Streak (1st/2nd)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Josh is now 2nd in "Longest Winless Streak".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Allie is now 3rd in "Longest Winless Streak".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Nick is now 2nd in "Fastest to 10 Career Points (# Games)".</p>
+                    </div></div>
+                    <table class="mini-standings">
+                        <thead><tr><th>#</th><th>Player</th><th>Pts</th><th>G</th></tr></thead>
+                        <tbody><tr><td>1</td><td>Nick</td><td>11</td><td>5</td></tr><tr><td>2</td><td>Michael</td><td>11</td><td>5</td></tr><tr><td>3</td><td>Luke</td><td>10</td><td>5</td></tr><tr><td>4</td><td>Richie</td><td>9</td><td>5</td></tr><tr><td>5</td><td>Austin</td><td>8</td><td>5</td></tr></tbody>
+                    </table>
+                </div>
+                <div class="week-card" data-season="2022">
+                    <h3>After Week 6</h3>
+                    <div class="week-events">
+                    <div class="event-card event-biggest_climb">
+                        <strong>Biggest rise in the standings</strong>
+                        <p>Ashley jumped 2 spot(s) (10 → 8).</p>
+                    </div>
+                    <div class="event-card event-biggest_drop">
+                        <strong>Biggest drop in the standings</strong>
+                        <p>Rachel F fell 2 spot(s) (6 → 8).</p>
+                    </div>
+                    <div class="event-card event-career_points_threshold">
+                        <strong>Career points milestone: 10</strong>
+                        <p>Dan reached 10 career points (crossed 10).</p>
+                    </div>
+                    <div class="event-card event-career_points_threshold">
+                        <strong>Career points milestone: 10</strong>
+                        <p>Richie reached 11 career points (crossed 10).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Ashley now leads the head-to-head vs Becca (3–2 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Austin now leads the head-to-head vs Josh (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Michael is now 2nd in "Points Leaders".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Michael is now 2nd in "Average Points per Game (min 5 games)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Michael is now 2nd in "Most 1st Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Richie is now 3rd in "Most 1st Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Luke is now 2nd in "Most 2nd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Austin is now 1st in "Most 3rd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Ryan is now 2nd in "Most 3rd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Becca is now 3rd in "Most 3rd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Becca is now 3rd in "Most 4th Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Josh is now 1st in "Bottom Half Finishes (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Ryan is now 3rd in "Longest Win Streak".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Dan is now 2nd in "Longest Streak w/o 4th".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Nick is now 3rd in "Longest Streak w/o 4th".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Dan is now 2nd in "Longest Top Half Streak (1st/2nd)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Richie is now 3rd in "Longest Top Half Streak (1st/2nd)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Ryan is now 1st in "Longest Winless Streak".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Dan is now 2nd in "Longest Winless Streak".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Josh is now 3rd in "Longest Winless Streak".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Austin is now 1st in "Longest Bottom Half Streak (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Dan is now 2nd in "Longest Bottom Half Streak (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Brian is now 3rd in "Longest Bottom Half Streak (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Dan is now 3rd in "Fastest to 10 Career Points (# Games)".</p>
+                    </div></div>
+                    <table class="mini-standings">
+                        <thead><tr><th>#</th><th>Player</th><th>Pts</th><th>G</th></tr></thead>
+                        <tbody><tr><td>1</td><td>Nick</td><td>14</td><td>6</td></tr><tr><td>2</td><td>Michael</td><td>12</td><td>6</td></tr><tr><td>3</td><td>Richie</td><td>11</td><td>6</td></tr><tr><td>4</td><td>Luke</td><td>11</td><td>6</td></tr><tr><td>5</td><td>Dan</td><td>10</td><td>6</td></tr></tbody>
+                    </table>
+                </div></div><div class="season-timeline" data-season="2023">
+                <div class="week-card" data-season="2023">
+                    <h3>After Week 1</h3>
+                    <div class="week-events">
+                    <div class="event-card event-first_time_first">
+                        <strong>First time in first place this season</strong>
+                        <p>Nick took the lead for the first time this season.</p>
+                    </div>
+                    <div class="event-card event-tied_for_first">
+                        <strong>Tied for first place</strong>
+                        <p>Nick and Ashley and Austin and Rachel M are tied at the top with 3 points.</p>
+                    </div>
+                    <div class="event-card event-career_points_threshold">
+                        <strong>Career points milestone: 10</strong>
+                        <p>Ryan reached 10 career points (crossed 10).</p>
+                    </div>
+                    <div class="event-card event-career_points_threshold">
+                        <strong>Career points milestone: 10</strong>
+                        <p>Austin reached 12 career points (crossed 10).</p>
+                    </div>
+                    <div class="event-card event-career_points_threshold">
+                        <strong>Career points milestone: 10</strong>
+                        <p>Ashley reached 10 career points (crossed 10).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Nick now leads the head-to-head vs Richie (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Richie now leads the head-to-head vs Michael (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Nick now leads the head-to-head vs Michael (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Ashley now leads the head-to-head vs Allie (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Richie is now 2nd in "Points Leaders".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Dan is now 3rd in "Points Leaders".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Richie is now 2nd in "Average Points per Game (min 5 games)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Dan is now 3rd in "Average Points per Game (min 5 games)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Austin is now 3rd in "Most 1st Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Ryan is now 2nd in "Most 2nd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Richie is now 3rd in "Most 2nd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Ryan is now 1st in "Most 3rd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Richie is now 2nd in "Most 3rd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Rachel F is now 3rd in "Most 3rd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Michael is now 3rd in "Most 4th Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Richie is now 3rd in "Top Half Finishes (1st/2nd)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Richie is now 3rd in "Bottom Half Finishes (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Dan is now 1st in "Longest Top Half Streak (1st/2nd)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Richie is now 2nd in "Longest Top Half Streak (1st/2nd)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Rachel F is now 3rd in "Longest Top Half Streak (1st/2nd)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Becca is now 2nd in "Longest Winless Streak".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Dan is now 3rd in "Longest Winless Streak".</p>
+                    </div></div>
+                    <table class="mini-standings">
+                        <thead><tr><th>#</th><th>Player</th><th>Pts</th><th>G</th></tr></thead>
+                        <tbody><tr><td>1</td><td>Nick</td><td>3</td><td>1</td></tr><tr><td>2</td><td>Ashley</td><td>3</td><td>1</td></tr><tr><td>3</td><td>Austin</td><td>3</td><td>1</td></tr><tr><td>4</td><td>Rachel M</td><td>3</td><td>1</td></tr><tr><td>5</td><td>Richie</td><td>2</td><td>1</td></tr></tbody>
+                    </table>
+                </div>
+                <div class="week-card" data-season="2023">
+                    <h3>After Week 2</h3>
+                    <div class="week-events">
+                    <div class="event-card event-new_leader">
+                        <strong>New #1 in the standings</strong>
+                        <p>Austin overtook Nick for first place.</p>
+                    </div>
+                    <div class="event-card event-biggest_climb">
+                        <strong>Biggest rise in the standings</strong>
+                        <p>Michael jumped 5 spot(s) (13 → 8).</p>
+                    </div>
+                    <div class="event-card event-biggest_drop">
+                        <strong>Biggest drop in the standings</strong>
+                        <p>Richie fell 5 spot(s) (5 → 10).</p>
+                    </div>
+                    <div class="event-card event-career_points_threshold">
+                        <strong>Career points milestone: 10</strong>
+                        <p>Rachel F reached 11 career points (crossed 10).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Austin now leads the head-to-head vs Richie (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Michael now leads the head-to-head vs Ashley (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Austin is now 2nd in "Points Leaders".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Richie is now 3rd in "Points Leaders".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Austin is now 2nd in "Average Points per Game (min 5 games)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Richie is now 3rd in "Average Points per Game (min 5 games)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Nick is now 3rd in "Most 2nd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Austin is now 2nd in "Most 3rd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Richie is now 3rd in "Most 3rd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Dan is now 3rd in "Most 4th Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Austin is now 3rd in "Top Half Finishes (1st/2nd)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Austin is now 3rd in "Bottom Half Finishes (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Richie is now 2nd in "Longest Streak w/o 4th".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Dan is now 3rd in "Longest Streak w/o 4th".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Nick is now 1st in "Longest Top Half Streak (1st/2nd)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Dan is now 2nd in "Longest Top Half Streak (1st/2nd)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Richie is now 3rd in "Longest Top Half Streak (1st/2nd)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Josh is now 1st in "Longest Bottom Half Streak (3rd/4th)".</p>
+                    </div></div>
+                    <table class="mini-standings">
+                        <thead><tr><th>#</th><th>Player</th><th>Pts</th><th>G</th></tr></thead>
+                        <tbody><tr><td>1</td><td>Austin</td><td>6</td><td>2</td></tr><tr><td>2</td><td>Nick</td><td>5</td><td>2</td></tr><tr><td>3</td><td>Ashley</td><td>5</td><td>2</td></tr><tr><td>4</td><td>Rachel M</td><td>5</td><td>2</td></tr><tr><td>5</td><td>Luke</td><td>4</td><td>2</td></tr></tbody>
+                    </table>
+                </div>
+                <div class="week-card" data-season="2023">
+                    <h3>After Week 3</h3>
+                    <div class="week-events">
+                    <div class="event-card event-biggest_climb">
+                        <strong>Biggest rise in the standings</strong>
+                        <p>Josh jumped 6 spot(s) (16 → 10).</p>
+                    </div>
+                    <div class="event-card event-biggest_drop">
+                        <strong>Biggest drop in the standings</strong>
+                        <p>Allie fell 3 spot(s) (13 → 16).</p>
+                    </div>
+                    <div class="event-card event-career_points_threshold">
+                        <strong>Career points milestone: 20</strong>
+                        <p>Nick reached 22 career points (crossed 20).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Ryan now leads the head-to-head vs Rachel F (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Nick now leads the head-to-head vs Allie (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Luke is now 3rd in "Points Leaders".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Luke is now 3rd in "Average Points per Game (min 5 games)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Allie is now 3rd in "Most 3rd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Ashley is now 3rd in "Most 4th Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Michael is now 2nd in "Top Half Finishes (1st/2nd)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Dan is now 3rd in "Top Half Finishes (1st/2nd)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Ryan is now 1st in "Bottom Half Finishes (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Richie is now 2nd in "Bottom Half Finishes (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Dan is now 3rd in "Bottom Half Finishes (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Austin is now 1st in "Longest Win Streak".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Nick is now 2nd in "Longest Win Streak".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Brian is now 3rd in "Longest Win Streak".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Nick is now 3rd in "Longest Streak w/o 4th".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Austin is now 3rd in "Longest Top Half Streak (1st/2nd)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Allie is now 2nd in "Longest Winless Streak".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Becca is now 3rd in "Longest Winless Streak".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Allie is now 1st in "Longest Bottom Half Streak (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Ryan is now 2nd in "Longest Bottom Half Streak (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Dan is now 3rd in "Longest Bottom Half Streak (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Nick is now 1st in "Fastest to 20 Career Points (# Games)".</p>
+                    </div></div>
+                    <table class="mini-standings">
+                        <thead><tr><th>#</th><th>Player</th><th>Pts</th><th>G</th></tr></thead>
+                        <tbody><tr><td>1</td><td>Austin</td><td>9</td><td>3</td></tr><tr><td>2</td><td>Nick</td><td>8</td><td>3</td></tr><tr><td>3</td><td>Rachel M</td><td>7</td><td>3</td></tr><tr><td>4</td><td>Michael</td><td>6</td><td>3</td></tr><tr><td>5</td><td>Ashley</td><td>6</td><td>3</td></tr></tbody>
+                    </table>
+                </div>
+                <div class="week-card" data-season="2023">
+                    <h3>After Week 4</h3>
+                    <div class="week-events">
+                    <div class="event-card event-new_leader">
+                        <strong>New #1 in the standings</strong>
+                        <p>Nick overtook Austin for first place.</p>
+                    </div>
+                    <div class="event-card event-biggest_climb">
+                        <strong>Biggest rise in the standings</strong>
+                        <p>Tyler jumped 3 spot(s) (10 → 7).</p>
+                    </div>
+                    <div class="event-card event-biggest_drop">
+                        <strong>Biggest drop in the standings</strong>
+                        <p>Dan fell 5 spot(s) (10 → 15).</p>
+                    </div>
+                    <div class="event-card event-career_points_threshold">
+                        <strong>Career points milestone: 20</strong>
+                        <p>Michael reached 20 career points (crossed 20).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Rachel F now leads the head-to-head vs Richie (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tied</strong>
+                        <p>Josh and Austin are now tied head-to-head (2–2 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Richie now leads the head-to-head vs Dan (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Michael now leads the head-to-head vs Austin (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Michael is now 2nd in "Points Leaders".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Austin is now 3rd in "Points Leaders".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Michael is now 2nd in "Average Points per Game (min 5 games)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Austin is now 3rd in "Average Points per Game (min 5 games)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Richie is now 2nd in "Most 3rd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Austin is now 3rd in "Most 3rd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Dan is now 3rd in "Most 4th Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Luke is now 3rd in "Top Half Finishes (1st/2nd)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Austin is now 2nd in "Longest Streak w/o 4th".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Ryan is now 1st in "Longest Bottom Half Streak (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Dan is now 2nd in "Longest Bottom Half Streak (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Luke is now 3rd in "Longest Bottom Half Streak (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Michael is now 2nd in "Fastest to 20 Career Points (# Games)".</p>
+                    </div></div>
+                    <table class="mini-standings">
+                        <thead><tr><th>#</th><th>Player</th><th>Pts</th><th>G</th></tr></thead>
+                        <tbody><tr><td>1</td><td>Nick</td><td>11</td><td>4</td></tr><tr><td>2</td><td>Austin</td><td>9</td><td>4</td></tr><tr><td>3</td><td>Rachel M</td><td>9</td><td>4</td></tr><tr><td>4</td><td>Michael</td><td>8</td><td>4</td></tr><tr><td>5</td><td>Luke</td><td>7</td><td>4</td></tr></tbody>
+                    </table>
+                </div>
+                <div class="week-card" data-season="2023">
+                    <h3>After Week 5</h3>
+                    <div class="week-events">
+                    <div class="event-card event-biggest_climb">
+                        <strong>Biggest rise in the standings</strong>
+                        <p>Richie jumped 3 spot(s) (11 → 8).</p>
+                    </div>
+                    <div class="event-card event-biggest_drop">
+                        <strong>Biggest drop in the standings</strong>
+                        <p>Luke fell 3 spot(s) (5 → 8).</p>
+                    </div>
+                    <div class="event-card event-career_points_threshold">
+                        <strong>Career points milestone: 10</strong>
+                        <p>Josh reached 12 career points (crossed 10).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Michael now leads the head-to-head vs Luke (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Josh now leads the head-to-head vs Austin (3–2 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tied</strong>
+                        <p>Ryan and Rachel F are now tied head-to-head (2–2 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Carly now leads the head-to-head vs Allie (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Tyler now leads the head-to-head vs Luke (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Rachel M is now 3rd in "Average Points per Game (min 5 games)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Austin is now 2nd in "Most 3rd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Dan is now 3rd in "Most 3rd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Josh is now 2nd in "Bottom Half Finishes (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Nick is now 1st in "Longest Win Streak".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Rachel F is now 2nd in "Longest Win Streak".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Josh is now 3rd in "Longest Bottom Half Streak (3rd/4th)".</p>
+                    </div></div>
+                    <table class="mini-standings">
+                        <thead><tr><th>#</th><th>Player</th><th>Pts</th><th>G</th></tr></thead>
+                        <tbody><tr><td>1</td><td>Nick</td><td>14</td><td>5</td></tr><tr><td>2</td><td>Michael</td><td>11</td><td>5</td></tr><tr><td>3</td><td>Austin</td><td>10</td><td>5</td></tr><tr><td>4</td><td>Rachel M</td><td>9</td><td>5</td></tr><tr><td>5</td><td>Ashley</td><td>8</td><td>5</td></tr></tbody>
+                    </table>
+                </div>
+                <div class="week-card" data-season="2023">
+                    <h3>After Week 6</h3>
+                    <div class="week-events">
+                    <div class="event-card event-biggest_climb">
+                        <strong>Biggest rise in the standings</strong>
+                        <p>Richie jumped 3 spot(s) (8 → 5).</p>
+                    </div>
+                    <div class="event-card event-biggest_drop">
+                        <strong>Biggest drop in the standings</strong>
+                        <p>Steve fell 3 spot(s) (5 → 8).</p>
+                    </div>
+                    <div class="event-card event-career_points_threshold">
+                        <strong>Career points milestone: 30</strong>
+                        <p>Nick reached 30 career points (crossed 30).</p>
+                    </div>
+                    <div class="event-card event-career_points_threshold">
+                        <strong>Career points milestone: 20</strong>
+                        <p>Austin reached 22 career points (crossed 20).</p>
+                    </div>
+                    <div class="event-card event-career_points_threshold">
+                        <strong>Career points milestone: 20</strong>
+                        <p>Richie reached 21 career points (crossed 20).</p>
+                    </div>
+                    <div class="event-card event-career_points_threshold">
+                        <strong>Career points milestone: 10</strong>
+                        <p>Rachel M reached 12 career points (crossed 10).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Austin now leads the head-to-head vs Nick (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tied</strong>
+                        <p>Richie and Rachel F are now tied head-to-head (2–2 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Luke now leads the head-to-head vs Allie (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Richie now leads the head-to-head vs Ashley (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tied</strong>
+                        <p>Dan and Austin are now tied head-to-head (2–2 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Ryan now leads the head-to-head vs Luke (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Austin now leads the head-to-head vs Carly (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Ashley is now 1st in "Most 2nd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Dan is now 2nd in "Most 2nd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Ryan is now 3rd in "Most 2nd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Rachel F is now 3rd in "Most 3rd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Allie is now 2nd in "Most 4th Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Ashley is now 3rd in "Top Half Finishes (1st/2nd)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Richie is now 2nd in "Longest Win Streak".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Nick is now 2nd in "Longest Streak w/o 4th".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Richie is now 3rd in "Longest Streak w/o 4th".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Michael is now 2nd in "Longest Top Half Streak (1st/2nd)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Dan is now 3rd in "Longest Top Half Streak (1st/2nd)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Dan is now 3rd in "Longest Winless Streak".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Allie is now 3rd in "Longest Bottom Half Streak (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Austin is now 3rd in "Fastest to 20 Career Points (# Games)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Nick is now 1st in "Fastest to 30 Career Points (# Games)".</p>
+                    </div></div>
+                    <table class="mini-standings">
+                        <thead><tr><th>#</th><th>Player</th><th>Pts</th><th>G</th></tr></thead>
+                        <tbody><tr><td>1</td><td>Nick</td><td>16</td><td>6</td></tr><tr><td>2</td><td>Michael</td><td>13</td><td>6</td></tr><tr><td>3</td><td>Austin</td><td>13</td><td>6</td></tr><tr><td>4</td><td>Rachel M</td><td>12</td><td>6</td></tr><tr><td>5</td><td>Richie</td><td>10</td><td>6</td></tr></tbody>
+                    </table>
+                </div></div><div class="season-timeline" data-season="2024">
+                <div class="week-card" data-season="2024">
+                    <h3>After Week 1</h3>
+                    <div class="week-events">
+                    <div class="event-card event-first_time_first">
+                        <strong>First time in first place this season</strong>
+                        <p>Richie took the lead for the first time this season.</p>
+                    </div>
+                    <div class="event-card event-tied_for_first">
+                        <strong>Tied for first place</strong>
+                        <p>Richie and Michael and Ashley and Carly and Austin are tied at the top with 3 points.</p>
+                    </div>
+                    <div class="event-card event-career_points_threshold">
+                        <strong>Career points milestone: 20</strong>
+                        <p>Ashley reached 20 career points (crossed 20).</p>
+                    </div>
+                    <div class="event-card event-career_points_threshold">
+                        <strong>Career points milestone: 10</strong>
+                        <p>Carly reached 11 career points (crossed 10).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Ashley now leads the head-to-head vs Ryan (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Carly now leads the head-to-head vs Rachel F (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Carly now leads the head-to-head vs Josh (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Michael now leads the head-to-head vs Rachel M (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Richie now leads the head-to-head vs Tyler (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Dan is now 3rd in "Most 3rd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Rachel F is now 2nd in "Bottom Half Finishes (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Rachel F is now 2nd in "Longest Win Streak".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Austin is now 2nd in "Longest Streak w/o 4th".</p>
+                    </div></div>
+                    <table class="mini-standings">
+                        <thead><tr><th>#</th><th>Player</th><th>Pts</th><th>G</th></tr></thead>
+                        <tbody><tr><td>1</td><td>Richie</td><td>3</td><td>1</td></tr><tr><td>2</td><td>Michael</td><td>3</td><td>1</td></tr><tr><td>3</td><td>Ashley</td><td>3</td><td>1</td></tr><tr><td>4</td><td>Carly</td><td>3</td><td>1</td></tr><tr><td>5</td><td>Austin</td><td>3</td><td>1</td></tr></tbody>
+                    </table>
+                </div>
+                <div class="week-card" data-season="2024">
+                    <h3>After Week 2</h3>
+                    <div class="week-events">
+                    <div class="event-card event-new_leader">
+                        <strong>New #1 in the standings</strong>
+                        <p>Michael overtook Richie for first place.</p>
+                    </div>
+                    <div class="event-card event-tied_for_first">
+                        <strong>Tied for first place</strong>
+                        <p>Michael and Austin are tied at the top with 6 points.</p>
+                    </div>
+                    <div class="event-card event-biggest_climb">
+                        <strong>Biggest rise in the standings</strong>
+                        <p>Cody jumped 7 spot(s) (11 → 4).</p>
+                    </div>
+                    <div class="event-card event-biggest_drop">
+                        <strong>Biggest drop in the standings</strong>
+                        <p>Tyler fell 8 spot(s) (6 → 14).</p>
+                    </div>
+                    <div class="event-card event-career_points_threshold">
+                        <strong>Career points milestone: 30</strong>
+                        <p>Michael reached 31 career points (crossed 30).</p>
+                    </div>
+                    <div class="event-card event-career_points_threshold">
+                        <strong>Career points milestone: 10</strong>
+                        <p>Jack M reached 10 career points (crossed 10).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tied</strong>
+                        <p>Richie and Michael are now tied head-to-head (2–2 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tied</strong>
+                        <p>Rachel F and Carly are now tied head-to-head (2–2 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Austin now leads the head-to-head vs Tyler (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Rachel M now leads the head-to-head vs Ashley (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Ryan now leads the head-to-head vs Allie (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Austin is now 3rd in "Average Points per Game (min 5 games)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Austin is now 2nd in "Most 1st Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Richie is now 3rd in "Most 1st Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Nick is now 1st in "Most 2nd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Austin is now 3rd in "Top Half Finishes (1st/2nd)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Dan is now 2nd in "Bottom Half Finishes (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Austin is now 3rd in "Bottom Half Finishes (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Nick is now 1st in "Longest Streak w/o 4th".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Ryan is now 2nd in "Longest Streak w/o 4th".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Austin is now 3rd in "Longest Streak w/o 4th".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Dan is now 1st in "Longest Bottom Half Streak (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Allie is now 2nd in "Longest Bottom Half Streak (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Josh is now 3rd in "Longest Bottom Half Streak (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Michael is now 2nd in "Fastest to 30 Career Points (# Games)".</p>
+                    </div></div>
+                    <table class="mini-standings">
+                        <thead><tr><th>#</th><th>Player</th><th>Pts</th><th>G</th></tr></thead>
+                        <tbody><tr><td>1</td><td>Michael</td><td>6</td><td>2</td></tr><tr><td>2</td><td>Austin</td><td>6</td><td>2</td></tr><tr><td>3</td><td>Richie</td><td>5</td><td>2</td></tr><tr><td>4</td><td>Cody</td><td>4</td><td>2</td></tr><tr><td>5</td><td>Rachel M</td><td>4</td><td>2</td></tr></tbody>
+                    </table>
+                </div>
+                <div class="week-card" data-season="2024">
+                    <h3>After Week 3</h3>
+                    <div class="week-events">
+                    <div class="event-card event-new_leader">
+                        <strong>New #1 in the standings</strong>
+                        <p>Austin overtook Michael for first place.</p>
+                    </div>
+                    <div class="event-card event-biggest_climb">
+                        <strong>Biggest rise in the standings</strong>
+                        <p>Jack M jumped 5 spot(s) (9 → 4).</p>
+                    </div>
+                    <div class="event-card event-biggest_drop">
+                        <strong>Biggest drop in the standings</strong>
+                        <p>Richie fell 7 spot(s) (3 → 10).</p>
+                    </div>
+                    <div class="event-card event-career_points_threshold">
+                        <strong>Career points milestone: 30</strong>
+                        <p>Austin reached 30 career points (crossed 30).</p>
+                    </div>
+                    <div class="event-card event-career_points_threshold">
+                        <strong>Career points milestone: 20</strong>
+                        <p>Rachel F reached 22 career points (crossed 20).</p>
+                    </div>
+                    <div class="event-card event-career_points_threshold">
+                        <strong>Career points milestone: 10</strong>
+                        <p>Allie reached 10 career points (crossed 10).</p>
+                    </div>
+                    <div class="event-card event-career_points_threshold">
+                        <strong>Career points milestone: 10</strong>
+                        <p>Tyler reached 11 career points (crossed 10).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Rachel F now leads the head-to-head vs Richie (3–2 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tied</strong>
+                        <p>Richie and Ashley are now tied head-to-head (2–2 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Rachel M is now 2nd in "Most 2nd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Dan is now 3rd in "Most 2nd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Dan is now 2nd in "Most 3rd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Allie is now 3rd in "Most 3rd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Dan is now 1st in "Bottom Half Finishes (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Rachel F is now 2nd in "Bottom Half Finishes (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Richie is now 3rd in "Bottom Half Finishes (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Ryan is now 2nd in "Longest Win Streak".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Dan is now 2nd in "Longest Winless Streak".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Jack M is now 3rd in "Longest Winless Streak".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Ryan is now 2nd in "Longest Bottom Half Streak (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Allie is now 3rd in "Longest Bottom Half Streak (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Austin is now 3rd in "Fastest to 30 Career Points (# Games)".</p>
+                    </div></div>
+                    <table class="mini-standings">
+                        <thead><tr><th>#</th><th>Player</th><th>Pts</th><th>G</th></tr></thead>
+                        <tbody><tr><td>1</td><td>Austin</td><td>8</td><td>3</td></tr><tr><td>2</td><td>Michael</td><td>7</td><td>3</td></tr><tr><td>3</td><td>Carly</td><td>7</td><td>3</td></tr><tr><td>4</td><td>Jack M</td><td>6</td><td>3</td></tr><tr><td>5</td><td>Ashley</td><td>6</td><td>3</td></tr></tbody>
+                    </table>
+                </div>
+                <div class="week-card" data-season="2024">
+                    <h3>After Week 4</h3>
+                    <div class="week-events">
+                    <div class="event-card event-new_leader">
+                        <strong>New #1 in the standings</strong>
+                        <p>Michael overtook Austin for first place.</p>
+                    </div>
+                    <div class="event-card event-tied_for_first">
+                        <strong>Tied for first place</strong>
+                        <p>Michael and Austin and Nick are tied at the top with 9 points.</p>
+                    </div>
+                    <div class="event-card event-biggest_climb">
+                        <strong>Biggest rise in the standings</strong>
+                        <p>Richie jumped 6 spot(s) (10 → 4).</p>
+                    </div>
+                    <div class="event-card event-biggest_drop">
+                        <strong>Biggest drop in the standings</strong>
+                        <p>Ashley fell 7 spot(s) (4 → 11).</p>
+                    </div>
+                    <div class="event-card event-career_points_threshold">
+                        <strong>Career points milestone: 20</strong>
+                        <p>Ryan reached 21 career points (crossed 20).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Richie now leads the head-to-head vs Rachel M (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Michael is now 2nd in "Most 1st Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Austin is now 3rd in "Most 1st Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Austin is now 2nd in "Most 3rd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Dan is now 3rd in "Most 3rd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Allie is now 1st in "Bottom Half Finishes (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Dan is now 2nd in "Bottom Half Finishes (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Rachel F is now 3rd in "Bottom Half Finishes (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Allie is now 1st in "Longest Winless Streak".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Ryan is now 2nd in "Longest Winless Streak".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Steve is now 3rd in "Longest Winless Streak".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Steve is now 3rd in "Longest Bottom Half Streak (3rd/4th)".</p>
+                    </div></div>
+                    <table class="mini-standings">
+                        <thead><tr><th>#</th><th>Player</th><th>Pts</th><th>G</th></tr></thead>
+                        <tbody><tr><td>1</td><td>Michael</td><td>9</td><td>4</td></tr><tr><td>2</td><td>Austin</td><td>9</td><td>4</td></tr><tr><td>3</td><td>Nick</td><td>9</td><td>4</td></tr><tr><td>4</td><td>Richie</td><td>8</td><td>4</td></tr><tr><td>5</td><td>Cody</td><td>8</td><td>4</td></tr></tbody>
+                    </table>
+                </div>
+                <div class="week-card" data-season="2024">
+                    <h3>After Week 5</h3>
+                    <div class="week-events">
+                    <div class="event-card event-new_leader">
+                        <strong>New #1 in the standings</strong>
+                        <p>Austin overtook Michael for first place.</p>
+                    </div>
+                    <div class="event-card event-biggest_climb">
+                        <strong>Biggest rise in the standings</strong>
+                        <p>Rachel M jumped 4 spot(s) (12 → 8).</p>
+                    </div>
+                    <div class="event-card event-biggest_drop">
+                        <strong>Biggest drop in the standings</strong>
+                        <p>Nick fell 5 spot(s) (1 → 6).</p>
+                    </div>
+                    <div class="event-card event-career_points_threshold">
+                        <strong>Career points milestone: 20</strong>
+                        <p>Dan reached 21 career points (crossed 20).</p>
+                    </div>
+                    <div class="event-card event-career_points_threshold">
+                        <strong>Career points milestone: 40</strong>
+                        <p>Nick reached 40 career points (crossed 40).</p>
+                    </div>
+                    <div class="event-card event-career_points_threshold">
+                        <strong>Career points milestone: 30</strong>
+                        <p>Richie reached 32 career points (crossed 30).</p>
+                    </div>
+                    <div class="event-card event-career_points_threshold">
+                        <strong>Career points milestone: 20</strong>
+                        <p>Rachel M reached 20 career points (crossed 20).</p>
+                    </div>
+                    <div class="event-card event-career_points_threshold">
+                        <strong>Career points milestone: 10</strong>
+                        <p>Cody reached 11 career points (crossed 10).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Austin now leads the head-to-head vs Dan (3–2 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Dan now leads the head-to-head vs Tyler (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Ryan now leads the head-to-head vs Steve (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Ashley now leads the head-to-head vs Jack M (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Cody is now 2nd in "Average Points per Game (min 5 games)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Michael is now 3rd in "Average Points per Game (min 5 games)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Austin is now 2nd in "Most 1st Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Richie is now 3rd in "Most 1st Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Dan is now 2nd in "Most 2nd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Jack M is now 3rd in "Most 2nd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Steve is now 3rd in "Most 4th Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Josh is now 2nd in "Bottom Half Finishes (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Dan is now 3rd in "Bottom Half Finishes (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Rachel M is now 3rd in "Fastest to 20 Career Points (# Games)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Nick is now 1st in "Fastest to 40 Career Points (# Games)".</p>
+                    </div></div>
+                    <table class="mini-standings">
+                        <thead><tr><th>#</th><th>Player</th><th>Pts</th><th>G</th></tr></thead>
+                        <tbody><tr><td>1</td><td>Austin</td><td>12</td><td>5</td></tr><tr><td>2</td><td>Richie</td><td>11</td><td>5</td></tr><tr><td>3</td><td>Cody</td><td>11</td><td>5</td></tr><tr><td>4</td><td>Michael</td><td>11</td><td>5</td></tr><tr><td>5</td><td>Rachel F</td><td>11</td><td>5</td></tr></tbody>
+                    </table>
+                </div>
+                <div class="week-card" data-season="2024">
+                    <h3>After Week 6</h3>
+                    <div class="week-events">
+                    <div class="event-card event-new_leader">
+                        <strong>New #1 in the standings</strong>
+                        <p>Richie overtook Austin for first place.</p>
+                    </div>
+                    <div class="event-card event-biggest_climb">
+                        <strong>Biggest rise in the standings</strong>
+                        <p>Nick jumped 4 spot(s) (6 → 2).</p>
+                    </div>
+                    <div class="event-card event-biggest_drop">
+                        <strong>Biggest drop in the standings</strong>
+                        <p>Austin fell 4 spot(s) (1 → 5).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tied</strong>
+                        <p>Rachel M and Michael are now tied head-to-head (2–2 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tied</strong>
+                        <p>Rachel M and Ashley are now tied head-to-head (2–2 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Richie is now 3rd in "Points Leaders".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Rachel F is now 3rd in "Most 1st Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Allie is now 3rd in "Most 2nd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Richie is now 3rd in "Top Half Finishes (1st/2nd)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Josh is now 1st in "Bottom Half Finishes (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Dan is now 2nd in "Bottom Half Finishes (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Rachel F is now 3rd in "Bottom Half Finishes (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Michael is now 2nd in "Longest Streak w/o 4th".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Ryan is now 3rd in "Longest Streak w/o 4th".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Rachel F is now 3rd in "Longest Top Half Streak (1st/2nd)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Allie is now 3rd in "Longest Bottom Half Streak (3rd/4th)".</p>
+                    </div></div>
+                    <table class="mini-standings">
+                        <thead><tr><th>#</th><th>Player</th><th>Pts</th><th>G</th></tr></thead>
+                        <tbody><tr><td>1</td><td>Richie</td><td>14</td><td>6</td></tr><tr><td>2</td><td>Cody</td><td>13</td><td>6</td></tr><tr><td>3</td><td>Rachel F</td><td>13</td><td>6</td></tr><tr><td>4</td><td>Nick</td><td>13</td><td>6</td></tr><tr><td>5</td><td>Michael</td><td>12</td><td>6</td></tr></tbody>
+                    </table>
+                </div></div><div class="season-timeline" data-season="2025">
+                <div class="week-card" data-season="2025">
+                    <h3>After Week 1</h3>
+                    <div class="week-events">
+                    <div class="event-card event-first_time_first">
+                        <strong>First time in first place this season</strong>
+                        <p>Richie took the lead for the first time this season.</p>
+                    </div>
+                    <div class="event-card event-tied_for_first">
+                        <strong>Tied for first place</strong>
+                        <p>Richie and Ashley and Michael and Cody and Ian are tied at the top with 3 points.</p>
+                    </div>
+                    <div class="event-card event-career_points_threshold">
+                        <strong>Career points milestone: 30</strong>
+                        <p>Rachel F reached 30 career points (crossed 30).</p>
+                    </div>
+                    <div class="event-card event-career_points_threshold">
+                        <strong>Career points milestone: 40</strong>
+                        <p>Michael reached 40 career points (crossed 40).</p>
+                    </div>
+                    <div class="event-card event-career_points_threshold">
+                        <strong>Career points milestone: 30</strong>
+                        <p>Ashley reached 30 career points (crossed 30).</p>
+                    </div>
+                    <div class="event-card event-career_points_threshold">
+                        <strong>Career points milestone: 10</strong>
+                        <p>Sam reached 11 career points (crossed 10).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Richie now leads the head-to-head vs Ryan (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tied</strong>
+                        <p>Dan and Austin are now tied head-to-head (3–3 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Ashley now leads the head-to-head vs Rachel M (3–2 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Jack M now leads the head-to-head vs Emma (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Sam now leads the head-to-head vs Steve (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Cody is now 1st in "Average Points per Game (min 5 games)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Nick is now 2nd in "Average Points per Game (min 5 games)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Richie is now 2nd in "Most 1st Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Austin is now 3rd in "Most 1st Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Dan is now 1st in "Most 2nd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Ryan is now 2nd in "Most 2nd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Rachel F is now 3rd in "Most 3rd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Dan is now 3rd in "Most 4th Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Ryan is now 2nd in "Bottom Half Finishes (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Dan is now 3rd in "Bottom Half Finishes (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Richie is now 1st in "Longest Win Streak".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Nick is now 2nd in "Longest Win Streak".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Ryan is now 3rd in "Longest Win Streak".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Dan is now 3rd in "Longest Winless Streak".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Michael is now 2nd in "Fastest to 40 Career Points (# Games)".</p>
+                    </div></div>
+                    <table class="mini-standings">
+                        <thead><tr><th>#</th><th>Player</th><th>Pts</th><th>G</th></tr></thead>
+                        <tbody><tr><td>1</td><td>Richie</td><td>3</td><td>1</td></tr><tr><td>2</td><td>Ashley</td><td>3</td><td>1</td></tr><tr><td>3</td><td>Michael</td><td>3</td><td>1</td></tr><tr><td>4</td><td>Cody</td><td>3</td><td>1</td></tr><tr><td>5</td><td>Ian</td><td>3</td><td>1</td></tr></tbody>
+                    </table>
+                </div>
+                <div class="week-card" data-season="2025">
+                    <h3>After Week 2</h3>
+                    <div class="week-events">
+                    <div class="event-card event-new_leader">
+                        <strong>New #1 in the standings</strong>
+                        <p>Ashley overtook Richie for first place.</p>
+                    </div>
+                    <div class="event-card event-tied_for_first">
+                        <strong>Tied for first place</strong>
+                        <p>Ashley and Michael are tied at the top with 6 points.</p>
+                    </div>
+                    <div class="event-card event-biggest_climb">
+                        <strong>Biggest rise in the standings</strong>
+                        <p>Rachel M jumped 7 spot(s) (11 → 4).</p>
+                    </div>
+                    <div class="event-card event-biggest_drop">
+                        <strong>Biggest drop in the standings</strong>
+                        <p>Jack C fell 7 spot(s) (6 → 13).</p>
+                    </div>
+                    <div class="event-card event-career_points_threshold">
+                        <strong>Career points milestone: 20</strong>
+                        <p>Josh reached 21 career points (crossed 20).</p>
+                    </div>
+                    <div class="event-card event-career_points_threshold">
+                        <strong>Career points milestone: 20</strong>
+                        <p>Jack M reached 21 career points (crossed 20).</p>
+                    </div>
+                    <div class="event-card event-career_points_threshold">
+                        <strong>Career points milestone: 10</strong>
+                        <p>Steve reached 10 career points (crossed 10).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Rachel F now leads the head-to-head vs Ryan (3–2 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Ashley now leads the head-to-head vs Josh (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Jack M now leads the head-to-head vs Dan (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tied</strong>
+                        <p>Richie and Rachel M are now tied head-to-head (2–2 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tied</strong>
+                        <p>Tyler and Steve are now tied head-to-head (2–2 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Michael now leads the head-to-head vs Tyler (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Dan now leads the head-to-head vs Carly (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Josh now leads the head-to-head vs Ian (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Cody now leads the head-to-head vs Carly (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Jack M now leads the head-to-head vs Carly (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Richie is now 2nd in "Points Leaders".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Austin is now 3rd in "Points Leaders".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Nick is now 1st in "Average Points per Game (min 5 games)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Cody is now 2nd in "Average Points per Game (min 5 games)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Richie is now 3rd in "Average Points per Game (min 5 games)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Nick is now 2nd in "Most 2nd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Ryan is now 3rd in "Most 2nd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Richie is now 3rd in "Most 3rd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Ryan is now 1st in "Bottom Half Finishes (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Allie is now 2nd in "Bottom Half Finishes (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Rachel F is now 3rd in "Longest Streak w/o 4th".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Steve is now 2nd in "Longest Winless Streak".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Ryan is now 3rd in "Longest Winless Streak".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Steve is now 1st in "Longest Bottom Half Streak (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Dan is now 2nd in "Longest Bottom Half Streak (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Ryan is now 3rd in "Longest Bottom Half Streak (3rd/4th)".</p>
+                    </div></div>
+                    <table class="mini-standings">
+                        <thead><tr><th>#</th><th>Player</th><th>Pts</th><th>G</th></tr></thead>
+                        <tbody><tr><td>1</td><td>Ashley</td><td>6</td><td>2</td></tr><tr><td>2</td><td>Michael</td><td>6</td><td>2</td></tr><tr><td>3</td><td>Jack M</td><td>5</td><td>2</td></tr><tr><td>4</td><td>Richie</td><td>4</td><td>2</td></tr><tr><td>5</td><td>Rachel M</td><td>4</td><td>2</td></tr></tbody>
+                    </table>
+                </div>
+                <div class="week-card" data-season="2025">
+                    <h3>After Week 3</h3>
+                    <div class="week-events">
+                    <div class="event-card event-biggest_climb">
+                        <strong>Biggest rise in the standings</strong>
+                        <p>Steve jumped 6 spot(s) (16 → 10).</p>
+                    </div>
+                    <div class="event-card event-biggest_drop">
+                        <strong>Biggest drop in the standings</strong>
+                        <p>Dan fell 6 spot(s) (4 → 10).</p>
+                    </div>
+                    <div class="event-card event-career_points_threshold">
+                        <strong>Career points milestone: 40</strong>
+                        <p>Richie reached 41 career points (crossed 40).</p>
+                    </div>
+                    <div class="event-card event-career_points_threshold">
+                        <strong>Career points milestone: 20</strong>
+                        <p>Carly reached 20 career points (crossed 20).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Ashley now leads the head-to-head vs Carly (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Rachel F now leads the head-to-head vs Carly (3–2 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Rachel M now leads the head-to-head vs Michael (3–2 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Tyler now leads the head-to-head vs Cody (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Michael is now 2nd in "Points Leaders".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Richie is now 3rd in "Points Leaders".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Michael is now 2nd in "Average Points per Game (min 5 games)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Cody is now 3rd in "Average Points per Game (min 5 games)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Michael is now 2nd in "Most 1st Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Richie is now 3rd in "Most 1st Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Dan is now 2nd in "Bottom Half Finishes (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Rachel F is now 3rd in "Bottom Half Finishes (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Richie is now 3rd in "Fastest to 40 Career Points (# Games)".</p>
+                    </div></div>
+                    <table class="mini-standings">
+                        <thead><tr><th>#</th><th>Player</th><th>Pts</th><th>G</th></tr></thead>
+                        <tbody><tr><td>1</td><td>Ashley</td><td>8</td><td>3</td></tr><tr><td>2</td><td>Rachel M</td><td>7</td><td>3</td></tr><tr><td>3</td><td>Sam</td><td>7</td><td>3</td></tr><tr><td>4</td><td>Jack M</td><td>7</td><td>3</td></tr><tr><td>5</td><td>Michael</td><td>7</td><td>3</td></tr></tbody>
+                    </table>
+                </div>
+                <div class="week-card" data-season="2025">
+                    <h3>After Week 4</h3>
+                    <div class="week-events">
+                    <div class="event-card event-new_leader">
+                        <strong>New #1 in the standings</strong>
+                        <p>Rachel M overtook Ashley for first place.</p>
+                    </div>
+                    <div class="event-card event-tied_for_first">
+                        <strong>Tied for first place</strong>
+                        <p>Rachel M and Sam are tied at the top with 10 points.</p>
+                    </div>
+                    <div class="event-card event-biggest_climb">
+                        <strong>Biggest rise in the standings</strong>
+                        <p>Dan jumped 4 spot(s) (10 → 6).</p>
+                    </div>
+                    <div class="event-card event-biggest_drop">
+                        <strong>Biggest drop in the standings</strong>
+                        <p>Jack M fell 4 spot(s) (2 → 6).</p>
+                    </div>
+                    <div class="event-card event-career_points_threshold">
+                        <strong>Career points milestone: 40</strong>
+                        <p>Austin reached 41 career points (crossed 40).</p>
+                    </div>
+                    <div class="event-card event-career_points_threshold">
+                        <strong>Career points milestone: 20</strong>
+                        <p>Tyler reached 20 career points (crossed 20).</p>
+                    </div>
+                    <div class="event-card event-career_points_threshold">
+                        <strong>Career points milestone: 30</strong>
+                        <p>Rachel M reached 32 career points (crossed 30).</p>
+                    </div>
+                    <div class="event-card event-career_points_threshold">
+                        <strong>Career points milestone: 10</strong>
+                        <p>Ian reached 10 career points (crossed 10).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tied</strong>
+                        <p>Rachel F and Josh are now tied head-to-head (3–3 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tied</strong>
+                        <p>Richie and Dan are now tied head-to-head (3–3 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tied</strong>
+                        <p>Ryan and Nick are now tied head-to-head (3–3 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Dan now leads the head-to-head vs Austin (4–3 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tied</strong>
+                        <p>Carly and Ashley are now tied head-to-head (2–2 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Austin is now 2nd in "Points Leaders".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Rachel F is now 3rd in "Points Leaders".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Rachel M is now 2nd in "Average Points per Game (min 5 games)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Sam is now 3rd in "Average Points per Game (min 5 games)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Austin is now 3rd in "Top Half Finishes (1st/2nd)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Josh is now 1st in "Bottom Half Finishes (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Ryan is now 2nd in "Bottom Half Finishes (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Dan is now 3rd in "Bottom Half Finishes (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Rachel F is now 2nd in "Longest Streak w/o 4th".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Ryan is now 3rd in "Longest Streak w/o 4th".</p>
+                    </div></div>
+                    <table class="mini-standings">
+                        <thead><tr><th>#</th><th>Player</th><th>Pts</th><th>G</th></tr></thead>
+                        <tbody><tr><td>1</td><td>Rachel M</td><td>10</td><td>4</td></tr><tr><td>2</td><td>Sam</td><td>10</td><td>4</td></tr><tr><td>3</td><td>Ashley</td><td>9</td><td>4</td></tr><tr><td>4</td><td>Michael</td><td>9</td><td>4</td></tr><tr><td>5</td><td>Rachel F</td><td>9</td><td>4</td></tr></tbody>
+                    </table>
+                </div>
+                <div class="week-card" data-season="2025">
+                    <h3>After Week 5</h3>
+                    <div class="week-events">
+                    <div class="event-card event-new_leader">
+                        <strong>New #1 in the standings</strong>
+                        <p>Sam overtook Rachel M for first place.</p>
+                    </div>
+                    <div class="event-card event-biggest_climb">
+                        <strong>Biggest rise in the standings</strong>
+                        <p>Emma jumped 5 spot(s) (20 → 15).</p>
+                    </div>
+                    <div class="event-card event-biggest_drop">
+                        <strong>Biggest drop in the standings</strong>
+                        <p>Michael fell 4 spot(s) (3 → 7).</p>
+                    </div>
+                    <div class="event-card event-career_points_threshold">
+                        <strong>Career points milestone: 30</strong>
+                        <p>Dan reached 31 career points (crossed 30).</p>
+                    </div>
+                    <div class="event-card event-career_points_threshold">
+                        <strong>Career points milestone: 20</strong>
+                        <p>Cody reached 20 career points (crossed 20).</p>
+                    </div>
+                    <div class="event-card event-career_points_threshold">
+                        <strong>Career points milestone: 20</strong>
+                        <p>Sam reached 22 career points (crossed 20).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tied</strong>
+                        <p>Richie and Nick are now tied head-to-head (2–2 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tied</strong>
+                        <p>Josh and Austin are now tied head-to-head (3–3 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Rachel F now leads the head-to-head vs Josh (4–3 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Jack M now leads the head-to-head vs Tyler (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Richie now leads the head-to-head vs Rachel M (3–2 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tied</strong>
+                        <p>Steve and Dan are now tied head-to-head (2–2 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Rachel M now leads the head-to-head vs Nick (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tied</strong>
+                        <p>Tyler and Michael are now tied head-to-head (2–2 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tied</strong>
+                        <p>Tyler and Cody are now tied head-to-head (2–2 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Sam now leads the head-to-head vs Austin (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Sam now leads the head-to-head vs Josh (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Michael is now 2nd in "Points Leaders".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Richie is now 3rd in "Points Leaders".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Michael is now 2nd in "Average Points per Game (min 5 games)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Richie is now 3rd in "Average Points per Game (min 5 games)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Richie is now 2nd in "Most 1st Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Austin is now 3rd in "Most 1st Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Dan is now 3rd in "Longest Win Streak".</p>
+                    </div></div>
+                    <table class="mini-standings">
+                        <thead><tr><th>#</th><th>Player</th><th>Pts</th><th>G</th></tr></thead>
+                        <tbody><tr><td>1</td><td>Sam</td><td>13</td><td>5</td></tr><tr><td>2</td><td>Rachel M</td><td>12</td><td>5</td></tr><tr><td>3</td><td>Ashley</td><td>10</td><td>5</td></tr><tr><td>4</td><td>Jack M</td><td>10</td><td>5</td></tr><tr><td>5</td><td>Rachel F</td><td>10</td><td>5</td></tr></tbody>
+                    </table>
+                </div>
+                <div class="week-card" data-season="2025">
+                    <h3>After Week 6</h3>
+                    <div class="week-events">
+                    <div class="event-card event-new_leader">
+                        <strong>New #1 in the standings</strong>
+                        <p>Rachel M overtook Sam for first place.</p>
+                    </div>
+                    <div class="event-card event-biggest_climb">
+                        <strong>Biggest rise in the standings</strong>
+                        <p>Richie jumped 4 spot(s) (7 → 3).</p>
+                    </div>
+                    <div class="event-card event-biggest_drop">
+                        <strong>Biggest drop in the standings</strong>
+                        <p>Ashley fell 3 spot(s) (3 → 6).</p>
+                    </div>
+                    <div class="event-card event-career_points_threshold">
+                        <strong>Career points milestone: 50</strong>
+                        <p>Nick reached 50 career points (crossed 50).</p>
+                    </div>
+                    <div class="event-card event-career_points_threshold">
+                        <strong>Career points milestone: 40</strong>
+                        <p>Rachel F reached 40 career points (crossed 40).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tied</strong>
+                        <p>Rachel M and Michael are now tied head-to-head (3–3 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tied</strong>
+                        <p>Rachel M and Ashley are now tied head-to-head (3–3 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Jack M now leads the head-to-head vs Rachel F (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tied</strong>
+                        <p>Josh and Ian are now tied head-to-head (2–2 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Richie now leads the head-to-head vs Sam (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Ian now leads the head-to-head vs Ryan (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Rachel M is now 3rd in "Average Points per Game (min 5 games)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Tyler is now 1st in "Most 2nd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Dan is now 2nd in "Most 2nd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Nick is now 3rd in "Most 2nd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Dan is now 3rd in "Most 3rd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Steve is now 2nd in "Most 4th Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Ryan is now 3rd in "Most 4th Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Ryan is now 1st in "Bottom Half Finishes (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Dan is now 2nd in "Bottom Half Finishes (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Rachel F is now 3rd in "Bottom Half Finishes (3rd/4th)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Ryan is now 2nd in "Longest Streak w/o 4th".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Austin is now 3rd in "Longest Streak w/o 4th".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Austin is now 3rd in "Longest Top Half Streak (1st/2nd)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Tyler is now 2nd in "Longest Winless Streak".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Nick is now 1st in "Fastest to 50 Career Points (# Games)".</p>
+                    </div></div>
+                    <table class="mini-standings">
+                        <thead><tr><th>#</th><th>Player</th><th>Pts</th><th>G</th></tr></thead>
+                        <tbody><tr><td>1</td><td>Rachel M</td><td>14</td><td>6</td></tr><tr><td>2</td><td>Sam</td><td>13</td><td>6</td></tr><tr><td>3</td><td>Richie</td><td>12</td><td>6</td></tr><tr><td>4</td><td>Jack M</td><td>12</td><td>6</td></tr><tr><td>5</td><td>Michael</td><td>12</td><td>6</td></tr></tbody>
+                    </table>
+                </div></div><div class="season-timeline" data-season="2026">
+                <div class="week-card" data-season="2026">
+                    <h3>After Week 1</h3>
+                    <div class="week-events">
+                    <div class="event-card event-first_time_first">
+                        <strong>First time in first place this season</strong>
+                        <p>Ashley took the lead for the first time this season.</p>
+                    </div>
+                    <div class="event-card event-tied_for_first">
+                        <strong>Tied for first place</strong>
+                        <p>Ashley and Michael and Austin and Brittany and Ian are tied at the top with 3 points.</p>
+                    </div>
+                    <div class="event-card event-career_points_threshold">
+                        <strong>Career points milestone: 50</strong>
+                        <p>Michael reached 52 career points (crossed 50).</p>
+                    </div>
+                    <div class="event-card event-career_points_threshold">
+                        <strong>Career points milestone: 40</strong>
+                        <p>Ashley reached 41 career points (crossed 40).</p>
+                    </div>
+                    <div class="event-card event-career_points_threshold">
+                        <strong>Career points milestone: 10</strong>
+                        <p>Emma reached 10 career points (crossed 10).</p>
+                    </div>
+                    <div class="event-card event-career_points_threshold">
+                        <strong>Career points milestone: 10</strong>
+                        <p>Brittany reached 11 career points (crossed 10).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Austin now leads the head-to-head vs Josh (4–3 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Austin now leads the head-to-head vs Ryan (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Ashley now leads the head-to-head vs Richie (3–2 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tied</strong>
+                        <p>Tyler and Jack M are now tied head-to-head (2–2 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Steve now leads the head-to-head vs Dan (3–2 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tied</strong>
+                        <p>Rachel F and Jack M are now tied head-to-head (2–2 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Ian now leads the head-to-head vs Steve (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tied</strong>
+                        <p>Sam and Richie are now tied head-to-head (2–2 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Brittany now leads the head-to-head vs Rachel F (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Austin is now 2nd in "Points Leaders".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Rachel M is now 2nd in "Average Points per Game (min 5 games)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Austin is now 3rd in "Average Points per Game (min 5 games)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Rachel M is now 1st in "Most 2nd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Tyler is now 2nd in "Most 2nd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Dan is now 3rd in "Most 2nd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Ryan is now 2nd in "Most 4th Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Dan is now 3rd in "Most 4th Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Rachel F is now 1st in "Longest Streak w/o 4th".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Nick is now 2nd in "Longest Streak w/o 4th".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Ryan is now 3rd in "Longest Streak w/o 4th".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Steve is now 3rd in "Longest Winless Streak".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Michael is now 2nd in "Fastest to 50 Career Points (# Games)".</p>
+                    </div></div>
+                    <table class="mini-standings">
+                        <thead><tr><th>#</th><th>Player</th><th>Pts</th><th>G</th></tr></thead>
+                        <tbody><tr><td>1</td><td>Ashley</td><td>3</td><td>1</td></tr><tr><td>2</td><td>Michael</td><td>3</td><td>1</td></tr><tr><td>3</td><td>Austin</td><td>3</td><td>1</td></tr><tr><td>4</td><td>Brittany</td><td>3</td><td>1</td></tr><tr><td>5</td><td>Ian</td><td>3</td><td>1</td></tr></tbody>
+                    </table>
+                </div>
+                <div class="week-card" data-season="2026">
+                    <h3>After Week 2</h3>
+                    <div class="week-events">
+                    <div class="event-card event-new_leader">
+                        <strong>New #1 in the standings</strong>
+                        <p>Austin overtook Ashley for first place.</p>
+                    </div>
+                    <div class="event-card event-tied_for_first">
+                        <strong>Tied for first place</strong>
+                        <p>Austin and Ian are tied at the top with 6 points.</p>
+                    </div>
+                    <div class="event-card event-biggest_climb">
+                        <strong>Biggest rise in the standings</strong>
+                        <p>Jack M jumped 8 spot(s) (16 → 8).</p>
+                    </div>
+                    <div class="event-card event-biggest_drop">
+                        <strong>Biggest drop in the standings</strong>
+                        <p>Brittany fell 7 spot(s) (1 → 8).</p>
+                    </div>
+                    <div class="event-card event-career_points_threshold">
+                        <strong>Career points milestone: 50</strong>
+                        <p>Austin reached 51 career points (crossed 50).</p>
+                    </div>
+                    <div class="event-card event-career_points_threshold">
+                        <strong>Career points milestone: 30</strong>
+                        <p>Jack M reached 31 career points (crossed 30).</p>
+                    </div>
+                    <div class="event-card event-career_points_threshold">
+                        <strong>Career points milestone: 40</strong>
+                        <p>Rachel M reached 41 career points (crossed 40).</p>
+                    </div>
+                    <div class="event-card event-career_points_threshold">
+                        <strong>Career points milestone: 20</strong>
+                        <p>Ian reached 22 career points (crossed 20).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tied</strong>
+                        <p>Michael and Austin are now tied head-to-head (3–3 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Ashley now leads the head-to-head vs Carly (3–2 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Josh now leads the head-to-head vs Tyler (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Jack M now leads the head-to-head vs Rachel F (3–2 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Cody now leads the head-to-head vs Tyler (3–2 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Cody now leads the head-to-head vs Josh (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tied</strong>
+                        <p>Sam and Rachel M are now tied head-to-head (2–2 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Nick now leads the head-to-head vs Cody (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-head_to_head_tie_broken">
+                        <strong>Head-to-head tie broken</strong>
+                        <p>Ian now leads the head-to-head vs Jack C (2–1 in games they played together).</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Michael is now 2nd in "Points Leaders".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Austin is now 3rd in "Points Leaders".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Michael is now 2nd in "Average Points per Game (min 5 games)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Rachel M is now 3rd in "Average Points per Game (min 5 games)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Michael is now 2nd in "Most 1st Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Richie is now 3rd in "Most 1st Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 1st on all-time leaderboard</strong>
+                        <p>Rachel F is now 1st in "Most 3rd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Ryan is now 2nd in "Most 3rd Places".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Austin is now 2nd in "Longest Top Half Streak (1st/2nd)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Rachel F is now 3rd in "Longest Top Half Streak (1st/2nd)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 2nd on all-time leaderboard</strong>
+                        <p>Steve is now 2nd in "Longest Winless Streak".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Ryan is now 3rd in "Longest Winless Streak".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Rachel M is now 3rd in "Fastest to 40 Career Points (# Games)".</p>
+                    </div>
+                    <div class="event-card event-all_time_leaderboard_move">
+                        <strong>Moved into 3rd on all-time leaderboard</strong>
+                        <p>Austin is now 3rd in "Fastest to 50 Career Points (# Games)".</p>
+                    </div></div>
+                    <table class="mini-standings">
+                        <thead><tr><th>#</th><th>Player</th><th>Pts</th><th>G</th></tr></thead>
+                        <tbody><tr><td>1</td><td>Austin</td><td>6</td><td>2</td></tr><tr><td>2</td><td>Ian</td><td>6</td><td>2</td></tr><tr><td>3</td><td>Michael</td><td>5</td><td>2</td></tr><tr><td>4</td><td>Nick</td><td>5</td><td>2</td></tr><tr><td>5</td><td>Rachel M</td><td>5</td><td>2</td></tr></tbody>
+                    </table>
+                </div></div>
+    </div>
+    <script>
+        document.querySelectorAll('.season-tab').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.season-tab').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.season-timeline').forEach(t => t.classList.remove('active'));
+                btn.classList.add('active');
+                const s = btn.dataset.season;
+                document.querySelector('.season-timeline[data-season="' + s + '"]').classList.add('active');
+            });
+        });
+        const firstTab = document.querySelector('.season-tab');
+        if (firstTab) { firstTab.click(); }
+    </script>
+</body>
+</html>

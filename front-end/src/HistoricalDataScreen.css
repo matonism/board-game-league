@@ -126,7 +126,9 @@
 .table-container{
     padding-bottom: 1rem;
 }
-
+.no-underline{
+    text-decoration: none;
+}
 @media screen and (max-width: 600px) {
         
     .historical-row.postseason  .historical-cell{

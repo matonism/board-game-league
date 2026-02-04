@@ -946,7 +946,7 @@
                     ]
                 },
                 {
-                    "location": "DNP",
+                    "location": null,
                     "players": [
                         {
                             "player": "Allie",

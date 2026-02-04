@@ -579,6 +579,56 @@ Category,Subcategory,Scope,Rank,Player,Value,Context,IsActive
 "Fastest to 50 Career Points (# Games)","Speed Records","All-Time (Regular Season)",1,"Nick",24,,false
 "Fastest to 50 Career Points (# Games)","Speed Records","All-Time (Regular Season)",2,"Michael",25,,false
 "Fastest to 50 Career Points (# Games)","Speed Records","All-Time (Regular Season)",3,"Austin",26,,false
+"Hardest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Regular Season)",1,"Emma",1.633,"42 opps",false
+"Hardest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Regular Season)",2,"Becca",1.601,"18 opps",false
+"Hardest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Regular Season)",3,"Josh",1.545,"78 opps",false
+"Hardest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Regular Season)",4,"Steve",1.530,"60 opps",false
+"Hardest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Regular Season)",5,"Brittany",1.525,"24 opps",false
+"Hardest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Regular Season)",6,"Jack M",1.524,"60 opps",false
+"Hardest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Regular Season)",7,"Carly",1.521,"60 opps",false
+"Hardest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Regular Season)",8,"Allie",1.519,"48 opps",false
+"Hardest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Regular Season)",9,"Ashley",1.508,"78 opps",false
+"Hardest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Regular Season)",10,"Rachel M",1.507,"60 opps",false
+"Hardest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Regular Season)",11,"Tyler",1.506,"60 opps",false
+"Hardest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Regular Season)",12,"Sam",1.504,"42 opps",false
+"Hardest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Regular Season)",13,"Ryan",1.481,"78 opps",false
+"Hardest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Regular Season)",14,"Cody",1.480,"42 opps",false
+"Hardest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Regular Season)",15,"Richie",1.468,"78 opps",false
+"Hardest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Regular Season)",16,"Michael",1.458,"78 opps",false
+"Hardest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Regular Season)",17,"Nick",1.454,"78 opps",false
+"Hardest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Regular Season)",18,"Rachel F",1.450,"78 opps",false
+"Hardest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Regular Season)",19,"Dan",1.444,"78 opps",false
+"Hardest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Regular Season)",20,"Austin",1.440,"78 opps",false
+"Hardest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Regular Season)",21,"Jack C",1.437,"24 opps",false
+"Hardest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Regular Season)",22,"Jennie",1.407,"18 opps",false
+"Hardest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Regular Season)",23,"Ian",1.403,"42 opps",false
+"Hardest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Regular Season)",24,"Luke",1.391,"36 opps",false
+"Hardest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Regular Season)",25,"Brian",1.385,"6 opps",false
+"Easiest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Regular Season)",1,"Brian",1.385,"6 opps",false
+"Easiest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Regular Season)",2,"Luke",1.391,"36 opps",false
+"Easiest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Regular Season)",3,"Ian",1.403,"42 opps",false
+"Easiest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Regular Season)",4,"Jennie",1.407,"18 opps",false
+"Easiest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Regular Season)",5,"Jack C",1.437,"24 opps",false
+"Easiest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Regular Season)",6,"Austin",1.440,"78 opps",false
+"Easiest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Regular Season)",7,"Dan",1.444,"78 opps",false
+"Easiest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Regular Season)",8,"Rachel F",1.450,"78 opps",false
+"Easiest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Regular Season)",9,"Nick",1.454,"78 opps",false
+"Easiest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Regular Season)",10,"Michael",1.458,"78 opps",false
+"Easiest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Regular Season)",11,"Richie",1.468,"78 opps",false
+"Easiest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Regular Season)",12,"Cody",1.480,"42 opps",false
+"Easiest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Regular Season)",13,"Ryan",1.481,"78 opps",false
+"Easiest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Regular Season)",14,"Sam",1.504,"42 opps",false
+"Easiest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Regular Season)",15,"Tyler",1.506,"60 opps",false
+"Easiest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Regular Season)",16,"Rachel M",1.507,"60 opps",false
+"Easiest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Regular Season)",17,"Ashley",1.508,"78 opps",false
+"Easiest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Regular Season)",18,"Allie",1.519,"48 opps",false
+"Easiest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Regular Season)",19,"Carly",1.521,"60 opps",false
+"Easiest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Regular Season)",20,"Jack M",1.524,"60 opps",false
+"Easiest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Regular Season)",21,"Brittany",1.525,"24 opps",false
+"Easiest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Regular Season)",22,"Steve",1.530,"60 opps",false
+"Easiest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Regular Season)",23,"Josh",1.545,"78 opps",false
+"Easiest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Regular Season)",24,"Becca",1.601,"18 opps",false
+"Easiest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Regular Season)",25,"Emma",1.633,"42 opps",false
 "Average Points per Game","Averages","All-Time (Reg and Post Season)",1,"Michael",2.10,"31 games",false
 "Average Points per Game","Averages","All-Time (Reg and Post Season)",2,"Austin",2.07,"29 games",false
 "Average Points per Game","Averages","All-Time (Reg and Post Season)",3,"Nick",2.03,"29 games",false
@@ -1160,6 +1210,56 @@ Category,Subcategory,Scope,Rank,Player,Value,Context,IsActive
 "Fastest to 50 Career Points (# Games)","Speed Records","All-Time (Reg and Post Season)",2,"Austin",25,,false
 "Fastest to 50 Career Points (# Games)","Speed Records","All-Time (Reg and Post Season)",2,"Michael",25,,false
 "Fastest to 50 Career Points (# Games)","Speed Records","All-Time (Reg and Post Season)",4,"Richie",27,,false
+"Hardest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Reg and Post Season)",1,"Emma",1.608,"42 opps",false
+"Hardest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Reg and Post Season)",2,"Becca",1.590,"18 opps",false
+"Hardest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Reg and Post Season)",3,"Carly",1.558,"66 opps",false
+"Hardest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Reg and Post Season)",4,"Rachel M",1.533,"66 opps",false
+"Hardest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Reg and Post Season)",5,"Josh",1.522,"78 opps",false
+"Hardest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Reg and Post Season)",6,"Jack M",1.519,"63 opps",false
+"Hardest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Reg and Post Season)",7,"Brittany",1.513,"24 opps",false
+"Hardest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Reg and Post Season)",8,"Ashley",1.507,"84 opps",false
+"Hardest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Reg and Post Season)",8,"Allie",1.507,"48 opps",false
+"Hardest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Reg and Post Season)",10,"Steve",1.496,"60 opps",false
+"Hardest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Reg and Post Season)",11,"Tyler",1.495,"60 opps",false
+"Hardest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Reg and Post Season)",12,"Cody",1.492,"48 opps",false
+"Hardest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Reg and Post Season)",13,"Sam",1.488,"45 opps",false
+"Hardest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Reg and Post Season)",14,"Michael",1.487,"93 opps",false
+"Hardest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Reg and Post Season)",15,"Richie",1.482,"93 opps",false
+"Hardest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Reg and Post Season)",16,"Nick",1.481,"87 opps",false
+"Hardest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Reg and Post Season)",17,"Ryan",1.470,"81 opps",false
+"Hardest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Reg and Post Season)",18,"Rachel F",1.444,"81 opps",false
+"Hardest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Reg and Post Season)",18,"Austin",1.444,"87 opps",false
+"Hardest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Reg and Post Season)",20,"Dan",1.436,"81 opps",false
+"Hardest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Reg and Post Season)",21,"Luke",1.427,"39 opps",false
+"Hardest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Reg and Post Season)",22,"Ian",1.419,"48 opps",false
+"Hardest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Reg and Post Season)",23,"Jack C",1.416,"24 opps",false
+"Hardest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Reg and Post Season)",24,"Jennie",1.399,"18 opps",false
+"Hardest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Reg and Post Season)",25,"Brian",1.360,"6 opps",false
+"Easiest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Reg and Post Season)",1,"Brian",1.360,"6 opps",false
+"Easiest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Reg and Post Season)",2,"Jennie",1.399,"18 opps",false
+"Easiest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Reg and Post Season)",3,"Jack C",1.416,"24 opps",false
+"Easiest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Reg and Post Season)",4,"Ian",1.419,"48 opps",false
+"Easiest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Reg and Post Season)",5,"Luke",1.427,"39 opps",false
+"Easiest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Reg and Post Season)",6,"Dan",1.436,"81 opps",false
+"Easiest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Reg and Post Season)",7,"Austin",1.444,"87 opps",false
+"Easiest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Reg and Post Season)",7,"Rachel F",1.444,"81 opps",false
+"Easiest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Reg and Post Season)",9,"Ryan",1.470,"81 opps",false
+"Easiest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Reg and Post Season)",10,"Nick",1.481,"87 opps",false
+"Easiest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Reg and Post Season)",11,"Richie",1.482,"93 opps",false
+"Easiest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Reg and Post Season)",12,"Michael",1.487,"93 opps",false
+"Easiest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Reg and Post Season)",13,"Sam",1.488,"45 opps",false
+"Easiest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Reg and Post Season)",14,"Cody",1.492,"48 opps",false
+"Easiest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Reg and Post Season)",15,"Tyler",1.495,"60 opps",false
+"Easiest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Reg and Post Season)",16,"Steve",1.496,"60 opps",false
+"Easiest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Reg and Post Season)",17,"Allie",1.507,"48 opps",false
+"Easiest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Reg and Post Season)",17,"Ashley",1.507,"84 opps",false
+"Easiest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Reg and Post Season)",19,"Brittany",1.513,"24 opps",false
+"Easiest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Reg and Post Season)",20,"Jack M",1.519,"63 opps",false
+"Easiest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Reg and Post Season)",21,"Josh",1.522,"78 opps",false
+"Easiest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Reg and Post Season)",22,"Rachel M",1.533,"66 opps",false
+"Easiest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Reg and Post Season)",23,"Carly",1.558,"66 opps",false
+"Easiest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Reg and Post Season)",24,"Becca",1.590,"18 opps",false
+"Easiest Strength of Schedule (All-Time Avg Opponent Pts)","Difficulty","All-Time (Reg and Post Season)",25,"Emma",1.608,"42 opps",false
 "Most Points (Season)","Totals","Single Season Records",1,"Nick",16,"2023",false
 "Most Points (Season)","Totals","Single Season Records",2,"Nick",14,"2022",false
 "Most Points (Season)","Totals","Single Season Records",2,"Richie",14,"2024",false
@@ -2143,6 +2243,35 @@ Category,Subcategory,Scope,Rank,Player,Value,Context,IsActive
 "Most Games Hosted (By Location)","Totals","Locations",17,"Mike Matonis Sr.",1,,false
 "Most Games Hosted (By Location)","Totals","Locations",17,"Jack C",1,,false
 "Most Games Hosted (By Location)","Totals","Locations",17,"Jack M & Emma",1,,false
+"Most Games Played at Neutral Sites","Neutral Sites","Locations",1,"Dan",4,,false
+"Most Games Played at Neutral Sites","Neutral Sites","Locations",2,"Nick",3,,false
+"Most Games Played at Neutral Sites","Neutral Sites","Locations",2,"Rachel M",3,,false
+"Most Games Played at Neutral Sites","Neutral Sites","Locations",2,"Sam",3,,false
+"Most Games Played at Neutral Sites","Neutral Sites","Locations",5,"Austin",2,,false
+"Most Games Played at Neutral Sites","Neutral Sites","Locations",5,"Richie",2,,false
+"Most Games Played at Neutral Sites","Neutral Sites","Locations",5,"Steve",2,,false
+"Most Games Played at Neutral Sites","Neutral Sites","Locations",5,"Ian",2,,false
+"Most Games Played at Neutral Sites","Neutral Sites","Locations",9,"Michael",1,,false
+"Most Games Played at Neutral Sites","Neutral Sites","Locations",9,"Ashley",1,,false
+"Most Games Played at Neutral Sites","Neutral Sites","Locations",9,"Carly",1,,false
+"Most Games Played at Neutral Sites","Neutral Sites","Locations",9,"Tyler",1,,false
+"Most Games Played at Neutral Sites","Neutral Sites","Locations",9,"Cody",1,,false
+"Most Games Played at Neutral Sites","Neutral Sites","Locations",9,"Emma",1,,false
+"Most Games Played at Neutral Sites","Neutral Sites","Locations",9,"Jack C",1,,false
+"Most Games Played at Neutral Sites","Neutral Sites","Locations",16,"Brian",0,,false
+"Most Games Played at Neutral Sites","Neutral Sites","Locations",16,"Ryan",0,,false
+"Most Games Played at Neutral Sites","Neutral Sites","Locations",16,"Josh",0,,false
+"Most Games Played at Neutral Sites","Neutral Sites","Locations",16,"Rachel F",0,,false
+"Most Games Played at Neutral Sites","Neutral Sites","Locations",16,"Luke",0,,false
+"Most Games Played at Neutral Sites","Neutral Sites","Locations",16,"Becca",0,,false
+"Most Games Played at Neutral Sites","Neutral Sites","Locations",16,"Allie",0,,false
+"Most Games Played at Neutral Sites","Neutral Sites","Locations",16,"Jack M",0,,false
+"Most Games Played at Neutral Sites","Neutral Sites","Locations",16,"Jennie",0,,false
+"Most Games Played at Neutral Sites","Neutral Sites","Locations",16,"Brittany",0,,false
+"Most Popular Neutral Sites","Neutral Sites","Locations",1,"Tapster",4,,false
+"Most Popular Neutral Sites","Neutral Sites","Locations",2,"Richie",1,,false
+"Most Popular Neutral Sites","Neutral Sites","Locations",2,"Grandma Matonis",1,,false
+"Most Popular Neutral Sites","Neutral Sites","Locations",2,"Mike Matonis Sr.",1,,false
 "Average Points at Home (Min 5 Home Games)","Averages","Locations",1,"Nick",2.16,"19 games",false
 "Average Points at Home (Min 5 Home Games)","Averages","Locations",2,"Michael",2.07,"14 games",false
 "Average Points at Home (Min 5 Home Games)","Averages","Locations",3,"Ashley",2.00,"11 games",false
@@ -2268,31 +2397,177 @@ Category,Subcategory,Scope,Rank,Player,Value,Context,IsActive
 "% of Games Played Away (Min 5 Games)","Averages","Locations",22,"Michael",54.8%,"17/31",false
 "% of Games Played Away (Min 5 Games)","Averages","Locations",23,"Nick",34.5%,"10/29",false
 "% of Games Played Away (Min 5 Games)","Averages","Locations",24,"Rachel F",29.6%,"8/27",false
-"Most Home Games Played","Totals","Locations",1,"Nick",19,,false
-"Most Home Games Played","Totals","Locations",1,"Rachel F",19,,false
-"Most Home Games Played","Totals","Locations",3,"Michael",14,,false
-"Most Home Games Played","Totals","Locations",4,"Ashley",11,,false
-"Most Home Games Played","Totals","Locations",5,"Austin",10,,false
-"Most Home Games Played","Totals","Locations",6,"Rachel M",9,,false
-"Most Home Games Played","Totals","Locations",7,"Carly",7,,false
-"Most Home Games Played","Totals","Locations",7,"Steve",7,,false
-"Most Home Games Played","Totals","Locations",9,"Richie",6,,false
-"Most Home Games Played","Totals","Locations",10,"Josh",5,,false
-"Most Home Games Played","Totals","Locations",10,"Cody",5,,false
-"Most Home Games Played","Totals","Locations",12,"Dan",4,,false
-"Most Home Games Played","Totals","Locations",13,"Luke",3,,false
-"Most Home Games Played","Totals","Locations",13,"Allie",3,,false
-"Most Home Games Played","Totals","Locations",15,"Becca",2,,false
-"Most Home Games Played","Totals","Locations",15,"Tyler",2,,false
-"Most Home Games Played","Totals","Locations",15,"Jennie",2,,false
-"Most Home Games Played","Totals","Locations",15,"Ian",2,,false
-"Most Home Games Played","Totals","Locations",15,"Brittany",2,,false
-"Most Home Games Played","Totals","Locations",20,"Brian",1,,false
-"Most Home Games Played","Totals","Locations",20,"Ryan",1,,false
-"Most Home Games Played","Totals","Locations",20,"Jack M",1,,false
-"Most Home Games Played","Totals","Locations",20,"Emma",1,,false
-"Most Home Games Played","Totals","Locations",20,"Jack C",1,,false
-"Most Home Games Played","Totals","Locations",25,"Sam",0,,false
+"Most Home Games Played (All-Time)","Totals","Locations",1,"Nick",19,,false
+"Most Home Games Played (All-Time)","Totals","Locations",1,"Rachel F",19,,false
+"Most Home Games Played (All-Time)","Totals","Locations",3,"Michael",14,,false
+"Most Home Games Played (All-Time)","Totals","Locations",4,"Ashley",11,,false
+"Most Home Games Played (All-Time)","Totals","Locations",5,"Austin",10,,false
+"Most Home Games Played (All-Time)","Totals","Locations",6,"Rachel M",9,,false
+"Most Home Games Played (All-Time)","Totals","Locations",7,"Carly",7,,false
+"Most Home Games Played (All-Time)","Totals","Locations",7,"Steve",7,,false
+"Most Home Games Played (All-Time)","Totals","Locations",9,"Richie",6,,false
+"Most Home Games Played (All-Time)","Totals","Locations",10,"Josh",5,,false
+"Most Home Games Played (All-Time)","Totals","Locations",10,"Cody",5,,false
+"Most Home Games Played (All-Time)","Totals","Locations",12,"Dan",4,,false
+"Most Home Games Played (All-Time)","Totals","Locations",13,"Luke",3,,false
+"Most Home Games Played (All-Time)","Totals","Locations",13,"Allie",3,,false
+"Most Home Games Played (All-Time)","Totals","Locations",15,"Becca",2,,false
+"Most Home Games Played (All-Time)","Totals","Locations",15,"Tyler",2,,false
+"Most Home Games Played (All-Time)","Totals","Locations",15,"Jennie",2,,false
+"Most Home Games Played (All-Time)","Totals","Locations",15,"Ian",2,,false
+"Most Home Games Played (All-Time)","Totals","Locations",15,"Brittany",2,,false
+"Most Home Games Played (All-Time)","Totals","Locations",20,"Brian",1,,false
+"Most Home Games Played (All-Time)","Totals","Locations",20,"Ryan",1,,false
+"Most Home Games Played (All-Time)","Totals","Locations",20,"Jack M",1,,false
+"Most Home Games Played (All-Time)","Totals","Locations",20,"Emma",1,,false
+"Most Home Games Played (All-Time)","Totals","Locations",20,"Jack C",1,,false
+"Most Home Games Played (All-Time)","Totals","Locations",25,"Sam",0,,false
+"Most Home Games Played (Single Season)","Totals","Locations",1,"Rachel F",6,"2024",false
+"Most Home Games Played (Single Season)","Totals","Locations",2,"Nick",5,"2023",false
+"Most Home Games Played (Single Season)","Totals","Locations",2,"Nick",5,"2024",false
+"Most Home Games Played (Single Season)","Totals","Locations",2,"Nick",5,"2025",false
+"Most Home Games Played (Single Season)","Totals","Locations",2,"Rachel F",5,"2025",false
+"Most Home Games Played (Single Season)","Totals","Locations",6,"Austin",4,"2022",false
+"Most Home Games Played (Single Season)","Totals","Locations",6,"Michael",4,"2022",false
+"Most Home Games Played (Single Season)","Totals","Locations",6,"Ashley",4,"2023",false
+"Most Home Games Played (Single Season)","Totals","Locations",6,"Michael",4,"2023",false
+"Most Home Games Played (Single Season)","Totals","Locations",6,"Rachel F",4,"2023",false
+"Most Home Games Played (Single Season)","Totals","Locations",6,"Carly",4,"2024",false
+"Most Home Games Played (Single Season)","Totals","Locations",6,"Steve",4,"2024",false
+"Most Home Games Played (Single Season)","Totals","Locations",6,"Richie",4,"2025",false
+"Most Home Games Played (Single Season)","Totals","Locations",6,"Rachel M",4,"2025",false
+"Most Home Games Played (Single Season)","Totals","Locations",15,"Nick",3,"2022",false
+"Most Home Games Played (Single Season)","Totals","Locations",15,"Rachel F",3,"2022",false
+"Most Home Games Played (Single Season)","Totals","Locations",15,"Josh",3,"2022",false
+"Most Home Games Played (Single Season)","Totals","Locations",15,"Michael",3,"2024",false
+"Most Home Games Played (Single Season)","Totals","Locations",15,"Ashley",3,"2024",false
+"Most Home Games Played (Single Season)","Totals","Locations",15,"Austin",3,"2024",false
+"Most Home Games Played (Single Season)","Totals","Locations",15,"Rachel M",3,"2024",false
+"Most Home Games Played (Single Season)","Totals","Locations",15,"Michael",3,"2025",false
+"Most Home Games Played (Single Season)","Totals","Locations",15,"Steve",3,"2025",false
+"Most Home Games Played (Single Season)","Totals","Locations",24,"Luke",2,"2022",false
+"Most Home Games Played (Single Season)","Totals","Locations",24,"Becca",2,"2022",false
+"Most Home Games Played (Single Season)","Totals","Locations",24,"Ashley",2,"2022",false
+"Most Home Games Played (Single Season)","Totals","Locations",24,"Dan",2,"2023",false
+"Most Home Games Played (Single Season)","Totals","Locations",24,"Allie",2,"2023",false
+"Most Home Games Played (Single Season)","Totals","Locations",24,"Austin",2,"2023",false
+"Most Home Games Played (Single Season)","Totals","Locations",24,"Jennie",2,"2024",false
+"Most Home Games Played (Single Season)","Totals","Locations",24,"Ian",2,"2024",false
+"Most Home Games Played (Single Season)","Totals","Locations",24,"Cody",2,"2024",false
+"Most Home Games Played (Single Season)","Totals","Locations",24,"Dan",2,"2025",false
+"Most Home Games Played (Single Season)","Totals","Locations",24,"Carly",2,"2025",false
+"Most Home Games Played (Single Season)","Totals","Locations",24,"Ashley",2,"2025",false
+"Most Home Games Played (Single Season)","Totals","Locations",24,"Cody",2,"2026",false
+"Most Home Games Played (Single Season)","Totals","Locations",24,"Rachel M",2,"2026",false
+"Most Home Games Played (Single Season)","Totals","Locations",38,"Brian",1,"2022",false
+"Most Home Games Played (Single Season)","Totals","Locations",38,"Ryan",1,"2022",false
+"Most Home Games Played (Single Season)","Totals","Locations",38,"Allie",1,"2022",false
+"Most Home Games Played (Single Season)","Totals","Locations",38,"Richie",1,"2022",false
+"Most Home Games Played (Single Season)","Totals","Locations",38,"Josh",1,"2023",false
+"Most Home Games Played (Single Season)","Totals","Locations",38,"Luke",1,"2023",false
+"Most Home Games Played (Single Season)","Totals","Locations",38,"Tyler",1,"2024",false
+"Most Home Games Played (Single Season)","Totals","Locations",38,"Josh",1,"2024",false
+"Most Home Games Played (Single Season)","Totals","Locations",38,"Richie",1,"2024",false
+"Most Home Games Played (Single Season)","Totals","Locations",38,"Tyler",1,"2025",false
+"Most Home Games Played (Single Season)","Totals","Locations",38,"Jack C",1,"2025",false
+"Most Home Games Played (Single Season)","Totals","Locations",38,"Cody",1,"2025",false
+"Most Home Games Played (Single Season)","Totals","Locations",38,"Brittany",1,"2025",false
+"Most Home Games Played (Single Season)","Totals","Locations",38,"Nick",1,"2026",false
+"Most Home Games Played (Single Season)","Totals","Locations",38,"Rachel F",1,"2026",false
+"Most Home Games Played (Single Season)","Totals","Locations",38,"Brittany",1,"2026",false
+"Most Home Games Played (Single Season)","Totals","Locations",38,"Austin",1,"2026",false
+"Most Home Games Played (Single Season)","Totals","Locations",38,"Carly",1,"2026",false
+"Most Home Games Played (Single Season)","Totals","Locations",38,"Emma",1,"2026",false
+"Most Home Games Played (Single Season)","Totals","Locations",38,"Jack M",1,"2026",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",1,"Dan",0,"2022",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",1,"Richie",0,"2023",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",1,"Carly",0,"2023",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",1,"Tyler",0,"2023",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",1,"Jack M",0,"2023",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",1,"Ryan",0,"2023",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",1,"Rachel M",0,"2023",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",1,"Steve",0,"2023",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",1,"Allie",0,"2024",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",1,"Jack M",0,"2024",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",1,"Emma",0,"2024",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",1,"Ryan",0,"2024",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",1,"Dan",0,"2024",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",1,"Sam",0,"2024",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",1,"Josh",0,"2025",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",1,"Ryan",0,"2025",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",1,"Sam",0,"2025",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",1,"Jack M",0,"2025",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",1,"Emma",0,"2025",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",1,"Austin",0,"2025",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",1,"Ian",0,"2025",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",22,"Brian",1,"2022",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",22,"Ryan",1,"2022",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",22,"Richie",1,"2022",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",22,"Allie",1,"2022",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",22,"Luke",1,"2023",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",22,"Josh",1,"2023",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",22,"Richie",1,"2024",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",22,"Tyler",1,"2024",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",22,"Josh",1,"2024",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",22,"Jack C",1,"2025",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",22,"Cody",1,"2025",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",22,"Brittany",1,"2025",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",22,"Tyler",1,"2025",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",35,"Luke",2,"2022",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",35,"Becca",2,"2022",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",35,"Ashley",2,"2022",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",35,"Allie",2,"2023",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",35,"Austin",2,"2023",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",35,"Dan",2,"2023",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",35,"Cody",2,"2024",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",35,"Jennie",2,"2024",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",35,"Ian",2,"2024",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",35,"Ashley",2,"2025",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",35,"Carly",2,"2025",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",35,"Dan",2,"2025",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",47,"Josh",3,"2022",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",47,"Nick",3,"2022",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",47,"Rachel F",3,"2022",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",47,"Rachel M",3,"2024",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",47,"Michael",3,"2024",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",47,"Ashley",3,"2024",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",47,"Austin",3,"2024",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",47,"Steve",3,"2025",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",47,"Michael",3,"2025",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",56,"Austin",4,"2022",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",56,"Michael",4,"2022",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",56,"Michael",4,"2023",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",56,"Ashley",4,"2023",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",56,"Rachel F",4,"2023",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",56,"Carly",4,"2024",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",56,"Steve",4,"2024",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",56,"Richie",4,"2025",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",56,"Rachel M",4,"2025",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",65,"Nick",5,"2023",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",65,"Nick",5,"2024",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",65,"Nick",5,"2025",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",65,"Rachel F",5,"2025",false
+"Fewest Home Games Played (Single Season)","Totals","Locations",69,"Rachel F",6,"2024",false
+"Last Hosted (Active Players)","Totals","Locations",1,"Sam",Never,,false
+"Last Hosted (Active Players)","Totals","Locations",2,"Ryan",2022 Week 1,,false
+"Last Hosted (Active Players)","Totals","Locations",3,"Josh",2024 Week 4,,false
+"Last Hosted (Active Players)","Totals","Locations",4,"Ian",2024 Week 6,,false
+"Last Hosted (Active Players)","Totals","Locations",5,"Tyler",2025 Week 2,,false
+"Last Hosted (Active Players)","Totals","Locations",6,"Jack C",2025 Week 3,,false
+"Last Hosted (Active Players)","Totals","Locations",7,"Ashley",2025 Week 5,,false
+"Last Hosted (Active Players)","Totals","Locations",7,"Michael",2025 Week 5,,false
+"Last Hosted (Active Players)","Totals","Locations",9,"Steve",2025 Week 6,,false
+"Last Hosted (Active Players)","Totals","Locations",9,"Dan",2025 Week 6,,false
+"Last Hosted (Active Players)","Totals","Locations",11,"Richie",2025 Championship,,false
+"Last Hosted (Active Players)","Totals","Locations",12,"Nick",2026 Week 1,,false
+"Last Hosted (Active Players)","Totals","Locations",12,"Rachel F",2026 Week 1,,false
+"Last Hosted (Active Players)","Totals","Locations",14,"Cody",2026 Week 2,,false
+"Last Hosted (Active Players)","Totals","Locations",14,"Emma",2026 Week 2,,false
+"Last Hosted (Active Players)","Totals","Locations",14,"Carly",2026 Week 2,,false
+"Last Hosted (Active Players)","Totals","Locations",14,"Rachel M",2026 Week 2,,false
+"Last Hosted (Active Players)","Totals","Locations",14,"Austin",2026 Week 2,,false
+"Last Hosted (Active Players)","Totals","Locations",14,"Brittany",2026 Week 2,,false
+"Last Hosted (Active Players)","Totals","Locations",14,"Jack M",2026 Week 2,,false
 "Most Wins at Home","Totals","Locations",1,"Nick",10,,false
 "Most Wins at Home","Totals","Locations",2,"Michael",7,,false
 "Most Wins at Home","Totals","Locations",3,"Rachel F",6,,false
@@ -2517,6 +2792,55 @@ Category,Subcategory,Scope,Rank,Player,Value,Context,IsActive
 "Best Week 6 Performance Avg (Min 2 games)","Averages by Week","Cross Season",16,"Sam",0.50,"2 games",false
 "Best Week 6 Performance Avg (Min 2 games)","Averages by Week","Cross Season",19,"Steve",0.00,"3 games",false
 "Best Week 6 Performance Avg (Min 2 games)","Averages by Week","Cross Season",19,"Emma",0.00,"2 games",false
+"The Opener (Avg Pts Wks 1-3) (Min 2 games)","Averages by Week","Cross Season",1,"Austin",2.43,"14 games",false
+"The Opener (Avg Pts Wks 1-3) (Min 2 games)","Averages by Week","Cross Season",2,"Michael",2.36,"14 games",false
+"The Opener (Avg Pts Wks 1-3) (Min 2 games)","Averages by Week","Cross Season",3,"Rachel M",2.18,"11 games",false
+"The Opener (Avg Pts Wks 1-3) (Min 2 games)","Averages by Week","Cross Season",4,"Nick",2.00,"14 games",false
+"The Opener (Avg Pts Wks 1-3) (Min 2 games)","Averages by Week","Cross Season",4,"Sam",2.00,"8 games",false
+"The Opener (Avg Pts Wks 1-3) (Min 2 games)","Averages by Week","Cross Season",6,"Ashley",1.86,"14 games",false
+"The Opener (Avg Pts Wks 1-3) (Min 2 games)","Averages by Week","Cross Season",7,"Luke",1.83,"6 games",false
+"The Opener (Avg Pts Wks 1-3) (Min 2 games)","Averages by Week","Cross Season",8,"Cody",1.75,"8 games",false
+"The Opener (Avg Pts Wks 1-3) (Min 2 games)","Averages by Week","Cross Season",9,"Jack M",1.73,"11 games",false
+"The Opener (Avg Pts Wks 1-3) (Min 2 games)","Averages by Week","Cross Season",10,"Rachel F",1.64,"14 games",false
+"The Opener (Avg Pts Wks 1-3) (Min 2 games)","Averages by Week","Cross Season",11,"Brian",1.50,"2 games",false
+"The Opener (Avg Pts Wks 1-3) (Min 2 games)","Averages by Week","Cross Season",11,"Richie",1.50,"14 games",false
+"The Opener (Avg Pts Wks 1-3) (Min 2 games)","Averages by Week","Cross Season",13,"Brittany",1.40,"5 games",false
+"The Opener (Avg Pts Wks 1-3) (Min 2 games)","Averages by Week","Cross Season",14,"Ian",1.38,"8 games",false
+"The Opener (Avg Pts Wks 1-3) (Min 2 games)","Averages by Week","Cross Season",15,"Becca",1.33,"3 games",false
+"The Opener (Avg Pts Wks 1-3) (Min 2 games)","Averages by Week","Cross Season",16,"Jack C",1.20,"5 games",false
+"The Opener (Avg Pts Wks 1-3) (Min 2 games)","Averages by Week","Cross Season",17,"Carly",1.18,"11 games",false
+"The Opener (Avg Pts Wks 1-3) (Min 2 games)","Averages by Week","Cross Season",18,"Tyler",1.09,"11 games",false
+"The Opener (Avg Pts Wks 1-3) (Min 2 games)","Averages by Week","Cross Season",19,"Ryan",1.00,"14 games",false
+"The Opener (Avg Pts Wks 1-3) (Min 2 games)","Averages by Week","Cross Season",19,"Jennie",1.00,"3 games",false
+"The Opener (Avg Pts Wks 1-3) (Min 2 games)","Averages by Week","Cross Season",21,"Dan",0.93,"14 games",false
+"The Opener (Avg Pts Wks 1-3) (Min 2 games)","Averages by Week","Cross Season",22,"Steve",0.91,"11 games",false
+"The Opener (Avg Pts Wks 1-3) (Min 2 games)","Averages by Week","Cross Season",23,"Josh",0.79,"14 games",false
+"The Opener (Avg Pts Wks 1-3) (Min 2 games)","Averages by Week","Cross Season",24,"Allie",0.71,"7 games",false
+"The Opener (Avg Pts Wks 1-3) (Min 2 games)","Averages by Week","Cross Season",25,"Emma",0.63,"8 games",false
+"The Closer (Avg Pts Wks 4-6) (Min 2 games)","Averages by Week","Cross Season",1,"Richie",2.33,"12 games",false
+"The Closer (Avg Pts Wks 4-6) (Min 2 games)","Averages by Week","Cross Season",2,"Nick",2.25,"12 games",false
+"The Closer (Avg Pts Wks 4-6) (Min 2 games)","Averages by Week","Cross Season",3,"Rachel M",1.89,"9 games",false
+"The Closer (Avg Pts Wks 4-6) (Min 2 games)","Averages by Week","Cross Season",4,"Ian",1.83,"6 games",false
+"The Closer (Avg Pts Wks 4-6) (Min 2 games)","Averages by Week","Cross Season",4,"Cody",1.83,"6 games",false
+"The Closer (Avg Pts Wks 4-6) (Min 2 games)","Averages by Week","Cross Season",6,"Michael",1.75,"12 games",false
+"The Closer (Avg Pts Wks 4-6) (Min 2 games)","Averages by Week","Cross Season",7,"Dan",1.67,"12 games",false
+"The Closer (Avg Pts Wks 4-6) (Min 2 games)","Averages by Week","Cross Season",7,"Rachel F",1.67,"12 games",false
+"The Closer (Avg Pts Wks 4-6) (Min 2 games)","Averages by Week","Cross Season",9,"Sam",1.50,"6 games",false
+"The Closer (Avg Pts Wks 4-6) (Min 2 games)","Averages by Week","Cross Season",10,"Austin",1.42,"12 games",false
+"The Closer (Avg Pts Wks 4-6) (Min 2 games)","Averages by Week","Cross Season",11,"Ashley",1.33,"12 games",false
+"The Closer (Avg Pts Wks 4-6) (Min 2 games)","Averages by Week","Cross Season",11,"Jack M",1.33,"9 games",false
+"The Closer (Avg Pts Wks 4-6) (Min 2 games)","Averages by Week","Cross Season",11,"Tyler",1.33,"9 games",false
+"The Closer (Avg Pts Wks 4-6) (Min 2 games)","Averages by Week","Cross Season",11,"Jennie",1.33,"3 games",false
+"The Closer (Avg Pts Wks 4-6) (Min 2 games)","Averages by Week","Cross Season",11,"Brittany",1.33,"3 games",false
+"The Closer (Avg Pts Wks 4-6) (Min 2 games)","Averages by Week","Cross Season",16,"Josh",1.25,"12 games",false
+"The Closer (Avg Pts Wks 4-6) (Min 2 games)","Averages by Week","Cross Season",17,"Luke",1.17,"6 games",false
+"The Closer (Avg Pts Wks 4-6) (Min 2 games)","Averages by Week","Cross Season",17,"Emma",1.17,"6 games",false
+"The Closer (Avg Pts Wks 4-6) (Min 2 games)","Averages by Week","Cross Season",19,"Carly",1.11,"9 games",false
+"The Closer (Avg Pts Wks 4-6) (Min 2 games)","Averages by Week","Cross Season",20,"Ryan",1.08,"12 games",false
+"The Closer (Avg Pts Wks 4-6) (Min 2 games)","Averages by Week","Cross Season",21,"Steve",0.89,"9 games",false
+"The Closer (Avg Pts Wks 4-6) (Min 2 games)","Averages by Week","Cross Season",22,"Allie",0.78,"9 games",false
+"The Closer (Avg Pts Wks 4-6) (Min 2 games)","Averages by Week","Cross Season",23,"Becca",0.67,"3 games",false
+"The Closer (Avg Pts Wks 4-6) (Min 2 games)","Averages by Week","Cross Season",23,"Jack C",0.67,"3 games",false
 "Biggest Points Jump (Season to Season)","Risers and Fallers","Cross Season",1,"Steve",+7,"2024 to 2025",false
 "Biggest Points Jump (Season to Season)","Risers and Fallers","Cross Season",2,"Ryan",+6,"2023 to 2024",false
 "Biggest Points Jump (Season to Season)","Risers and Fallers","Cross Season",2,"Ian",+6,"2024 to 2025",false
@@ -2600,10 +2924,678 @@ Category,Subcategory,Scope,Rank,Player,Value,Context,IsActive
 "Most Consistent Scorers (Season Pts Std Dev)","Risers and Fallers","Cross Season",17,"Richie",4.12,"5 seasons",false
 "Most Consistent Scorers (Season Pts Std Dev)","Risers and Fallers","Cross Season",18,"Carly",4.15,"4 seasons",false
 "Most Consistent Scorers (Season Pts Std Dev)","Risers and Fallers","Cross Season",19,"Nick",4.24,"5 seasons",false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",1,"Josh & Ryan",8,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",1,"Ashley & Michael",8,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",1,"Ashley & Rachel F",8,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",4,"Nick & Rachel F",7,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",4,"Austin & Josh",7,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",4,"Josh & Rachel F",7,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",4,"Dan & Nick",7,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",4,"Austin & Dan",7,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",4,"Austin & Carly",7,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",10,"Dan & Ryan",6,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",10,"Rachel F & Ryan",6,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",10,"Dan & Richie",6,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",10,"Josh & Richie",6,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",10,"Austin & Michael",6,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",10,"Michael & Nick",6,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",10,"Nick & Ryan",6,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",10,"Rachel M & Steve",6,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",10,"Jack M & Michael",6,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",10,"Michael & Rachel M",6,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",10,"Ashley & Rachel M",6,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",21,"Dan & Josh",5,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",21,"Austin & Nick",5,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",21,"Austin & Rachel F",5,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",21,"Rachel F & Richie",5,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",21,"Ashley & Becca",5,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",21,"Michael & Ryan",5,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",21,"Allie & Austin",5,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",21,"Ashley & Richie",5,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",21,"Allie & Carly",5,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",21,"Ashley & Carly",5,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",21,"Carly & Rachel F",5,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",21,"Austin & Tyler",5,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",21,"Dan & Tyler",5,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",21,"Rachel M & Ryan",5,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",21,"Ryan & Steve",5,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",21,"Rachel M & Richie",5,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",21,"Dan & Steve",5,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",21,"Josh & Nick",5,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",21,"Jack M & Nick",5,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",21,"Jack M & Rachel M",5,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",21,"Michael & Steve",5,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",21,"Jack M & Rachel F",5,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",21,"Cody & Tyler",5,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",21,"Emma & Jack M",5,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",21,"Emma & Michael",5,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",21,"Carly & Michael",5,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",47,"Austin & Richie",4,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",47,"Nick & Richie",4,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",47,"Josh & Luke",4,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",47,"Ashley & Dan",4,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",47,"Ashley & Nick",4,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",47,"Michael & Richie",4,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",47,"Ashley & Ryan",4,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",47,"Dan & Luke",4,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",47,"Allie & Nick",4,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",47,"Allie & Dan",4,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",47,"Allie & Josh",4,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",47,"Jack M & Tyler",4,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",47,"Austin & Rachel M",4,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",47,"Steve & Tyler",4,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",47,"Carly & Nick",4,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",47,"Ashley & Steve",4,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",47,"Richie & Tyler",4,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",47,"Michael & Tyler",4,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",47,"Allie & Ryan",4,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",47,"Rachel F & Tyler",4,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",47,"Ian & Josh",4,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",47,"Emma & Richie",4,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",47,"Carly & Cody",4,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",47,"Rachel M & Sam",4,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",47,"Cody & Sam",4,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",47,"Richie & Sam",4,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",73,"Luke & Michael",3,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",73,"Richie & Ryan",3,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",73,"Luke & Richie",3,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",73,"Austin & Ryan",3,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",73,"Josh & Michael",3,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",73,"Allie & Luke",3,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",73,"Luke & Nick",3,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",73,"Allie & Ashley",3,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",73,"Ashley & Josh",3,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",73,"Luke & Ryan",3,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",73,"Dan & Jack M",3,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",73,"Josh & Rachel M",3,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",73,"Luke & Tyler",3,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",73,"Ashley & Jack M",3,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",73,"Carly & Josh",3,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",73,"Ashley & Austin",3,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",73,"Josh & Tyler",3,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",73,"Nick & Rachel M",3,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",73,"Dan & Rachel F",3,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",73,"Jack M & Steve",3,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",73,"Carly & Dan",3,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",73,"Cody & Richie",3,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",73,"Emma & Rachel M",3,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",73,"Austin & Sam",3,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",73,"Nick & Steve",3,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",73,"Sam & Steve",3,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",73,"Cody & Josh",3,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",73,"Ian & Jack M",3,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",73,"Ian & Sam",3,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",73,"Ian & Steve",3,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",73,"Emma & Steve",3,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",73,"Ian & Richie",3,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",73,"Cody & Rachel F",3,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",73,"Josh & Sam",3,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",73,"Carly & Emma",3,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",73,"Emma & Rachel F",3,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",73,"Carly & Jack M",3,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",73,"Ian & Ryan",3,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",73,"Jack C & Richie",3,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",73,"Brittany & Rachel F",3,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",73,"Cody & Nick",3,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",73,"Dan & Ian",3,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",73,"Jack C & Steve",3,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",73,"Ian & Jack C",3,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",117,"Brian & Ryan",2,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",117,"Becca & Luke",2,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",117,"Becca & Michael",2,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",117,"Austin & Luke",2,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",117,"Luke & Rachel F",2,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",117,"Becca & Dan",2,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",117,"Becca & Rachel F",2,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",117,"Allie & Michael",2,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",117,"Allie & Rachel F",2,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",117,"Austin & Jack M",2,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",117,"Josh & Steve",2,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",117,"Allie & Richie",2,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",117,"Luke & Steve",2,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",117,"Jack M & Ryan",2,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",117,"Austin & Steve",2,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",117,"Carly & Steve",2,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",117,"Allie & Jack M",2,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",117,"Rachel F & Steve",2,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",117,"Richie & Steve",2,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",117,"Carly & Ryan",2,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",117,"Dan & Rachel M",2,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",117,"Allie & Cody",2,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",117,"Allie & Tyler",2,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",117,"Jennie & Ryan",2,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",117,"Jennie & Richie",2,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",117,"Ashley & Cody",2,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",117,"Jack M & Sam",2,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",117,"Ryan & Tyler",2,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",117,"Cody & Jennie",2,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",117,"Austin & Ian",2,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",117,"Ian & Rachel M",2,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",117,"Jennie & Tyler",2,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",117,"Ryan & Sam",2,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",117,"Dan & Emma",2,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",117,"Ian & Jennie",2,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",117,"Ashley & Emma",2,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",117,"Cody & Michael",2,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",117,"Emma & Sam",2,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",117,"Ian & Tyler",2,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",117,"Jack C & Ryan",2,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",117,"Ashley & Sam",2,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",117,"Brittany & Cody",2,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",117,"Jack C & Michael",2,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",117,"Jack C & Tyler",2,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",117,"Cody & Dan",2,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",117,"Cody & Jack M",2,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",117,"Austin & Brittany",2,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",117,"Ashley & Ian",2,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",117,"Ian & Nick",2,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",117,"Brittany & Richie",2,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",117,"Austin & Emma",2,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",117,"Jack C & Sam",2,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",117,"Nick & Tyler",2,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",117,"Brittany & Jack M",2,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",117,"Brittany & Tyler",2,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",117,"Rachel F & Sam",2,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",117,"Dan & Jack C",2,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",117,"Brittany & Ian",2,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",117,"Emma & Nick",2,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",176,"Brian & Dan",1,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",176,"Brian & Josh",1,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",176,"Ashley & Luke",1,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",176,"Becca & Nick",1,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",176,"Brian & Michael",1,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",176,"Brian & Richie",1,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",176,"Becca & Ryan",1,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",176,"Becca & Richie",1,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",176,"Austin & Becca",1,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",176,"Allie & Becca",1,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",176,"Allie & Rachel M",1,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",176,"Michael & Rachel F",1,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",176,"Rachel F & Rachel M",1,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",176,"Carly & Luke",1,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",176,"Ashley & Tyler",1,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",176,"Ashley & Jennie",1,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",176,"Dan & Jennie",1,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",176,"Carly & Ian",1,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",176,"Ian & Rachel F",1,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",176,"Nick & Sam",1,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",176,"Emma & Jennie",1,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",176,"Jennie & Michael",1,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",176,"Cody & Rachel M",1,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",176,"Carly & Tyler",1,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",176,"Emma & Ryan",1,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",176,"Emma & Tyler",1,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",176,"Allie & Jennie",1,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",176,"Carly & Jennie",1,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",176,"Jack M & Josh",1,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",176,"Jack M & Richie",1,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",176,"Jennie & Rachel F",1,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",176,"Allie & Sam",1,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",176,"Jennie & Josh",1,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",176,"Carly & Sam",1,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",176,"Michael & Sam",1,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",176,"Cody & Emma",1,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",176,"Jack C & Josh",1,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",176,"Brittany & Nick",1,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",176,"Brittany & Ryan",1,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",176,"Brittany & Josh",1,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",176,"Brittany & Steve",1,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",176,"Jack C & Jack M",1,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",176,"Brittany & Rachel M",1,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",176,"Rachel M & Tyler",1,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",176,"Ashley & Jack C",1,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",176,"Carly & Jack C",1,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",176,"Carly & Rachel M",1,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",176,"Carly & Richie",1,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",176,"Ashley & Brittany",1,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",176,"Brittany & Emma",1,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",176,"Emma & Ian",1,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",176,"Sam & Tyler",1,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",176,"Austin & Cody",1,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",176,"Brittany & Carly",1,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",176,"Brittany & Jack C",1,,false
+"Most Common Matchups (Regular Season Only)","Rivalries","Cross Season",176,"Dan & Sam",1,,false
+"Least Played Matchups (Active Players Only - Max 1 Game)","Rivalries","Cross Season",1,"Dan & Michael",0,"26 chances",false
+"Least Played Matchups (Active Players Only - Max 1 Game)","Rivalries","Cross Season",1,"Cody & Ian",0,"14 chances",false
+"Least Played Matchups (Active Players Only - Max 1 Game)","Rivalries","Cross Season",1,"Cody & Ryan",0,"14 chances",false
+"Least Played Matchups (Active Players Only - Max 1 Game)","Rivalries","Cross Season",1,"Cody & Steve",0,"14 chances",false
+"Least Played Matchups (Active Players Only - Max 1 Game)","Rivalries","Cross Season",1,"Emma & Josh",0,"14 chances",false
+"Least Played Matchups (Active Players Only - Max 1 Game)","Rivalries","Cross Season",1,"Austin & Jack C",0,"8 chances",false
+"Least Played Matchups (Active Players Only - Max 1 Game)","Rivalries","Cross Season",1,"Brittany & Dan",0,"8 chances",false
+"Least Played Matchups (Active Players Only - Max 1 Game)","Rivalries","Cross Season",1,"Brittany & Michael",0,"8 chances",false
+"Least Played Matchups (Active Players Only - Max 1 Game)","Rivalries","Cross Season",1,"Brittany & Sam",0,"8 chances",false
+"Least Played Matchups (Active Players Only - Max 1 Game)","Rivalries","Cross Season",1,"Cody & Jack C",0,"8 chances",false
+"Least Played Matchups (Active Players Only - Max 1 Game)","Rivalries","Cross Season",1,"Emma & Jack C",0,"8 chances",false
+"Least Played Matchups (Active Players Only - Max 1 Game)","Rivalries","Cross Season",1,"Jack C & Nick",0,"8 chances",false
+"Least Played Matchups (Active Players Only - Max 1 Game)","Rivalries","Cross Season",1,"Jack C & Rachel F",0,"8 chances",false
+"Least Played Matchups (Active Players Only - Max 1 Game)","Rivalries","Cross Season",1,"Jack C & Rachel M",0,"8 chances",false
+"Least Played Matchups (Active Players Only - Max 1 Game)","Rivalries","Cross Season",15,"Michael & Rachel F",1,"26 chances",false
+"Least Played Matchups (Active Players Only - Max 1 Game)","Rivalries","Cross Season",15,"Ashley & Tyler",1,"20 chances",false
+"Least Played Matchups (Active Players Only - Max 1 Game)","Rivalries","Cross Season",15,"Carly & Rachel M",1,"20 chances",false
+"Least Played Matchups (Active Players Only - Max 1 Game)","Rivalries","Cross Season",15,"Carly & Tyler",1,"20 chances",false
+"Least Played Matchups (Active Players Only - Max 1 Game)","Rivalries","Cross Season",15,"Jack M & Josh",1,"20 chances",false
+"Least Played Matchups (Active Players Only - Max 1 Game)","Rivalries","Cross Season",15,"Jack M & Richie",1,"20 chances",false
+"Least Played Matchups (Active Players Only - Max 1 Game)","Rivalries","Cross Season",15,"Rachel F & Rachel M",1,"20 chances",false
+"Least Played Matchups (Active Players Only - Max 1 Game)","Rivalries","Cross Season",15,"Rachel M & Tyler",1,"20 chances",false
+"Least Played Matchups (Active Players Only - Max 1 Game)","Rivalries","Cross Season",15,"Ian & Michael",1,"15 chances",false
+"Least Played Matchups (Active Players Only - Max 1 Game)","Rivalries","Cross Season",15,"Carly & Ian",1,"14 chances",false
+"Least Played Matchups (Active Players Only - Max 1 Game)","Rivalries","Cross Season",15,"Carly & Sam",1,"14 chances",false
+"Least Played Matchups (Active Players Only - Max 1 Game)","Rivalries","Cross Season",15,"Cody & Emma",1,"14 chances",false
+"Least Played Matchups (Active Players Only - Max 1 Game)","Rivalries","Cross Season",15,"Cody & Rachel M",1,"14 chances",false
+"Least Played Matchups (Active Players Only - Max 1 Game)","Rivalries","Cross Season",15,"Emma & Ian",1,"14 chances",false
+"Least Played Matchups (Active Players Only - Max 1 Game)","Rivalries","Cross Season",15,"Emma & Ryan",1,"14 chances",false
+"Least Played Matchups (Active Players Only - Max 1 Game)","Rivalries","Cross Season",15,"Emma & Tyler",1,"14 chances",false
+"Least Played Matchups (Active Players Only - Max 1 Game)","Rivalries","Cross Season",15,"Ian & Rachel F",1,"14 chances",false
+"Least Played Matchups (Active Players Only - Max 1 Game)","Rivalries","Cross Season",15,"Michael & Sam",1,"14 chances",false
+"Least Played Matchups (Active Players Only - Max 1 Game)","Rivalries","Cross Season",15,"Nick & Sam",1,"14 chances",false
+"Least Played Matchups (Active Players Only - Max 1 Game)","Rivalries","Cross Season",15,"Sam & Tyler",1,"14 chances",false
+"Least Played Matchups (Active Players Only - Max 1 Game)","Rivalries","Cross Season",15,"Ashley & Brittany",1,"8 chances",false
+"Least Played Matchups (Active Players Only - Max 1 Game)","Rivalries","Cross Season",15,"Ashley & Jack C",1,"8 chances",false
+"Least Played Matchups (Active Players Only - Max 1 Game)","Rivalries","Cross Season",15,"Brittany & Carly",1,"8 chances",false
+"Least Played Matchups (Active Players Only - Max 1 Game)","Rivalries","Cross Season",15,"Brittany & Emma",1,"8 chances",false
+"Least Played Matchups (Active Players Only - Max 1 Game)","Rivalries","Cross Season",15,"Brittany & Jack C",1,"8 chances",false
+"Least Played Matchups (Active Players Only - Max 1 Game)","Rivalries","Cross Season",15,"Brittany & Josh",1,"8 chances",false
+"Least Played Matchups (Active Players Only - Max 1 Game)","Rivalries","Cross Season",15,"Brittany & Nick",1,"8 chances",false
+"Least Played Matchups (Active Players Only - Max 1 Game)","Rivalries","Cross Season",15,"Brittany & Rachel M",1,"8 chances",false
+"Least Played Matchups (Active Players Only - Max 1 Game)","Rivalries","Cross Season",15,"Brittany & Ryan",1,"8 chances",false
+"Least Played Matchups (Active Players Only - Max 1 Game)","Rivalries","Cross Season",15,"Brittany & Steve",1,"8 chances",false
+"Least Played Matchups (Active Players Only - Max 1 Game)","Rivalries","Cross Season",15,"Carly & Jack C",1,"8 chances",false
+"Least Played Matchups (Active Players Only - Max 1 Game)","Rivalries","Cross Season",15,"Jack C & Jack M",1,"8 chances",false
+"Least Played Matchups (Active Players Only - Max 1 Game)","Rivalries","Cross Season",15,"Jack C & Josh",1,"8 chances",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",1,"Dan & Michael",26,"Never Met - 26 chances",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",2,"Michael & Rachel F",24,"Last: 2023 Week 3",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",2,"Michael & Ryan",24,"Last: 2023 Week 3",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",2,"Rachel F & Rachel M",24,"Last: 2023 Week 3",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",5,"Jack M & Ryan",22,"Last: 2023 Week 5",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",6,"Ashley & Tyler",21,"Last: 2023 Week 6",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",7,"Austin & Steve",19,"Last: 2024 Week 1",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",7,"Carly & Ian",19,"Last: 2024 Week 1",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",7,"Carly & Josh",19,"Last: 2024 Week 1",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",7,"Ian & Rachel F",19,"Last: 2024 Week 1",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",7,"Nick & Sam",19,"Last: 2024 Week 1",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",12,"Carly & Tyler",18,"Last: 2024 Week 2",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",12,"Cody & Rachel M",18,"Last: 2024 Week 2",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",14,"Ashley & Dan",17,"Last: 2024 Week 3",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",14,"Emma & Ryan",17,"Last: 2024 Week 3",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",14,"Emma & Tyler",17,"Last: 2024 Week 3",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",14,"Jack M & Josh",17,"Last: 2024 Week 3",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",14,"Josh & Michael",17,"Last: 2024 Week 3",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",19,"Austin & Nick",16,"Last: 2024 Week 4",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",19,"Carly & Steve",16,"Last: 2024 Week 4",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",19,"Ian & Rachel M",16,"Last: 2024 Week 4",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",19,"Jack M & Richie",16,"Last: 2024 Week 4",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",23,"Carly & Sam",15,"Last: 2024 Week 5",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",23,"Michael & Sam",15,"Last: 2024 Week 5",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",25,"Austin & Jack M",14,"Last: 2024 Week 6",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",25,"Cody & Emma",14,"Last: 2024 Week 6",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",25,"Cody & Ian",14,"Never Met - 14 chances",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",25,"Cody & Ryan",14,"Never Met - 14 chances",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",25,"Cody & Steve",14,"Never Met - 14 chances",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",25,"Dan & Rachel F",14,"Last: 2024 Week 6",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",25,"Emma & Josh",14,"Never Met - 14 chances",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",25,"Ryan & Tyler",14,"Last: 2024 Week 6",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",33,"Rachel F & Richie",13,"Last: 2024 Playoff 1",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",34,"Austin & Ian",10,"Last: 2025 Week 1",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",34,"Austin & Tyler",10,"Last: 2025 Week 1",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",34,"Brittany & Nick",10,"Last: 2025 Week 1",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",34,"Ian & Tyler",10,"Last: 2025 Week 1",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",34,"Jack C & Josh",10,"Last: 2025 Week 1",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",34,"Richie & Ryan",10,"Last: 2025 Week 1",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",34,"Sam & Steve",10,"Last: 2025 Week 1",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",41,"Ashley & Josh",9,"Last: 2025 Week 2",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",41,"Ashley & Nick",9,"Last: 2025 Week 2",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",41,"Brittany & Ryan",9,"Last: 2025 Week 2",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",41,"Carly & Dan",9,"Last: 2025 Week 2",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",41,"Carly & Jack M",9,"Last: 2025 Week 2",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",41,"Dan & Jack M",9,"Last: 2025 Week 2",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",41,"Emma & Sam",9,"Last: 2025 Week 2",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",41,"Steve & Tyler",9,"Last: 2025 Week 2",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",49,"Ashley & Rachel F",8,"Last: 2025 Week 3",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",49,"Ashley & Ryan",8,"Last: 2025 Week 3",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",49,"Austin & Jack C",8,"Never Met - 8 chances",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",49,"Brittany & Dan",8,"Never Met - 8 chances",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",49,"Brittany & Josh",8,"Last: 2025 Week 3",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",49,"Brittany & Michael",8,"Never Met - 8 chances",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",49,"Brittany & Sam",8,"Never Met - 8 chances",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",49,"Brittany & Steve",8,"Last: 2025 Week 3",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",49,"Carly & Rachel F",8,"Last: 2025 Week 3",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",49,"Carly & Ryan",8,"Last: 2025 Week 3",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",49,"Cody & Dan",8,"Last: 2025 Week 3",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",49,"Cody & Jack C",8,"Never Met - 8 chances",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",49,"Dan & Nick",8,"Last: 2025 Week 3",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",49,"Dan & Tyler",8,"Last: 2025 Week 3",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",49,"Emma & Jack C",8,"Never Met - 8 chances",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",49,"Emma & Rachel M",8,"Last: 2025 Week 3",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",49,"Ian & Jack M",8,"Last: 2025 Week 3",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",49,"Jack C & Jack M",8,"Last: 2025 Week 3",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",49,"Jack C & Nick",8,"Never Met - 8 chances",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",49,"Jack C & Rachel F",8,"Never Met - 8 chances",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",49,"Jack C & Rachel M",8,"Never Met - 8 chances",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",49,"Jack M & Sam",8,"Last: 2025 Week 3",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",49,"Josh & Richie",8,"Last: 2025 Week 3",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",49,"Josh & Steve",8,"Last: 2025 Week 3",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",49,"Rachel F & Ryan",8,"Last: 2025 Week 3",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",49,"Richie & Steve",8,"Last: 2025 Week 3",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",75,"Ashley & Jack C",7,"Last: 2025 Week 4",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",75,"Austin & Dan",7,"Last: 2025 Week 4",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",75,"Austin & Emma",7,"Last: 2025 Week 4",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",75,"Austin & Richie",7,"Last: 2025 Week 4",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",75,"Brittany & Rachel M",7,"Last: 2025 Week 4",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",75,"Carly & Jack C",7,"Last: 2025 Week 4",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",75,"Cody & Rachel F",7,"Last: 2025 Week 4",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",75,"Dan & Emma",7,"Last: 2025 Week 4",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",75,"Emma & Richie",7,"Last: 2025 Week 4",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",75,"Ian & Nick",7,"Last: 2025 Week 4",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",75,"Jack C & Michael",7,"Last: 2025 Week 4",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",75,"Nick & Ryan",7,"Last: 2025 Week 4",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",75,"Nick & Steve",7,"Last: 2025 Week 4",false
+"Longest Matchup Droughts (> 6 Weeks Since Last Play)","Rivalries","Cross Season",75,"Rachel M & Tyler",7,"Last: 2025 Week 4",false
+"Best Duo (Combined Avg Pts > 2.0)","Rivalries","Cross Season",1,"Jack M & Nick",4.80,"5 games",false
+"Best Duo (Combined Avg Pts > 2.0)","Rivalries","Cross Season",2,"Michael & Rachel M",4.50,"6 games",false
+"Best Duo (Combined Avg Pts > 2.0)","Rivalries","Cross Season",3,"Austin & Nick",4.40,"5 games",false
+"Best Duo (Combined Avg Pts > 2.0)","Rivalries","Cross Season",4,"Austin & Dan",4.00,"7 games",false
+"Best Duo (Combined Avg Pts > 2.0)","Rivalries","Cross Season",5,"Michael & Ryan",3.80,"5 games",false
+"Best Duo (Combined Avg Pts > 2.0)","Rivalries","Cross Season",6,"Ashley & Rachel F",3.75,"8 games",false
+"Best Duo (Combined Avg Pts > 2.0)","Rivalries","Cross Season",7,"Austin & Michael",3.67,"6 games",false
+"Best Duo (Combined Avg Pts > 2.0)","Rivalries","Cross Season",7,"Nick & Ryan",3.67,"6 games",false
+"Best Duo (Combined Avg Pts > 2.0)","Rivalries","Cross Season",7,"Jack M & Michael",3.67,"6 games",false
+"Best Duo (Combined Avg Pts > 2.0)","Rivalries","Cross Season",10,"Ashley & Richie",3.60,"5 games",false
+"Best Duo (Combined Avg Pts > 2.0)","Rivalries","Cross Season",10,"Carly & Rachel F",3.60,"5 games",false
+"Best Duo (Combined Avg Pts > 2.0)","Rivalries","Cross Season",12,"Nick & Rachel F",3.57,"7 games",false
+"Best Duo (Combined Avg Pts > 2.0)","Rivalries","Cross Season",13,"Ashley & Michael",3.50,"8 games",false
+"Best Duo (Combined Avg Pts > 2.0)","Rivalries","Cross Season",14,"Austin & Carly",3.43,"7 games",false
+"Best Duo (Combined Avg Pts > 2.0)","Rivalries","Cross Season",15,"Rachel M & Ryan",3.40,"5 games",false
+"Best Duo (Combined Avg Pts > 2.0)","Rivalries","Cross Season",15,"Rachel M & Richie",3.40,"5 games",false
+"Best Duo (Combined Avg Pts > 2.0)","Rivalries","Cross Season",17,"Michael & Nick",3.33,"6 games",false
+"Best Duo (Combined Avg Pts > 2.0)","Rivalries","Cross Season",18,"Austin & Rachel F",3.20,"5 games",false
+"Best Duo (Combined Avg Pts > 2.0)","Rivalries","Cross Season",18,"Rachel F & Richie",3.20,"5 games",false
+"Best Duo (Combined Avg Pts > 2.0)","Rivalries","Cross Season",18,"Allie & Carly",3.20,"5 games",false
+"Best Duo (Combined Avg Pts > 2.0)","Rivalries","Cross Season",18,"Ashley & Carly",3.20,"5 games",false
+"Best Duo (Combined Avg Pts > 2.0)","Rivalries","Cross Season",22,"Ashley & Rachel M",3.17,"6 games",false
+"Best Duo (Combined Avg Pts > 2.0)","Rivalries","Cross Season",23,"Dan & Nick",3.14,"7 games",false
+"Best Duo (Combined Avg Pts > 2.0)","Rivalries","Cross Season",24,"Dan & Richie",3.00,"6 games",false
+"Best Duo (Combined Avg Pts > 2.0)","Rivalries","Cross Season",24,"Josh & Richie",3.00,"6 games",false
+"Best Duo (Combined Avg Pts > 2.0)","Rivalries","Cross Season",24,"Ryan & Steve",3.00,"5 games",false
+"Best Duo (Combined Avg Pts > 2.0)","Rivalries","Cross Season",24,"Jack M & Rachel M",3.00,"5 games",false
+"Best Duo (Combined Avg Pts > 2.0)","Rivalries","Cross Season",24,"Michael & Steve",3.00,"5 games",false
+"Best Duo (Combined Avg Pts > 2.0)","Rivalries","Cross Season",24,"Jack M & Rachel F",3.00,"5 games",false
+"Best Duo (Combined Avg Pts > 2.0)","Rivalries","Cross Season",24,"Emma & Michael",3.00,"5 games",false
+"Best Duo (Combined Avg Pts > 2.0)","Rivalries","Cross Season",24,"Carly & Michael",3.00,"5 games",false
+"Best Duo (Combined Avg Pts > 2.0)","Rivalries","Cross Season",32,"Allie & Austin",2.80,"5 games",false
+"Best Duo (Combined Avg Pts > 2.0)","Rivalries","Cross Season",32,"Austin & Tyler",2.80,"5 games",false
+"Best Duo (Combined Avg Pts > 2.0)","Rivalries","Cross Season",32,"Josh & Nick",2.80,"5 games",false
+"Best Duo (Combined Avg Pts > 2.0)","Rivalries","Cross Season",32,"Cody & Tyler",2.80,"5 games",false
+"Best Duo (Combined Avg Pts > 2.0)","Rivalries","Cross Season",36,"Josh & Rachel F",2.71,"7 games",false
+"Best Duo (Combined Avg Pts > 2.0)","Rivalries","Cross Season",37,"Rachel M & Steve",2.67,"6 games",false
+"Best Duo (Combined Avg Pts > 2.0)","Rivalries","Cross Season",38,"Ashley & Becca",2.60,"5 games",false
+"Best Duo (Combined Avg Pts > 2.0)","Rivalries","Cross Season",38,"Dan & Steve",2.60,"5 games",false
+"Best Duo (Combined Avg Pts > 2.0)","Rivalries","Cross Season",38,"Emma & Jack M",2.60,"5 games",false
+"Best Duo (Combined Avg Pts > 2.0)","Rivalries","Cross Season",41,"Rachel F & Ryan",2.33,"6 games",false
+"Best Duo (Combined Avg Pts > 2.0)","Rivalries","Cross Season",42,"Austin & Josh",2.29,"7 games",false
+"Best Duo (Combined Avg Pts > 2.0)","Rivalries","Cross Season",43,"Dan & Josh",2.00,"5 games",false
+"Best Duo (Combined Avg Pts > 2.0)","Rivalries","Cross Season",43,"Dan & Ryan",2.00,"6 games",false
+"Best Duo (Combined Avg Pts > 2.0)","Rivalries","Cross Season",43,"Dan & Tyler",2.00,"5 games",false
+"Best Duo (Combined Avg Pts > 2.0)","Rivalries","Cross Season",46,"Josh & Ryan",1.63,"8 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",1,"Steve vs Ashley",0.00,"4 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",1,"Steve vs Jack M",0.00,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",1,"Emma vs Rachel M",0.00,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",1,"Steve vs Emma",0.00,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",5,"Tyler vs Rachel F",0.25,"4 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",5,"Emma vs Richie",0.25,"4 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",7,"Josh vs Michael",0.33,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",7,"Josh vs Rachel M",0.33,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",7,"Steve vs Rachel M",0.33,"6 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",7,"Jack M vs Ashley",0.33,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",7,"Dan vs Rachel F",0.33,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",7,"Steve vs Sam",0.33,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",7,"Ian vs Sam",0.33,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",7,"Carly vs Emma",0.33,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",15,"Emma vs Michael",0.40,"5 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",16,"Dan vs Nick",0.43,"7 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",17,"Ryan vs Ashley",0.50,"4 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",17,"Allie vs Dan",0.50,"4 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",17,"Allie vs Josh",0.50,"4 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",17,"Carly vs Nick",0.50,"4 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",21,"Josh vs Dan",0.60,"5 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",21,"Steve vs Michael",0.60,"5 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",21,"Carly vs Michael",0.60,"5 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",24,"Ryan vs Dan",0.67,"6 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",24,"Ryan vs Rachel F",0.67,"6 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",24,"Josh vs Richie",0.67,"6 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",24,"Ryan vs Austin",0.67,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",24,"Luke vs Nick",0.67,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",24,"Allie vs Ashley",0.67,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",24,"Ashley vs Austin",0.67,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",24,"Carly vs Dan",0.67,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",24,"Josh vs Cody",0.67,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",24,"Ian vs Jack M",0.67,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",34,"Josh vs Ryan",0.75,"8 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",34,"Richie vs Austin",0.75,"4 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",34,"Dan vs Ashley",0.75,"4 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",34,"Allie vs Nick",0.75,"4 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",34,"Allie vs Ryan",0.75,"4 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",34,"Carly vs Cody",0.75,"4 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",40,"Allie vs Austin",0.80,"5 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",40,"Tyler vs Austin",0.80,"5 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",40,"Tyler vs Dan",0.80,"5 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",40,"Ryan vs Rachel M",0.80,"5 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",40,"Josh vs Nick",0.80,"5 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",45,"Ryan vs Josh",0.88,"8 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",46,"Luke vs Michael",1.00,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",46,"Josh vs Austin",1.00,"7 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",46,"Luke vs Richie",1.00,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",46,"Allie vs Luke",1.00,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",46,"Luke vs Allie",1.00,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",46,"Ryan vs Luke",1.00,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",46,"Tyler vs Jack M",1.00,"4 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",46,"Jack M vs Tyler",1.00,"4 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",46,"Luke vs Tyler",1.00,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",46,"Ashley vs Jack M",1.00,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",46,"Jack M vs Rachel M",1.00,"5 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",46,"Tyler vs Cody",1.00,"5 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",46,"Emma vs Jack M",1.00,"5 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",46,"Nick vs Steve",1.00,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",46,"Steve vs Nick",1.00,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",46,"Steve vs Ian",1.00,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",46,"Sam vs Richie",1.00,"4 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",46,"Carly vs Jack M",1.00,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",46,"Ryan vs Ian",1.00,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",46,"Dan vs Ian",1.00,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",46,"Jack C vs Steve",1.00,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",67,"Rachel F vs Nick",1.14,"7 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",68,"Richie vs Rachel F",1.20,"5 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",68,"Rachel F vs Austin",1.20,"5 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",68,"Becca vs Ashley",1.20,"5 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",68,"Allie vs Carly",1.20,"5 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",68,"Dan vs Tyler",1.20,"5 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",68,"Steve vs Ryan",1.20,"5 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",68,"Dan vs Steve",1.20,"5 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",75,"Luke vs Josh",1.25,"4 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",75,"Josh vs Luke",1.25,"4 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",75,"Ashley vs Nick",1.25,"4 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",75,"Dan vs Luke",1.25,"4 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",75,"Dan vs Allie",1.25,"4 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",75,"Steve vs Tyler",1.25,"4 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",81,"Josh vs Rachel F",1.29,"7 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",81,"Austin vs Josh",1.29,"7 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",81,"Carly vs Austin",1.29,"7 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",84,"Dan vs Ryan",1.33,"6 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",84,"Ryan vs Richie",1.33,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",84,"Michael vs Nick",1.33,"6 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",84,"Ashley vs Josh",1.33,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",84,"Luke vs Ryan",1.33,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",84,"Tyler vs Luke",1.33,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",84,"Josh vs Sam",1.33,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",84,"Emma vs Carly",1.33,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",84,"Emma vs Rachel F",1.33,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",84,"Jack C vs Richie",1.33,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",84,"Steve vs Jack C",1.33,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",84,"Jack C vs Ian",1.33,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",96,"Ashley vs Michael",1.38,"8 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",97,"Dan vs Josh",1.40,"5 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",97,"Ashley vs Becca",1.40,"5 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",97,"Ryan vs Michael",1.40,"5 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",97,"Richie vs Ashley",1.40,"5 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",97,"Rachel M vs Richie",1.40,"5 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",97,"Steve vs Dan",1.40,"5 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",97,"Jack M vs Rachel F",1.40,"5 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",104,"Rachel F vs Josh",1.43,"7 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",105,"Michael vs Richie",1.50,"4 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",105,"Ashley vs Rachel F",1.50,"8 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",105,"Richie vs Dan",1.50,"6 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",105,"Dan vs Richie",1.50,"6 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",105,"Tyler vs Steve",1.50,"4 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",105,"Tyler vs Richie",1.50,"4 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",105,"Rachel M vs Ashley",1.50,"6 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",105,"Ryan vs Allie",1.50,"4 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",105,"Ian vs Josh",1.50,"4 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",105,"Richie vs Emma",1.50,"4 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",105,"Cody vs Carly",1.50,"4 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",105,"Sam vs Cody",1.50,"4 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",117,"Ashley vs Carly",1.60,"5 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",117,"Carly vs Ashley",1.60,"5 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",117,"Carly vs Rachel F",1.60,"5 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",117,"Rachel F vs Jack M",1.60,"5 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",117,"Jack M vs Emma",1.60,"5 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",122,"Rachel F vs Ryan",1.67,"6 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",122,"Austin vs Michael",1.67,"6 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",122,"Josh vs Ashley",1.67,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",122,"Dan vs Jack M",1.67,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",122,"Jack M vs Michael",1.67,"6 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",122,"Josh vs Carly",1.67,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",122,"Tyler vs Josh",1.67,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",122,"Josh vs Tyler",1.67,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",122,"Ashley vs Rachel M",1.67,"6 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",122,"Nick vs Rachel M",1.67,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",122,"Dan vs Carly",1.67,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",122,"Cody vs Richie",1.67,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",122,"Sam vs Steve",1.67,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",122,"Cody vs Josh",1.67,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",122,"Ian vs Steve",1.67,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",122,"Emma vs Steve",1.67,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",122,"Rachel F vs Cody",1.67,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",122,"Rachel F vs Emma",1.67,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",122,"Ian vs Ryan",1.67,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",141,"Ashley vs Ryan",1.75,"4 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",141,"Nick vs Carly",1.75,"4 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",141,"Tyler vs Michael",1.75,"4 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",141,"Rachel F vs Tyler",1.75,"4 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",141,"Josh vs Ian",1.75,"4 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",141,"Cody vs Sam",1.75,"4 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",141,"Richie vs Sam",1.75,"4 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",148,"Ryan vs Steve",1.80,"5 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",148,"Cody vs Tyler",1.80,"5 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",150,"Nick vs Ryan",1.83,"6 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",150,"Ryan vs Nick",1.83,"6 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",152,"Nick vs Austin",2.00,"5 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",152,"Austin vs Richie",2.00,"4 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",152,"Austin vs Rachel F",2.00,"5 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",152,"Rachel F vs Richie",2.00,"5 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",152,"Michael vs Luke",2.00,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",152,"Richie vs Michael",2.00,"4 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",152,"Richie vs Luke",2.00,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",152,"Luke vs Dan",2.00,"4 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",152,"Austin vs Allie",2.00,"5 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",152,"Michael vs Austin",2.00,"6 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",152,"Nick vs Michael",2.00,"6 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",152,"Nick vs Allie",2.00,"4 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",152,"Michael vs Josh",2.00,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",152,"Austin vs Ryan",2.00,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",152,"Dan vs Austin",2.00,"7 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",152,"Austin vs Dan",2.00,"7 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",152,"Ashley vs Allie",2.00,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",152,"Rachel F vs Carly",2.00,"5 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",152,"Carly vs Allie",2.00,"5 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",152,"Austin vs Tyler",2.00,"5 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",152,"Jack M vs Dan",2.00,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",152,"Rachel M vs Austin",2.00,"4 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",152,"Richie vs Rachel M",2.00,"5 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",152,"Michael vs Jack M",2.00,"6 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",152,"Carly vs Josh",2.00,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",152,"Nick vs Josh",2.00,"5 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",152,"Ashley vs Steve",2.00,"4 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",152,"Jack M vs Nick",2.00,"5 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",152,"Rachel M vs Jack M",2.00,"5 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",152,"Michael vs Tyler",2.00,"4 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",152,"Jack M vs Steve",2.00,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",152,"Richie vs Cody",2.00,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",152,"Sam vs Austin",2.00,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",152,"Jack M vs Ian",2.00,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",152,"Rachel M vs Sam",2.00,"4 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",152,"Ian vs Richie",2.00,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",152,"Cody vs Rachel F",2.00,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",152,"Jack M vs Carly",2.00,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",152,"Cody vs Nick",2.00,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",152,"Nick vs Cody",2.00,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",152,"Brittany vs Rachel F",2.00,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",152,"Rachel F vs Brittany",2.00,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",152,"Ian vs Jack C",2.00,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",195,"Michael vs Ashley",2.13,"8 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",196,"Austin vs Carly",2.14,"7 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",197,"Michael vs Rachel M",2.17,"6 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",198,"Ashley vs Richie",2.20,"5 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",199,"Nick vs Richie",2.25,"4 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",199,"Richie vs Nick",2.25,"4 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",199,"Nick vs Ashley",2.25,"4 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",199,"Ashley vs Dan",2.25,"4 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",199,"Rachel F vs Ashley",2.25,"8 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",199,"Josh vs Allie",2.25,"4 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",199,"Sam vs Rachel M",2.25,"4 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",206,"Richie vs Ryan",2.33,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",206,"Richie vs Josh",2.33,"6 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",206,"Rachel M vs Josh",2.33,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",206,"Rachel M vs Steve",2.33,"6 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",206,"Rachel M vs Michael",2.33,"6 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",206,"Austin vs Ashley",2.33,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",206,"Rachel M vs Nick",2.33,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",206,"Austin vs Sam",2.33,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",206,"Sam vs Josh",2.33,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",215,"Austin vs Nick",2.40,"5 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",215,"Michael vs Ryan",2.40,"5 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",215,"Michael vs Steve",2.40,"5 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",215,"Michael vs Carly",2.40,"5 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",219,"Nick vs Rachel F",2.43,"7 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",220,"Austin vs Rachel M",2.50,"4 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",220,"Richie vs Tyler",2.50,"4 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",222,"Rachel M vs Ryan",2.60,"5 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",222,"Michael vs Emma",2.60,"5 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",224,"Rachel F vs Dan",2.67,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",224,"Rachel M vs Emma",2.67,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",224,"Richie vs Ian",2.67,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",224,"Richie vs Jack C",2.67,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",228,"Nick vs Dan",2.71,"7 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",229,"Nick vs Jack M",2.80,"5 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",230,"Nick vs Luke",3.00,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",230,"Sam vs Ian",3.00,"3 games",false
+"Worst Enemies (Lowest Avg Score vs Opponent)","Rivalries","Cross Season",230,"Ian vs Dan",3.00,"3 games",false
 "Lowest Points to Qualify for Playoffs","Cutoffs","League Metrics",1,"Ryan",10,"2024",false
 "Lowest Points to Qualify for Playoffs","Cutoffs","League Metrics",2,"Richie",11,"2022",false
 "Lowest Points to Qualify for Playoffs","Cutoffs","League Metrics",2,"Ashley",11,"2025",false
 "Lowest Points to Qualify for Playoffs","Cutoffs","League Metrics",4,"Rachel M",12,"2023",false
+"Hardest Path to Playoffs (Single Season SoS)","Difficulty","League Metrics",1,"Rachel M",1.583,"2025",false
+"Hardest Path to Playoffs (Single Season SoS)","Difficulty","League Metrics",2,"Michael",1.556,"2024",false
+"Hardest Path to Playoffs (Single Season SoS)","Difficulty","League Metrics",2,"Sam",1.556,"2025",false
+"Hardest Path to Playoffs (Single Season SoS)","Difficulty","League Metrics",4,"Richie",1.528,"2022",false
+"Hardest Path to Playoffs (Single Season SoS)","Difficulty","League Metrics",5,"Nick",1.509,"2022",false
+"Hardest Path to Playoffs (Single Season SoS)","Difficulty","League Metrics",5,"Cody",1.509,"2024",false
+"Hardest Path to Playoffs (Single Season SoS)","Difficulty","League Metrics",7,"Rachel F",1.500,"2024",false
+"Hardest Path to Playoffs (Single Season SoS)","Difficulty","League Metrics",8,"Michael",1.463,"2022",false
+"Hardest Path to Playoffs (Single Season SoS)","Difficulty","League Metrics",9,"Luke",1.454,"2022",false
+"Hardest Path to Playoffs (Single Season SoS)","Difficulty","League Metrics",9,"Austin",1.454,"2024",false
+"Hardest Path to Playoffs (Single Season SoS)","Difficulty","League Metrics",11,"Rachel M",1.444,"2023",false
+"Hardest Path to Playoffs (Single Season SoS)","Difficulty","League Metrics",12,"Michael",1.435,"2023",false
+"Hardest Path to Playoffs (Single Season SoS)","Difficulty","League Metrics",12,"Carly",1.435,"2024",false
+"Hardest Path to Playoffs (Single Season SoS)","Difficulty","League Metrics",12,"Ashley",1.435,"2025",false
+"Hardest Path to Playoffs (Single Season SoS)","Difficulty","League Metrics",15,"Nick",1.426,"2024",false
+"Hardest Path to Playoffs (Single Season SoS)","Difficulty","League Metrics",15,"Jack M",1.426,"2025",false
+"Hardest Path to Playoffs (Single Season SoS)","Difficulty","League Metrics",17,"Michael",1.417,"2025",false
+"Hardest Path to Playoffs (Single Season SoS)","Difficulty","League Metrics",18,"Richie",1.380,"2024",false
+"Hardest Path to Playoffs (Single Season SoS)","Difficulty","League Metrics",19,"Ian",1.352,"2025",false
+"Hardest Path to Playoffs (Single Season SoS)","Difficulty","League Metrics",20,"Richie",1.333,"2025",false
+"Hardest Path to Playoffs (Single Season SoS)","Difficulty","League Metrics",21,"Dan",1.324,"2025",false
+"Hardest Path to Playoffs (Single Season SoS)","Difficulty","League Metrics",22,"Nick",1.315,"2023",false
+"Hardest Path to Playoffs (Single Season SoS)","Difficulty","League Metrics",22,"Austin",1.315,"2023",false
+"Hardest Path to Playoffs (Single Season SoS)","Difficulty","League Metrics",24,"Ryan",1.167,"2024",false
 "Worst Start (2 Games) to Make Playoffs","Comebacks","League Metrics",1,"Richie",2,"2022 - Final: 11",false
 "Worst Start (2 Games) to Make Playoffs","Comebacks","League Metrics",2,"Michael",3,"2023 - Final: 13",false
 "Worst Start (2 Games) to Make Playoffs","Comebacks","League Metrics",2,"Ryan",3,"2024 - Final: 10",false

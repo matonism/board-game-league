@@ -91,6 +91,12 @@ const HistoricalDataScreen = props => {
                     data={historicalData.postSeason}
                     getSubtable={(player) => <HeadToHeadTable variant="postseason-head-to-head" player={player}></HeadToHeadTable>}
                 ></ExpandableDataTable>
+
+                <a href="https://bglcompanion.com/analysis" className="no-underline">
+                    <div className="historical-data-button-container">
+                        <div className="historical-data-button">Leaderboards</div>
+                    </div>
+                </a>
             </div>)
         }
     }

@@ -3,7 +3,11 @@ const path = require('path');
 
 // CONFIGURATION
 const OUTPUT_DIR = path.join(__dirname, 'output');
-const ANALYSIS_DIR = path.join(__dirname, 'analysis');
+const ANALYSIS_DIR = path.join(__dirname, 'analysis'); 
+if (!fs.existsSync(ANALYSIS_DIR)){
+    fs.mkdirSync(ANALYSIS_DIR);
+}
+
 const DATA_FILE = path.join(OUTPUT_DIR, 'Schedules.txt');
 const CSV_FILE = path.join(OUTPUT_DIR, 'league_stats_export.csv');
 const JSON_FILE = path.join(OUTPUT_DIR, 'leagueLeaderboard.txt');
@@ -50,7 +54,6 @@ function main() {
         console.log(`Identified ${activePlayersSet.size} active players in season ${maxSeason}.`);
 
         // 3. Identify Seasons with Playoffs (Completed Seasons)
-        // Used to determine if the "Current/Latest" season should be included in jump/drop stats
         const seasonsWithPlayoffs = new Set(
             allGames.filter(g => g.isPostSeason).map(g => g.season)
         );
@@ -72,10 +75,10 @@ function main() {
         [SCOPE_REG, SCOPE_COM].forEach(scope => {
             const dataset = scope === SCOPE_REG ? regSeasonGames : allGames;
             
-            // 1. Averages (Moved Up)
+            // 1. Averages
             processStat("Average Points per Game", "Averages", scope, getAveragePoints(dataset));
 
-            // 2. Placement Rates (Moved Up) - Min 5 Games
+            // 2. Placement Rates - Min 5 Games
             const minGames = 5;
             processStat(`% of 1st Place Finishes (Min ${minGames} Games)`, "Placement Rates", scope, getPlacementRates(dataset, g => g.place === 1, minGames));
             processStat(`% of 2nd Place Finishes (Min ${minGames} Games)`, "Placement Rates", scope, getPlacementRates(dataset, g => g.place === 2, minGames));
@@ -114,6 +117,11 @@ function main() {
             [10, 20, 30, 40, 50].forEach(target => {
                 processStat(`Fastest to ${target} Career Points (# Games)`, "Speed Records", scope, getFastestToCareerPoints(dataset, target));
             });
+
+            
+            const sosStats = calculateStrengthOfSchedule(dataset);
+            processStat("Hardest Strength of Schedule (All-Time Avg Opponent Pts)", "Difficulty", scope, sosStats.hardest);
+            processStat("Easiest Strength of Schedule (All-Time Avg Opponent Pts)", "Difficulty", scope, sosStats.easiest);
         });
 
         // --- SECTION 2: Single Season Records ---
@@ -162,6 +170,10 @@ function main() {
 
         // New Leaderboard: Most Games Hosted (Location Popularity)
         processStat("Most Games Hosted (By Location)", "Totals", SCOPE_HOME, getLocationCounts(allGames));
+        
+        // NEW: Neutral Site Stats
+        processStat("Most Games Played at Neutral Sites", "Neutral Sites", SCOPE_HOME, getNeutralSiteCounts(allGames));
+        processStat("Most Popular Neutral Sites", "Neutral Sites", SCOPE_HOME, getNeutralSiteLocationCounts(allGames));
 
         processStat("Average Points at Home (Min 5 Home Games)", "Averages", SCOPE_HOME, getLocationAveragePoints(homeDataset, true, 5));
         processStat("Average Points Away (Min 5 Away Games)", "Averages", SCOPE_HOME, getLocationAveragePoints(homeDataset, false, 5));
@@ -173,7 +185,12 @@ function main() {
         processStat("% of Games Played at Home (Min 5 Games)", "Averages", SCOPE_HOME, getLocationPercent(homeDataset, true, 5));
         processStat("% of Games Played Away (Min 5 Games)", "Averages", SCOPE_HOME, getLocationPercent(homeDataset, false, 5));
 
-        processStat("Most Home Games Played", "Totals", SCOPE_HOME, getCounts(homeDataset, g => g.isHome));
+        processStat("Most Home Games Played (All-Time)", "Totals", SCOPE_HOME, getCounts(homeDataset, g => g.isHome));
+        processStat("Most Home Games Played (Single Season)", "Totals", SCOPE_HOME, getMostHomeGamesInSeason(homeDataset));
+        processStat("Fewest Home Games Played (Single Season)", "Totals", SCOPE_HOME, getFewestHomeGamesInSeason(homeDataset, seasonsWithPlayoffs));
+        // NEW: Least Recent Host
+        processStat("Last Hosted (Active Players)", "Totals", SCOPE_HOME, getLeastRecentHost(allGames, activePlayersSet));
+
         processStat("Most Wins at Home", "Totals", SCOPE_HOME, getCounts(homeDataset, g => g.isHome && g.place === 1));
         processStat("Most Wins Away", "Totals", SCOPE_HOME, getCounts(homeDataset, g => !g.isHome && g.place === 1));
         
@@ -186,6 +203,13 @@ function main() {
         for(let w=1; w<=6; w++) {
             processStat(`Best Week ${w} Performance Avg (Min ${minRequiredGames} games)`, "Averages by Week", SCOPE_CROSS, getWeeklyAverages(allGames, w, minRequiredGames));
         }
+        
+        // NEW: The Opener and The Closer
+        const openers = getSplitPerformance(regSeasonGames, [1, 2, 3], minRequiredGames);
+        const closers = getSplitPerformance(regSeasonGames, [4, 5, 6], minRequiredGames);
+        processStat(`The Opener (Avg Pts Wks 1-3) (Min ${minRequiredGames} games)`, "Averages by Week", SCOPE_CROSS, openers);
+        processStat(`The Closer (Avg Pts Wks 4-6) (Min ${minRequiredGames} games)`, "Averages by Week", SCOPE_CROSS, closers);
+
 
         // Risers and Fallers
         processStat("Biggest Points Jump (Season to Season)", "Risers and Fallers", SCOPE_CROSS, getBiggestPointJumps(regSeasonGames, seasonsWithPlayoffs));
@@ -196,13 +220,26 @@ function main() {
         
         // NEW: Consistency (Standard Deviation of Season Point Totals) - Min 3 seasons
         processStat("Most Consistent Scorers (Season Pts Std Dev)", "Risers and Fallers", SCOPE_CROSS, getPointsConsistency(regSeasonGames, 3));
+        
+        // Rivalries / Matchups
+        processStat("Most Common Matchups (Regular Season Only)", "Rivalries", SCOPE_CROSS, getMostCommonMatchups(regSeasonGames));
+        processStat("Least Played Matchups (Active Players Only - Max 1 Game)", "Rivalries", SCOPE_CROSS, getLeastPlayedMatchups(allGames, activePlayersSet));
+        processStat("Longest Matchup Droughts (> 6 Weeks Since Last Play)", "Rivalries", SCOPE_CROSS, getMatchupDroughts(allGames, activePlayersSet));
 
+        // NEW: Best Duo / Worst Enemies
+        processStat("Best Duo (Combined Avg Pts > 2.0)", "Rivalries", SCOPE_CROSS, getBestDuos(regSeasonGames));
+        processStat("Worst Enemies (Lowest Avg Score vs Opponent)", "Rivalries", SCOPE_CROSS, getWorstEnemies(regSeasonGames));
 
         // --- SECTION 6: League Metrics ---
         const SCOPE_METRICS = "League Metrics";
         const seasonMetrics = calculateSeasonMetrics(allGames);
         
         processStat("Lowest Points to Qualify for Playoffs", "Cutoffs", SCOPE_METRICS, seasonMetrics.lowestQualifiers);
+        
+        // Strength of Schedule
+        const sosStats = calculateStrengthOfSchedule(regSeasonGames);
+        processStat("Hardest Path to Playoffs (Single Season SoS)", "Difficulty", SCOPE_METRICS, getHardestPathToPlayoffs(regSeasonGames, allGames)); // Requires passing allGames to check playoff status
+
         
         processStat("Worst Start (2 Games) to Make Playoffs", "Comebacks", SCOPE_METRICS, seasonMetrics.worstStarts2);
         processStat("Worst Start (3 Games) to Make Playoffs", "Comebacks", SCOPE_METRICS, seasonMetrics.worstStarts3);
@@ -217,8 +254,7 @@ function main() {
         fs.writeFileSync(CSV_FILE, csvRows.join('\n'));
         console.log(`SUCCESS: CSV exported to ${CSV_FILE}`);
 
-        // fs.writeFileSync(JSON_FILE, JSON.stringify(jsonOutput, null, 2));
-        fs.writeFileSync(JSON_FILE, JSON.stringify(jsonOutput));
+        fs.writeFileSync(JSON_FILE, JSON.stringify(jsonOutput, null, 2));
         console.log(`SUCCESS: JSON exported to ${JSON_FILE}`);
 
         // 4. GENERATE HTML DASHBOARD
@@ -245,40 +281,31 @@ function generateHtmlDashboard(data) {
     <style>
         :root { --primary: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #1e293b; --border: #e2e8f0; --active-streak: #16a34a; }
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; }
-        .container { max-width: 1200px; margin: 0 auto; position: relative; }
-        
-        /* Back Button Style */
-        .back-nav {
-            position: absolute;
-            top: 0;
-            right: 0;
-            padding: 10px;
-        }
-        .btn-back {
-            display: inline-flex;
-            align-items: center;
-            padding: 8px 16px;
-            background: var(--surface);
-            color: var(--primary);
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 0.9em;
-            border: 1px solid var(--primary);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            transition: all 0.2s;
-        }
-        .btn-back:hover {
-            background: var(--primary);
-            color: white;
-        }
-
-        header { margin-bottom: 30px; text-align: center; padding-top: 10px; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        header { margin-bottom: 30px; text-align: center; position: relative; }
         h1 { margin: 0; color: var(--primary); }
         .timestamp { color: #64748b; font-size: 0.9em; }
         
+        /* Back Button */
+        .back-btn {
+            position: absolute;
+            top: 0;
+            left: 0;
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 600;
+            padding: 8px 15px;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 0.9em;
+            transition: all 0.2s;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        .back-btn:hover { background: #f1f5f9; }
+
         /* Tabs */
-        .tabs { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; justify-content: center; }
+        .tabs { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; justify-content: center; margin-top: 20px; }
         .tab-btn { padding: 10px 20px; border: none; background: var(--surface); cursor: pointer; border-radius: 8px; font-weight: 600; color: #64748b; box-shadow: 0 1px 3px rgba(0,0,0,0.1); transition: all 0.2s; }
         .tab-btn.active { background: var(--primary); color: white; }
         .tab-btn:hover:not(.active) { background: #e0f2fe; color: var(--primary); }
@@ -298,7 +325,7 @@ function generateHtmlDashboard(data) {
 
         /* Cards */
         .card { background: var(--surface); border-radius: 12px; padding: 20px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); border: 1px solid var(--border); display: flex; flex-direction: column; }
-        .card h3 { margin-top: 0; color: var(--primary); font-size: 1.1em; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; margin-bottom: 15px; }
+        .card h3 { margin-top: 0; color: var(--primary); font-size: 1.1em; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; margin-bottom: 15px; display: flex; align-items: center; justify-content: space-between; }
         
         /* Table */
         table { width: 100%; border-collapse: collapse; font-size: 0.95em; }
@@ -331,69 +358,61 @@ function generateHtmlDashboard(data) {
         /* Tooltip Text */
         .tooltip-text {
             visibility: hidden;
-            width: 220px;
-            background-color: #333;
+            width: 240px;
+            background-color: #1e293b;
             color: #fff;
             text-align: center;
             border-radius: 6px;
-            padding: 8px;
+            padding: 10px;
             position: absolute;
-            z-index: 1000; /* Ensure high z-index to sit on top */
-            bottom: 125%; /* Position above the icon */
+            z-index: 100;
+            bottom: 135%;
             left: 50%;
-            margin-left: -110px; /* Center the tooltip */
+            margin-left: -120px;
             opacity: 0;
-            transition: opacity 0.3s;
-            font-size: 0.8rem;
+            transition: opacity 0.2s, visibility 0.2s, bottom 0.2s;
+            font-size: 0.85rem;
             line-height: 1.4;
             font-weight: normal;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            pointer-events: none;
         }
 
-        /* Tooltip Arrow */
         .tooltip-text::after {
             content: "";
             position: absolute;
-            top: 100%; /* At the bottom of the tooltip */
+            top: 100%;
             left: 50%;
             margin-left: -5px;
             border-width: 5px;
             border-style: solid;
-            border-color: #333 transparent transparent transparent;
+            border-color: #1e293b transparent transparent transparent;
         }
 
-        /* Show the tooltip text when hovering over the container or when active class is present */
         .tooltip-container:hover .tooltip-text,
         .tooltip-container.active .tooltip-text {
             visibility: visible;
             opacity: 1;
+            bottom: 125%;
         }
-        
+
         /* Hidden Rows */
         .hidden-rows { display: none; }
         .show-more-btn { margin-top: auto; padding-top: 15px; background: none; border: none; color: var(--primary); cursor: pointer; font-size: 0.9em; font-weight: 600; width: 100%; text-align: center; }
         .show-more-btn:hover { text-decoration: underline; }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-        /* Responsive adjustment for the back button on small screens */
+        
         @media (max-width: 600px) {
-            .back-nav { position: static; text-align: center; margin-bottom: 10px; }
+            .back-btn { position: static; display: inline-block; margin-bottom: 15px; }
+            header { text-align: center; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <nav class="back-nav">
-            <a href="https://bglcompanion.com" class="btn-back">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px;">
-                    <path d="M19 12H5M12 19l-7-7 7-7"/>
-                </svg>
-                Back to BGL
-            </a>
-        </nav>
-
         <header>
+            <a href="https://www.bglcompanion.com" class="back-btn">&larr; Back to BGL</a>
             <h1>League Analytics Dashboard</h1>
             <div class="timestamp">Generated: ${new Date().toLocaleString()}</div>
         </header>
@@ -409,23 +428,16 @@ function generateHtmlDashboard(data) {
         function init() {
             const tabsContainer = document.getElementById('tabContainer');
             const contentContainer = document.getElementById('contentContainer');
-
-            // Close tooltips when clicking outside
-            document.addEventListener('click', function(event) {
-                // If the click is NOT inside a tooltip-container, remove 'active' from all tooltip-containers
-                if (!event.target.closest('.tooltip-container')) {
+            
+            // Global Click Listener for closing tooltips
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.tooltip-container')) {
                     document.querySelectorAll('.tooltip-container.active').forEach(el => {
                         el.classList.remove('active');
                     });
-                } else {
-                    // If it IS inside a container, close others to keep it clean (optional but nice)
-                    const clickedContainer = event.target.closest('.tooltip-container');
-                    document.querySelectorAll('.tooltip-container.active').forEach(el => {
-                        if (el !== clickedContainer) el.classList.remove('active');
-                    });
                 }
             });
-            
+
             // 1. Group Data by Scope
             const scopes = {};
             LEAGUE_DATA.leaderboards.forEach(lb => {
@@ -526,27 +538,38 @@ function generateHtmlDashboard(data) {
             let infoText = "";
             // Check board category for specific tooltips
             if (board.category.includes("Consistent") || board.category.includes("Std Dev")) {
-                infoText = "Standard Deviation measures consistency. A lower value means the player's performance is more predictable/consistent (less variance).";
+                infoText = "<strong>Standard Deviation</strong> measures consistency. <br>A lower value means the player's performance is more predictable/consistent (less variance).";
             } else if (board.category.includes("Differential")) {
-                infoText = "Positive values (+) indicate better performance at HOME. Negative values (-) indicate better performance AWAY.";
+                infoText = "<strong>(+) Positive:</strong> Better at HOME.<br><strong>(-) Negative:</strong> Better AWAY.";
+            } else if (board.category.includes("Strength of Schedule")) {
+                infoText = "Calculated as the average regular season score of all opponents faced.";
+            } else if (board.category.includes("Worst Enemies")) {
+                infoText = "Lowest average score when playing against this specific opponent (Min 3 games).";
+            } else if (board.category.includes("Best Duo")) {
+                infoText = "Highest combined average score per game when playing at the same table (Min 5 games).";
+            }else if (board.category.includes("Hardest Path to Playoffs")) {
+                infoText = "Calculates the toughest strength of schedule for a player that still made playoffs";
             }
 
             // Create SVG icon if tooltip text exists
             // Using a container to handle hover/click states
             const infoIconHtml = infoText ? 
-                \`<span class="tooltip-container" onclick="this.classList.toggle('active')">
-                    <span class="info-icon" style="cursor:pointer; margin-left:5px; color:#64748b; font-size:0.8em; vertical-align:middle;">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                \`<div class="tooltip-container" onclick="this.classList.toggle('active'); event.stopPropagation();">
+                    <div class="info-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="12" cy="12" r="10"></circle>
                             <line x1="12" y1="16" x2="12" y2="12"></line>
                             <line x1="12" y1="8" x2="12.01" y2="8"></line>
                         </svg>
-                    </span>
+                    </div>
                     <span class="tooltip-text">\${infoText}</span>
-                  </span>\` : "";
+                  </div>\` : "";
 
             card.innerHTML = \`
-                <h3>\${board.category} \${infoIconHtml}</h3>
+                <h3>
+                    <span>\${board.category}</span>
+                    \${infoIconHtml}
+                </h3>
                 <table>
                     <thead><tr><th>Rank</th><th>Player</th><th style="text-align:right">Value</th><th></th></tr></thead>
                     <tbody>\${rowsHtml}</tbody>
@@ -655,6 +678,8 @@ function processStat(category, subcategory, scope, sortedList) {
 
 function parseSchedule(data) {
     const games = [];
+    let gameIdCounter = 1; // Unique ID for each table result
+
     for (const [seasonStr, weeks] of Object.entries(data)) {
         const season = parseInt(seasonStr);
         weeks.forEach(weekData => {
@@ -664,12 +689,24 @@ function parseSchedule(data) {
             const isPostSeason = weekLabel.includes('Playoff') || weekLabel.includes('Championship');
             if (weekData.results) {
                 weekData.results.forEach(table => {
+                    const currentGameId = gameIdCounter++; // Assign ID
                     const location = table.location;
+                    
+                    // Determine if Neutral Site (No player in the game is in the location string)
+                    let isNeutralSite = false;
+                    if (table.players && location) {
+                        const playerNames = table.players.map(p => p.player);
+                        // Check if ANY player name appears in the location string
+                        const isHosted = playerNames.some(name => location.includes(name));
+                        isNeutralSite = !isHosted && location !== 'TBD' && location !== null && location !== 'DNP';
+                    }
+
                     if (table.players) {
                         table.players.forEach(p => {
                             if (p.placement) {
                                 const place = parseInt(p.placement);
                                 games.push({
+                                    gameId: currentGameId, // Pass ID through
                                     season: season,
                                     weekLabel: weekLabel,
                                     weekIndex: weekIndex,
@@ -679,7 +716,8 @@ function parseSchedule(data) {
                                     place: place,
                                     points: POINTS[place] || 0,
                                     isHome: location.includes(p.player),
-                                    location: location // Ensure location is passed through
+                                    isNeutral: isNeutralSite, 
+                                    location: location
                                 });
                             }
                         });
@@ -732,6 +770,237 @@ function getAveragePoints(games, minGames = 1) {
         results.push({ player, value: avg.toFixed(2), raw: avg, extra: `(${records.length} games)` });
     }
     return results.sort((a, b) => b.raw - a.raw);
+}
+
+// NEW: Strength of Schedule
+function calculateStrengthOfSchedule(games) {
+    // 1. Calculate Avg Points for EVERY player first
+    const playerAvgs = {};
+    const grouped = groupByPlayer(games);
+    for (const [player, records] of Object.entries(grouped)) {
+        const sum = records.reduce((acc, r) => acc + r.points, 0);
+        playerAvgs[player] = sum / records.length;
+    }
+
+    // 2. Map GameID -> List of Players in that game
+    const gameTables = {};
+    games.forEach(g => {
+        if(!gameTables[g.gameId]) gameTables[g.gameId] = [];
+        gameTables[g.gameId].push(g.player);
+    });
+
+    // 3. For each player, calculate avg of OPPONENTS' avgs
+    const results = [];
+    for (const [player, records] of Object.entries(grouped)) {
+        let totalOpponentStrength = 0;
+        let opponentCount = 0;
+
+        records.forEach(g => {
+            const tablePlayers = gameTables[g.gameId] || [];
+            tablePlayers.forEach(opp => {
+                if (opp !== player && playerAvgs[opp] !== undefined) {
+                    totalOpponentStrength += playerAvgs[opp];
+                    opponentCount++;
+                }
+            });
+        });
+
+        if (opponentCount > 0) {
+            const sos = totalOpponentStrength / opponentCount;
+            results.push({
+                player: player,
+                value: sos.toFixed(3),
+                raw: sos,
+                extra: `(${opponentCount} opps)`
+            });
+        }
+    }
+
+    // Sort: Hardest (Highest Avg Opponent Score) -> Easiest
+    const hardest = [...results].sort((a,b) => b.raw - a.raw);
+    const easiest = [...results].sort((a,b) => a.raw - b.raw);
+
+    return { hardest, easiest, playerAvgs }; // Return playerAvgs for reuse
+}
+
+// NEW: Hardest Path to Playoffs (Single Season SoS for Qualifiers)
+function getHardestPathToPlayoffs(regGames, allGames) {
+    // 1. Identify Playoff Qualifiers per Season
+    const qualifiers = {}; // Season -> Set(Players)
+    allGames.filter(g => g.isPostSeason).forEach(g => {
+        if(!qualifiers[g.season]) qualifiers[g.season] = new Set();
+        qualifiers[g.season].add(g.player);
+    });
+
+    // 2. Calculate Season-Specific SoS for everyone
+    // We need player averages PER SEASON, not all-time
+    const seasonResults = [];
+    
+    // Group reg games by season
+    const gamesBySeason = {};
+    regGames.forEach(g => {
+        if(!gamesBySeason[g.season]) gamesBySeason[g.season] = [];
+        gamesBySeason[g.season].push(g);
+    });
+
+    for (const [season, sGames] of Object.entries(gamesBySeason)) {
+        const sQualifiers = qualifiers[season];
+        if (!sQualifiers) continue;
+
+        // Calcavgs for this season
+        const sGrouped = groupByPlayer(sGames);
+        const sPlayerAvgs = {};
+        for(const [p, recs] of Object.entries(sGrouped)) {
+            sPlayerAvgs[p] = recs.reduce((a,b)=>a+b.points,0) / recs.length;
+        }
+
+        // Map Tables
+        const sTables = {};
+        sGames.forEach(g => {
+            if(!sTables[g.gameId]) sTables[g.gameId] = [];
+            sTables[g.gameId].push(g.player);
+        });
+
+        // Calc SoS for QUALIFIERS only
+        sQualifiers.forEach(player => {
+            if (!sGrouped[player]) return;
+            
+            let totalOppStr = 0;
+            let count = 0;
+            
+            sGrouped[player].forEach(g => {
+                const opps = sTables[g.gameId] || [];
+                opps.forEach(opp => {
+                    if (opp !== player && sPlayerAvgs[opp] !== undefined) {
+                        totalOppStr += sPlayerAvgs[opp];
+                        count++;
+                    }
+                });
+            });
+
+            if (count > 0) {
+                const sos = totalOppStr / count;
+                seasonResults.push({
+                    player: player,
+                    value: sos.toFixed(3),
+                    raw: sos,
+                    extra: `(${season})`
+                });
+            }
+        });
+    }
+
+    return seasonResults.sort((a,b) => b.raw - a.raw);
+}
+
+// NEW: The Opener & Closer (Splits)
+function getSplitPerformance(games, weeksArray, minGames) {
+    // Filter games to only included weeks
+    const splitGames = games.filter(g => weeksArray.includes(g.weekIndex));
+    const grouped = groupByPlayer(splitGames);
+    const results = [];
+
+    for (const [player, records] of Object.entries(grouped)) {
+        if (records.length < minGames) continue;
+        const avg = records.reduce((a,b)=>a+b.points,0) / records.length;
+        results.push({
+            player,
+            value: avg.toFixed(2),
+            raw: avg,
+            extra: `(${records.length} games)`
+        });
+    }
+    return results.sort((a,b) => b.raw - a.raw);
+}
+
+// NEW: Worst Enemies (Opponent Impact)
+function getWorstEnemies(games) {
+    // For each player, find their average score vs specific opponents vs their global average
+    // Actually, simple "Avg Points when playing against X" is usually enough.
+    // We want the PAIR (Player, Enemy) where Player scores lowest.
+    
+    // 1. Group games by ID
+    const tables = {};
+    games.forEach(g => {
+        if(!tables[g.gameId]) tables[g.gameId] = [];
+        tables[g.gameId].push(g); // Store full game obj to get points
+    });
+
+    const enemyStats = {}; // Key: "Player|Enemy" -> { totalPts, games }
+
+    Object.values(tables).forEach(tableGames => {
+        // For every player in this game...
+        for (let i = 0; i < tableGames.length; i++) {
+            const p1 = tableGames[i];
+            // ... against every other player (Enemy)
+            for (let j = 0; j < tableGames.length; j++) {
+                if (i === j) continue;
+                const enemy = tableGames[j];
+                
+                const key = `${p1.player} vs ${enemy.player}`;
+                if (!enemyStats[key]) enemyStats[key] = { pts: 0, games: 0 };
+                enemyStats[key].pts += p1.points;
+                enemyStats[key].games++;
+            }
+        }
+    });
+
+    const results = [];
+    for (const [key, stats] of Object.entries(enemyStats)) {
+        if (stats.games < 3) continue; // Min 3 games
+        const avg = stats.pts / stats.games;
+        // We want LOWEST avg
+        results.push({
+            player: key,
+            value: avg.toFixed(2),
+            raw: avg,
+            extra: `(${stats.games} games)`
+        });
+    }
+
+    return results.sort((a,b) => a.raw - b.raw); // Lowest score first
+}
+
+// NEW: Best Duo (Combined Average)
+function getBestDuos(games) {
+    const tables = {};
+    games.forEach(g => {
+        if(!tables[g.gameId]) tables[g.gameId] = [];
+        tables[g.gameId].push(g);
+    });
+
+    const duoStats = {}; // Key: "P1 & P2" -> { totalPts, games }
+
+    Object.values(tables).forEach(tableGames => {
+        const players = tableGames.sort((a,b) => a.player.localeCompare(b.player)); // Sort to dedup P1/P2 order
+        
+        for (let i = 0; i < players.length; i++) {
+            for (let j = i + 1; j < players.length; j++) {
+                const p1 = players[i];
+                const p2 = players[j];
+                const key = `${p1.player} & ${p2.player}`;
+                
+                if (!duoStats[key]) duoStats[key] = { pts: 0, games: 0 };
+                duoStats[key].pts += (p1.points + p2.points); // Sum of both
+                duoStats[key].games++;
+            }
+        }
+    });
+
+    const results = [];
+    for (const [key, stats] of Object.entries(duoStats)) {
+        if (stats.games < 5) continue; // Min 5 games
+        // Average COMBINED score
+        const avg = stats.pts / stats.games;
+        results.push({
+            player: key,
+            value: avg.toFixed(2),
+            raw: avg,
+            extra: `(${stats.games} games)`
+        });
+    }
+
+    return results.sort((a,b) => b.raw - a.raw);
 }
 
 function getLocationAveragePoints(games, isHome, minGames = 1) {
@@ -814,6 +1083,145 @@ function getLocationCounts(games) {
     }));
 
     return results.sort((a, b) => b.value - a.value);
+}
+
+// NEW: Count neutral site games per player
+function getNeutralSiteCounts(games) {
+    return getCounts(games, g => g.isNeutral);
+}
+
+// NEW: Count occurrences of specific neutral sites
+function getNeutralSiteLocationCounts(games) {
+    const uniqueGames = new Set();
+    const locationCounts = {};
+
+    games.forEach(g => {
+        if (!g.isNeutral) return;
+        
+        const gameKey = `${g.season}-${g.weekLabel}-${g.gameName}-${g.location}`;
+        if (!uniqueGames.has(gameKey)) {
+            uniqueGames.add(gameKey);
+            if (g.location && g.location !== 'TBD') {
+                if (!locationCounts[g.location]) locationCounts[g.location] = 0;
+                locationCounts[g.location]++;
+            }
+        }
+    });
+
+    const results = Object.entries(locationCounts).map(([loc, count]) => ({
+        player: loc, 
+        value: count
+    }));
+
+    return results.sort((a, b) => b.value - a.value);
+}
+
+// NEW: Most Home Games in a Single Season
+function getMostHomeGamesInSeason(games) {
+    const grouped = {}; // Key: Player+Season
+
+    games.forEach(g => {
+        if (!g.isHome) return;
+        const key = `${g.player}|${g.season}`;
+        if (!grouped[key]) grouped[key] = { player: g.player, season: g.season, count: 0 };
+        grouped[key].count++;
+    });
+
+    const results = Object.values(grouped).map(entry => ({
+        player: entry.player,
+        value: entry.count,
+        extra: `(${entry.season})`
+    }));
+
+    return results.sort((a, b) => b.value - a.value);
+}
+
+// NEW: Fewest Home Games in a Single Season
+function getFewestHomeGamesInSeason(games, seasonsWithPlayoffs) {
+    const seasonPlayers = {}; // Season -> Set of Players
+    const hostCounts = {};    // Key: Player|Season -> count
+
+    // 1. Identify all players active in each season
+    games.forEach(g => {
+        if (!seasonPlayers[g.season]) seasonPlayers[g.season] = new Set();
+        seasonPlayers[g.season].add(g.player);
+
+        if (g.isHome) {
+            const key = `${g.player}|${g.season}`;
+            if (!hostCounts[key]) hostCounts[key] = 0;
+            hostCounts[key]++;
+        }
+    });
+
+    const results = [];
+
+    // 2. Iterate seasons and players to find counts (including 0)
+    for (const [season, players] of Object.entries(seasonPlayers)) {
+        // Exclude incomplete seasons (those without playoffs yet)
+        // If seasonsWithPlayoffs is provided, use it. Otherwise, proceed (fallback).
+        if (seasonsWithPlayoffs && !seasonsWithPlayoffs.has(parseInt(season))) {
+            continue;
+        }
+
+        players.forEach(player => {
+            const key = `${player}|${season}`;
+            const count = hostCounts[key] || 0;
+            results.push({
+                player: player,
+                value: count,
+                extra: `(${season})`
+            });
+        });
+    }
+
+    // Sort Ascending (Fewest is "best" for this specific metric request)
+    return results.sort((a, b) => a.value - b.value);
+}
+
+// NEW: Least Recent Host (Active Players Only)
+function getLeastRecentHost(games, activePlayersSet) {
+    // Only care about games where isHome = true
+    // We want the LAST date (Season + Week) a player hosted.
+    
+    const lastHosted = {}; // Key: Player -> { dateStr, timestamp }
+
+    games.forEach(g => {
+        if (!g.isHome) return;
+        
+        // Simple timestamp for sorting: Season * 100 + WeekIndex
+        // Week index for Playoff1 (20), Playoff2 (21), Champ (22) handles order
+        const timestamp = (g.season * 100) + g.weekIndex;
+        
+        if (!lastHosted[g.player] || timestamp > lastHosted[g.player].timestamp) {
+            lastHosted[g.player] = {
+                dateStr: `${g.season} ${g.weekLabel}`,
+                timestamp: timestamp
+            };
+        }
+    });
+
+    const results = [];
+    
+    // Iterate all active players
+    activePlayersSet.forEach(player => {
+        if (lastHosted[player]) {
+            results.push({
+                player: player,
+                value: lastHosted[player].dateStr,
+                raw: lastHosted[player].timestamp
+            });
+        } else {
+            // Player has NEVER hosted
+            results.push({
+                player: player,
+                value: "Never",
+                raw: 0 // Sort to top (or bottom depending on asc/desc)
+            });
+        }
+    });
+
+    // Sort Ascending by timestamp (Oldest date first)
+    return results.sort((a, b) => a.raw - b.raw);
 }
 
 function getPlacementRates(games, filterFn, minGames = 1) {
@@ -944,7 +1352,7 @@ function getWinRates(games, isHome, minGames = 1) {
         results.push({ 
             player, 
             value: pct.toFixed(1) + '%', 
-            raw: pct,
+            raw: pct, 
             extra: `(${wins}/${total})` 
         });
     }
@@ -1250,6 +1658,237 @@ function getPointsConsistency(games, minSeasons) {
     }
     // Sort Ascending (Lower Std Dev = Better Consistency)
     return results.sort((a, b) => a.raw - b.raw);
+}
+
+// NEW: Most Common Matchups (Pairs)
+function getMostCommonMatchups(games) {
+    // 1. Group by unique Game Table ID
+    // We used to group by Season|Week|Game|Location, but that merges multiple tables at same location/week.
+    // We need to use the 'gameId' we added in parseSchedule.
+    const gameGroups = {}; 
+    
+    games.forEach(g => {
+        if (!gameGroups[g.gameId]) gameGroups[g.gameId] = [];
+        gameGroups[g.gameId].push(g.player);
+    });
+
+    const pairCounts = {};
+
+    // 2. Iterate groups and generate pairs
+    Object.values(gameGroups).forEach(players => {
+        // Sort players to ensure pair "A vs B" is same as "B vs A"
+        players.sort();
+        
+        // Remove duplicates if any (though parseSchedule shouldn't produce them)
+        const uniquePlayers = [...new Set(players)];
+
+        for (let i = 0; i < uniquePlayers.length; i++) {
+            for (let j = i + 1; j < uniquePlayers.length; j++) {
+                const pair = `${uniquePlayers[i]} & ${uniquePlayers[j]}`;
+                if (!pairCounts[pair]) pairCounts[pair] = 0;
+                pairCounts[pair]++;
+            }
+        }
+    });
+
+    // 3. Convert to leaderboard format
+    const results = Object.entries(pairCounts).map(([pair, count]) => ({
+        player: pair, // "Player A & Player B"
+        value: count
+    }));
+
+    return results.sort((a, b) => b.value - a.value);
+}
+
+// NEW: Least Played Matchups (Active Players Only)
+function getLeastPlayedMatchups(games, activePlayersSet) {
+    // 1. Map Weeks to Players to calculate "Chances"
+    const weekMap = {}; // Key: "Season|Week" -> Set of Players
+    games.forEach(g => {
+        const weekKey = `${g.season}|${g.weekIndex}|${g.weekLabel}`;
+        if (!weekMap[weekKey]) weekMap[weekKey] = new Set();
+        weekMap[weekKey].add(g.player);
+    });
+
+    // 2. Generate all unique pairs of ACTIVE players
+    const activePlayers = Array.from(activePlayersSet).sort();
+    const pairStats = {}; // Key: "P1 & P2" -> { count: 0, chances: 0 }
+    
+    for (let i = 0; i < activePlayers.length; i++) {
+        for (let j = i + 1; j < activePlayers.length; j++) {
+            const p1 = activePlayers[i];
+            const p2 = activePlayers[j];
+            const pair = `${p1} & ${p2}`;
+            
+            // Calculate chances (both played in same week)
+            let chances = 0;
+            for (const weekPlayers of Object.values(weekMap)) {
+                if (weekPlayers.has(p1) && weekPlayers.has(p2)) {
+                    chances++;
+                }
+            }
+            
+            pairStats[pair] = { count: 0, chances: chances };
+        }
+    }
+
+    // 3. Count actual matchups
+    // Group by unique Game Table ID
+    const gameGroups = {}; 
+    games.forEach(g => {
+        if (!gameGroups[g.gameId]) gameGroups[g.gameId] = [];
+        gameGroups[g.gameId].push(g.player);
+    });
+
+    Object.values(gameGroups).forEach(players => {
+        const uniquePlayers = [...new Set(players)];
+        // Only count if both players are active
+        for (let i = 0; i < uniquePlayers.length; i++) {
+            for (let j = i + 1; j < uniquePlayers.length; j++) {
+                const p1 = uniquePlayers[i];
+                const p2 = uniquePlayers[j];
+                
+                if (activePlayersSet.has(p1) && activePlayersSet.has(p2)) {
+                    const sortedPair = [p1, p2].sort();
+                    const pairKey = `${sortedPair[0]} & ${sortedPair[1]}`;
+                    if (pairStats[pairKey]) {
+                        pairStats[pairKey].count++;
+                    }
+                }
+            }
+        }
+    });
+
+    // 4. Filter for 1 or fewer times AND format output
+    const results = [];
+    for (const [pair, stats] of Object.entries(pairStats)) {
+        if (stats.count <= 1) {
+            results.push({
+                player: pair,
+                value: stats.count,
+                extra: `(${stats.chances} chances)`
+            });
+        }
+    }
+
+    // Sort Ascending (0 then 1), tie-break with most chances (descending) to show "missed opportunities"
+    return results.sort((a, b) => {
+        if (a.value !== b.value) return a.value - b.value; // Primary: Matchups (Asc)
+        // Secondary: Chances (Desc) - "Never played but had 20 chances" is more interesting than "Never played, 1 chance"
+        const chancesA = parseInt(a.extra.match(/\d+/)[0]);
+        const chancesB = parseInt(b.extra.match(/\d+/)[0]);
+        return chancesB - chancesA;
+    });
+}
+
+// NEW: Longest Matchup Droughts (Active Players)
+function getMatchupDroughts(games, activePlayersSet) {
+    // 1. Identify all unique weeks chronologically
+    // Use a map to store games per week to check matchups later
+    const gamesByWeek = {}; // weekKey -> [games]
+    const weekKeys = []; // To keep order
+    
+    // Also map players to weeks to calculate "chances" for never-met pairs
+    const playerWeeks = {}; // Player -> Set of WeekKeys
+
+    games.forEach(g => {
+        const weekKey = `${g.season}|${g.weekIndex}|${g.weekLabel}`;
+        
+        if (!gamesByWeek[weekKey]) {
+            gamesByWeek[weekKey] = [];
+            weekKeys.push(weekKey);
+        }
+        gamesByWeek[weekKey].push(g);
+        
+        if (!playerWeeks[g.player]) playerWeeks[g.player] = new Set();
+        playerWeeks[g.player].add(weekKey);
+    });
+
+    // Dedup weekKeys (preserve order)
+    const uniqueWeeks = [...new Set(weekKeys)];
+    const currentWeekIndex = uniqueWeeks.length - 1;
+
+    // 2. Generate Pairs
+    const activePlayers = Array.from(activePlayersSet).sort();
+    const results = [];
+
+    for (let i = 0; i < activePlayers.length; i++) {
+        for (let j = i + 1; j < activePlayers.length; j++) {
+            const p1 = activePlayers[i];
+            const p2 = activePlayers[j];
+            
+            // Find last matchup index
+            let lastMatchupIdx = -1;
+            let lastMatchupLabel = "";
+
+            // Iterate backwards through weeks to find LAST meeting
+            for (let w = currentWeekIndex; w >= 0; w--) {
+                const weekKey = uniqueWeeks[w];
+                const weekGames = gamesByWeek[weekKey];
+                
+                // Group by table/gameId within this week
+                const tables = {};
+                weekGames.forEach(g => {
+                    if (!tables[g.gameId]) tables[g.gameId] = [];
+                    tables[g.gameId].push(g.player);
+                });
+
+                // Check if pair existed in any table
+                let pairFound = false;
+                for (const players of Object.values(tables)) {
+                    if (players.includes(p1) && players.includes(p2)) {
+                        pairFound = true;
+                        break;
+                    }
+                }
+
+                if (pairFound) {
+                    lastMatchupIdx = w;
+                    const parts = weekKey.split('|');
+                    lastMatchupLabel = `${parts[0]} ${parts[2]}`;
+                    break;
+                }
+            }
+
+            if (lastMatchupIdx !== -1) {
+                // They have met before
+                const droughtWeeks = currentWeekIndex - lastMatchupIdx;
+                
+                // Filter: Exclude if happened within last 6 weeks (drought <= 6)
+                if (droughtWeeks > 6) {
+                    results.push({
+                        player: `${p1} & ${p2}`,
+                        value: droughtWeeks,
+                        extra: `(Last: ${lastMatchupLabel})`
+                    });
+                }
+            } else {
+                // They have NEVER met
+                // Calculate "Chances" (weeks where BOTH played but not each other)
+                // Since they never met, every week they both played is a missed chance.
+                let chances = 0;
+                const p1Weeks = playerWeeks[p1] || new Set();
+                const p2Weeks = playerWeeks[p2] || new Set();
+                
+                uniqueWeeks.forEach(wk => {
+                    if (p1Weeks.has(wk) && p2Weeks.has(wk)) {
+                        chances++;
+                    }
+                });
+
+                if (chances > 6) { // Consistent filter with existing logic
+                    results.push({
+                        player: `${p1} & ${p2}`,
+                        value: chances, // Drought is number of missed chances
+                        extra: `(Never Met - ${chances} chances)`
+                    });
+                }
+            }
+        }
+    }
+
+    // Sort Descending (Longest drought first)
+    return results.sort((a, b) => b.value - a.value);
 }
 
 function getPlayoffAppearances(postGames) {

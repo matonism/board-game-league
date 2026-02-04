@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "generated_at": "2026-02-02T02:40:09.242Z",
+    "generated_at": "2026-02-04T02:10:56.001Z",
     "description": "League Analytics Data"
   },
   "leaderboards": [
@@ -3864,6 +3864,320 @@
           "player": "Austin",
           "value": 26,
           "context": ""
+        }
+      ]
+    },
+    {
+      "category": "Hardest Strength of Schedule (All-Time Avg Opponent Pts)",
+      "subcategory": "Difficulty",
+      "scope": "All-Time (Regular Season)",
+      "entries": [
+        {
+          "rank": 1,
+          "player": "Emma",
+          "value": "1.633",
+          "context": "42 opps"
+        },
+        {
+          "rank": 2,
+          "player": "Becca",
+          "value": "1.601",
+          "context": "18 opps"
+        },
+        {
+          "rank": 3,
+          "player": "Josh",
+          "value": "1.545",
+          "context": "78 opps"
+        },
+        {
+          "rank": 4,
+          "player": "Steve",
+          "value": "1.530",
+          "context": "60 opps"
+        },
+        {
+          "rank": 5,
+          "player": "Brittany",
+          "value": "1.525",
+          "context": "24 opps"
+        },
+        {
+          "rank": 6,
+          "player": "Jack M",
+          "value": "1.524",
+          "context": "60 opps"
+        },
+        {
+          "rank": 7,
+          "player": "Carly",
+          "value": "1.521",
+          "context": "60 opps"
+        },
+        {
+          "rank": 8,
+          "player": "Allie",
+          "value": "1.519",
+          "context": "48 opps"
+        },
+        {
+          "rank": 9,
+          "player": "Ashley",
+          "value": "1.508",
+          "context": "78 opps"
+        },
+        {
+          "rank": 10,
+          "player": "Rachel M",
+          "value": "1.507",
+          "context": "60 opps"
+        },
+        {
+          "rank": 11,
+          "player": "Tyler",
+          "value": "1.506",
+          "context": "60 opps"
+        },
+        {
+          "rank": 12,
+          "player": "Sam",
+          "value": "1.504",
+          "context": "42 opps"
+        },
+        {
+          "rank": 13,
+          "player": "Ryan",
+          "value": "1.481",
+          "context": "78 opps"
+        },
+        {
+          "rank": 14,
+          "player": "Cody",
+          "value": "1.480",
+          "context": "42 opps"
+        },
+        {
+          "rank": 15,
+          "player": "Richie",
+          "value": "1.468",
+          "context": "78 opps"
+        },
+        {
+          "rank": 16,
+          "player": "Michael",
+          "value": "1.458",
+          "context": "78 opps"
+        },
+        {
+          "rank": 17,
+          "player": "Nick",
+          "value": "1.454",
+          "context": "78 opps"
+        },
+        {
+          "rank": 18,
+          "player": "Rachel F",
+          "value": "1.450",
+          "context": "78 opps"
+        },
+        {
+          "rank": 19,
+          "player": "Dan",
+          "value": "1.444",
+          "context": "78 opps"
+        },
+        {
+          "rank": 20,
+          "player": "Austin",
+          "value": "1.440",
+          "context": "78 opps"
+        },
+        {
+          "rank": 21,
+          "player": "Jack C",
+          "value": "1.437",
+          "context": "24 opps"
+        },
+        {
+          "rank": 22,
+          "player": "Jennie",
+          "value": "1.407",
+          "context": "18 opps"
+        },
+        {
+          "rank": 23,
+          "player": "Ian",
+          "value": "1.403",
+          "context": "42 opps"
+        },
+        {
+          "rank": 24,
+          "player": "Luke",
+          "value": "1.391",
+          "context": "36 opps"
+        },
+        {
+          "rank": 25,
+          "player": "Brian",
+          "value": "1.385",
+          "context": "6 opps"
+        }
+      ]
+    },
+    {
+      "category": "Easiest Strength of Schedule (All-Time Avg Opponent Pts)",
+      "subcategory": "Difficulty",
+      "scope": "All-Time (Regular Season)",
+      "entries": [
+        {
+          "rank": 1,
+          "player": "Brian",
+          "value": "1.385",
+          "context": "6 opps"
+        },
+        {
+          "rank": 2,
+          "player": "Luke",
+          "value": "1.391",
+          "context": "36 opps"
+        },
+        {
+          "rank": 3,
+          "player": "Ian",
+          "value": "1.403",
+          "context": "42 opps"
+        },
+        {
+          "rank": 4,
+          "player": "Jennie",
+          "value": "1.407",
+          "context": "18 opps"
+        },
+        {
+          "rank": 5,
+          "player": "Jack C",
+          "value": "1.437",
+          "context": "24 opps"
+        },
+        {
+          "rank": 6,
+          "player": "Austin",
+          "value": "1.440",
+          "context": "78 opps"
+        },
+        {
+          "rank": 7,
+          "player": "Dan",
+          "value": "1.444",
+          "context": "78 opps"
+        },
+        {
+          "rank": 8,
+          "player": "Rachel F",
+          "value": "1.450",
+          "context": "78 opps"
+        },
+        {
+          "rank": 9,
+          "player": "Nick",
+          "value": "1.454",
+          "context": "78 opps"
+        },
+        {
+          "rank": 10,
+          "player": "Michael",
+          "value": "1.458",
+          "context": "78 opps"
+        },
+        {
+          "rank": 11,
+          "player": "Richie",
+          "value": "1.468",
+          "context": "78 opps"
+        },
+        {
+          "rank": 12,
+          "player": "Cody",
+          "value": "1.480",
+          "context": "42 opps"
+        },
+        {
+          "rank": 13,
+          "player": "Ryan",
+          "value": "1.481",
+          "context": "78 opps"
+        },
+        {
+          "rank": 14,
+          "player": "Sam",
+          "value": "1.504",
+          "context": "42 opps"
+        },
+        {
+          "rank": 15,
+          "player": "Tyler",
+          "value": "1.506",
+          "context": "60 opps"
+        },
+        {
+          "rank": 16,
+          "player": "Rachel M",
+          "value": "1.507",
+          "context": "60 opps"
+        },
+        {
+          "rank": 17,
+          "player": "Ashley",
+          "value": "1.508",
+          "context": "78 opps"
+        },
+        {
+          "rank": 18,
+          "player": "Allie",
+          "value": "1.519",
+          "context": "48 opps"
+        },
+        {
+          "rank": 19,
+          "player": "Carly",
+          "value": "1.521",
+          "context": "60 opps"
+        },
+        {
+          "rank": 20,
+          "player": "Jack M",
+          "value": "1.524",
+          "context": "60 opps"
+        },
+        {
+          "rank": 21,
+          "player": "Brittany",
+          "value": "1.525",
+          "context": "24 opps"
+        },
+        {
+          "rank": 22,
+          "player": "Steve",
+          "value": "1.530",
+          "context": "60 opps"
+        },
+        {
+          "rank": 23,
+          "player": "Josh",
+          "value": "1.545",
+          "context": "78 opps"
+        },
+        {
+          "rank": 24,
+          "player": "Becca",
+          "value": "1.601",
+          "context": "18 opps"
+        },
+        {
+          "rank": 25,
+          "player": "Emma",
+          "value": "1.633",
+          "context": "42 opps"
         }
       ]
     },
@@ -7733,6 +8047,320 @@
           "player": "Richie",
           "value": 27,
           "context": ""
+        }
+      ]
+    },
+    {
+      "category": "Hardest Strength of Schedule (All-Time Avg Opponent Pts)",
+      "subcategory": "Difficulty",
+      "scope": "All-Time (Reg and Post Season)",
+      "entries": [
+        {
+          "rank": 1,
+          "player": "Emma",
+          "value": "1.608",
+          "context": "42 opps"
+        },
+        {
+          "rank": 2,
+          "player": "Becca",
+          "value": "1.590",
+          "context": "18 opps"
+        },
+        {
+          "rank": 3,
+          "player": "Carly",
+          "value": "1.558",
+          "context": "66 opps"
+        },
+        {
+          "rank": 4,
+          "player": "Rachel M",
+          "value": "1.533",
+          "context": "66 opps"
+        },
+        {
+          "rank": 5,
+          "player": "Josh",
+          "value": "1.522",
+          "context": "78 opps"
+        },
+        {
+          "rank": 6,
+          "player": "Jack M",
+          "value": "1.519",
+          "context": "63 opps"
+        },
+        {
+          "rank": 7,
+          "player": "Brittany",
+          "value": "1.513",
+          "context": "24 opps"
+        },
+        {
+          "rank": 8,
+          "player": "Ashley",
+          "value": "1.507",
+          "context": "84 opps"
+        },
+        {
+          "rank": 8,
+          "player": "Allie",
+          "value": "1.507",
+          "context": "48 opps"
+        },
+        {
+          "rank": 10,
+          "player": "Steve",
+          "value": "1.496",
+          "context": "60 opps"
+        },
+        {
+          "rank": 11,
+          "player": "Tyler",
+          "value": "1.495",
+          "context": "60 opps"
+        },
+        {
+          "rank": 12,
+          "player": "Cody",
+          "value": "1.492",
+          "context": "48 opps"
+        },
+        {
+          "rank": 13,
+          "player": "Sam",
+          "value": "1.488",
+          "context": "45 opps"
+        },
+        {
+          "rank": 14,
+          "player": "Michael",
+          "value": "1.487",
+          "context": "93 opps"
+        },
+        {
+          "rank": 15,
+          "player": "Richie",
+          "value": "1.482",
+          "context": "93 opps"
+        },
+        {
+          "rank": 16,
+          "player": "Nick",
+          "value": "1.481",
+          "context": "87 opps"
+        },
+        {
+          "rank": 17,
+          "player": "Ryan",
+          "value": "1.470",
+          "context": "81 opps"
+        },
+        {
+          "rank": 18,
+          "player": "Rachel F",
+          "value": "1.444",
+          "context": "81 opps"
+        },
+        {
+          "rank": 18,
+          "player": "Austin",
+          "value": "1.444",
+          "context": "87 opps"
+        },
+        {
+          "rank": 20,
+          "player": "Dan",
+          "value": "1.436",
+          "context": "81 opps"
+        },
+        {
+          "rank": 21,
+          "player": "Luke",
+          "value": "1.427",
+          "context": "39 opps"
+        },
+        {
+          "rank": 22,
+          "player": "Ian",
+          "value": "1.419",
+          "context": "48 opps"
+        },
+        {
+          "rank": 23,
+          "player": "Jack C",
+          "value": "1.416",
+          "context": "24 opps"
+        },
+        {
+          "rank": 24,
+          "player": "Jennie",
+          "value": "1.399",
+          "context": "18 opps"
+        },
+        {
+          "rank": 25,
+          "player": "Brian",
+          "value": "1.360",
+          "context": "6 opps"
+        }
+      ]
+    },
+    {
+      "category": "Easiest Strength of Schedule (All-Time Avg Opponent Pts)",
+      "subcategory": "Difficulty",
+      "scope": "All-Time (Reg and Post Season)",
+      "entries": [
+        {
+          "rank": 1,
+          "player": "Brian",
+          "value": "1.360",
+          "context": "6 opps"
+        },
+        {
+          "rank": 2,
+          "player": "Jennie",
+          "value": "1.399",
+          "context": "18 opps"
+        },
+        {
+          "rank": 3,
+          "player": "Jack C",
+          "value": "1.416",
+          "context": "24 opps"
+        },
+        {
+          "rank": 4,
+          "player": "Ian",
+          "value": "1.419",
+          "context": "48 opps"
+        },
+        {
+          "rank": 5,
+          "player": "Luke",
+          "value": "1.427",
+          "context": "39 opps"
+        },
+        {
+          "rank": 6,
+          "player": "Dan",
+          "value": "1.436",
+          "context": "81 opps"
+        },
+        {
+          "rank": 7,
+          "player": "Austin",
+          "value": "1.444",
+          "context": "87 opps"
+        },
+        {
+          "rank": 7,
+          "player": "Rachel F",
+          "value": "1.444",
+          "context": "81 opps"
+        },
+        {
+          "rank": 9,
+          "player": "Ryan",
+          "value": "1.470",
+          "context": "81 opps"
+        },
+        {
+          "rank": 10,
+          "player": "Nick",
+          "value": "1.481",
+          "context": "87 opps"
+        },
+        {
+          "rank": 11,
+          "player": "Richie",
+          "value": "1.482",
+          "context": "93 opps"
+        },
+        {
+          "rank": 12,
+          "player": "Michael",
+          "value": "1.487",
+          "context": "93 opps"
+        },
+        {
+          "rank": 13,
+          "player": "Sam",
+          "value": "1.488",
+          "context": "45 opps"
+        },
+        {
+          "rank": 14,
+          "player": "Cody",
+          "value": "1.492",
+          "context": "48 opps"
+        },
+        {
+          "rank": 15,
+          "player": "Tyler",
+          "value": "1.495",
+          "context": "60 opps"
+        },
+        {
+          "rank": 16,
+          "player": "Steve",
+          "value": "1.496",
+          "context": "60 opps"
+        },
+        {
+          "rank": 17,
+          "player": "Allie",
+          "value": "1.507",
+          "context": "48 opps"
+        },
+        {
+          "rank": 17,
+          "player": "Ashley",
+          "value": "1.507",
+          "context": "84 opps"
+        },
+        {
+          "rank": 19,
+          "player": "Brittany",
+          "value": "1.513",
+          "context": "24 opps"
+        },
+        {
+          "rank": 20,
+          "player": "Jack M",
+          "value": "1.519",
+          "context": "63 opps"
+        },
+        {
+          "rank": 21,
+          "player": "Josh",
+          "value": "1.522",
+          "context": "78 opps"
+        },
+        {
+          "rank": 22,
+          "player": "Rachel M",
+          "value": "1.533",
+          "context": "66 opps"
+        },
+        {
+          "rank": 23,
+          "player": "Carly",
+          "value": "1.558",
+          "context": "66 opps"
+        },
+        {
+          "rank": 24,
+          "player": "Becca",
+          "value": "1.590",
+          "context": "18 opps"
+        },
+        {
+          "rank": 25,
+          "player": "Emma",
+          "value": "1.608",
+          "context": "42 opps"
         }
       ]
     },
@@ -14178,6 +14806,194 @@
       ]
     },
     {
+      "category": "Most Games Played at Neutral Sites",
+      "subcategory": "Neutral Sites",
+      "scope": "Locations",
+      "entries": [
+        {
+          "rank": 1,
+          "player": "Dan",
+          "value": 4,
+          "context": ""
+        },
+        {
+          "rank": 2,
+          "player": "Nick",
+          "value": 3,
+          "context": ""
+        },
+        {
+          "rank": 2,
+          "player": "Rachel M",
+          "value": 3,
+          "context": ""
+        },
+        {
+          "rank": 2,
+          "player": "Sam",
+          "value": 3,
+          "context": ""
+        },
+        {
+          "rank": 5,
+          "player": "Austin",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 5,
+          "player": "Richie",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 5,
+          "player": "Steve",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 5,
+          "player": "Ian",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 9,
+          "player": "Michael",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 9,
+          "player": "Ashley",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 9,
+          "player": "Carly",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 9,
+          "player": "Tyler",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 9,
+          "player": "Cody",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 9,
+          "player": "Emma",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 9,
+          "player": "Jack C",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 16,
+          "player": "Brian",
+          "value": 0,
+          "context": ""
+        },
+        {
+          "rank": 16,
+          "player": "Ryan",
+          "value": 0,
+          "context": ""
+        },
+        {
+          "rank": 16,
+          "player": "Josh",
+          "value": 0,
+          "context": ""
+        },
+        {
+          "rank": 16,
+          "player": "Rachel F",
+          "value": 0,
+          "context": ""
+        },
+        {
+          "rank": 16,
+          "player": "Luke",
+          "value": 0,
+          "context": ""
+        },
+        {
+          "rank": 16,
+          "player": "Becca",
+          "value": 0,
+          "context": ""
+        },
+        {
+          "rank": 16,
+          "player": "Allie",
+          "value": 0,
+          "context": ""
+        },
+        {
+          "rank": 16,
+          "player": "Jack M",
+          "value": 0,
+          "context": ""
+        },
+        {
+          "rank": 16,
+          "player": "Jennie",
+          "value": 0,
+          "context": ""
+        },
+        {
+          "rank": 16,
+          "player": "Brittany",
+          "value": 0,
+          "context": ""
+        }
+      ]
+    },
+    {
+      "category": "Most Popular Neutral Sites",
+      "subcategory": "Neutral Sites",
+      "scope": "Locations",
+      "entries": [
+        {
+          "rank": 1,
+          "player": "Tapster",
+          "value": 4,
+          "context": ""
+        },
+        {
+          "rank": 2,
+          "player": "Richie",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 2,
+          "player": "Grandma Matonis",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 2,
+          "player": "Mike Matonis Sr.",
+          "value": 1,
+          "context": ""
+        }
+      ]
+    },
+    {
       "category": "Average Points at Home (Min 5 Home Games)",
       "subcategory": "Averages",
       "scope": "Locations",
@@ -14977,7 +15793,7 @@
       ]
     },
     {
-      "category": "Most Home Games Played",
+      "category": "Most Home Games Played (All-Time)",
       "subcategory": "Totals",
       "scope": "Locations",
       "entries": [
@@ -15129,6 +15945,903 @@
           "rank": 25,
           "player": "Sam",
           "value": 0,
+          "context": ""
+        }
+      ]
+    },
+    {
+      "category": "Most Home Games Played (Single Season)",
+      "subcategory": "Totals",
+      "scope": "Locations",
+      "entries": [
+        {
+          "rank": 1,
+          "player": "Rachel F",
+          "value": 6,
+          "context": "2024"
+        },
+        {
+          "rank": 2,
+          "player": "Nick",
+          "value": 5,
+          "context": "2023"
+        },
+        {
+          "rank": 2,
+          "player": "Nick",
+          "value": 5,
+          "context": "2024"
+        },
+        {
+          "rank": 2,
+          "player": "Nick",
+          "value": 5,
+          "context": "2025"
+        },
+        {
+          "rank": 2,
+          "player": "Rachel F",
+          "value": 5,
+          "context": "2025"
+        },
+        {
+          "rank": 6,
+          "player": "Austin",
+          "value": 4,
+          "context": "2022"
+        },
+        {
+          "rank": 6,
+          "player": "Michael",
+          "value": 4,
+          "context": "2022"
+        },
+        {
+          "rank": 6,
+          "player": "Ashley",
+          "value": 4,
+          "context": "2023"
+        },
+        {
+          "rank": 6,
+          "player": "Michael",
+          "value": 4,
+          "context": "2023"
+        },
+        {
+          "rank": 6,
+          "player": "Rachel F",
+          "value": 4,
+          "context": "2023"
+        },
+        {
+          "rank": 6,
+          "player": "Carly",
+          "value": 4,
+          "context": "2024"
+        },
+        {
+          "rank": 6,
+          "player": "Steve",
+          "value": 4,
+          "context": "2024"
+        },
+        {
+          "rank": 6,
+          "player": "Richie",
+          "value": 4,
+          "context": "2025"
+        },
+        {
+          "rank": 6,
+          "player": "Rachel M",
+          "value": 4,
+          "context": "2025"
+        },
+        {
+          "rank": 15,
+          "player": "Nick",
+          "value": 3,
+          "context": "2022"
+        },
+        {
+          "rank": 15,
+          "player": "Rachel F",
+          "value": 3,
+          "context": "2022"
+        },
+        {
+          "rank": 15,
+          "player": "Josh",
+          "value": 3,
+          "context": "2022"
+        },
+        {
+          "rank": 15,
+          "player": "Michael",
+          "value": 3,
+          "context": "2024"
+        },
+        {
+          "rank": 15,
+          "player": "Ashley",
+          "value": 3,
+          "context": "2024"
+        },
+        {
+          "rank": 15,
+          "player": "Austin",
+          "value": 3,
+          "context": "2024"
+        },
+        {
+          "rank": 15,
+          "player": "Rachel M",
+          "value": 3,
+          "context": "2024"
+        },
+        {
+          "rank": 15,
+          "player": "Michael",
+          "value": 3,
+          "context": "2025"
+        },
+        {
+          "rank": 15,
+          "player": "Steve",
+          "value": 3,
+          "context": "2025"
+        },
+        {
+          "rank": 24,
+          "player": "Luke",
+          "value": 2,
+          "context": "2022"
+        },
+        {
+          "rank": 24,
+          "player": "Becca",
+          "value": 2,
+          "context": "2022"
+        },
+        {
+          "rank": 24,
+          "player": "Ashley",
+          "value": 2,
+          "context": "2022"
+        },
+        {
+          "rank": 24,
+          "player": "Dan",
+          "value": 2,
+          "context": "2023"
+        },
+        {
+          "rank": 24,
+          "player": "Allie",
+          "value": 2,
+          "context": "2023"
+        },
+        {
+          "rank": 24,
+          "player": "Austin",
+          "value": 2,
+          "context": "2023"
+        },
+        {
+          "rank": 24,
+          "player": "Jennie",
+          "value": 2,
+          "context": "2024"
+        },
+        {
+          "rank": 24,
+          "player": "Ian",
+          "value": 2,
+          "context": "2024"
+        },
+        {
+          "rank": 24,
+          "player": "Cody",
+          "value": 2,
+          "context": "2024"
+        },
+        {
+          "rank": 24,
+          "player": "Dan",
+          "value": 2,
+          "context": "2025"
+        },
+        {
+          "rank": 24,
+          "player": "Carly",
+          "value": 2,
+          "context": "2025"
+        },
+        {
+          "rank": 24,
+          "player": "Ashley",
+          "value": 2,
+          "context": "2025"
+        },
+        {
+          "rank": 24,
+          "player": "Cody",
+          "value": 2,
+          "context": "2026"
+        },
+        {
+          "rank": 24,
+          "player": "Rachel M",
+          "value": 2,
+          "context": "2026"
+        },
+        {
+          "rank": 38,
+          "player": "Brian",
+          "value": 1,
+          "context": "2022"
+        },
+        {
+          "rank": 38,
+          "player": "Ryan",
+          "value": 1,
+          "context": "2022"
+        },
+        {
+          "rank": 38,
+          "player": "Allie",
+          "value": 1,
+          "context": "2022"
+        },
+        {
+          "rank": 38,
+          "player": "Richie",
+          "value": 1,
+          "context": "2022"
+        },
+        {
+          "rank": 38,
+          "player": "Josh",
+          "value": 1,
+          "context": "2023"
+        },
+        {
+          "rank": 38,
+          "player": "Luke",
+          "value": 1,
+          "context": "2023"
+        },
+        {
+          "rank": 38,
+          "player": "Tyler",
+          "value": 1,
+          "context": "2024"
+        },
+        {
+          "rank": 38,
+          "player": "Josh",
+          "value": 1,
+          "context": "2024"
+        },
+        {
+          "rank": 38,
+          "player": "Richie",
+          "value": 1,
+          "context": "2024"
+        },
+        {
+          "rank": 38,
+          "player": "Tyler",
+          "value": 1,
+          "context": "2025"
+        },
+        {
+          "rank": 38,
+          "player": "Jack C",
+          "value": 1,
+          "context": "2025"
+        },
+        {
+          "rank": 38,
+          "player": "Cody",
+          "value": 1,
+          "context": "2025"
+        },
+        {
+          "rank": 38,
+          "player": "Brittany",
+          "value": 1,
+          "context": "2025"
+        },
+        {
+          "rank": 38,
+          "player": "Nick",
+          "value": 1,
+          "context": "2026"
+        },
+        {
+          "rank": 38,
+          "player": "Rachel F",
+          "value": 1,
+          "context": "2026"
+        },
+        {
+          "rank": 38,
+          "player": "Brittany",
+          "value": 1,
+          "context": "2026"
+        },
+        {
+          "rank": 38,
+          "player": "Austin",
+          "value": 1,
+          "context": "2026"
+        },
+        {
+          "rank": 38,
+          "player": "Carly",
+          "value": 1,
+          "context": "2026"
+        },
+        {
+          "rank": 38,
+          "player": "Emma",
+          "value": 1,
+          "context": "2026"
+        },
+        {
+          "rank": 38,
+          "player": "Jack M",
+          "value": 1,
+          "context": "2026"
+        }
+      ]
+    },
+    {
+      "category": "Fewest Home Games Played (Single Season)",
+      "subcategory": "Totals",
+      "scope": "Locations",
+      "entries": [
+        {
+          "rank": 1,
+          "player": "Dan",
+          "value": 0,
+          "context": "2022"
+        },
+        {
+          "rank": 1,
+          "player": "Richie",
+          "value": 0,
+          "context": "2023"
+        },
+        {
+          "rank": 1,
+          "player": "Carly",
+          "value": 0,
+          "context": "2023"
+        },
+        {
+          "rank": 1,
+          "player": "Tyler",
+          "value": 0,
+          "context": "2023"
+        },
+        {
+          "rank": 1,
+          "player": "Jack M",
+          "value": 0,
+          "context": "2023"
+        },
+        {
+          "rank": 1,
+          "player": "Ryan",
+          "value": 0,
+          "context": "2023"
+        },
+        {
+          "rank": 1,
+          "player": "Rachel M",
+          "value": 0,
+          "context": "2023"
+        },
+        {
+          "rank": 1,
+          "player": "Steve",
+          "value": 0,
+          "context": "2023"
+        },
+        {
+          "rank": 1,
+          "player": "Allie",
+          "value": 0,
+          "context": "2024"
+        },
+        {
+          "rank": 1,
+          "player": "Jack M",
+          "value": 0,
+          "context": "2024"
+        },
+        {
+          "rank": 1,
+          "player": "Emma",
+          "value": 0,
+          "context": "2024"
+        },
+        {
+          "rank": 1,
+          "player": "Ryan",
+          "value": 0,
+          "context": "2024"
+        },
+        {
+          "rank": 1,
+          "player": "Dan",
+          "value": 0,
+          "context": "2024"
+        },
+        {
+          "rank": 1,
+          "player": "Sam",
+          "value": 0,
+          "context": "2024"
+        },
+        {
+          "rank": 1,
+          "player": "Josh",
+          "value": 0,
+          "context": "2025"
+        },
+        {
+          "rank": 1,
+          "player": "Ryan",
+          "value": 0,
+          "context": "2025"
+        },
+        {
+          "rank": 1,
+          "player": "Sam",
+          "value": 0,
+          "context": "2025"
+        },
+        {
+          "rank": 1,
+          "player": "Jack M",
+          "value": 0,
+          "context": "2025"
+        },
+        {
+          "rank": 1,
+          "player": "Emma",
+          "value": 0,
+          "context": "2025"
+        },
+        {
+          "rank": 1,
+          "player": "Austin",
+          "value": 0,
+          "context": "2025"
+        },
+        {
+          "rank": 1,
+          "player": "Ian",
+          "value": 0,
+          "context": "2025"
+        },
+        {
+          "rank": 22,
+          "player": "Brian",
+          "value": 1,
+          "context": "2022"
+        },
+        {
+          "rank": 22,
+          "player": "Ryan",
+          "value": 1,
+          "context": "2022"
+        },
+        {
+          "rank": 22,
+          "player": "Richie",
+          "value": 1,
+          "context": "2022"
+        },
+        {
+          "rank": 22,
+          "player": "Allie",
+          "value": 1,
+          "context": "2022"
+        },
+        {
+          "rank": 22,
+          "player": "Luke",
+          "value": 1,
+          "context": "2023"
+        },
+        {
+          "rank": 22,
+          "player": "Josh",
+          "value": 1,
+          "context": "2023"
+        },
+        {
+          "rank": 22,
+          "player": "Richie",
+          "value": 1,
+          "context": "2024"
+        },
+        {
+          "rank": 22,
+          "player": "Tyler",
+          "value": 1,
+          "context": "2024"
+        },
+        {
+          "rank": 22,
+          "player": "Josh",
+          "value": 1,
+          "context": "2024"
+        },
+        {
+          "rank": 22,
+          "player": "Jack C",
+          "value": 1,
+          "context": "2025"
+        },
+        {
+          "rank": 22,
+          "player": "Cody",
+          "value": 1,
+          "context": "2025"
+        },
+        {
+          "rank": 22,
+          "player": "Brittany",
+          "value": 1,
+          "context": "2025"
+        },
+        {
+          "rank": 22,
+          "player": "Tyler",
+          "value": 1,
+          "context": "2025"
+        },
+        {
+          "rank": 35,
+          "player": "Luke",
+          "value": 2,
+          "context": "2022"
+        },
+        {
+          "rank": 35,
+          "player": "Becca",
+          "value": 2,
+          "context": "2022"
+        },
+        {
+          "rank": 35,
+          "player": "Ashley",
+          "value": 2,
+          "context": "2022"
+        },
+        {
+          "rank": 35,
+          "player": "Allie",
+          "value": 2,
+          "context": "2023"
+        },
+        {
+          "rank": 35,
+          "player": "Austin",
+          "value": 2,
+          "context": "2023"
+        },
+        {
+          "rank": 35,
+          "player": "Dan",
+          "value": 2,
+          "context": "2023"
+        },
+        {
+          "rank": 35,
+          "player": "Cody",
+          "value": 2,
+          "context": "2024"
+        },
+        {
+          "rank": 35,
+          "player": "Jennie",
+          "value": 2,
+          "context": "2024"
+        },
+        {
+          "rank": 35,
+          "player": "Ian",
+          "value": 2,
+          "context": "2024"
+        },
+        {
+          "rank": 35,
+          "player": "Ashley",
+          "value": 2,
+          "context": "2025"
+        },
+        {
+          "rank": 35,
+          "player": "Carly",
+          "value": 2,
+          "context": "2025"
+        },
+        {
+          "rank": 35,
+          "player": "Dan",
+          "value": 2,
+          "context": "2025"
+        },
+        {
+          "rank": 47,
+          "player": "Josh",
+          "value": 3,
+          "context": "2022"
+        },
+        {
+          "rank": 47,
+          "player": "Nick",
+          "value": 3,
+          "context": "2022"
+        },
+        {
+          "rank": 47,
+          "player": "Rachel F",
+          "value": 3,
+          "context": "2022"
+        },
+        {
+          "rank": 47,
+          "player": "Rachel M",
+          "value": 3,
+          "context": "2024"
+        },
+        {
+          "rank": 47,
+          "player": "Michael",
+          "value": 3,
+          "context": "2024"
+        },
+        {
+          "rank": 47,
+          "player": "Ashley",
+          "value": 3,
+          "context": "2024"
+        },
+        {
+          "rank": 47,
+          "player": "Austin",
+          "value": 3,
+          "context": "2024"
+        },
+        {
+          "rank": 47,
+          "player": "Steve",
+          "value": 3,
+          "context": "2025"
+        },
+        {
+          "rank": 47,
+          "player": "Michael",
+          "value": 3,
+          "context": "2025"
+        },
+        {
+          "rank": 56,
+          "player": "Austin",
+          "value": 4,
+          "context": "2022"
+        },
+        {
+          "rank": 56,
+          "player": "Michael",
+          "value": 4,
+          "context": "2022"
+        },
+        {
+          "rank": 56,
+          "player": "Michael",
+          "value": 4,
+          "context": "2023"
+        },
+        {
+          "rank": 56,
+          "player": "Ashley",
+          "value": 4,
+          "context": "2023"
+        },
+        {
+          "rank": 56,
+          "player": "Rachel F",
+          "value": 4,
+          "context": "2023"
+        },
+        {
+          "rank": 56,
+          "player": "Carly",
+          "value": 4,
+          "context": "2024"
+        },
+        {
+          "rank": 56,
+          "player": "Steve",
+          "value": 4,
+          "context": "2024"
+        },
+        {
+          "rank": 56,
+          "player": "Richie",
+          "value": 4,
+          "context": "2025"
+        },
+        {
+          "rank": 56,
+          "player": "Rachel M",
+          "value": 4,
+          "context": "2025"
+        },
+        {
+          "rank": 65,
+          "player": "Nick",
+          "value": 5,
+          "context": "2023"
+        },
+        {
+          "rank": 65,
+          "player": "Nick",
+          "value": 5,
+          "context": "2024"
+        },
+        {
+          "rank": 65,
+          "player": "Nick",
+          "value": 5,
+          "context": "2025"
+        },
+        {
+          "rank": 65,
+          "player": "Rachel F",
+          "value": 5,
+          "context": "2025"
+        },
+        {
+          "rank": 69,
+          "player": "Rachel F",
+          "value": 6,
+          "context": "2024"
+        }
+      ]
+    },
+    {
+      "category": "Last Hosted (Active Players)",
+      "subcategory": "Totals",
+      "scope": "Locations",
+      "entries": [
+        {
+          "rank": 1,
+          "player": "Sam",
+          "value": "Never",
+          "context": ""
+        },
+        {
+          "rank": 2,
+          "player": "Ryan",
+          "value": "2022 Week 1",
+          "context": ""
+        },
+        {
+          "rank": 3,
+          "player": "Josh",
+          "value": "2024 Week 4",
+          "context": ""
+        },
+        {
+          "rank": 4,
+          "player": "Ian",
+          "value": "2024 Week 6",
+          "context": ""
+        },
+        {
+          "rank": 5,
+          "player": "Tyler",
+          "value": "2025 Week 2",
+          "context": ""
+        },
+        {
+          "rank": 6,
+          "player": "Jack C",
+          "value": "2025 Week 3",
+          "context": ""
+        },
+        {
+          "rank": 7,
+          "player": "Ashley",
+          "value": "2025 Week 5",
+          "context": ""
+        },
+        {
+          "rank": 7,
+          "player": "Michael",
+          "value": "2025 Week 5",
+          "context": ""
+        },
+        {
+          "rank": 9,
+          "player": "Steve",
+          "value": "2025 Week 6",
+          "context": ""
+        },
+        {
+          "rank": 9,
+          "player": "Dan",
+          "value": "2025 Week 6",
+          "context": ""
+        },
+        {
+          "rank": 11,
+          "player": "Richie",
+          "value": "2025 Championship",
+          "context": ""
+        },
+        {
+          "rank": 12,
+          "player": "Nick",
+          "value": "2026 Week 1",
+          "context": ""
+        },
+        {
+          "rank": 12,
+          "player": "Rachel F",
+          "value": "2026 Week 1",
+          "context": ""
+        },
+        {
+          "rank": 14,
+          "player": "Cody",
+          "value": "2026 Week 2",
+          "context": ""
+        },
+        {
+          "rank": 14,
+          "player": "Emma",
+          "value": "2026 Week 2",
+          "context": ""
+        },
+        {
+          "rank": 14,
+          "player": "Carly",
+          "value": "2026 Week 2",
+          "context": ""
+        },
+        {
+          "rank": 14,
+          "player": "Rachel M",
+          "value": "2026 Week 2",
+          "context": ""
+        },
+        {
+          "rank": 14,
+          "player": "Austin",
+          "value": "2026 Week 2",
+          "context": ""
+        },
+        {
+          "rank": 14,
+          "player": "Brittany",
+          "value": "2026 Week 2",
+          "context": ""
+        },
+        {
+          "rank": 14,
+          "player": "Jack M",
+          "value": "2026 Week 2",
           "context": ""
         }
       ]
@@ -16548,6 +18261,314 @@
       ]
     },
     {
+      "category": "The Opener (Avg Pts Wks 1-3) (Min 2 games)",
+      "subcategory": "Averages by Week",
+      "scope": "Cross Season",
+      "entries": [
+        {
+          "rank": 1,
+          "player": "Austin",
+          "value": "2.43",
+          "context": "14 games"
+        },
+        {
+          "rank": 2,
+          "player": "Michael",
+          "value": "2.36",
+          "context": "14 games"
+        },
+        {
+          "rank": 3,
+          "player": "Rachel M",
+          "value": "2.18",
+          "context": "11 games"
+        },
+        {
+          "rank": 4,
+          "player": "Nick",
+          "value": "2.00",
+          "context": "14 games"
+        },
+        {
+          "rank": 4,
+          "player": "Sam",
+          "value": "2.00",
+          "context": "8 games"
+        },
+        {
+          "rank": 6,
+          "player": "Ashley",
+          "value": "1.86",
+          "context": "14 games"
+        },
+        {
+          "rank": 7,
+          "player": "Luke",
+          "value": "1.83",
+          "context": "6 games"
+        },
+        {
+          "rank": 8,
+          "player": "Cody",
+          "value": "1.75",
+          "context": "8 games"
+        },
+        {
+          "rank": 9,
+          "player": "Jack M",
+          "value": "1.73",
+          "context": "11 games"
+        },
+        {
+          "rank": 10,
+          "player": "Rachel F",
+          "value": "1.64",
+          "context": "14 games"
+        },
+        {
+          "rank": 11,
+          "player": "Brian",
+          "value": "1.50",
+          "context": "2 games"
+        },
+        {
+          "rank": 11,
+          "player": "Richie",
+          "value": "1.50",
+          "context": "14 games"
+        },
+        {
+          "rank": 13,
+          "player": "Brittany",
+          "value": "1.40",
+          "context": "5 games"
+        },
+        {
+          "rank": 14,
+          "player": "Ian",
+          "value": "1.38",
+          "context": "8 games"
+        },
+        {
+          "rank": 15,
+          "player": "Becca",
+          "value": "1.33",
+          "context": "3 games"
+        },
+        {
+          "rank": 16,
+          "player": "Jack C",
+          "value": "1.20",
+          "context": "5 games"
+        },
+        {
+          "rank": 17,
+          "player": "Carly",
+          "value": "1.18",
+          "context": "11 games"
+        },
+        {
+          "rank": 18,
+          "player": "Tyler",
+          "value": "1.09",
+          "context": "11 games"
+        },
+        {
+          "rank": 19,
+          "player": "Ryan",
+          "value": "1.00",
+          "context": "14 games"
+        },
+        {
+          "rank": 19,
+          "player": "Jennie",
+          "value": "1.00",
+          "context": "3 games"
+        },
+        {
+          "rank": 21,
+          "player": "Dan",
+          "value": "0.93",
+          "context": "14 games"
+        },
+        {
+          "rank": 22,
+          "player": "Steve",
+          "value": "0.91",
+          "context": "11 games"
+        },
+        {
+          "rank": 23,
+          "player": "Josh",
+          "value": "0.79",
+          "context": "14 games"
+        },
+        {
+          "rank": 24,
+          "player": "Allie",
+          "value": "0.71",
+          "context": "7 games"
+        },
+        {
+          "rank": 25,
+          "player": "Emma",
+          "value": "0.63",
+          "context": "8 games"
+        }
+      ]
+    },
+    {
+      "category": "The Closer (Avg Pts Wks 4-6) (Min 2 games)",
+      "subcategory": "Averages by Week",
+      "scope": "Cross Season",
+      "entries": [
+        {
+          "rank": 1,
+          "player": "Richie",
+          "value": "2.33",
+          "context": "12 games"
+        },
+        {
+          "rank": 2,
+          "player": "Nick",
+          "value": "2.25",
+          "context": "12 games"
+        },
+        {
+          "rank": 3,
+          "player": "Rachel M",
+          "value": "1.89",
+          "context": "9 games"
+        },
+        {
+          "rank": 4,
+          "player": "Ian",
+          "value": "1.83",
+          "context": "6 games"
+        },
+        {
+          "rank": 4,
+          "player": "Cody",
+          "value": "1.83",
+          "context": "6 games"
+        },
+        {
+          "rank": 6,
+          "player": "Michael",
+          "value": "1.75",
+          "context": "12 games"
+        },
+        {
+          "rank": 7,
+          "player": "Dan",
+          "value": "1.67",
+          "context": "12 games"
+        },
+        {
+          "rank": 7,
+          "player": "Rachel F",
+          "value": "1.67",
+          "context": "12 games"
+        },
+        {
+          "rank": 9,
+          "player": "Sam",
+          "value": "1.50",
+          "context": "6 games"
+        },
+        {
+          "rank": 10,
+          "player": "Austin",
+          "value": "1.42",
+          "context": "12 games"
+        },
+        {
+          "rank": 11,
+          "player": "Ashley",
+          "value": "1.33",
+          "context": "12 games"
+        },
+        {
+          "rank": 11,
+          "player": "Jack M",
+          "value": "1.33",
+          "context": "9 games"
+        },
+        {
+          "rank": 11,
+          "player": "Tyler",
+          "value": "1.33",
+          "context": "9 games"
+        },
+        {
+          "rank": 11,
+          "player": "Jennie",
+          "value": "1.33",
+          "context": "3 games"
+        },
+        {
+          "rank": 11,
+          "player": "Brittany",
+          "value": "1.33",
+          "context": "3 games"
+        },
+        {
+          "rank": 16,
+          "player": "Josh",
+          "value": "1.25",
+          "context": "12 games"
+        },
+        {
+          "rank": 17,
+          "player": "Luke",
+          "value": "1.17",
+          "context": "6 games"
+        },
+        {
+          "rank": 17,
+          "player": "Emma",
+          "value": "1.17",
+          "context": "6 games"
+        },
+        {
+          "rank": 19,
+          "player": "Carly",
+          "value": "1.11",
+          "context": "9 games"
+        },
+        {
+          "rank": 20,
+          "player": "Ryan",
+          "value": "1.08",
+          "context": "12 games"
+        },
+        {
+          "rank": 21,
+          "player": "Steve",
+          "value": "0.89",
+          "context": "9 games"
+        },
+        {
+          "rank": 22,
+          "player": "Allie",
+          "value": "0.78",
+          "context": "9 games"
+        },
+        {
+          "rank": 23,
+          "player": "Becca",
+          "value": "0.67",
+          "context": "3 games"
+        },
+        {
+          "rank": 23,
+          "player": "Jack C",
+          "value": "0.67",
+          "context": "3 games"
+        }
+      ]
+    },
+    {
       "category": "Biggest Points Jump (Season to Season)",
       "subcategory": "Risers and Fallers",
       "scope": "Cross Season",
@@ -17074,6 +19095,3905 @@
       ]
     },
     {
+      "category": "Most Common Matchups (Regular Season Only)",
+      "subcategory": "Rivalries",
+      "scope": "Cross Season",
+      "entries": [
+        {
+          "rank": 1,
+          "player": "Josh & Ryan",
+          "value": 8,
+          "context": ""
+        },
+        {
+          "rank": 1,
+          "player": "Ashley & Michael",
+          "value": 8,
+          "context": ""
+        },
+        {
+          "rank": 1,
+          "player": "Ashley & Rachel F",
+          "value": 8,
+          "context": ""
+        },
+        {
+          "rank": 4,
+          "player": "Nick & Rachel F",
+          "value": 7,
+          "context": ""
+        },
+        {
+          "rank": 4,
+          "player": "Austin & Josh",
+          "value": 7,
+          "context": ""
+        },
+        {
+          "rank": 4,
+          "player": "Josh & Rachel F",
+          "value": 7,
+          "context": ""
+        },
+        {
+          "rank": 4,
+          "player": "Dan & Nick",
+          "value": 7,
+          "context": ""
+        },
+        {
+          "rank": 4,
+          "player": "Austin & Dan",
+          "value": 7,
+          "context": ""
+        },
+        {
+          "rank": 4,
+          "player": "Austin & Carly",
+          "value": 7,
+          "context": ""
+        },
+        {
+          "rank": 10,
+          "player": "Dan & Ryan",
+          "value": 6,
+          "context": ""
+        },
+        {
+          "rank": 10,
+          "player": "Rachel F & Ryan",
+          "value": 6,
+          "context": ""
+        },
+        {
+          "rank": 10,
+          "player": "Dan & Richie",
+          "value": 6,
+          "context": ""
+        },
+        {
+          "rank": 10,
+          "player": "Josh & Richie",
+          "value": 6,
+          "context": ""
+        },
+        {
+          "rank": 10,
+          "player": "Austin & Michael",
+          "value": 6,
+          "context": ""
+        },
+        {
+          "rank": 10,
+          "player": "Michael & Nick",
+          "value": 6,
+          "context": ""
+        },
+        {
+          "rank": 10,
+          "player": "Nick & Ryan",
+          "value": 6,
+          "context": ""
+        },
+        {
+          "rank": 10,
+          "player": "Rachel M & Steve",
+          "value": 6,
+          "context": ""
+        },
+        {
+          "rank": 10,
+          "player": "Jack M & Michael",
+          "value": 6,
+          "context": ""
+        },
+        {
+          "rank": 10,
+          "player": "Michael & Rachel M",
+          "value": 6,
+          "context": ""
+        },
+        {
+          "rank": 10,
+          "player": "Ashley & Rachel M",
+          "value": 6,
+          "context": ""
+        },
+        {
+          "rank": 21,
+          "player": "Dan & Josh",
+          "value": 5,
+          "context": ""
+        },
+        {
+          "rank": 21,
+          "player": "Austin & Nick",
+          "value": 5,
+          "context": ""
+        },
+        {
+          "rank": 21,
+          "player": "Austin & Rachel F",
+          "value": 5,
+          "context": ""
+        },
+        {
+          "rank": 21,
+          "player": "Rachel F & Richie",
+          "value": 5,
+          "context": ""
+        },
+        {
+          "rank": 21,
+          "player": "Ashley & Becca",
+          "value": 5,
+          "context": ""
+        },
+        {
+          "rank": 21,
+          "player": "Michael & Ryan",
+          "value": 5,
+          "context": ""
+        },
+        {
+          "rank": 21,
+          "player": "Allie & Austin",
+          "value": 5,
+          "context": ""
+        },
+        {
+          "rank": 21,
+          "player": "Ashley & Richie",
+          "value": 5,
+          "context": ""
+        },
+        {
+          "rank": 21,
+          "player": "Allie & Carly",
+          "value": 5,
+          "context": ""
+        },
+        {
+          "rank": 21,
+          "player": "Ashley & Carly",
+          "value": 5,
+          "context": ""
+        },
+        {
+          "rank": 21,
+          "player": "Carly & Rachel F",
+          "value": 5,
+          "context": ""
+        },
+        {
+          "rank": 21,
+          "player": "Austin & Tyler",
+          "value": 5,
+          "context": ""
+        },
+        {
+          "rank": 21,
+          "player": "Dan & Tyler",
+          "value": 5,
+          "context": ""
+        },
+        {
+          "rank": 21,
+          "player": "Rachel M & Ryan",
+          "value": 5,
+          "context": ""
+        },
+        {
+          "rank": 21,
+          "player": "Ryan & Steve",
+          "value": 5,
+          "context": ""
+        },
+        {
+          "rank": 21,
+          "player": "Rachel M & Richie",
+          "value": 5,
+          "context": ""
+        },
+        {
+          "rank": 21,
+          "player": "Dan & Steve",
+          "value": 5,
+          "context": ""
+        },
+        {
+          "rank": 21,
+          "player": "Josh & Nick",
+          "value": 5,
+          "context": ""
+        },
+        {
+          "rank": 21,
+          "player": "Jack M & Nick",
+          "value": 5,
+          "context": ""
+        },
+        {
+          "rank": 21,
+          "player": "Jack M & Rachel M",
+          "value": 5,
+          "context": ""
+        },
+        {
+          "rank": 21,
+          "player": "Michael & Steve",
+          "value": 5,
+          "context": ""
+        },
+        {
+          "rank": 21,
+          "player": "Jack M & Rachel F",
+          "value": 5,
+          "context": ""
+        },
+        {
+          "rank": 21,
+          "player": "Cody & Tyler",
+          "value": 5,
+          "context": ""
+        },
+        {
+          "rank": 21,
+          "player": "Emma & Jack M",
+          "value": 5,
+          "context": ""
+        },
+        {
+          "rank": 21,
+          "player": "Emma & Michael",
+          "value": 5,
+          "context": ""
+        },
+        {
+          "rank": 21,
+          "player": "Carly & Michael",
+          "value": 5,
+          "context": ""
+        },
+        {
+          "rank": 47,
+          "player": "Austin & Richie",
+          "value": 4,
+          "context": ""
+        },
+        {
+          "rank": 47,
+          "player": "Nick & Richie",
+          "value": 4,
+          "context": ""
+        },
+        {
+          "rank": 47,
+          "player": "Josh & Luke",
+          "value": 4,
+          "context": ""
+        },
+        {
+          "rank": 47,
+          "player": "Ashley & Dan",
+          "value": 4,
+          "context": ""
+        },
+        {
+          "rank": 47,
+          "player": "Ashley & Nick",
+          "value": 4,
+          "context": ""
+        },
+        {
+          "rank": 47,
+          "player": "Michael & Richie",
+          "value": 4,
+          "context": ""
+        },
+        {
+          "rank": 47,
+          "player": "Ashley & Ryan",
+          "value": 4,
+          "context": ""
+        },
+        {
+          "rank": 47,
+          "player": "Dan & Luke",
+          "value": 4,
+          "context": ""
+        },
+        {
+          "rank": 47,
+          "player": "Allie & Nick",
+          "value": 4,
+          "context": ""
+        },
+        {
+          "rank": 47,
+          "player": "Allie & Dan",
+          "value": 4,
+          "context": ""
+        },
+        {
+          "rank": 47,
+          "player": "Allie & Josh",
+          "value": 4,
+          "context": ""
+        },
+        {
+          "rank": 47,
+          "player": "Jack M & Tyler",
+          "value": 4,
+          "context": ""
+        },
+        {
+          "rank": 47,
+          "player": "Austin & Rachel M",
+          "value": 4,
+          "context": ""
+        },
+        {
+          "rank": 47,
+          "player": "Steve & Tyler",
+          "value": 4,
+          "context": ""
+        },
+        {
+          "rank": 47,
+          "player": "Carly & Nick",
+          "value": 4,
+          "context": ""
+        },
+        {
+          "rank": 47,
+          "player": "Ashley & Steve",
+          "value": 4,
+          "context": ""
+        },
+        {
+          "rank": 47,
+          "player": "Richie & Tyler",
+          "value": 4,
+          "context": ""
+        },
+        {
+          "rank": 47,
+          "player": "Michael & Tyler",
+          "value": 4,
+          "context": ""
+        },
+        {
+          "rank": 47,
+          "player": "Allie & Ryan",
+          "value": 4,
+          "context": ""
+        },
+        {
+          "rank": 47,
+          "player": "Rachel F & Tyler",
+          "value": 4,
+          "context": ""
+        },
+        {
+          "rank": 47,
+          "player": "Ian & Josh",
+          "value": 4,
+          "context": ""
+        },
+        {
+          "rank": 47,
+          "player": "Emma & Richie",
+          "value": 4,
+          "context": ""
+        },
+        {
+          "rank": 47,
+          "player": "Carly & Cody",
+          "value": 4,
+          "context": ""
+        },
+        {
+          "rank": 47,
+          "player": "Rachel M & Sam",
+          "value": 4,
+          "context": ""
+        },
+        {
+          "rank": 47,
+          "player": "Cody & Sam",
+          "value": 4,
+          "context": ""
+        },
+        {
+          "rank": 47,
+          "player": "Richie & Sam",
+          "value": 4,
+          "context": ""
+        },
+        {
+          "rank": 73,
+          "player": "Luke & Michael",
+          "value": 3,
+          "context": ""
+        },
+        {
+          "rank": 73,
+          "player": "Richie & Ryan",
+          "value": 3,
+          "context": ""
+        },
+        {
+          "rank": 73,
+          "player": "Luke & Richie",
+          "value": 3,
+          "context": ""
+        },
+        {
+          "rank": 73,
+          "player": "Austin & Ryan",
+          "value": 3,
+          "context": ""
+        },
+        {
+          "rank": 73,
+          "player": "Josh & Michael",
+          "value": 3,
+          "context": ""
+        },
+        {
+          "rank": 73,
+          "player": "Allie & Luke",
+          "value": 3,
+          "context": ""
+        },
+        {
+          "rank": 73,
+          "player": "Luke & Nick",
+          "value": 3,
+          "context": ""
+        },
+        {
+          "rank": 73,
+          "player": "Allie & Ashley",
+          "value": 3,
+          "context": ""
+        },
+        {
+          "rank": 73,
+          "player": "Ashley & Josh",
+          "value": 3,
+          "context": ""
+        },
+        {
+          "rank": 73,
+          "player": "Luke & Ryan",
+          "value": 3,
+          "context": ""
+        },
+        {
+          "rank": 73,
+          "player": "Dan & Jack M",
+          "value": 3,
+          "context": ""
+        },
+        {
+          "rank": 73,
+          "player": "Josh & Rachel M",
+          "value": 3,
+          "context": ""
+        },
+        {
+          "rank": 73,
+          "player": "Luke & Tyler",
+          "value": 3,
+          "context": ""
+        },
+        {
+          "rank": 73,
+          "player": "Ashley & Jack M",
+          "value": 3,
+          "context": ""
+        },
+        {
+          "rank": 73,
+          "player": "Carly & Josh",
+          "value": 3,
+          "context": ""
+        },
+        {
+          "rank": 73,
+          "player": "Ashley & Austin",
+          "value": 3,
+          "context": ""
+        },
+        {
+          "rank": 73,
+          "player": "Josh & Tyler",
+          "value": 3,
+          "context": ""
+        },
+        {
+          "rank": 73,
+          "player": "Nick & Rachel M",
+          "value": 3,
+          "context": ""
+        },
+        {
+          "rank": 73,
+          "player": "Dan & Rachel F",
+          "value": 3,
+          "context": ""
+        },
+        {
+          "rank": 73,
+          "player": "Jack M & Steve",
+          "value": 3,
+          "context": ""
+        },
+        {
+          "rank": 73,
+          "player": "Carly & Dan",
+          "value": 3,
+          "context": ""
+        },
+        {
+          "rank": 73,
+          "player": "Cody & Richie",
+          "value": 3,
+          "context": ""
+        },
+        {
+          "rank": 73,
+          "player": "Emma & Rachel M",
+          "value": 3,
+          "context": ""
+        },
+        {
+          "rank": 73,
+          "player": "Austin & Sam",
+          "value": 3,
+          "context": ""
+        },
+        {
+          "rank": 73,
+          "player": "Nick & Steve",
+          "value": 3,
+          "context": ""
+        },
+        {
+          "rank": 73,
+          "player": "Sam & Steve",
+          "value": 3,
+          "context": ""
+        },
+        {
+          "rank": 73,
+          "player": "Cody & Josh",
+          "value": 3,
+          "context": ""
+        },
+        {
+          "rank": 73,
+          "player": "Ian & Jack M",
+          "value": 3,
+          "context": ""
+        },
+        {
+          "rank": 73,
+          "player": "Ian & Sam",
+          "value": 3,
+          "context": ""
+        },
+        {
+          "rank": 73,
+          "player": "Ian & Steve",
+          "value": 3,
+          "context": ""
+        },
+        {
+          "rank": 73,
+          "player": "Emma & Steve",
+          "value": 3,
+          "context": ""
+        },
+        {
+          "rank": 73,
+          "player": "Ian & Richie",
+          "value": 3,
+          "context": ""
+        },
+        {
+          "rank": 73,
+          "player": "Cody & Rachel F",
+          "value": 3,
+          "context": ""
+        },
+        {
+          "rank": 73,
+          "player": "Josh & Sam",
+          "value": 3,
+          "context": ""
+        },
+        {
+          "rank": 73,
+          "player": "Carly & Emma",
+          "value": 3,
+          "context": ""
+        },
+        {
+          "rank": 73,
+          "player": "Emma & Rachel F",
+          "value": 3,
+          "context": ""
+        },
+        {
+          "rank": 73,
+          "player": "Carly & Jack M",
+          "value": 3,
+          "context": ""
+        },
+        {
+          "rank": 73,
+          "player": "Ian & Ryan",
+          "value": 3,
+          "context": ""
+        },
+        {
+          "rank": 73,
+          "player": "Jack C & Richie",
+          "value": 3,
+          "context": ""
+        },
+        {
+          "rank": 73,
+          "player": "Brittany & Rachel F",
+          "value": 3,
+          "context": ""
+        },
+        {
+          "rank": 73,
+          "player": "Cody & Nick",
+          "value": 3,
+          "context": ""
+        },
+        {
+          "rank": 73,
+          "player": "Dan & Ian",
+          "value": 3,
+          "context": ""
+        },
+        {
+          "rank": 73,
+          "player": "Jack C & Steve",
+          "value": 3,
+          "context": ""
+        },
+        {
+          "rank": 73,
+          "player": "Ian & Jack C",
+          "value": 3,
+          "context": ""
+        },
+        {
+          "rank": 117,
+          "player": "Brian & Ryan",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 117,
+          "player": "Becca & Luke",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 117,
+          "player": "Becca & Michael",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 117,
+          "player": "Austin & Luke",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 117,
+          "player": "Luke & Rachel F",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 117,
+          "player": "Becca & Dan",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 117,
+          "player": "Becca & Rachel F",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 117,
+          "player": "Allie & Michael",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 117,
+          "player": "Allie & Rachel F",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 117,
+          "player": "Austin & Jack M",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 117,
+          "player": "Josh & Steve",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 117,
+          "player": "Allie & Richie",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 117,
+          "player": "Luke & Steve",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 117,
+          "player": "Jack M & Ryan",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 117,
+          "player": "Austin & Steve",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 117,
+          "player": "Carly & Steve",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 117,
+          "player": "Allie & Jack M",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 117,
+          "player": "Rachel F & Steve",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 117,
+          "player": "Richie & Steve",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 117,
+          "player": "Carly & Ryan",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 117,
+          "player": "Dan & Rachel M",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 117,
+          "player": "Allie & Cody",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 117,
+          "player": "Allie & Tyler",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 117,
+          "player": "Jennie & Ryan",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 117,
+          "player": "Jennie & Richie",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 117,
+          "player": "Ashley & Cody",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 117,
+          "player": "Jack M & Sam",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 117,
+          "player": "Ryan & Tyler",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 117,
+          "player": "Cody & Jennie",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 117,
+          "player": "Austin & Ian",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 117,
+          "player": "Ian & Rachel M",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 117,
+          "player": "Jennie & Tyler",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 117,
+          "player": "Ryan & Sam",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 117,
+          "player": "Dan & Emma",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 117,
+          "player": "Ian & Jennie",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 117,
+          "player": "Ashley & Emma",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 117,
+          "player": "Cody & Michael",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 117,
+          "player": "Emma & Sam",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 117,
+          "player": "Ian & Tyler",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 117,
+          "player": "Jack C & Ryan",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 117,
+          "player": "Ashley & Sam",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 117,
+          "player": "Brittany & Cody",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 117,
+          "player": "Jack C & Michael",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 117,
+          "player": "Jack C & Tyler",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 117,
+          "player": "Cody & Dan",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 117,
+          "player": "Cody & Jack M",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 117,
+          "player": "Austin & Brittany",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 117,
+          "player": "Ashley & Ian",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 117,
+          "player": "Ian & Nick",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 117,
+          "player": "Brittany & Richie",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 117,
+          "player": "Austin & Emma",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 117,
+          "player": "Jack C & Sam",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 117,
+          "player": "Nick & Tyler",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 117,
+          "player": "Brittany & Jack M",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 117,
+          "player": "Brittany & Tyler",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 117,
+          "player": "Rachel F & Sam",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 117,
+          "player": "Dan & Jack C",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 117,
+          "player": "Brittany & Ian",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 117,
+          "player": "Emma & Nick",
+          "value": 2,
+          "context": ""
+        },
+        {
+          "rank": 176,
+          "player": "Brian & Dan",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 176,
+          "player": "Brian & Josh",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 176,
+          "player": "Ashley & Luke",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 176,
+          "player": "Becca & Nick",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 176,
+          "player": "Brian & Michael",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 176,
+          "player": "Brian & Richie",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 176,
+          "player": "Becca & Ryan",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 176,
+          "player": "Becca & Richie",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 176,
+          "player": "Austin & Becca",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 176,
+          "player": "Allie & Becca",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 176,
+          "player": "Allie & Rachel M",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 176,
+          "player": "Michael & Rachel F",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 176,
+          "player": "Rachel F & Rachel M",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 176,
+          "player": "Carly & Luke",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 176,
+          "player": "Ashley & Tyler",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 176,
+          "player": "Ashley & Jennie",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 176,
+          "player": "Dan & Jennie",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 176,
+          "player": "Carly & Ian",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 176,
+          "player": "Ian & Rachel F",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 176,
+          "player": "Nick & Sam",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 176,
+          "player": "Emma & Jennie",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 176,
+          "player": "Jennie & Michael",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 176,
+          "player": "Cody & Rachel M",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 176,
+          "player": "Carly & Tyler",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 176,
+          "player": "Emma & Ryan",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 176,
+          "player": "Emma & Tyler",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 176,
+          "player": "Allie & Jennie",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 176,
+          "player": "Carly & Jennie",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 176,
+          "player": "Jack M & Josh",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 176,
+          "player": "Jack M & Richie",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 176,
+          "player": "Jennie & Rachel F",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 176,
+          "player": "Allie & Sam",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 176,
+          "player": "Jennie & Josh",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 176,
+          "player": "Carly & Sam",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 176,
+          "player": "Michael & Sam",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 176,
+          "player": "Cody & Emma",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 176,
+          "player": "Jack C & Josh",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 176,
+          "player": "Brittany & Nick",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 176,
+          "player": "Brittany & Ryan",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 176,
+          "player": "Brittany & Josh",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 176,
+          "player": "Brittany & Steve",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 176,
+          "player": "Jack C & Jack M",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 176,
+          "player": "Brittany & Rachel M",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 176,
+          "player": "Rachel M & Tyler",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 176,
+          "player": "Ashley & Jack C",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 176,
+          "player": "Carly & Jack C",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 176,
+          "player": "Carly & Rachel M",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 176,
+          "player": "Carly & Richie",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 176,
+          "player": "Ashley & Brittany",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 176,
+          "player": "Brittany & Emma",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 176,
+          "player": "Emma & Ian",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 176,
+          "player": "Sam & Tyler",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 176,
+          "player": "Austin & Cody",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 176,
+          "player": "Brittany & Carly",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 176,
+          "player": "Brittany & Jack C",
+          "value": 1,
+          "context": ""
+        },
+        {
+          "rank": 176,
+          "player": "Dan & Sam",
+          "value": 1,
+          "context": ""
+        }
+      ]
+    },
+    {
+      "category": "Least Played Matchups (Active Players Only - Max 1 Game)",
+      "subcategory": "Rivalries",
+      "scope": "Cross Season",
+      "entries": [
+        {
+          "rank": 1,
+          "player": "Dan & Michael",
+          "value": 0,
+          "context": "26 chances"
+        },
+        {
+          "rank": 1,
+          "player": "Cody & Ian",
+          "value": 0,
+          "context": "14 chances"
+        },
+        {
+          "rank": 1,
+          "player": "Cody & Ryan",
+          "value": 0,
+          "context": "14 chances"
+        },
+        {
+          "rank": 1,
+          "player": "Cody & Steve",
+          "value": 0,
+          "context": "14 chances"
+        },
+        {
+          "rank": 1,
+          "player": "Emma & Josh",
+          "value": 0,
+          "context": "14 chances"
+        },
+        {
+          "rank": 1,
+          "player": "Austin & Jack C",
+          "value": 0,
+          "context": "8 chances"
+        },
+        {
+          "rank": 1,
+          "player": "Brittany & Dan",
+          "value": 0,
+          "context": "8 chances"
+        },
+        {
+          "rank": 1,
+          "player": "Brittany & Michael",
+          "value": 0,
+          "context": "8 chances"
+        },
+        {
+          "rank": 1,
+          "player": "Brittany & Sam",
+          "value": 0,
+          "context": "8 chances"
+        },
+        {
+          "rank": 1,
+          "player": "Cody & Jack C",
+          "value": 0,
+          "context": "8 chances"
+        },
+        {
+          "rank": 1,
+          "player": "Emma & Jack C",
+          "value": 0,
+          "context": "8 chances"
+        },
+        {
+          "rank": 1,
+          "player": "Jack C & Nick",
+          "value": 0,
+          "context": "8 chances"
+        },
+        {
+          "rank": 1,
+          "player": "Jack C & Rachel F",
+          "value": 0,
+          "context": "8 chances"
+        },
+        {
+          "rank": 1,
+          "player": "Jack C & Rachel M",
+          "value": 0,
+          "context": "8 chances"
+        },
+        {
+          "rank": 15,
+          "player": "Michael & Rachel F",
+          "value": 1,
+          "context": "26 chances"
+        },
+        {
+          "rank": 15,
+          "player": "Ashley & Tyler",
+          "value": 1,
+          "context": "20 chances"
+        },
+        {
+          "rank": 15,
+          "player": "Carly & Rachel M",
+          "value": 1,
+          "context": "20 chances"
+        },
+        {
+          "rank": 15,
+          "player": "Carly & Tyler",
+          "value": 1,
+          "context": "20 chances"
+        },
+        {
+          "rank": 15,
+          "player": "Jack M & Josh",
+          "value": 1,
+          "context": "20 chances"
+        },
+        {
+          "rank": 15,
+          "player": "Jack M & Richie",
+          "value": 1,
+          "context": "20 chances"
+        },
+        {
+          "rank": 15,
+          "player": "Rachel F & Rachel M",
+          "value": 1,
+          "context": "20 chances"
+        },
+        {
+          "rank": 15,
+          "player": "Rachel M & Tyler",
+          "value": 1,
+          "context": "20 chances"
+        },
+        {
+          "rank": 15,
+          "player": "Ian & Michael",
+          "value": 1,
+          "context": "15 chances"
+        },
+        {
+          "rank": 15,
+          "player": "Carly & Ian",
+          "value": 1,
+          "context": "14 chances"
+        },
+        {
+          "rank": 15,
+          "player": "Carly & Sam",
+          "value": 1,
+          "context": "14 chances"
+        },
+        {
+          "rank": 15,
+          "player": "Cody & Emma",
+          "value": 1,
+          "context": "14 chances"
+        },
+        {
+          "rank": 15,
+          "player": "Cody & Rachel M",
+          "value": 1,
+          "context": "14 chances"
+        },
+        {
+          "rank": 15,
+          "player": "Emma & Ian",
+          "value": 1,
+          "context": "14 chances"
+        },
+        {
+          "rank": 15,
+          "player": "Emma & Ryan",
+          "value": 1,
+          "context": "14 chances"
+        },
+        {
+          "rank": 15,
+          "player": "Emma & Tyler",
+          "value": 1,
+          "context": "14 chances"
+        },
+        {
+          "rank": 15,
+          "player": "Ian & Rachel F",
+          "value": 1,
+          "context": "14 chances"
+        },
+        {
+          "rank": 15,
+          "player": "Michael & Sam",
+          "value": 1,
+          "context": "14 chances"
+        },
+        {
+          "rank": 15,
+          "player": "Nick & Sam",
+          "value": 1,
+          "context": "14 chances"
+        },
+        {
+          "rank": 15,
+          "player": "Sam & Tyler",
+          "value": 1,
+          "context": "14 chances"
+        },
+        {
+          "rank": 15,
+          "player": "Ashley & Brittany",
+          "value": 1,
+          "context": "8 chances"
+        },
+        {
+          "rank": 15,
+          "player": "Ashley & Jack C",
+          "value": 1,
+          "context": "8 chances"
+        },
+        {
+          "rank": 15,
+          "player": "Brittany & Carly",
+          "value": 1,
+          "context": "8 chances"
+        },
+        {
+          "rank": 15,
+          "player": "Brittany & Emma",
+          "value": 1,
+          "context": "8 chances"
+        },
+        {
+          "rank": 15,
+          "player": "Brittany & Jack C",
+          "value": 1,
+          "context": "8 chances"
+        },
+        {
+          "rank": 15,
+          "player": "Brittany & Josh",
+          "value": 1,
+          "context": "8 chances"
+        },
+        {
+          "rank": 15,
+          "player": "Brittany & Nick",
+          "value": 1,
+          "context": "8 chances"
+        },
+        {
+          "rank": 15,
+          "player": "Brittany & Rachel M",
+          "value": 1,
+          "context": "8 chances"
+        },
+        {
+          "rank": 15,
+          "player": "Brittany & Ryan",
+          "value": 1,
+          "context": "8 chances"
+        },
+        {
+          "rank": 15,
+          "player": "Brittany & Steve",
+          "value": 1,
+          "context": "8 chances"
+        },
+        {
+          "rank": 15,
+          "player": "Carly & Jack C",
+          "value": 1,
+          "context": "8 chances"
+        },
+        {
+          "rank": 15,
+          "player": "Jack C & Jack M",
+          "value": 1,
+          "context": "8 chances"
+        },
+        {
+          "rank": 15,
+          "player": "Jack C & Josh",
+          "value": 1,
+          "context": "8 chances"
+        }
+      ]
+    },
+    {
+      "category": "Longest Matchup Droughts (> 6 Weeks Since Last Play)",
+      "subcategory": "Rivalries",
+      "scope": "Cross Season",
+      "entries": [
+        {
+          "rank": 1,
+          "player": "Dan & Michael",
+          "value": 26,
+          "context": "Never Met - 26 chances"
+        },
+        {
+          "rank": 2,
+          "player": "Michael & Rachel F",
+          "value": 24,
+          "context": "Last: 2023 Week 3"
+        },
+        {
+          "rank": 2,
+          "player": "Michael & Ryan",
+          "value": 24,
+          "context": "Last: 2023 Week 3"
+        },
+        {
+          "rank": 2,
+          "player": "Rachel F & Rachel M",
+          "value": 24,
+          "context": "Last: 2023 Week 3"
+        },
+        {
+          "rank": 5,
+          "player": "Jack M & Ryan",
+          "value": 22,
+          "context": "Last: 2023 Week 5"
+        },
+        {
+          "rank": 6,
+          "player": "Ashley & Tyler",
+          "value": 21,
+          "context": "Last: 2023 Week 6"
+        },
+        {
+          "rank": 7,
+          "player": "Austin & Steve",
+          "value": 19,
+          "context": "Last: 2024 Week 1"
+        },
+        {
+          "rank": 7,
+          "player": "Carly & Ian",
+          "value": 19,
+          "context": "Last: 2024 Week 1"
+        },
+        {
+          "rank": 7,
+          "player": "Carly & Josh",
+          "value": 19,
+          "context": "Last: 2024 Week 1"
+        },
+        {
+          "rank": 7,
+          "player": "Ian & Rachel F",
+          "value": 19,
+          "context": "Last: 2024 Week 1"
+        },
+        {
+          "rank": 7,
+          "player": "Nick & Sam",
+          "value": 19,
+          "context": "Last: 2024 Week 1"
+        },
+        {
+          "rank": 12,
+          "player": "Carly & Tyler",
+          "value": 18,
+          "context": "Last: 2024 Week 2"
+        },
+        {
+          "rank": 12,
+          "player": "Cody & Rachel M",
+          "value": 18,
+          "context": "Last: 2024 Week 2"
+        },
+        {
+          "rank": 14,
+          "player": "Ashley & Dan",
+          "value": 17,
+          "context": "Last: 2024 Week 3"
+        },
+        {
+          "rank": 14,
+          "player": "Emma & Ryan",
+          "value": 17,
+          "context": "Last: 2024 Week 3"
+        },
+        {
+          "rank": 14,
+          "player": "Emma & Tyler",
+          "value": 17,
+          "context": "Last: 2024 Week 3"
+        },
+        {
+          "rank": 14,
+          "player": "Jack M & Josh",
+          "value": 17,
+          "context": "Last: 2024 Week 3"
+        },
+        {
+          "rank": 14,
+          "player": "Josh & Michael",
+          "value": 17,
+          "context": "Last: 2024 Week 3"
+        },
+        {
+          "rank": 19,
+          "player": "Austin & Nick",
+          "value": 16,
+          "context": "Last: 2024 Week 4"
+        },
+        {
+          "rank": 19,
+          "player": "Carly & Steve",
+          "value": 16,
+          "context": "Last: 2024 Week 4"
+        },
+        {
+          "rank": 19,
+          "player": "Ian & Rachel M",
+          "value": 16,
+          "context": "Last: 2024 Week 4"
+        },
+        {
+          "rank": 19,
+          "player": "Jack M & Richie",
+          "value": 16,
+          "context": "Last: 2024 Week 4"
+        },
+        {
+          "rank": 23,
+          "player": "Carly & Sam",
+          "value": 15,
+          "context": "Last: 2024 Week 5"
+        },
+        {
+          "rank": 23,
+          "player": "Michael & Sam",
+          "value": 15,
+          "context": "Last: 2024 Week 5"
+        },
+        {
+          "rank": 25,
+          "player": "Austin & Jack M",
+          "value": 14,
+          "context": "Last: 2024 Week 6"
+        },
+        {
+          "rank": 25,
+          "player": "Cody & Emma",
+          "value": 14,
+          "context": "Last: 2024 Week 6"
+        },
+        {
+          "rank": 25,
+          "player": "Cody & Ian",
+          "value": 14,
+          "context": "Never Met - 14 chances"
+        },
+        {
+          "rank": 25,
+          "player": "Cody & Ryan",
+          "value": 14,
+          "context": "Never Met - 14 chances"
+        },
+        {
+          "rank": 25,
+          "player": "Cody & Steve",
+          "value": 14,
+          "context": "Never Met - 14 chances"
+        },
+        {
+          "rank": 25,
+          "player": "Dan & Rachel F",
+          "value": 14,
+          "context": "Last: 2024 Week 6"
+        },
+        {
+          "rank": 25,
+          "player": "Emma & Josh",
+          "value": 14,
+          "context": "Never Met - 14 chances"
+        },
+        {
+          "rank": 25,
+          "player": "Ryan & Tyler",
+          "value": 14,
+          "context": "Last: 2024 Week 6"
+        },
+        {
+          "rank": 33,
+          "player": "Rachel F & Richie",
+          "value": 13,
+          "context": "Last: 2024 Playoff 1"
+        },
+        {
+          "rank": 34,
+          "player": "Austin & Ian",
+          "value": 10,
+          "context": "Last: 2025 Week 1"
+        },
+        {
+          "rank": 34,
+          "player": "Austin & Tyler",
+          "value": 10,
+          "context": "Last: 2025 Week 1"
+        },
+        {
+          "rank": 34,
+          "player": "Brittany & Nick",
+          "value": 10,
+          "context": "Last: 2025 Week 1"
+        },
+        {
+          "rank": 34,
+          "player": "Ian & Tyler",
+          "value": 10,
+          "context": "Last: 2025 Week 1"
+        },
+        {
+          "rank": 34,
+          "player": "Jack C & Josh",
+          "value": 10,
+          "context": "Last: 2025 Week 1"
+        },
+        {
+          "rank": 34,
+          "player": "Richie & Ryan",
+          "value": 10,
+          "context": "Last: 2025 Week 1"
+        },
+        {
+          "rank": 34,
+          "player": "Sam & Steve",
+          "value": 10,
+          "context": "Last: 2025 Week 1"
+        },
+        {
+          "rank": 41,
+          "player": "Ashley & Josh",
+          "value": 9,
+          "context": "Last: 2025 Week 2"
+        },
+        {
+          "rank": 41,
+          "player": "Ashley & Nick",
+          "value": 9,
+          "context": "Last: 2025 Week 2"
+        },
+        {
+          "rank": 41,
+          "player": "Brittany & Ryan",
+          "value": 9,
+          "context": "Last: 2025 Week 2"
+        },
+        {
+          "rank": 41,
+          "player": "Carly & Dan",
+          "value": 9,
+          "context": "Last: 2025 Week 2"
+        },
+        {
+          "rank": 41,
+          "player": "Carly & Jack M",
+          "value": 9,
+          "context": "Last: 2025 Week 2"
+        },
+        {
+          "rank": 41,
+          "player": "Dan & Jack M",
+          "value": 9,
+          "context": "Last: 2025 Week 2"
+        },
+        {
+          "rank": 41,
+          "player": "Emma & Sam",
+          "value": 9,
+          "context": "Last: 2025 Week 2"
+        },
+        {
+          "rank": 41,
+          "player": "Steve & Tyler",
+          "value": 9,
+          "context": "Last: 2025 Week 2"
+        },
+        {
+          "rank": 49,
+          "player": "Ashley & Rachel F",
+          "value": 8,
+          "context": "Last: 2025 Week 3"
+        },
+        {
+          "rank": 49,
+          "player": "Ashley & Ryan",
+          "value": 8,
+          "context": "Last: 2025 Week 3"
+        },
+        {
+          "rank": 49,
+          "player": "Austin & Jack C",
+          "value": 8,
+          "context": "Never Met - 8 chances"
+        },
+        {
+          "rank": 49,
+          "player": "Brittany & Dan",
+          "value": 8,
+          "context": "Never Met - 8 chances"
+        },
+        {
+          "rank": 49,
+          "player": "Brittany & Josh",
+          "value": 8,
+          "context": "Last: 2025 Week 3"
+        },
+        {
+          "rank": 49,
+          "player": "Brittany & Michael",
+          "value": 8,
+          "context": "Never Met - 8 chances"
+        },
+        {
+          "rank": 49,
+          "player": "Brittany & Sam",
+          "value": 8,
+          "context": "Never Met - 8 chances"
+        },
+        {
+          "rank": 49,
+          "player": "Brittany & Steve",
+          "value": 8,
+          "context": "Last: 2025 Week 3"
+        },
+        {
+          "rank": 49,
+          "player": "Carly & Rachel F",
+          "value": 8,
+          "context": "Last: 2025 Week 3"
+        },
+        {
+          "rank": 49,
+          "player": "Carly & Ryan",
+          "value": 8,
+          "context": "Last: 2025 Week 3"
+        },
+        {
+          "rank": 49,
+          "player": "Cody & Dan",
+          "value": 8,
+          "context": "Last: 2025 Week 3"
+        },
+        {
+          "rank": 49,
+          "player": "Cody & Jack C",
+          "value": 8,
+          "context": "Never Met - 8 chances"
+        },
+        {
+          "rank": 49,
+          "player": "Dan & Nick",
+          "value": 8,
+          "context": "Last: 2025 Week 3"
+        },
+        {
+          "rank": 49,
+          "player": "Dan & Tyler",
+          "value": 8,
+          "context": "Last: 2025 Week 3"
+        },
+        {
+          "rank": 49,
+          "player": "Emma & Jack C",
+          "value": 8,
+          "context": "Never Met - 8 chances"
+        },
+        {
+          "rank": 49,
+          "player": "Emma & Rachel M",
+          "value": 8,
+          "context": "Last: 2025 Week 3"
+        },
+        {
+          "rank": 49,
+          "player": "Ian & Jack M",
+          "value": 8,
+          "context": "Last: 2025 Week 3"
+        },
+        {
+          "rank": 49,
+          "player": "Jack C & Jack M",
+          "value": 8,
+          "context": "Last: 2025 Week 3"
+        },
+        {
+          "rank": 49,
+          "player": "Jack C & Nick",
+          "value": 8,
+          "context": "Never Met - 8 chances"
+        },
+        {
+          "rank": 49,
+          "player": "Jack C & Rachel F",
+          "value": 8,
+          "context": "Never Met - 8 chances"
+        },
+        {
+          "rank": 49,
+          "player": "Jack C & Rachel M",
+          "value": 8,
+          "context": "Never Met - 8 chances"
+        },
+        {
+          "rank": 49,
+          "player": "Jack M & Sam",
+          "value": 8,
+          "context": "Last: 2025 Week 3"
+        },
+        {
+          "rank": 49,
+          "player": "Josh & Richie",
+          "value": 8,
+          "context": "Last: 2025 Week 3"
+        },
+        {
+          "rank": 49,
+          "player": "Josh & Steve",
+          "value": 8,
+          "context": "Last: 2025 Week 3"
+        },
+        {
+          "rank": 49,
+          "player": "Rachel F & Ryan",
+          "value": 8,
+          "context": "Last: 2025 Week 3"
+        },
+        {
+          "rank": 49,
+          "player": "Richie & Steve",
+          "value": 8,
+          "context": "Last: 2025 Week 3"
+        },
+        {
+          "rank": 75,
+          "player": "Ashley & Jack C",
+          "value": 7,
+          "context": "Last: 2025 Week 4"
+        },
+        {
+          "rank": 75,
+          "player": "Austin & Dan",
+          "value": 7,
+          "context": "Last: 2025 Week 4"
+        },
+        {
+          "rank": 75,
+          "player": "Austin & Emma",
+          "value": 7,
+          "context": "Last: 2025 Week 4"
+        },
+        {
+          "rank": 75,
+          "player": "Austin & Richie",
+          "value": 7,
+          "context": "Last: 2025 Week 4"
+        },
+        {
+          "rank": 75,
+          "player": "Brittany & Rachel M",
+          "value": 7,
+          "context": "Last: 2025 Week 4"
+        },
+        {
+          "rank": 75,
+          "player": "Carly & Jack C",
+          "value": 7,
+          "context": "Last: 2025 Week 4"
+        },
+        {
+          "rank": 75,
+          "player": "Cody & Rachel F",
+          "value": 7,
+          "context": "Last: 2025 Week 4"
+        },
+        {
+          "rank": 75,
+          "player": "Dan & Emma",
+          "value": 7,
+          "context": "Last: 2025 Week 4"
+        },
+        {
+          "rank": 75,
+          "player": "Emma & Richie",
+          "value": 7,
+          "context": "Last: 2025 Week 4"
+        },
+        {
+          "rank": 75,
+          "player": "Ian & Nick",
+          "value": 7,
+          "context": "Last: 2025 Week 4"
+        },
+        {
+          "rank": 75,
+          "player": "Jack C & Michael",
+          "value": 7,
+          "context": "Last: 2025 Week 4"
+        },
+        {
+          "rank": 75,
+          "player": "Nick & Ryan",
+          "value": 7,
+          "context": "Last: 2025 Week 4"
+        },
+        {
+          "rank": 75,
+          "player": "Nick & Steve",
+          "value": 7,
+          "context": "Last: 2025 Week 4"
+        },
+        {
+          "rank": 75,
+          "player": "Rachel M & Tyler",
+          "value": 7,
+          "context": "Last: 2025 Week 4"
+        }
+      ]
+    },
+    {
+      "category": "Best Duo (Combined Avg Pts > 2.0)",
+      "subcategory": "Rivalries",
+      "scope": "Cross Season",
+      "entries": [
+        {
+          "rank": 1,
+          "player": "Jack M & Nick",
+          "value": "4.80",
+          "context": "5 games"
+        },
+        {
+          "rank": 2,
+          "player": "Michael & Rachel M",
+          "value": "4.50",
+          "context": "6 games"
+        },
+        {
+          "rank": 3,
+          "player": "Austin & Nick",
+          "value": "4.40",
+          "context": "5 games"
+        },
+        {
+          "rank": 4,
+          "player": "Austin & Dan",
+          "value": "4.00",
+          "context": "7 games"
+        },
+        {
+          "rank": 5,
+          "player": "Michael & Ryan",
+          "value": "3.80",
+          "context": "5 games"
+        },
+        {
+          "rank": 6,
+          "player": "Ashley & Rachel F",
+          "value": "3.75",
+          "context": "8 games"
+        },
+        {
+          "rank": 7,
+          "player": "Austin & Michael",
+          "value": "3.67",
+          "context": "6 games"
+        },
+        {
+          "rank": 7,
+          "player": "Nick & Ryan",
+          "value": "3.67",
+          "context": "6 games"
+        },
+        {
+          "rank": 7,
+          "player": "Jack M & Michael",
+          "value": "3.67",
+          "context": "6 games"
+        },
+        {
+          "rank": 10,
+          "player": "Ashley & Richie",
+          "value": "3.60",
+          "context": "5 games"
+        },
+        {
+          "rank": 10,
+          "player": "Carly & Rachel F",
+          "value": "3.60",
+          "context": "5 games"
+        },
+        {
+          "rank": 12,
+          "player": "Nick & Rachel F",
+          "value": "3.57",
+          "context": "7 games"
+        },
+        {
+          "rank": 13,
+          "player": "Ashley & Michael",
+          "value": "3.50",
+          "context": "8 games"
+        },
+        {
+          "rank": 14,
+          "player": "Austin & Carly",
+          "value": "3.43",
+          "context": "7 games"
+        },
+        {
+          "rank": 15,
+          "player": "Rachel M & Ryan",
+          "value": "3.40",
+          "context": "5 games"
+        },
+        {
+          "rank": 15,
+          "player": "Rachel M & Richie",
+          "value": "3.40",
+          "context": "5 games"
+        },
+        {
+          "rank": 17,
+          "player": "Michael & Nick",
+          "value": "3.33",
+          "context": "6 games"
+        },
+        {
+          "rank": 18,
+          "player": "Austin & Rachel F",
+          "value": "3.20",
+          "context": "5 games"
+        },
+        {
+          "rank": 18,
+          "player": "Rachel F & Richie",
+          "value": "3.20",
+          "context": "5 games"
+        },
+        {
+          "rank": 18,
+          "player": "Allie & Carly",
+          "value": "3.20",
+          "context": "5 games"
+        },
+        {
+          "rank": 18,
+          "player": "Ashley & Carly",
+          "value": "3.20",
+          "context": "5 games"
+        },
+        {
+          "rank": 22,
+          "player": "Ashley & Rachel M",
+          "value": "3.17",
+          "context": "6 games"
+        },
+        {
+          "rank": 23,
+          "player": "Dan & Nick",
+          "value": "3.14",
+          "context": "7 games"
+        },
+        {
+          "rank": 24,
+          "player": "Dan & Richie",
+          "value": "3.00",
+          "context": "6 games"
+        },
+        {
+          "rank": 24,
+          "player": "Josh & Richie",
+          "value": "3.00",
+          "context": "6 games"
+        },
+        {
+          "rank": 24,
+          "player": "Ryan & Steve",
+          "value": "3.00",
+          "context": "5 games"
+        },
+        {
+          "rank": 24,
+          "player": "Jack M & Rachel M",
+          "value": "3.00",
+          "context": "5 games"
+        },
+        {
+          "rank": 24,
+          "player": "Michael & Steve",
+          "value": "3.00",
+          "context": "5 games"
+        },
+        {
+          "rank": 24,
+          "player": "Jack M & Rachel F",
+          "value": "3.00",
+          "context": "5 games"
+        },
+        {
+          "rank": 24,
+          "player": "Emma & Michael",
+          "value": "3.00",
+          "context": "5 games"
+        },
+        {
+          "rank": 24,
+          "player": "Carly & Michael",
+          "value": "3.00",
+          "context": "5 games"
+        },
+        {
+          "rank": 32,
+          "player": "Allie & Austin",
+          "value": "2.80",
+          "context": "5 games"
+        },
+        {
+          "rank": 32,
+          "player": "Austin & Tyler",
+          "value": "2.80",
+          "context": "5 games"
+        },
+        {
+          "rank": 32,
+          "player": "Josh & Nick",
+          "value": "2.80",
+          "context": "5 games"
+        },
+        {
+          "rank": 32,
+          "player": "Cody & Tyler",
+          "value": "2.80",
+          "context": "5 games"
+        },
+        {
+          "rank": 36,
+          "player": "Josh & Rachel F",
+          "value": "2.71",
+          "context": "7 games"
+        },
+        {
+          "rank": 37,
+          "player": "Rachel M & Steve",
+          "value": "2.67",
+          "context": "6 games"
+        },
+        {
+          "rank": 38,
+          "player": "Ashley & Becca",
+          "value": "2.60",
+          "context": "5 games"
+        },
+        {
+          "rank": 38,
+          "player": "Dan & Steve",
+          "value": "2.60",
+          "context": "5 games"
+        },
+        {
+          "rank": 38,
+          "player": "Emma & Jack M",
+          "value": "2.60",
+          "context": "5 games"
+        },
+        {
+          "rank": 41,
+          "player": "Rachel F & Ryan",
+          "value": "2.33",
+          "context": "6 games"
+        },
+        {
+          "rank": 42,
+          "player": "Austin & Josh",
+          "value": "2.29",
+          "context": "7 games"
+        },
+        {
+          "rank": 43,
+          "player": "Dan & Josh",
+          "value": "2.00",
+          "context": "5 games"
+        },
+        {
+          "rank": 43,
+          "player": "Dan & Ryan",
+          "value": "2.00",
+          "context": "6 games"
+        },
+        {
+          "rank": 43,
+          "player": "Dan & Tyler",
+          "value": "2.00",
+          "context": "5 games"
+        },
+        {
+          "rank": 46,
+          "player": "Josh & Ryan",
+          "value": "1.63",
+          "context": "8 games"
+        }
+      ]
+    },
+    {
+      "category": "Worst Enemies (Lowest Avg Score vs Opponent)",
+      "subcategory": "Rivalries",
+      "scope": "Cross Season",
+      "entries": [
+        {
+          "rank": 1,
+          "player": "Steve vs Ashley",
+          "value": "0.00",
+          "context": "4 games"
+        },
+        {
+          "rank": 1,
+          "player": "Steve vs Jack M",
+          "value": "0.00",
+          "context": "3 games"
+        },
+        {
+          "rank": 1,
+          "player": "Emma vs Rachel M",
+          "value": "0.00",
+          "context": "3 games"
+        },
+        {
+          "rank": 1,
+          "player": "Steve vs Emma",
+          "value": "0.00",
+          "context": "3 games"
+        },
+        {
+          "rank": 5,
+          "player": "Tyler vs Rachel F",
+          "value": "0.25",
+          "context": "4 games"
+        },
+        {
+          "rank": 5,
+          "player": "Emma vs Richie",
+          "value": "0.25",
+          "context": "4 games"
+        },
+        {
+          "rank": 7,
+          "player": "Josh vs Michael",
+          "value": "0.33",
+          "context": "3 games"
+        },
+        {
+          "rank": 7,
+          "player": "Josh vs Rachel M",
+          "value": "0.33",
+          "context": "3 games"
+        },
+        {
+          "rank": 7,
+          "player": "Steve vs Rachel M",
+          "value": "0.33",
+          "context": "6 games"
+        },
+        {
+          "rank": 7,
+          "player": "Jack M vs Ashley",
+          "value": "0.33",
+          "context": "3 games"
+        },
+        {
+          "rank": 7,
+          "player": "Dan vs Rachel F",
+          "value": "0.33",
+          "context": "3 games"
+        },
+        {
+          "rank": 7,
+          "player": "Steve vs Sam",
+          "value": "0.33",
+          "context": "3 games"
+        },
+        {
+          "rank": 7,
+          "player": "Ian vs Sam",
+          "value": "0.33",
+          "context": "3 games"
+        },
+        {
+          "rank": 7,
+          "player": "Carly vs Emma",
+          "value": "0.33",
+          "context": "3 games"
+        },
+        {
+          "rank": 15,
+          "player": "Emma vs Michael",
+          "value": "0.40",
+          "context": "5 games"
+        },
+        {
+          "rank": 16,
+          "player": "Dan vs Nick",
+          "value": "0.43",
+          "context": "7 games"
+        },
+        {
+          "rank": 17,
+          "player": "Ryan vs Ashley",
+          "value": "0.50",
+          "context": "4 games"
+        },
+        {
+          "rank": 17,
+          "player": "Allie vs Dan",
+          "value": "0.50",
+          "context": "4 games"
+        },
+        {
+          "rank": 17,
+          "player": "Allie vs Josh",
+          "value": "0.50",
+          "context": "4 games"
+        },
+        {
+          "rank": 17,
+          "player": "Carly vs Nick",
+          "value": "0.50",
+          "context": "4 games"
+        },
+        {
+          "rank": 21,
+          "player": "Josh vs Dan",
+          "value": "0.60",
+          "context": "5 games"
+        },
+        {
+          "rank": 21,
+          "player": "Steve vs Michael",
+          "value": "0.60",
+          "context": "5 games"
+        },
+        {
+          "rank": 21,
+          "player": "Carly vs Michael",
+          "value": "0.60",
+          "context": "5 games"
+        },
+        {
+          "rank": 24,
+          "player": "Ryan vs Dan",
+          "value": "0.67",
+          "context": "6 games"
+        },
+        {
+          "rank": 24,
+          "player": "Ryan vs Rachel F",
+          "value": "0.67",
+          "context": "6 games"
+        },
+        {
+          "rank": 24,
+          "player": "Josh vs Richie",
+          "value": "0.67",
+          "context": "6 games"
+        },
+        {
+          "rank": 24,
+          "player": "Ryan vs Austin",
+          "value": "0.67",
+          "context": "3 games"
+        },
+        {
+          "rank": 24,
+          "player": "Luke vs Nick",
+          "value": "0.67",
+          "context": "3 games"
+        },
+        {
+          "rank": 24,
+          "player": "Allie vs Ashley",
+          "value": "0.67",
+          "context": "3 games"
+        },
+        {
+          "rank": 24,
+          "player": "Ashley vs Austin",
+          "value": "0.67",
+          "context": "3 games"
+        },
+        {
+          "rank": 24,
+          "player": "Carly vs Dan",
+          "value": "0.67",
+          "context": "3 games"
+        },
+        {
+          "rank": 24,
+          "player": "Josh vs Cody",
+          "value": "0.67",
+          "context": "3 games"
+        },
+        {
+          "rank": 24,
+          "player": "Ian vs Jack M",
+          "value": "0.67",
+          "context": "3 games"
+        },
+        {
+          "rank": 34,
+          "player": "Josh vs Ryan",
+          "value": "0.75",
+          "context": "8 games"
+        },
+        {
+          "rank": 34,
+          "player": "Richie vs Austin",
+          "value": "0.75",
+          "context": "4 games"
+        },
+        {
+          "rank": 34,
+          "player": "Dan vs Ashley",
+          "value": "0.75",
+          "context": "4 games"
+        },
+        {
+          "rank": 34,
+          "player": "Allie vs Nick",
+          "value": "0.75",
+          "context": "4 games"
+        },
+        {
+          "rank": 34,
+          "player": "Allie vs Ryan",
+          "value": "0.75",
+          "context": "4 games"
+        },
+        {
+          "rank": 34,
+          "player": "Carly vs Cody",
+          "value": "0.75",
+          "context": "4 games"
+        },
+        {
+          "rank": 40,
+          "player": "Allie vs Austin",
+          "value": "0.80",
+          "context": "5 games"
+        },
+        {
+          "rank": 40,
+          "player": "Tyler vs Austin",
+          "value": "0.80",
+          "context": "5 games"
+        },
+        {
+          "rank": 40,
+          "player": "Tyler vs Dan",
+          "value": "0.80",
+          "context": "5 games"
+        },
+        {
+          "rank": 40,
+          "player": "Ryan vs Rachel M",
+          "value": "0.80",
+          "context": "5 games"
+        },
+        {
+          "rank": 40,
+          "player": "Josh vs Nick",
+          "value": "0.80",
+          "context": "5 games"
+        },
+        {
+          "rank": 45,
+          "player": "Ryan vs Josh",
+          "value": "0.88",
+          "context": "8 games"
+        },
+        {
+          "rank": 46,
+          "player": "Luke vs Michael",
+          "value": "1.00",
+          "context": "3 games"
+        },
+        {
+          "rank": 46,
+          "player": "Josh vs Austin",
+          "value": "1.00",
+          "context": "7 games"
+        },
+        {
+          "rank": 46,
+          "player": "Luke vs Richie",
+          "value": "1.00",
+          "context": "3 games"
+        },
+        {
+          "rank": 46,
+          "player": "Allie vs Luke",
+          "value": "1.00",
+          "context": "3 games"
+        },
+        {
+          "rank": 46,
+          "player": "Luke vs Allie",
+          "value": "1.00",
+          "context": "3 games"
+        },
+        {
+          "rank": 46,
+          "player": "Ryan vs Luke",
+          "value": "1.00",
+          "context": "3 games"
+        },
+        {
+          "rank": 46,
+          "player": "Tyler vs Jack M",
+          "value": "1.00",
+          "context": "4 games"
+        },
+        {
+          "rank": 46,
+          "player": "Jack M vs Tyler",
+          "value": "1.00",
+          "context": "4 games"
+        },
+        {
+          "rank": 46,
+          "player": "Luke vs Tyler",
+          "value": "1.00",
+          "context": "3 games"
+        },
+        {
+          "rank": 46,
+          "player": "Ashley vs Jack M",
+          "value": "1.00",
+          "context": "3 games"
+        },
+        {
+          "rank": 46,
+          "player": "Jack M vs Rachel M",
+          "value": "1.00",
+          "context": "5 games"
+        },
+        {
+          "rank": 46,
+          "player": "Tyler vs Cody",
+          "value": "1.00",
+          "context": "5 games"
+        },
+        {
+          "rank": 46,
+          "player": "Emma vs Jack M",
+          "value": "1.00",
+          "context": "5 games"
+        },
+        {
+          "rank": 46,
+          "player": "Nick vs Steve",
+          "value": "1.00",
+          "context": "3 games"
+        },
+        {
+          "rank": 46,
+          "player": "Steve vs Nick",
+          "value": "1.00",
+          "context": "3 games"
+        },
+        {
+          "rank": 46,
+          "player": "Steve vs Ian",
+          "value": "1.00",
+          "context": "3 games"
+        },
+        {
+          "rank": 46,
+          "player": "Sam vs Richie",
+          "value": "1.00",
+          "context": "4 games"
+        },
+        {
+          "rank": 46,
+          "player": "Carly vs Jack M",
+          "value": "1.00",
+          "context": "3 games"
+        },
+        {
+          "rank": 46,
+          "player": "Ryan vs Ian",
+          "value": "1.00",
+          "context": "3 games"
+        },
+        {
+          "rank": 46,
+          "player": "Dan vs Ian",
+          "value": "1.00",
+          "context": "3 games"
+        },
+        {
+          "rank": 46,
+          "player": "Jack C vs Steve",
+          "value": "1.00",
+          "context": "3 games"
+        },
+        {
+          "rank": 67,
+          "player": "Rachel F vs Nick",
+          "value": "1.14",
+          "context": "7 games"
+        },
+        {
+          "rank": 68,
+          "player": "Richie vs Rachel F",
+          "value": "1.20",
+          "context": "5 games"
+        },
+        {
+          "rank": 68,
+          "player": "Rachel F vs Austin",
+          "value": "1.20",
+          "context": "5 games"
+        },
+        {
+          "rank": 68,
+          "player": "Becca vs Ashley",
+          "value": "1.20",
+          "context": "5 games"
+        },
+        {
+          "rank": 68,
+          "player": "Allie vs Carly",
+          "value": "1.20",
+          "context": "5 games"
+        },
+        {
+          "rank": 68,
+          "player": "Dan vs Tyler",
+          "value": "1.20",
+          "context": "5 games"
+        },
+        {
+          "rank": 68,
+          "player": "Steve vs Ryan",
+          "value": "1.20",
+          "context": "5 games"
+        },
+        {
+          "rank": 68,
+          "player": "Dan vs Steve",
+          "value": "1.20",
+          "context": "5 games"
+        },
+        {
+          "rank": 75,
+          "player": "Luke vs Josh",
+          "value": "1.25",
+          "context": "4 games"
+        },
+        {
+          "rank": 75,
+          "player": "Josh vs Luke",
+          "value": "1.25",
+          "context": "4 games"
+        },
+        {
+          "rank": 75,
+          "player": "Ashley vs Nick",
+          "value": "1.25",
+          "context": "4 games"
+        },
+        {
+          "rank": 75,
+          "player": "Dan vs Luke",
+          "value": "1.25",
+          "context": "4 games"
+        },
+        {
+          "rank": 75,
+          "player": "Dan vs Allie",
+          "value": "1.25",
+          "context": "4 games"
+        },
+        {
+          "rank": 75,
+          "player": "Steve vs Tyler",
+          "value": "1.25",
+          "context": "4 games"
+        },
+        {
+          "rank": 81,
+          "player": "Josh vs Rachel F",
+          "value": "1.29",
+          "context": "7 games"
+        },
+        {
+          "rank": 81,
+          "player": "Austin vs Josh",
+          "value": "1.29",
+          "context": "7 games"
+        },
+        {
+          "rank": 81,
+          "player": "Carly vs Austin",
+          "value": "1.29",
+          "context": "7 games"
+        },
+        {
+          "rank": 84,
+          "player": "Dan vs Ryan",
+          "value": "1.33",
+          "context": "6 games"
+        },
+        {
+          "rank": 84,
+          "player": "Ryan vs Richie",
+          "value": "1.33",
+          "context": "3 games"
+        },
+        {
+          "rank": 84,
+          "player": "Michael vs Nick",
+          "value": "1.33",
+          "context": "6 games"
+        },
+        {
+          "rank": 84,
+          "player": "Ashley vs Josh",
+          "value": "1.33",
+          "context": "3 games"
+        },
+        {
+          "rank": 84,
+          "player": "Luke vs Ryan",
+          "value": "1.33",
+          "context": "3 games"
+        },
+        {
+          "rank": 84,
+          "player": "Tyler vs Luke",
+          "value": "1.33",
+          "context": "3 games"
+        },
+        {
+          "rank": 84,
+          "player": "Josh vs Sam",
+          "value": "1.33",
+          "context": "3 games"
+        },
+        {
+          "rank": 84,
+          "player": "Emma vs Carly",
+          "value": "1.33",
+          "context": "3 games"
+        },
+        {
+          "rank": 84,
+          "player": "Emma vs Rachel F",
+          "value": "1.33",
+          "context": "3 games"
+        },
+        {
+          "rank": 84,
+          "player": "Jack C vs Richie",
+          "value": "1.33",
+          "context": "3 games"
+        },
+        {
+          "rank": 84,
+          "player": "Steve vs Jack C",
+          "value": "1.33",
+          "context": "3 games"
+        },
+        {
+          "rank": 84,
+          "player": "Jack C vs Ian",
+          "value": "1.33",
+          "context": "3 games"
+        },
+        {
+          "rank": 96,
+          "player": "Ashley vs Michael",
+          "value": "1.38",
+          "context": "8 games"
+        },
+        {
+          "rank": 97,
+          "player": "Dan vs Josh",
+          "value": "1.40",
+          "context": "5 games"
+        },
+        {
+          "rank": 97,
+          "player": "Ashley vs Becca",
+          "value": "1.40",
+          "context": "5 games"
+        },
+        {
+          "rank": 97,
+          "player": "Ryan vs Michael",
+          "value": "1.40",
+          "context": "5 games"
+        },
+        {
+          "rank": 97,
+          "player": "Richie vs Ashley",
+          "value": "1.40",
+          "context": "5 games"
+        },
+        {
+          "rank": 97,
+          "player": "Rachel M vs Richie",
+          "value": "1.40",
+          "context": "5 games"
+        },
+        {
+          "rank": 97,
+          "player": "Steve vs Dan",
+          "value": "1.40",
+          "context": "5 games"
+        },
+        {
+          "rank": 97,
+          "player": "Jack M vs Rachel F",
+          "value": "1.40",
+          "context": "5 games"
+        },
+        {
+          "rank": 104,
+          "player": "Rachel F vs Josh",
+          "value": "1.43",
+          "context": "7 games"
+        },
+        {
+          "rank": 105,
+          "player": "Michael vs Richie",
+          "value": "1.50",
+          "context": "4 games"
+        },
+        {
+          "rank": 105,
+          "player": "Ashley vs Rachel F",
+          "value": "1.50",
+          "context": "8 games"
+        },
+        {
+          "rank": 105,
+          "player": "Richie vs Dan",
+          "value": "1.50",
+          "context": "6 games"
+        },
+        {
+          "rank": 105,
+          "player": "Dan vs Richie",
+          "value": "1.50",
+          "context": "6 games"
+        },
+        {
+          "rank": 105,
+          "player": "Tyler vs Steve",
+          "value": "1.50",
+          "context": "4 games"
+        },
+        {
+          "rank": 105,
+          "player": "Tyler vs Richie",
+          "value": "1.50",
+          "context": "4 games"
+        },
+        {
+          "rank": 105,
+          "player": "Rachel M vs Ashley",
+          "value": "1.50",
+          "context": "6 games"
+        },
+        {
+          "rank": 105,
+          "player": "Ryan vs Allie",
+          "value": "1.50",
+          "context": "4 games"
+        },
+        {
+          "rank": 105,
+          "player": "Ian vs Josh",
+          "value": "1.50",
+          "context": "4 games"
+        },
+        {
+          "rank": 105,
+          "player": "Richie vs Emma",
+          "value": "1.50",
+          "context": "4 games"
+        },
+        {
+          "rank": 105,
+          "player": "Cody vs Carly",
+          "value": "1.50",
+          "context": "4 games"
+        },
+        {
+          "rank": 105,
+          "player": "Sam vs Cody",
+          "value": "1.50",
+          "context": "4 games"
+        },
+        {
+          "rank": 117,
+          "player": "Ashley vs Carly",
+          "value": "1.60",
+          "context": "5 games"
+        },
+        {
+          "rank": 117,
+          "player": "Carly vs Ashley",
+          "value": "1.60",
+          "context": "5 games"
+        },
+        {
+          "rank": 117,
+          "player": "Carly vs Rachel F",
+          "value": "1.60",
+          "context": "5 games"
+        },
+        {
+          "rank": 117,
+          "player": "Rachel F vs Jack M",
+          "value": "1.60",
+          "context": "5 games"
+        },
+        {
+          "rank": 117,
+          "player": "Jack M vs Emma",
+          "value": "1.60",
+          "context": "5 games"
+        },
+        {
+          "rank": 122,
+          "player": "Rachel F vs Ryan",
+          "value": "1.67",
+          "context": "6 games"
+        },
+        {
+          "rank": 122,
+          "player": "Austin vs Michael",
+          "value": "1.67",
+          "context": "6 games"
+        },
+        {
+          "rank": 122,
+          "player": "Josh vs Ashley",
+          "value": "1.67",
+          "context": "3 games"
+        },
+        {
+          "rank": 122,
+          "player": "Dan vs Jack M",
+          "value": "1.67",
+          "context": "3 games"
+        },
+        {
+          "rank": 122,
+          "player": "Jack M vs Michael",
+          "value": "1.67",
+          "context": "6 games"
+        },
+        {
+          "rank": 122,
+          "player": "Josh vs Carly",
+          "value": "1.67",
+          "context": "3 games"
+        },
+        {
+          "rank": 122,
+          "player": "Tyler vs Josh",
+          "value": "1.67",
+          "context": "3 games"
+        },
+        {
+          "rank": 122,
+          "player": "Josh vs Tyler",
+          "value": "1.67",
+          "context": "3 games"
+        },
+        {
+          "rank": 122,
+          "player": "Ashley vs Rachel M",
+          "value": "1.67",
+          "context": "6 games"
+        },
+        {
+          "rank": 122,
+          "player": "Nick vs Rachel M",
+          "value": "1.67",
+          "context": "3 games"
+        },
+        {
+          "rank": 122,
+          "player": "Dan vs Carly",
+          "value": "1.67",
+          "context": "3 games"
+        },
+        {
+          "rank": 122,
+          "player": "Cody vs Richie",
+          "value": "1.67",
+          "context": "3 games"
+        },
+        {
+          "rank": 122,
+          "player": "Sam vs Steve",
+          "value": "1.67",
+          "context": "3 games"
+        },
+        {
+          "rank": 122,
+          "player": "Cody vs Josh",
+          "value": "1.67",
+          "context": "3 games"
+        },
+        {
+          "rank": 122,
+          "player": "Ian vs Steve",
+          "value": "1.67",
+          "context": "3 games"
+        },
+        {
+          "rank": 122,
+          "player": "Emma vs Steve",
+          "value": "1.67",
+          "context": "3 games"
+        },
+        {
+          "rank": 122,
+          "player": "Rachel F vs Cody",
+          "value": "1.67",
+          "context": "3 games"
+        },
+        {
+          "rank": 122,
+          "player": "Rachel F vs Emma",
+          "value": "1.67",
+          "context": "3 games"
+        },
+        {
+          "rank": 122,
+          "player": "Ian vs Ryan",
+          "value": "1.67",
+          "context": "3 games"
+        },
+        {
+          "rank": 141,
+          "player": "Ashley vs Ryan",
+          "value": "1.75",
+          "context": "4 games"
+        },
+        {
+          "rank": 141,
+          "player": "Nick vs Carly",
+          "value": "1.75",
+          "context": "4 games"
+        },
+        {
+          "rank": 141,
+          "player": "Tyler vs Michael",
+          "value": "1.75",
+          "context": "4 games"
+        },
+        {
+          "rank": 141,
+          "player": "Rachel F vs Tyler",
+          "value": "1.75",
+          "context": "4 games"
+        },
+        {
+          "rank": 141,
+          "player": "Josh vs Ian",
+          "value": "1.75",
+          "context": "4 games"
+        },
+        {
+          "rank": 141,
+          "player": "Cody vs Sam",
+          "value": "1.75",
+          "context": "4 games"
+        },
+        {
+          "rank": 141,
+          "player": "Richie vs Sam",
+          "value": "1.75",
+          "context": "4 games"
+        },
+        {
+          "rank": 148,
+          "player": "Ryan vs Steve",
+          "value": "1.80",
+          "context": "5 games"
+        },
+        {
+          "rank": 148,
+          "player": "Cody vs Tyler",
+          "value": "1.80",
+          "context": "5 games"
+        },
+        {
+          "rank": 150,
+          "player": "Nick vs Ryan",
+          "value": "1.83",
+          "context": "6 games"
+        },
+        {
+          "rank": 150,
+          "player": "Ryan vs Nick",
+          "value": "1.83",
+          "context": "6 games"
+        },
+        {
+          "rank": 152,
+          "player": "Nick vs Austin",
+          "value": "2.00",
+          "context": "5 games"
+        },
+        {
+          "rank": 152,
+          "player": "Austin vs Richie",
+          "value": "2.00",
+          "context": "4 games"
+        },
+        {
+          "rank": 152,
+          "player": "Austin vs Rachel F",
+          "value": "2.00",
+          "context": "5 games"
+        },
+        {
+          "rank": 152,
+          "player": "Rachel F vs Richie",
+          "value": "2.00",
+          "context": "5 games"
+        },
+        {
+          "rank": 152,
+          "player": "Michael vs Luke",
+          "value": "2.00",
+          "context": "3 games"
+        },
+        {
+          "rank": 152,
+          "player": "Richie vs Michael",
+          "value": "2.00",
+          "context": "4 games"
+        },
+        {
+          "rank": 152,
+          "player": "Richie vs Luke",
+          "value": "2.00",
+          "context": "3 games"
+        },
+        {
+          "rank": 152,
+          "player": "Luke vs Dan",
+          "value": "2.00",
+          "context": "4 games"
+        },
+        {
+          "rank": 152,
+          "player": "Austin vs Allie",
+          "value": "2.00",
+          "context": "5 games"
+        },
+        {
+          "rank": 152,
+          "player": "Michael vs Austin",
+          "value": "2.00",
+          "context": "6 games"
+        },
+        {
+          "rank": 152,
+          "player": "Nick vs Michael",
+          "value": "2.00",
+          "context": "6 games"
+        },
+        {
+          "rank": 152,
+          "player": "Nick vs Allie",
+          "value": "2.00",
+          "context": "4 games"
+        },
+        {
+          "rank": 152,
+          "player": "Michael vs Josh",
+          "value": "2.00",
+          "context": "3 games"
+        },
+        {
+          "rank": 152,
+          "player": "Austin vs Ryan",
+          "value": "2.00",
+          "context": "3 games"
+        },
+        {
+          "rank": 152,
+          "player": "Dan vs Austin",
+          "value": "2.00",
+          "context": "7 games"
+        },
+        {
+          "rank": 152,
+          "player": "Austin vs Dan",
+          "value": "2.00",
+          "context": "7 games"
+        },
+        {
+          "rank": 152,
+          "player": "Ashley vs Allie",
+          "value": "2.00",
+          "context": "3 games"
+        },
+        {
+          "rank": 152,
+          "player": "Rachel F vs Carly",
+          "value": "2.00",
+          "context": "5 games"
+        },
+        {
+          "rank": 152,
+          "player": "Carly vs Allie",
+          "value": "2.00",
+          "context": "5 games"
+        },
+        {
+          "rank": 152,
+          "player": "Austin vs Tyler",
+          "value": "2.00",
+          "context": "5 games"
+        },
+        {
+          "rank": 152,
+          "player": "Jack M vs Dan",
+          "value": "2.00",
+          "context": "3 games"
+        },
+        {
+          "rank": 152,
+          "player": "Rachel M vs Austin",
+          "value": "2.00",
+          "context": "4 games"
+        },
+        {
+          "rank": 152,
+          "player": "Richie vs Rachel M",
+          "value": "2.00",
+          "context": "5 games"
+        },
+        {
+          "rank": 152,
+          "player": "Michael vs Jack M",
+          "value": "2.00",
+          "context": "6 games"
+        },
+        {
+          "rank": 152,
+          "player": "Carly vs Josh",
+          "value": "2.00",
+          "context": "3 games"
+        },
+        {
+          "rank": 152,
+          "player": "Nick vs Josh",
+          "value": "2.00",
+          "context": "5 games"
+        },
+        {
+          "rank": 152,
+          "player": "Ashley vs Steve",
+          "value": "2.00",
+          "context": "4 games"
+        },
+        {
+          "rank": 152,
+          "player": "Jack M vs Nick",
+          "value": "2.00",
+          "context": "5 games"
+        },
+        {
+          "rank": 152,
+          "player": "Rachel M vs Jack M",
+          "value": "2.00",
+          "context": "5 games"
+        },
+        {
+          "rank": 152,
+          "player": "Michael vs Tyler",
+          "value": "2.00",
+          "context": "4 games"
+        },
+        {
+          "rank": 152,
+          "player": "Jack M vs Steve",
+          "value": "2.00",
+          "context": "3 games"
+        },
+        {
+          "rank": 152,
+          "player": "Richie vs Cody",
+          "value": "2.00",
+          "context": "3 games"
+        },
+        {
+          "rank": 152,
+          "player": "Sam vs Austin",
+          "value": "2.00",
+          "context": "3 games"
+        },
+        {
+          "rank": 152,
+          "player": "Jack M vs Ian",
+          "value": "2.00",
+          "context": "3 games"
+        },
+        {
+          "rank": 152,
+          "player": "Rachel M vs Sam",
+          "value": "2.00",
+          "context": "4 games"
+        },
+        {
+          "rank": 152,
+          "player": "Ian vs Richie",
+          "value": "2.00",
+          "context": "3 games"
+        },
+        {
+          "rank": 152,
+          "player": "Cody vs Rachel F",
+          "value": "2.00",
+          "context": "3 games"
+        },
+        {
+          "rank": 152,
+          "player": "Jack M vs Carly",
+          "value": "2.00",
+          "context": "3 games"
+        },
+        {
+          "rank": 152,
+          "player": "Cody vs Nick",
+          "value": "2.00",
+          "context": "3 games"
+        },
+        {
+          "rank": 152,
+          "player": "Nick vs Cody",
+          "value": "2.00",
+          "context": "3 games"
+        },
+        {
+          "rank": 152,
+          "player": "Brittany vs Rachel F",
+          "value": "2.00",
+          "context": "3 games"
+        },
+        {
+          "rank": 152,
+          "player": "Rachel F vs Brittany",
+          "value": "2.00",
+          "context": "3 games"
+        },
+        {
+          "rank": 152,
+          "player": "Ian vs Jack C",
+          "value": "2.00",
+          "context": "3 games"
+        },
+        {
+          "rank": 195,
+          "player": "Michael vs Ashley",
+          "value": "2.13",
+          "context": "8 games"
+        },
+        {
+          "rank": 196,
+          "player": "Austin vs Carly",
+          "value": "2.14",
+          "context": "7 games"
+        },
+        {
+          "rank": 197,
+          "player": "Michael vs Rachel M",
+          "value": "2.17",
+          "context": "6 games"
+        },
+        {
+          "rank": 198,
+          "player": "Ashley vs Richie",
+          "value": "2.20",
+          "context": "5 games"
+        },
+        {
+          "rank": 199,
+          "player": "Nick vs Richie",
+          "value": "2.25",
+          "context": "4 games"
+        },
+        {
+          "rank": 199,
+          "player": "Richie vs Nick",
+          "value": "2.25",
+          "context": "4 games"
+        },
+        {
+          "rank": 199,
+          "player": "Nick vs Ashley",
+          "value": "2.25",
+          "context": "4 games"
+        },
+        {
+          "rank": 199,
+          "player": "Ashley vs Dan",
+          "value": "2.25",
+          "context": "4 games"
+        },
+        {
+          "rank": 199,
+          "player": "Rachel F vs Ashley",
+          "value": "2.25",
+          "context": "8 games"
+        },
+        {
+          "rank": 199,
+          "player": "Josh vs Allie",
+          "value": "2.25",
+          "context": "4 games"
+        },
+        {
+          "rank": 199,
+          "player": "Sam vs Rachel M",
+          "value": "2.25",
+          "context": "4 games"
+        },
+        {
+          "rank": 206,
+          "player": "Richie vs Ryan",
+          "value": "2.33",
+          "context": "3 games"
+        },
+        {
+          "rank": 206,
+          "player": "Richie vs Josh",
+          "value": "2.33",
+          "context": "6 games"
+        },
+        {
+          "rank": 206,
+          "player": "Rachel M vs Josh",
+          "value": "2.33",
+          "context": "3 games"
+        },
+        {
+          "rank": 206,
+          "player": "Rachel M vs Steve",
+          "value": "2.33",
+          "context": "6 games"
+        },
+        {
+          "rank": 206,
+          "player": "Rachel M vs Michael",
+          "value": "2.33",
+          "context": "6 games"
+        },
+        {
+          "rank": 206,
+          "player": "Austin vs Ashley",
+          "value": "2.33",
+          "context": "3 games"
+        },
+        {
+          "rank": 206,
+          "player": "Rachel M vs Nick",
+          "value": "2.33",
+          "context": "3 games"
+        },
+        {
+          "rank": 206,
+          "player": "Austin vs Sam",
+          "value": "2.33",
+          "context": "3 games"
+        },
+        {
+          "rank": 206,
+          "player": "Sam vs Josh",
+          "value": "2.33",
+          "context": "3 games"
+        },
+        {
+          "rank": 215,
+          "player": "Austin vs Nick",
+          "value": "2.40",
+          "context": "5 games"
+        },
+        {
+          "rank": 215,
+          "player": "Michael vs Ryan",
+          "value": "2.40",
+          "context": "5 games"
+        },
+        {
+          "rank": 215,
+          "player": "Michael vs Steve",
+          "value": "2.40",
+          "context": "5 games"
+        },
+        {
+          "rank": 215,
+          "player": "Michael vs Carly",
+          "value": "2.40",
+          "context": "5 games"
+        },
+        {
+          "rank": 219,
+          "player": "Nick vs Rachel F",
+          "value": "2.43",
+          "context": "7 games"
+        },
+        {
+          "rank": 220,
+          "player": "Austin vs Rachel M",
+          "value": "2.50",
+          "context": "4 games"
+        },
+        {
+          "rank": 220,
+          "player": "Richie vs Tyler",
+          "value": "2.50",
+          "context": "4 games"
+        },
+        {
+          "rank": 222,
+          "player": "Rachel M vs Ryan",
+          "value": "2.60",
+          "context": "5 games"
+        },
+        {
+          "rank": 222,
+          "player": "Michael vs Emma",
+          "value": "2.60",
+          "context": "5 games"
+        },
+        {
+          "rank": 224,
+          "player": "Rachel F vs Dan",
+          "value": "2.67",
+          "context": "3 games"
+        },
+        {
+          "rank": 224,
+          "player": "Rachel M vs Emma",
+          "value": "2.67",
+          "context": "3 games"
+        },
+        {
+          "rank": 224,
+          "player": "Richie vs Ian",
+          "value": "2.67",
+          "context": "3 games"
+        },
+        {
+          "rank": 224,
+          "player": "Richie vs Jack C",
+          "value": "2.67",
+          "context": "3 games"
+        },
+        {
+          "rank": 228,
+          "player": "Nick vs Dan",
+          "value": "2.71",
+          "context": "7 games"
+        },
+        {
+          "rank": 229,
+          "player": "Nick vs Jack M",
+          "value": "2.80",
+          "context": "5 games"
+        },
+        {
+          "rank": 230,
+          "player": "Nick vs Luke",
+          "value": "3.00",
+          "context": "3 games"
+        },
+        {
+          "rank": 230,
+          "player": "Sam vs Ian",
+          "value": "3.00",
+          "context": "3 games"
+        },
+        {
+          "rank": 230,
+          "player": "Ian vs Dan",
+          "value": "3.00",
+          "context": "3 games"
+        }
+      ]
+    },
+    {
       "category": "Lowest Points to Qualify for Playoffs",
       "subcategory": "Cutoffs",
       "scope": "League Metrics",
@@ -17101,6 +23021,157 @@
           "player": "Rachel M",
           "value": 12,
           "context": "2023"
+        }
+      ]
+    },
+    {
+      "category": "Hardest Path to Playoffs (Single Season SoS)",
+      "subcategory": "Difficulty",
+      "scope": "League Metrics",
+      "entries": [
+        {
+          "rank": 1,
+          "player": "Rachel M",
+          "value": "1.583",
+          "context": "2025"
+        },
+        {
+          "rank": 2,
+          "player": "Michael",
+          "value": "1.556",
+          "context": "2024"
+        },
+        {
+          "rank": 2,
+          "player": "Sam",
+          "value": "1.556",
+          "context": "2025"
+        },
+        {
+          "rank": 4,
+          "player": "Richie",
+          "value": "1.528",
+          "context": "2022"
+        },
+        {
+          "rank": 5,
+          "player": "Nick",
+          "value": "1.509",
+          "context": "2022"
+        },
+        {
+          "rank": 5,
+          "player": "Cody",
+          "value": "1.509",
+          "context": "2024"
+        },
+        {
+          "rank": 7,
+          "player": "Rachel F",
+          "value": "1.500",
+          "context": "2024"
+        },
+        {
+          "rank": 8,
+          "player": "Michael",
+          "value": "1.463",
+          "context": "2022"
+        },
+        {
+          "rank": 9,
+          "player": "Luke",
+          "value": "1.454",
+          "context": "2022"
+        },
+        {
+          "rank": 9,
+          "player": "Austin",
+          "value": "1.454",
+          "context": "2024"
+        },
+        {
+          "rank": 11,
+          "player": "Rachel M",
+          "value": "1.444",
+          "context": "2023"
+        },
+        {
+          "rank": 12,
+          "player": "Michael",
+          "value": "1.435",
+          "context": "2023"
+        },
+        {
+          "rank": 12,
+          "player": "Carly",
+          "value": "1.435",
+          "context": "2024"
+        },
+        {
+          "rank": 12,
+          "player": "Ashley",
+          "value": "1.435",
+          "context": "2025"
+        },
+        {
+          "rank": 15,
+          "player": "Nick",
+          "value": "1.426",
+          "context": "2024"
+        },
+        {
+          "rank": 15,
+          "player": "Jack M",
+          "value": "1.426",
+          "context": "2025"
+        },
+        {
+          "rank": 17,
+          "player": "Michael",
+          "value": "1.417",
+          "context": "2025"
+        },
+        {
+          "rank": 18,
+          "player": "Richie",
+          "value": "1.380",
+          "context": "2024"
+        },
+        {
+          "rank": 19,
+          "player": "Ian",
+          "value": "1.352",
+          "context": "2025"
+        },
+        {
+          "rank": 20,
+          "player": "Richie",
+          "value": "1.333",
+          "context": "2025"
+        },
+        {
+          "rank": 21,
+          "player": "Dan",
+          "value": "1.324",
+          "context": "2025"
+        },
+        {
+          "rank": 22,
+          "player": "Nick",
+          "value": "1.315",
+          "context": "2023"
+        },
+        {
+          "rank": 22,
+          "player": "Austin",
+          "value": "1.315",
+          "context": "2023"
+        },
+        {
+          "rank": 24,
+          "player": "Ryan",
+          "value": "1.167",
+          "context": "2024"
         }
       ]
     },
