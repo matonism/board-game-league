@@ -97,6 +97,11 @@ const HistoricalDataScreen = props => {
                         <div className="historical-data-button">Leaderboards</div>
                     </div>
                 </a>
+                <a href="https://bglcompanion.com/weeklyReport" className="no-underline">
+                    <div className="historical-data-button-container">
+                        <div className="historical-data-button">Weekly Report</div>
+                    </div>
+                </a>
             </div>)
         }
     }

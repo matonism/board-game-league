@@ -3,7 +3,7 @@ const path = require('path');
 
 // CONFIGURATION
 const OUTPUT_DIR = path.join(__dirname, 'output');
-const ANALYSIS_DIR = path.join(__dirname, 'analysis'); 
+const ANALYSIS_DIR = path.join(__dirname, 'addToBuild/analysis'); 
 if (!fs.existsSync(ANALYSIS_DIR)){
     fs.mkdirSync(ANALYSIS_DIR);
 }
@@ -11,7 +11,7 @@ if (!fs.existsSync(ANALYSIS_DIR)){
 const DATA_FILE = path.join(OUTPUT_DIR, 'Schedules.txt');
 const CSV_FILE = path.join(OUTPUT_DIR, 'league_stats_export.csv');
 const JSON_FILE = path.join(OUTPUT_DIR, 'leagueLeaderboard.txt');
-const HTML_FILE = path.join(ANALYSIS_DIR, 'league_stats_viewer.html');
+const HTML_FILE = path.join(ANALYSIS_DIR, 'index.html');
 
 // SCORING SYSTEM
 const POINTS = { 1: 3, 2: 2, 3: 1, 4: 0 };
@@ -72,7 +72,7 @@ function main() {
         const SCOPE_REG = "All-Time (Regular Season)";
         const SCOPE_COM = "All-Time (Reg and Post Season)";
 
-        [SCOPE_REG, SCOPE_COM].forEach(scope => {
+        [SCOPE_COM, SCOPE_REG].forEach(scope => {
             const dataset = scope === SCOPE_REG ? regSeasonGames : allGames;
             
             // 1. Averages
@@ -97,31 +97,30 @@ function main() {
             processStat("Bottom Half Finishes (3rd/4th)", "Totals", scope, getCounts(dataset, g => g.place >= 3));
             
             // 4. Streaks
-            // Pass activePlayersSet to ensure retired players don't show as active
-            processStat("Longest Win Streak", "Streaks", scope, getStreaks(dataset, g => g.place === 1, activePlayersSet));
-            processStat("Current Active Win Streak", "Streaks", scope, getActiveStreaks(dataset, g => g.place === 1, activePlayersSet));
+            processStat("Longest Win Streak", "Streaks (All-Time)", scope, getStreaks(dataset, g => g.place === 1, activePlayersSet));
+            processStat("Longest 2nd Place Streak", "Streaks (All-Time)", scope, getStreaks(dataset, g => g.place === 2, activePlayersSet));
+            processStat("Longest 3rd Place Streak", "Streaks (All-Time)", scope, getStreaks(dataset, g => g.place === 3, activePlayersSet));
+            processStat("Longest 4th Place Streak", "Streaks (All-Time)", scope, getStreaks(dataset, g => g.place === 4, activePlayersSet));
+            processStat("Longest Streak w/o 4th", "Streaks (All-Time)", scope, getStreaks(dataset, g => g.place !== 4, activePlayersSet));
+            processStat("Longest Winless Streak", "Streaks (All-Time)", scope, getStreaks(dataset, g => g.place !== 1, activePlayersSet));
+            processStat("Longest Top Half Streak (1st/2nd)", "Streaks (All-Time)", scope, getStreaks(dataset, g => g.place <= 2, activePlayersSet));
+            processStat("Longest Bottom Half Streak (3rd/4th)", "Streaks (All-Time)", scope, getStreaks(dataset, g => g.place >= 3, activePlayersSet));
             
-            processStat("Longest Streak w/o 4th", "Streaks", scope, getStreaks(dataset, g => g.place !== 4, activePlayersSet));
-            processStat("Current Active Streak w/o 4th", "Streaks", scope, getActiveStreaks(dataset, g => g.place !== 4, activePlayersSet));
-            
-            processStat("Longest Top Half Streak (1st/2nd)", "Streaks", scope, getStreaks(dataset, g => g.place <= 2, activePlayersSet));
-            processStat("Current Active Top Half Streak", "Streaks", scope, getActiveStreaks(dataset, g => g.place <= 2, activePlayersSet));
 
-            processStat("Longest Winless Streak", "Streaks", scope, getStreaks(dataset, g => g.place !== 1, activePlayersSet));
-            processStat("Current Active Winless Streak", "Streaks", scope, getActiveStreaks(dataset, g => g.place !== 1, activePlayersSet));
-            
-            processStat("Longest Bottom Half Streak (3rd/4th)", "Streaks", scope, getStreaks(dataset, g => g.place >= 3, activePlayersSet));
-            processStat("Current Active Bottom Half Streak", "Streaks", scope, getActiveStreaks(dataset, g => g.place >= 3, activePlayersSet));
+            processStat("Active Win Streak", "Streaks (Active)", scope, getActiveStreaks(dataset, g => g.place === 1, activePlayersSet));
+            processStat("Active 2nd Place Streak", "Streaks (Active)", scope, getActiveStreaks(dataset, g => g.place === 2, activePlayersSet));
+            processStat("Active 4th Place Streak", "Streaks (Active)", scope, getActiveStreaks(dataset, g => g.place === 3, activePlayersSet));
+            processStat("Active 4th Place Streak", "Streaks (Active)", scope, getActiveStreaks(dataset, g => g.place === 4, activePlayersSet));
+            processStat("Active Streak w/o 4th", "Streaks (Active)", scope, getActiveStreaks(dataset, g => g.place !== 4, activePlayersSet));
+            processStat("Active Winless Streak", "Streaks (Active)", scope, getActiveStreaks(dataset, g => g.place !== 1, activePlayersSet));
+            processStat("Active Top Half Streak", "Streaks (Active)", scope, getActiveStreaks(dataset, g => g.place <= 2, activePlayersSet));
+            processStat("Active Bottom Half Streak", "Streaks (Active)", scope, getActiveStreaks(dataset, g => g.place >= 3, activePlayersSet));
+
 
             // 5. Speed Records
-            [10, 20, 30, 40, 50].forEach(target => {
+            [10, 20, 30, 40, 50, 60].forEach(target => {
                 processStat(`Fastest to ${target} Career Points (# Games)`, "Speed Records", scope, getFastestToCareerPoints(dataset, target));
             });
-
-            
-            const sosStats = calculateStrengthOfSchedule(dataset);
-            processStat("Hardest Strength of Schedule (All-Time Avg Opponent Pts)", "Difficulty", scope, sosStats.hardest);
-            processStat("Easiest Strength of Schedule (All-Time Avg Opponent Pts)", "Difficulty", scope, sosStats.easiest);
         });
 
         // --- SECTION 2: Single Season Records ---
@@ -168,34 +167,37 @@ function main() {
         const SCOPE_HOME = "Locations";
         const homeDataset = allGames; 
 
-        // New Leaderboard: Most Games Hosted (Location Popularity)
-        processStat("Most Games Hosted (By Location)", "Totals", SCOPE_HOME, getLocationCounts(allGames));
         
-        // NEW: Neutral Site Stats
-        processStat("Most Games Played at Neutral Sites", "Neutral Sites", SCOPE_HOME, getNeutralSiteCounts(allGames));
-        processStat("Most Popular Neutral Sites", "Neutral Sites", SCOPE_HOME, getNeutralSiteLocationCounts(allGames));
 
-        processStat("Average Points at Home (Min 5 Home Games)", "Averages", SCOPE_HOME, getLocationAveragePoints(homeDataset, true, 5));
-        processStat("Average Points Away (Min 5 Away Games)", "Averages", SCOPE_HOME, getLocationAveragePoints(homeDataset, false, 5));
-        processStat("Home vs Away Point Differential (Min 5 Games Each)", "Averages", SCOPE_HOME, getLocationPointDifferential(homeDataset, 5));
-        
         processStat("Home Win % (Min 5 Home Games)", "Averages", SCOPE_HOME, getWinRates(homeDataset, true, 5));
         processStat("Away Win % (Min 5 Away Games)", "Averages", SCOPE_HOME, getWinRates(homeDataset, false, 5));
-        
+        processStat("Home vs Away Point Differential (Min 5 Games Each)", "Averages", SCOPE_HOME, getLocationPointDifferential(homeDataset, 5));
+
         processStat("% of Games Played at Home (Min 5 Games)", "Averages", SCOPE_HOME, getLocationPercent(homeDataset, true, 5));
         processStat("% of Games Played Away (Min 5 Games)", "Averages", SCOPE_HOME, getLocationPercent(homeDataset, false, 5));
 
-        processStat("Most Home Games Played (All-Time)", "Totals", SCOPE_HOME, getCounts(homeDataset, g => g.isHome));
-        processStat("Most Home Games Played (Single Season)", "Totals", SCOPE_HOME, getMostHomeGamesInSeason(homeDataset));
-        processStat("Fewest Home Games Played (Single Season)", "Totals", SCOPE_HOME, getFewestHomeGamesInSeason(homeDataset, seasonsWithPlayoffs));
+        processStat("Average Points at Home (Min 5 Home Games)", "Averages", SCOPE_HOME, getLocationAveragePoints(homeDataset, true, 5));
+        processStat("Average Points Away (Min 5 Away Games)", "Averages", SCOPE_HOME, getLocationAveragePoints(homeDataset, false, 5));
+        
+        
+        // New Leaderboard: Most Games Hosted (Location Popularity)
+        processStat("Most Games Hosted (By Location)", "Totals", SCOPE_HOME, getLocationCounts(allGames));
+        processStat("Most Home Games Played (By Player)", "Totals", SCOPE_HOME, getCounts(homeDataset, g => g.isHome));
+
         // NEW: Least Recent Host
         processStat("Last Hosted (Active Players)", "Totals", SCOPE_HOME, getLeastRecentHost(allGames, activePlayersSet));
 
         processStat("Most Wins at Home", "Totals", SCOPE_HOME, getCounts(homeDataset, g => g.isHome && g.place === 1));
         processStat("Most Wins Away", "Totals", SCOPE_HOME, getCounts(homeDataset, g => !g.isHome && g.place === 1));
         
-        processStat("Top Half Finishes at Home", "Totals", SCOPE_HOME, getCounts(homeDataset, g => g.isHome && g.place <= 2));
-        processStat("Top Half Finishes Away", "Totals", SCOPE_HOME, getCounts(homeDataset, g => !g.isHome && g.place <= 2));
+
+        // Single Season Stats
+        processStat("Most Home Games Played (Single Season)", "Single Season", SCOPE_HOME, getMostHomeGamesInSeason(homeDataset));
+        processStat("Fewest Home Games Played (Single Season)", "Single Season", SCOPE_HOME, getFewestHomeGamesInSeason(homeDataset, seasonsWithPlayoffs));
+        
+        // NEW: Neutral Site Stats
+        processStat("Most Games Played at Neutral Sites", "Neutral Sites", SCOPE_HOME, getNeutralSiteCounts(allGames));
+        processStat("Most Popular Neutral Sites", "Neutral Sites", SCOPE_HOME, getNeutralSiteLocationCounts(allGames));
 
         // --- SECTION 5: Cross Season ---
         const SCOPE_CROSS = "Cross Season";
@@ -238,7 +240,9 @@ function main() {
         
         // Strength of Schedule
         const sosStats = calculateStrengthOfSchedule(regSeasonGames);
-        processStat("Hardest Path to Playoffs (Single Season SoS)", "Difficulty", SCOPE_METRICS, getHardestPathToPlayoffs(regSeasonGames, allGames)); // Requires passing allGames to check playoff status
+        processStat("Hardest Strength of Schedule (All-Time Avg Opponent Pts)", "Difficulty", SCOPE_METRICS, sosStats.hardest);
+        processStat("Easiest Strength of Schedule (All-Time Avg Opponent Pts)", "Difficulty", SCOPE_METRICS, sosStats.easiest);
+        processStat("Hardest Path to Playoffs (Single Season SoS)", "Difficulty", SCOPE_METRICS, getHardestPathToPlayoffs(regSeasonGames, allGames));
 
         
         processStat("Worst Start (2 Games) to Make Playoffs", "Comebacks", SCOPE_METRICS, seasonMetrics.worstStarts2);
@@ -412,7 +416,7 @@ function generateHtmlDashboard(data) {
 <body>
     <div class="container">
         <header>
-            <a href="https://www.bglcompanion.com" class="back-btn">&larr; Back to BGL</a>
+            <a href="https://bglcompanion.com" class="back-btn">&larr; Back to BGL</a>
             <h1>League Analytics Dashboard</h1>
             <div class="timestamp">Generated: ${new Date().toLocaleString()}</div>
         </header>
@@ -893,116 +897,6 @@ function getHardestPathToPlayoffs(regGames, allGames) {
     return seasonResults.sort((a,b) => b.raw - a.raw);
 }
 
-// NEW: The Opener & Closer (Splits)
-function getSplitPerformance(games, weeksArray, minGames) {
-    // Filter games to only included weeks
-    const splitGames = games.filter(g => weeksArray.includes(g.weekIndex));
-    const grouped = groupByPlayer(splitGames);
-    const results = [];
-
-    for (const [player, records] of Object.entries(grouped)) {
-        if (records.length < minGames) continue;
-        const avg = records.reduce((a,b)=>a+b.points,0) / records.length;
-        results.push({
-            player,
-            value: avg.toFixed(2),
-            raw: avg,
-            extra: `(${records.length} games)`
-        });
-    }
-    return results.sort((a,b) => b.raw - a.raw);
-}
-
-// NEW: Worst Enemies (Opponent Impact)
-function getWorstEnemies(games) {
-    // For each player, find their average score vs specific opponents vs their global average
-    // Actually, simple "Avg Points when playing against X" is usually enough.
-    // We want the PAIR (Player, Enemy) where Player scores lowest.
-    
-    // 1. Group games by ID
-    const tables = {};
-    games.forEach(g => {
-        if(!tables[g.gameId]) tables[g.gameId] = [];
-        tables[g.gameId].push(g); // Store full game obj to get points
-    });
-
-    const enemyStats = {}; // Key: "Player|Enemy" -> { totalPts, games }
-
-    Object.values(tables).forEach(tableGames => {
-        // For every player in this game...
-        for (let i = 0; i < tableGames.length; i++) {
-            const p1 = tableGames[i];
-            // ... against every other player (Enemy)
-            for (let j = 0; j < tableGames.length; j++) {
-                if (i === j) continue;
-                const enemy = tableGames[j];
-                
-                const key = `${p1.player} vs ${enemy.player}`;
-                if (!enemyStats[key]) enemyStats[key] = { pts: 0, games: 0 };
-                enemyStats[key].pts += p1.points;
-                enemyStats[key].games++;
-            }
-        }
-    });
-
-    const results = [];
-    for (const [key, stats] of Object.entries(enemyStats)) {
-        if (stats.games < 3) continue; // Min 3 games
-        const avg = stats.pts / stats.games;
-        // We want LOWEST avg
-        results.push({
-            player: key,
-            value: avg.toFixed(2),
-            raw: avg,
-            extra: `(${stats.games} games)`
-        });
-    }
-
-    return results.sort((a,b) => a.raw - b.raw); // Lowest score first
-}
-
-// NEW: Best Duo (Combined Average)
-function getBestDuos(games) {
-    const tables = {};
-    games.forEach(g => {
-        if(!tables[g.gameId]) tables[g.gameId] = [];
-        tables[g.gameId].push(g);
-    });
-
-    const duoStats = {}; // Key: "P1 & P2" -> { totalPts, games }
-
-    Object.values(tables).forEach(tableGames => {
-        const players = tableGames.sort((a,b) => a.player.localeCompare(b.player)); // Sort to dedup P1/P2 order
-        
-        for (let i = 0; i < players.length; i++) {
-            for (let j = i + 1; j < players.length; j++) {
-                const p1 = players[i];
-                const p2 = players[j];
-                const key = `${p1.player} & ${p2.player}`;
-                
-                if (!duoStats[key]) duoStats[key] = { pts: 0, games: 0 };
-                duoStats[key].pts += (p1.points + p2.points); // Sum of both
-                duoStats[key].games++;
-            }
-        }
-    });
-
-    const results = [];
-    for (const [key, stats] of Object.entries(duoStats)) {
-        if (stats.games < 5) continue; // Min 5 games
-        // Average COMBINED score
-        const avg = stats.pts / stats.games;
-        results.push({
-            player: key,
-            value: avg.toFixed(2),
-            raw: avg,
-            extra: `(${stats.games} games)`
-        });
-    }
-
-    return results.sort((a,b) => b.raw - a.raw);
-}
-
 function getLocationAveragePoints(games, isHome, minGames = 1) {
     const grouped = groupByPlayer(games);
     const results = [];
@@ -1303,7 +1197,7 @@ function getStreaks(games, hitFn, activePlayersSet) {
             }
         }
         
-        results.push({ player, value: max, isActive: isActive, extra: context });
+        results.push({ player, value: max, isActive: isActive, extra: context, startDate: startDate, endDate: endDate });
     }
     return results.sort((a, b) => b.value - a.value);
 }
@@ -1352,7 +1246,7 @@ function getWinRates(games, isHome, minGames = 1) {
         results.push({ 
             player, 
             value: pct.toFixed(1) + '%', 
-            raw: pct, 
+            raw: pct,
             extra: `(${wins}/${total})` 
         });
     }
@@ -1426,11 +1320,26 @@ function getSingleSeasonStreaks(games, hitFn, activePlayersSet) {
             const isSeasonActive = parseInt(season) === currentSeason;
             const finalActive = r.isActive && isSeasonActive;
 
-            // Context is already generated by getStreaks, but we want to ensure season year is visible if not present?
-            // getStreaks returns (Date - Date). Since this is Single Season, adding (Season) is redundant if dates have years.
-            // Let's rely on the formatted date string from getStreaks.
+            // FIX: Ensure past season streaks have explicit dates, never "Present"
+            let context = r.extra;
+            if (r.isActive && !isSeasonActive) {
+                // If getStreaks thought it was active (end of data provided), but it's an old season,
+                // rewrite context to be specific dates.
+                if (r.value === 1) {
+                    context = `(${r.startDate})`;
+                } else {
+                    context = `(${r.startDate} - ${r.endDate})`;
+                }
+            } else if (finalActive) {
+                // It IS active in the current season
+                 if (r.value === 1) {
+                    context = `(${r.startDate} - Present)`;
+                } else {
+                    context = `(${r.startDate} - Present)`;
+                }
+            }
 
-            if (r.value > 0) results.push({ player: r.player, value: r.value, extra: r.extra, isActive: finalActive });
+            if (r.value > 0) results.push({ player: r.player, value: r.value, extra: context, isActive: finalActive });
         });
     }
     return results.sort((a, b) => b.value - a.value);
@@ -1705,7 +1614,7 @@ function getLeastPlayedMatchups(games, activePlayersSet) {
     // 1. Map Weeks to Players to calculate "Chances"
     const weekMap = {}; // Key: "Season|Week" -> Set of Players
     games.forEach(g => {
-        const weekKey = `${g.season}|${g.weekIndex}|${g.weekLabel}`;
+        const weekKey = `${g.season}|${g.weekLabel}`;
         if (!weekMap[weekKey]) weekMap[weekKey] = new Set();
         weekMap[weekKey].add(g.player);
     });
@@ -2086,6 +1995,116 @@ function calculateSeasonMetrics(allGames) {
         worstStarts2, worstStarts3, worstStarts4,
         bestMisses2, bestMisses3, bestMisses4
     };
+}
+
+// NEW: The Opener & Closer (Splits)
+function getSplitPerformance(games, weeksArray, minGames) {
+    // Filter games to only included weeks
+    const splitGames = games.filter(g => weeksArray.includes(g.weekIndex));
+    const grouped = groupByPlayer(splitGames);
+    const results = [];
+
+    for (const [player, records] of Object.entries(grouped)) {
+        if (records.length < minGames) continue;
+        const avg = records.reduce((a,b)=>a+b.points,0) / records.length;
+        results.push({
+            player,
+            value: avg.toFixed(2),
+            raw: avg,
+            extra: `(${records.length} games)`
+        });
+    }
+    return results.sort((a,b) => b.raw - a.raw);
+}
+
+// NEW: Worst Enemies (Opponent Impact)
+function getWorstEnemies(games) {
+    // For each player, find their average score vs specific opponents vs their global average
+    // Actually, simple "Avg Points when playing against X" is usually enough.
+    // We want the PAIR (Player, Enemy) where Player scores lowest.
+    
+    // 1. Group games by ID
+    const tables = {};
+    games.forEach(g => {
+        if(!tables[g.gameId]) tables[g.gameId] = [];
+        tables[g.gameId].push(g); // Store full game obj to get points
+    });
+
+    const enemyStats = {}; // Key: "Player|Enemy" -> { totalPts, games }
+
+    Object.values(tables).forEach(tableGames => {
+        // For every player in this game...
+        for (let i = 0; i < tableGames.length; i++) {
+            const p1 = tableGames[i];
+            // ... against every other player (Enemy)
+            for (let j = 0; j < tableGames.length; j++) {
+                if (i === j) continue;
+                const enemy = tableGames[j];
+                
+                const key = `${p1.player} vs ${enemy.player}`;
+                if (!enemyStats[key]) enemyStats[key] = { pts: 0, games: 0 };
+                enemyStats[key].pts += p1.points;
+                enemyStats[key].games++;
+            }
+        }
+    });
+
+    const results = [];
+    for (const [key, stats] of Object.entries(enemyStats)) {
+        if (stats.games < 3) continue; // Min 3 games
+        const avg = stats.pts / stats.games;
+        // We want LOWEST avg
+        results.push({
+            player: key,
+            value: avg.toFixed(2),
+            raw: avg,
+            extra: `(${stats.games} games)`
+        });
+    }
+
+    return results.sort((a,b) => a.raw - b.raw); // Lowest score first
+}
+
+// NEW: Best Duo (Combined Average)
+function getBestDuos(games) {
+    const tables = {};
+    games.forEach(g => {
+        if(!tables[g.gameId]) tables[g.gameId] = [];
+        tables[g.gameId].push(g);
+    });
+
+    const duoStats = {}; // Key: "P1 & P2" -> { totalPts, games }
+
+    Object.values(tables).forEach(tableGames => {
+        const players = tableGames.sort((a,b) => a.player.localeCompare(b.player)); // Sort to dedup P1/P2 order
+        
+        for (let i = 0; i < players.length; i++) {
+            for (let j = i + 1; j < players.length; j++) {
+                const p1 = players[i];
+                const p2 = players[j];
+                const key = `${p1.player} & ${p2.player}`;
+                
+                if (!duoStats[key]) duoStats[key] = { pts: 0, games: 0 };
+                duoStats[key].pts += (p1.points + p2.points); // Sum of both
+                duoStats[key].games++;
+            }
+        }
+    });
+
+    const results = [];
+    for (const [key, stats] of Object.entries(duoStats)) {
+        if (stats.games < 5) continue; // Min 5 games
+        // Average COMBINED score
+        const avg = stats.pts / stats.games;
+        results.push({
+            player: key,
+            value: avg.toFixed(2),
+            raw: avg,
+            extra: `(${stats.games} games)`
+        });
+    }
+
+    return results.sort((a,b) => b.raw - a.raw);
 }
 
 main();
