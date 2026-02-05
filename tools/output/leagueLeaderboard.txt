@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "generated_at": "2026-02-05T03:19:56.536Z",
+    "generated_at": "2026-02-05T04:02:21.231Z",
     "description": "League Analytics Data"
   },
   "leaderboards": [
@@ -16304,12 +16304,6 @@
         {
           "rank": 17,
           "player": "Luke",
-          "value": 1,
-          "context": ""
-        },
-        {
-          "rank": 17,
-          "player": "DNP",
           "value": 1,
           "context": ""
         },

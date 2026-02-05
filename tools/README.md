@@ -13,3 +13,11 @@ Note, I did use a service account fo reading from files so that my account isn't
 Upload Error: The user's Drive storage quota has been exceeded.
 
 So I had to use OAuth.  And I believe this is fine as long as I don't expose my tools publicly
+
+
+
+To do a full upload of all the Weekly Events and Leaderboard:
+run: .\updateLeagueAfterGame.bat -d 
+
+To do a full upload of all the Weekly Events and Leaderboard AFTER UPDATING THE REACT APP ITSELF:
+run: .\updateLeagueAfterGame.bat -d -b

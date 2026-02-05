@@ -504,7 +504,10 @@ export function createHistoricalDataObject(data){
                                 // sosObject[performance.player] = {strengthOfScheduleTotal: 0, gamesPlayed: player.gamesPlayed, gamesToPlay: player.gamesToPlay};
                             }
 
-                            let isHomeGame = location.includes(performance.player);
+                            let isHomeGame = false;
+                            if(location !== null){
+                                isHomeGame = location.includes(performance.player);
+                            }
                             if(isHomeGame){
                                 analysisObject[performance.player].homeGames++;
                             }

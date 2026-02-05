@@ -51,7 +51,7 @@ function main() {
         const activePlayersSet = new Set(
             allGames.filter(g => g.season === maxSeason).map(g => g.player)
         );
-        console.log(`Identified ${activePlayersSet.size} active players in season ${maxSeason}.`);
+        // console.log(`Identified ${activePlayersSet.size} active players in season ${maxSeason}.`);
 
         // 3. Identify Seasons with Playoffs (Completed Seasons)
         const seasonsWithPlayoffs = new Set(
@@ -624,7 +624,7 @@ function processStat(category, subcategory, scope, sortedList) {
     if (!sortedList || sortedList.length === 0) return;
 
     // 1. Console Output
-    console.log(`\n> ${category} [${scope}]`);
+    // console.log(`\n> ${category} [${scope}]`);
     let rank = 1;
     for (let i = 0; i < sortedList.length; i++) {
         const current = sortedList[i];
@@ -635,7 +635,7 @@ function processStat(category, subcategory, scope, sortedList) {
         const activeMark = current.isActive ? " [ACTIVE]" : "";
         
         // Only print Top 5 to console to keep it clean
-        if (i < 5) console.log(`  ${rank}. ${current.player.padEnd(15)}: ${current.value} ${extra}${activeMark}`);
+        // if (i < 5) console.log(`  ${rank}. ${current.player.padEnd(15)}: ${current.value} ${extra}${activeMark}`);
     }
 
     // 2. Prepare JSON Entry
@@ -719,7 +719,7 @@ function parseSchedule(data) {
                                     player: p.player,
                                     place: place,
                                     points: POINTS[place] || 0,
-                                    isHome: location.includes(p.player),
+                                    isHome: location !== null ? location.includes(p.player) : false,
                                     isNeutral: isNeutralSite, 
                                     location: location
                                 });
