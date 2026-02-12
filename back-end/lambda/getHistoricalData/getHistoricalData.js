@@ -17,7 +17,7 @@ async function getHistoricalData(queryParams){
     const spreadsheetId = process.env.DOCUMENT_ID;
     
     let sheetRanges = seasons.split(',').map(season => {
-        return "Schedule-" + season + "!A:E";
+        return "Schedule-" + season + "!A:F";
     });
 
     const readData = await googleSheetsInstance.spreadsheets.values.batchGet({

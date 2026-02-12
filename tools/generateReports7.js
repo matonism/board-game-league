@@ -109,7 +109,7 @@ function main() {
 
             processStat("Active Win Streak", "Streaks (Active)", scope, getActiveStreaks(dataset, g => g.place === 1, activePlayersSet));
             processStat("Active 2nd Place Streak", "Streaks (Active)", scope, getActiveStreaks(dataset, g => g.place === 2, activePlayersSet));
-            processStat("Active 4th Place Streak", "Streaks (Active)", scope, getActiveStreaks(dataset, g => g.place === 3, activePlayersSet));
+            processStat("Active 3rd Place Streak", "Streaks (Active)", scope, getActiveStreaks(dataset, g => g.place === 3, activePlayersSet));
             processStat("Active 4th Place Streak", "Streaks (Active)", scope, getActiveStreaks(dataset, g => g.place === 4, activePlayersSet));
             processStat("Active Streak w/o 4th", "Streaks (Active)", scope, getActiveStreaks(dataset, g => g.place !== 4, activePlayersSet));
             processStat("Active Winless Streak", "Streaks (Active)", scope, getActiveStreaks(dataset, g => g.place !== 1, activePlayersSet));
@@ -553,6 +553,8 @@ function generateHtmlDashboard(data) {
                 infoText = "Highest combined average score per game when playing at the same table (Min 5 games).";
             }else if (board.category.includes("Hardest Path to Playoffs")) {
                 infoText = "Calculates the toughest strength of schedule for a player that still made playoffs";
+            }else if (board.category.includes("Worst Enemies")) {
+                infoText = "The first player's average points in games featuring the second";
             }
 
             // Create SVG icon if tooltip text exists
@@ -2041,7 +2043,7 @@ function getWorstEnemies(games) {
                 if (i === j) continue;
                 const enemy = tableGames[j];
                 
-                const key = `${p1.player} vs ${enemy.player}`;
+                const key = `${p1.player}' against  ${enemy.player}`;
                 if (!enemyStats[key]) enemyStats[key] = { pts: 0, games: 0 };
                 enemyStats[key].pts += p1.points;
                 enemyStats[key].games++;

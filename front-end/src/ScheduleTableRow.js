@@ -34,10 +34,10 @@ const ScheduleTableRow = props => {
                     <td className="bgl-table-title-cell">
                         <div data-name={props.index} onClick={openScheduler}>Group {props.index + 1}</div>
                     </td>
-                    <td className="bgl-table-cell">{group[0].player}</td>
-                    <td className="bgl-table-cell">{group[1].player}</td>
-                    <td className="bgl-table-cell">{group[2].player}</td>
-                    <td className="bgl-table-cell">{group[3].player}</td>
+                    <td className="bgl-table-cell">{group[0].sub ? group[0].player + ' (' + group[0].sub + ')' : group[0].player}</td>
+                    <td className="bgl-table-cell">{group[1].sub ? group[1].player + ' (' + group[1].sub + ')' : group[1].player}</td>
+                    <td className="bgl-table-cell">{group[2].sub ? group[2].player + ' (' + group[2].sub + ')' : group[2].player}</td>
+                    <td className="bgl-table-cell">{group[3].sub ? group[3].player + ' (' + group[3].sub + ')' : group[3].player}</td>
                 </tr>
                 <tr  key={"place-row-" + props.index} className="bgl-table-row placement-row">
                     <td className="bgl-table-subtitle-cell">Placement</td>

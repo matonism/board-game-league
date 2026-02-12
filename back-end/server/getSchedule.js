@@ -18,7 +18,7 @@ async function getSchedule(queryParams){
     const readData = await googleSheetsInstance.spreadsheets.values.get({
         auth, //auth object
         spreadsheetId, // spreadsheet id
-        range: "Schedule-" + season + "!A:E", //range of cells to read from.
+        range: "Schedule-" + season + "!A:F", //range of cells to read from.
     })
 
     return readData.data;

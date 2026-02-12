@@ -25,12 +25,12 @@ if "%SHOULD_REBUILD_REACT%"=="true" (
     echo No "-b" flag provided. Skipping Rebuilding React App...
 )
 
-echo Re-pulling historical data...
 :: Retrieve historical data, schedules, standings, strength of schedules, etc..
+echo Re-pulling historical data...
 node .\historicalDataRetreiver.js
 
-echo Generating Report and Weekly Events...
 :: Generate Reports and Weekly Events html pages and json files
+echo Generating Report and Weekly Events...
 node .\generateReports7.js & node .\weeklyEvents2.js
 
 echo Copying reports to build folder...
@@ -40,6 +40,10 @@ if not exist "../front-end/build/weeklyReport" mkdir "../front-end/build/weeklyR
 
 robocopy "./addToBuild/analysis" "../front-end/build/analysis" /E /R:2 /W:5
 robocopy "./addToBuild/weeklyReport" "../front-end/build/weeklyReport" /E /R:2 /W:5
+
+:: Upload all the updated stats files that were regenerated to Drive so NotebookLM can use them (May have to re-generate the token.json file from Google Console every 7 days)
+echo Updating stats on Google Drive...
+node .\uploadBGLFilesOAuth.js
 
 :: Deploy the app 
 if "%DEPLOY_ON%"=="true" (

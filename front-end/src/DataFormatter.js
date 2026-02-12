@@ -2,13 +2,16 @@ import {getBoardGameGeekIds } from "./callouts/CalloutFactory";
 
 
 export function createScheduleObject(response) {
-    if(response?.values?.length > 0 && response.values[0].length === 5){
+
+    //IF Cell F1 is populated, we're hiding this season
+    if(response?.values?.length > 0 && response.values[0].length === 6){
         return null;
     }
-    let numberOfGamesPerWeek = getNumberOfGamesPerWeek(response);
     let numberOfPlayersPerGame = 4;
     let infoHeaderRows = 1;
-    let rowsBetweenWeeksInSpreadsheet = numberOfGamesPerWeek * 2 + infoHeaderRows;
+    let rowsPerGroup = 3
+    let numberOfGamesPerWeek = getNumberOfGamesPerWeek(response, rowsPerGroup);
+    let rowsBetweenWeeksInSpreadsheet = numberOfGamesPerWeek * rowsPerGroup + infoHeaderRows;
     
     let schedule = [];
     let playoffRowStart = 0;
@@ -17,6 +20,8 @@ export function createScheduleObject(response) {
 
         let row = response.values[rowIndex];
         let rowReference = rowIndex % rowsBetweenWeeksInSpreadsheet;
+
+        //Weekly title rows in spreadsheet
         if(rowReference === 0){
 
             if(row[0].toLowerCase().includes('championship') || row[0].toLowerCase().includes('playoff')){
@@ -32,74 +37,91 @@ export function createScheduleObject(response) {
                 results: [],
                 album: []
             });
-        }else if(rowReference % 2 === 1){
+        
+        //For the first row of each group in a given week
+        }else if(rowReference % rowsPerGroup === 1){
             let placementRow = response.values[rowIndex + 1];
+            let subRow = response.values[rowIndex + 2];
             let scheduleToUpdate = schedule[schedule.length - 1];
-            // scheduleToUpdate.results.push([]);
+
             let newGroup = [];
             for(let j = 1; j <= numberOfPlayersPerGame; j++){
                 if(row[j]){
                     let placement = placementRow[j];
-                    newGroup.push({player: row[j].trim(), placement: placement})
+                    let sub = subRow[j]
+                    let playerEntry ={player: row[j].trim(), placement: placement};
+                    if(sub){
+                        playerEntry.sub = sub;
+                    } 
+                    newGroup.push(playerEntry);
                 }
                 // let groupToUpdate = scheduleToUpdate.results[scheduleToUpdate.results.length-1];
             }
             if(newGroup.length > 0){
-                scheduleToUpdate.results.push(newGroup);
+                let location = placementRow[5] ? placementRow[5] : null;
+                scheduleToUpdate.results.push({location: location, players: newGroup});
             }
 
             //For album, we need to match the naming convention (ex: 2_3) to the given week (2) and given group (3)
-            if(scheduleToUpdate.results?.length > 0 && scheduleToUpdate.results[scheduleToUpdate.results.length-1][0]?.placement){
+            // if(scheduleToUpdate.results?.length > 0 && scheduleToUpdate.results[scheduleToUpdate.results.length-1][0]?.placement){
                 
-                if(scheduleToUpdate.week === 'championship'){
-                    scheduleToUpdate.album.push('championship')
-                }else{
-                    scheduleToUpdate.album.push(schedule.length + '_' + scheduleToUpdate.results.length)
-                }
-            }
+            //     if(scheduleToUpdate.week === 'championship'){
+            //         scheduleToUpdate.album.push('championship')
+            //     }else{
+            //         scheduleToUpdate.album.push(schedule.length + '_' + scheduleToUpdate.results.length)
+            //     }
+            // }
         }
     }
 
     //Playoffs and championship setup
-    let rowsBetweenChampionshipWeeks = 1 * 2 + infoHeaderRows;
+    let rowsBetweenChampionshipWeeks = 1 * rowsPerGroup + infoHeaderRows;
     for(let rowIndex = playoffRowStart; rowIndex < response.values.length; rowIndex++){
         let row = response.values[rowIndex];
-        let rowReference = rowIndex % rowsBetweenChampionshipWeeks;
+        let rowReference = (rowIndex - playoffRowStart) % rowsBetweenChampionshipWeeks;
         if(rowReference === 0){
             schedule.push({
                 week: row[0], 
                 game: row[1], 
                 dates: row[2], 
+                headlines: row[3],
                 results: [],
                 album: []
             });
-        }else if(rowReference % 2 === 1){
+        }else if(rowReference % rowsPerGroup === 1){
             let placementRow = response.values[rowIndex + 1];
+            let subRow = response.values[rowIndex + 2];
             let scheduleToUpdate = schedule[schedule.length - 1];
             // scheduleToUpdate.results.push([]);
             let newGroup = [];
             for(let j = 1; j <= numberOfPlayersPerGame; j++){
                 if(row[j]){
                     let placement = placementRow[j];
-                    newGroup.push({player: row[j].trim(), placement: placement})
+                    let sub = subRow[j]
+                    let playerEntry ={player: row[j].trim(), placement: placement};
+                    if(sub){
+                        playerEntry.sub = sub;
+                    } 
+                    newGroup.push(playerEntry);
                 }
                 // let groupToUpdate = scheduleToUpdate.results[scheduleToUpdate.results.length-1];
             }
             if(newGroup.length > 0){
-                scheduleToUpdate.results.push(newGroup);
+                let location = placementRow[5] ? placementRow[5] : null;
+                scheduleToUpdate.results.push({location: location, players: newGroup});
             }
 
             //For album, we need to match the naming convention (ex: 2_3) to the given week (2) and given group (3)
-            if(scheduleToUpdate.results?.length > 0 && scheduleToUpdate.results[scheduleToUpdate.results.length-1][0]?.placement){
+            // if(scheduleToUpdate.results?.length > 0 && scheduleToUpdate.results[scheduleToUpdate.results.length-1][0]?.placement){
                 
-                if(scheduleToUpdate.week === 'championship'){
-                    scheduleToUpdate.album.push('championship')
-                }else if(scheduleToUpdate.week.includes('playoff')){
-                    scheduleToUpdate.album.push(scheduleToUpdate.week.replaceAll(' ', '_'));
-                }else{
-                    scheduleToUpdate.album.push(schedule.length + '_' + scheduleToUpdate.results.length)
-                }
-            }
+            //     if(scheduleToUpdate.week === 'championship'){
+            //         scheduleToUpdate.album.push('championship')
+            //     }else if(scheduleToUpdate.week.includes('playoff')){
+            //         scheduleToUpdate.album.push(scheduleToUpdate.week.replaceAll(' ', '_'));
+            //     }else{
+            //         scheduleToUpdate.album.push(schedule.length + '_' + scheduleToUpdate.results.length)
+            //     }
+            // }
         }
     }
     // response.values.forEach((row, rowIndex) => {
@@ -110,7 +132,7 @@ export function createScheduleObject(response) {
     return schedule;
 }
 
-function getNumberOfGamesPerWeek(scheduleResponse){
+function getNumberOfGamesPerWeek(scheduleResponse, rowsPerGroup){
     let numberOfRowsBetweenWeeks = 0;
     if(scheduleResponse.values.length > 1){
         for(let i = 1; i < scheduleResponse.values.length; i++){
@@ -122,7 +144,7 @@ function getNumberOfGamesPerWeek(scheduleResponse){
             }
         }
     }
-    return numberOfRowsBetweenWeeks/2;
+    return numberOfRowsBetweenWeeks / rowsPerGroup;
 }
 
 export function isRegularSeason(weekLabel){
@@ -150,7 +172,7 @@ export function createStandingsObject(schedule){
     schedule.forEach((week, index)=>{
         if(isRegularSeason(week.week.toLowerCase())){ 
             week.results.forEach(group => {
-                group.forEach(performance => {
+                group.players.forEach(performance => {
                     let player = performance.player.trim();
                     if(!standings.regularSeason[player]){
                         standings.regularSeason[player] = {score: 0, gamesPlayed: 0, gamesToPlay: 0, weeklyScores: new Array(index).fill(0)};
@@ -165,7 +187,7 @@ export function createStandingsObject(schedule){
             })
         }else if(isChampionship(week.week.toLowerCase())){
             week.results.forEach(group => {
-                group.forEach(performance => {
+                group.players.forEach(performance => {
                     let player = performance.player.trim();
                     if(!standings.championship[player]){
                         standings.championship[player] = {score: 0, gamesPlayed: 0, gamesToPlay: 0};
@@ -285,13 +307,13 @@ export function createStrengthOfScheduleObject(schedule, standings){
         if(isRegularSeason(week.week.toLowerCase())){ 
             week.results.forEach(group => {
                 // gamesPerWeek = group.length;
-                group.forEach(performance => {
+                group.players.forEach(performance => {
 
                     if(!sosObject[performance.player]){
                         let player = standings.regularSeason.find(standing => { return standing.player === performance.player})
                         sosObject[performance.player] = {strengthOfScheduleTotal: 0, gamesPlayed: player.gamesPlayed, gamesToPlay: player.gamesToPlay};
                     }
-                    group.forEach(performance2 => {
+                    group.players.forEach(performance2 => {
                         if(performance !== performance2){
                             let performance2Player = standings.regularSeason.find(standing => { return standing.player === performance2.player})
                             let sosValue = performance2Player.gamesPlayed > 0 ? performance2Player.points / performance2Player.gamesPlayed : 0;
@@ -368,7 +390,7 @@ export function getImageFileNamesToLoad(schedule, response){
         }
     });
 
-    let numberOfGamesPerWeek = getNumberOfGamesPerWeek(response);
+    let numberOfGamesPerWeek = getNumberOfGamesPerWeek(response, 3);
 
     let imageNames= [];
     let week = 1;
@@ -473,7 +495,7 @@ export function createHistoricalDataObject(data){
             if(isRegularSeason(week.week.toLowerCase())){ 
                 week.results.forEach(group => {
                     // gamesPerWeek = group.length;
-                    group.forEach(performance => {
+                    group.players.forEach(performance => {
                         if(performance.placement){
                             if(!analysisObject[performance.player]){
                                 analysisObject[performance.player] = {
@@ -506,7 +528,7 @@ export function createHistoricalDataObject(data){
 
                             analysisObject[performance.player].points += scoringRubric(performance.placement);
 
-                            group.forEach(performance2 => {
+                            group.players.forEach(performance2 => {
                                 if(performance !== performance2){
                                     if(!analysisObject[performance.player].headToHead[performance2.player]){
                                         analysisObject[performance.player].headToHead[performance2.player] = {
@@ -541,7 +563,7 @@ export function createHistoricalDataObject(data){
             }else{
                 week.results.forEach(group => {
                     // gamesPerWeek = group.length;
-                    group.forEach(performance => {
+                    group.players.forEach(performance => {
 
                         if(performance.placement){
                             if(!postSeasonObject[performance.player]){
@@ -588,7 +610,7 @@ export function createHistoricalDataObject(data){
                             postSeasonObject[performance.player].averagePosition = ((postSeasonObject[performance.player].averagePosition * (postSeasonObject[performance.player].gamesPlayed - 1)) + parseInt(performance.placement)) / postSeasonObject[performance.player].gamesPlayed;
                             postSeasonObject[performance.player].points += scoringRubric(performance.placement);
 
-                            group.forEach(performance2 => {
+                            group.players.forEach(performance2 => {
                                 if(performance !== performance2){
                                     if(!postSeasonObject[performance.player].headToHead[performance2.player]){
                                         postSeasonObject[performance.player].headToHead[performance2.player] = {

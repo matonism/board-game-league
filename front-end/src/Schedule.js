@@ -62,7 +62,7 @@ class Schedule extends React.Component {
     getSingleScheduleTable(week){
         return week.results.map((group, index) => {
             return (
-                <ScheduleTableRow key={'group-' + index} week={week} group={group} season={this.props.season} index={index}></ScheduleTableRow>
+                <ScheduleTableRow key={'group-' + index} week={week} group={group.players} season={this.props.season} index={index}></ScheduleTableRow>
             )
         })
     }

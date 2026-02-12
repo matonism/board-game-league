@@ -8,10 +8,11 @@ export function createScheduleObject(response) {
     }
                 
     let year = response.range.split('-')[1].split('\'')[0];
-    let numberOfGamesPerWeek = getNumberOfGamesPerWeek(response);
     let numberOfPlayersPerGame = 4;
     let infoHeaderRows = 1;
-    let rowsBetweenWeeksInSpreadsheet = numberOfGamesPerWeek * 2 + infoHeaderRows;
+    let rowsPerGroup = 3
+    let numberOfGamesPerWeek = getNumberOfGamesPerWeek(response, rowsPerGroup);
+    let rowsBetweenWeeksInSpreadsheet = numberOfGamesPerWeek * rowsPerGroup + infoHeaderRows;
     
     let schedule = [];
     let playoffRowStart = 0;
@@ -34,26 +35,32 @@ export function createScheduleObject(response) {
                 week: row[0], 
                 game: row[1], 
                 dates: row[2],
+                headlines: row[3],
                 results: [],
-                album: [],
-                headlines: row[3]
+                album: []
             });
         
         //Group rows & placement rows
-        }else if(rowReference % 2 === 1){
+        }else if(rowReference % rowsPerGroup === 1){
             let placementRow = response.values[rowIndex + 1];
+            let subRow = response.values[rowIndex + 2];
             let scheduleToUpdate = schedule[schedule.length - 1];
 
             let newGroup = [];
             for(let j = 1; j <= numberOfPlayersPerGame; j++){
                 if(row[j]){
                     let placement = placementRow[j];
-                    newGroup.push({player: row[j].trim(), placement: placement})
+                    let sub = subRow[j]
+                    let playerEntry ={player: row[j].trim(), placement: placement};
+                    if(sub){
+                        playerEntry.sub = sub;
+                    } 
+                    newGroup.push(playerEntry);
                 }
             }
 
             if(newGroup.length > 0){
-                let location = locations[year][schedule.length-1].groups[scheduleToUpdate.results.length].location;
+                let location = placementRow[5] ? placementRow[5] : null;
                 scheduleToUpdate.results.push({location: location, players: newGroup});
             }
 
@@ -70,33 +77,40 @@ export function createScheduleObject(response) {
     }
 
     //Playoffs and championship setup
-    let rowsBetweenChampionshipWeeks = 1 * 2 + infoHeaderRows;
+    let rowsBetweenChampionshipWeeks = 1 * rowsPerGroup + infoHeaderRows;
     for(let rowIndex = playoffRowStart; rowIndex < response.values.length; rowIndex++){
         let row = response.values[rowIndex];
-        let rowReference = rowIndex % rowsBetweenChampionshipWeeks;
+        let rowReference = (rowIndex - playoffRowStart) % rowsBetweenChampionshipWeeks;
         if(rowReference === 0){
             schedule.push({
                 week: row[0], 
                 game: row[1], 
                 dates: row[2], 
+                headlines: row[3],
                 results: [],
                 album: []
             });
-        }else if(rowReference % 2 === 1){
+        }else if(rowReference % rowsPerGroup === 1){
             let placementRow = response.values[rowIndex + 1];
+            let subRow = response.values[rowIndex + 2];
             let scheduleToUpdate = schedule[schedule.length - 1];
             // scheduleToUpdate.results.push([]);
             let newGroup = [];
             for(let j = 1; j <= numberOfPlayersPerGame; j++){
                 if(row[j]){
                     let placement = placementRow[j];
-                    newGroup.push({player: row[j].trim(), placement: placement})
+                    let sub = subRow[j]
+                    let playerEntry ={player: row[j].trim(), placement: placement};
+                    if(sub){
+                        playerEntry.sub = sub;
+                    } 
+                    newGroup.push(playerEntry);
                 }
                 // let groupToUpdate = scheduleToUpdate.results[scheduleToUpdate.results.length-1];
             }
 
             if(newGroup.length > 0){
-                let location = locations[year][schedule.length-1].groups[scheduleToUpdate.results.length].location;
+                let location = placementRow[5] ? placementRow[5] : null;
                 scheduleToUpdate.results.push({location: location, players: newGroup});
             }
 
@@ -121,7 +135,7 @@ export function createScheduleObject(response) {
     return schedule;
 }
 
-function getNumberOfGamesPerWeek(scheduleResponse){
+function getNumberOfGamesPerWeek(scheduleResponse, rowsPerGroup){
     let numberOfRowsBetweenWeeks = 0;
     if(scheduleResponse.values.length > 1){
         for(let i = 1; i < scheduleResponse.values.length; i++){
@@ -133,7 +147,7 @@ function getNumberOfGamesPerWeek(scheduleResponse){
             }
         }
     }
-    return numberOfRowsBetweenWeeks/2;
+    return numberOfRowsBetweenWeeks/rowsPerGroup;
 }
 
 export function isRegularSeason(weekLabel){
@@ -379,7 +393,7 @@ export function getImageFileNamesToLoad(schedule, response){
         }
     });
 
-    let numberOfGamesPerWeek = getNumberOfGamesPerWeek(response);
+    let numberOfGamesPerWeek = getNumberOfGamesPerWeek(response, 3);
 
     let imageNames= [];
     let week = 1;
