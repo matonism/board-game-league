@@ -12,6 +12,15 @@ const HTML_FILE = path.join(ANALYSIS_DIR, 'index.html');
 // SCORING
 const POINTS = { 1: 3, 2: 2, 3: 1, 4: 0 };
 
+// PLAYER GENDERS (M/F)
+const PLAYER_GENDERS = {
+    'Michael': 'M', 'Nick': 'M', 'Richie': 'M', 'Austin': 'M', 'Luke': 'M', 'Josh': 'M', 
+    'Dan': 'M', 'Ryan': 'M', 'Tyler': 'M', 'Steve': 'M', 'Jack M': 'M', 'Jack C': 'M', 
+    'Cody': 'M', 'Ian': 'M', 'Sam': 'M', 'Brian': 'M',
+    'Rachel F': 'F', 'Rachel M': 'F', 'Ashley': 'F', 'Carly': 'F', 'Allie': 'F', 
+    'Becca': 'F', 'Emma': 'F', 'Jennie': 'F', 'Brittany': 'F'
+};
+
 // MILESTONES CONFIG
 const MILESTONES = {
     career_points: 20,  // Notify every 25 points
@@ -205,6 +214,13 @@ function getSnapshot(games, targetSeason) {
     const streaksMap = {}; // Active streaks
     const playerStats = []; // For record calculation
 
+    // Helper: Map Game ID to Players in that game (for Gender/Nemesis checks)
+    const gameTables = {};
+    games.forEach(g => {
+        if (!gameTables[g.gameId]) gameTables[g.gameId] = [];
+        gameTables[g.gameId].push(g);
+    });
+
     const byPlayer = {};
     games.forEach(g => {
         if(!byPlayer[g.player]) byPlayer[g.player] = [];
@@ -222,6 +238,35 @@ function getSnapshot(games, targetSeason) {
         // Reg Season Only Records
         const regRecords = records.filter(r => !r.isPostSeason);
 
+        // Gender Streak Logic
+        // We calculate this manually here
+        let genderStreak = 0;
+        let maxGenderStreak = 0;
+        const myGender = PLAYER_GENDERS[player] || 'U'; // U for unknown
+        const oppGender = myGender === 'M' ? 'F' : (myGender === 'F' ? 'M' : null);
+
+        records.forEach(g => {
+            if (!oppGender) return;
+            // Who was in this game?
+            const table = gameTables[g.gameId] || [];
+            // Is there an opponent of the opposite gender?
+            const hasOppGender = table.some(p => p.player !== player && PLAYER_GENDERS[p.player] === oppGender);
+            
+            if (hasOppGender) {
+                // Did I lose to ANY of them? (i.e., did any of them have a lower place than me?)
+                // Note: Lower place is better (1st < 2nd)
+                const lostToOppGender = table.some(p => p.player !== player && PLAYER_GENDERS[p.player] === oppGender && p.place < g.place);
+                
+                if (!lostToOppGender) {
+                    genderStreak++;
+                    if (genderStreak > maxGenderStreak) maxGenderStreak = genderStreak;
+                } else {
+                    genderStreak = 0;
+                }
+            }
+            // If no opposite gender present, streak pauses (maintains value)
+        });
+
         // Active Streaks (Current run from most recent game backwards)
         streaksMap[player] = {
             winStreak: getActiveStreakCount(records, r => r.place === 1),
@@ -230,7 +275,9 @@ function getSnapshot(games, targetSeason) {
             // Regular Season Versions (for context)
             regWinStreak: getActiveStreakCount(regRecords, r => r.place === 1),
             regTopHalfStreak: getActiveStreakCount(regRecords, r => r.place <= 2),
-            regNoLastStreak: getActiveStreakCount(regRecords, r => r.place !== 4)
+            regNoLastStreak: getActiveStreakCount(regRecords, r => r.place !== 4),
+            // Gender Streak (Calculated above)
+            genderStreak: genderStreak
         };
 
         // Historical Max Streaks (Best run ever in history)
@@ -240,7 +287,8 @@ function getSnapshot(games, targetSeason) {
                 win: getMaxStreakCount(records, r => r.place === 1),
                 top2: getMaxStreakCount(records, r => r.place <= 2),
                 safe: getMaxStreakCount(records, r => r.place !== 4),
-                winless: getMaxStreakCount(records, r => r.place !== 1)
+                winless: getMaxStreakCount(records, r => r.place !== 1),
+                gender: maxGenderStreak // Added
             },
             reg: {
                 win: getMaxStreakCount(regRecords, r => r.place === 1),
@@ -261,7 +309,8 @@ function getSnapshot(games, targetSeason) {
             points: totalPoints,
             average: totalGames > 0 ? totalPoints / totalGames : 0,
             games: totalGames,
-            maxStreaks
+            maxStreaks,
+            gender: myGender
         });
     });
 
@@ -280,7 +329,11 @@ function getSnapshot(games, targetSeason) {
         streak_safe_reg: getLeader(playerStats, p => p.maxStreaks.reg.safe),
 
         streak_winless_all: getLeader(playerStats, p => p.maxStreaks.all.winless), 
-        streak_winless_reg: getLeader(playerStats, p => p.maxStreaks.reg.winless)
+        streak_winless_reg: getLeader(playerStats, p => p.maxStreaks.reg.winless),
+
+        // NEW: Gender Records
+        streak_gender_m: getLeader(playerStats, p => p.gender === 'M' ? p.maxStreaks.all.gender : -1),
+        streak_gender_f: getLeader(playerStats, p => p.gender === 'F' ? p.maxStreaks.all.gender : -1)
     };
 
     // 3. Season Standings (Regular Season Only)
@@ -402,7 +455,9 @@ const RECORD_TITLES = {
     streak_safe_all: "Longest No-4th Streak (All-Time)",
     streak_safe_reg: "Longest No-4th Streak (Regular Season)",
     streak_winless_all: "Longest Winless Streak (All-Time)", 
-    streak_winless_reg: "Longest Winless Streak (Regular Season)"
+    streak_winless_reg: "Longest Winless Streak (Regular Season)",
+    streak_gender_m: "Battle of the Sexes (Men)", // NEW
+    streak_gender_f: "Battle of the Sexes (Women)" // NEW
 };
 
 function generateStories(prev, curr, activePlayers, weekIndex, isPostSeason, playoffCutoff, gamesHistory, weeklyGames) {
@@ -442,7 +497,7 @@ function generateStories(prev, curr, activePlayers, weekIndex, isPostSeason, pla
         });
     }
 
-    // 2. DETECT RECORD BREAKERS (Includes Winless)
+    // 2. DETECT RECORD BREAKERS (Includes Winless & Gender)
     if (prev.leagueRecords && curr.leagueRecords) {
         Object.keys(curr.leagueRecords).forEach(key => {
             const pRec = prev.leagueRecords[key];
@@ -671,6 +726,25 @@ function generateStories(prev, curr, activePlayers, weekIndex, isPostSeason, pla
             addStreak('winStreak', 'Win Streak', sCurr, sPrev, 'regWinStreak');
             addStreak('topHalfStreak', 'Top 2 Streak', sCurr, sPrev, 'regTopHalfStreak');
             addStreak('noLastStreak', 'Safety Streak (Avoiding 4th Place)', sCurr, sPrev, 'regNoLastStreak');
+
+            // NEW: Gender Streak (Manual Check)
+            if (sCurr.genderStreak >= 3 && sCurr.genderStreak > sPrev.genderStreak) {
+                // If it's a new personal best or notable
+                stories.streakEvents.push({
+                    player, 
+                    type: "Battle of the Sexes Streak", 
+                    count: sCurr.genderStreak, 
+                    status: 'Active',
+                    subtext: "(Games without losing to opposite gender)"
+                });
+            } else if (sPrev.genderStreak >= 3 && sCurr.genderStreak === 0) {
+                stories.streakEvents.push({
+                    player, 
+                    type: "Battle of the Sexes Streak", 
+                    count: sPrev.genderStreak, 
+                    status: 'Snapped'
+                });
+            }
         }
     });
 

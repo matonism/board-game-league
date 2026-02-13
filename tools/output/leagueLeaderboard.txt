@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "generated_at": "2026-02-11T04:46:26.575Z",
+    "generated_at": "2026-02-12T23:54:21.005Z",
     "description": "League Analytics Data"
   },
   "leaderboards": [
@@ -3623,6 +3623,188 @@
       ]
     },
     {
+      "category": "Longest Streak Without Losing to a Man",
+      "subcategory": "Streaks (All-Time)",
+      "scope": "All-Time (Reg and Post Season)",
+      "entries": [
+        {
+          "rank": 1,
+          "player": "Ashley",
+          "value": 5,
+          "context": "2024 Week 5 - 2025 Week 3",
+          "isActive": false
+        },
+        {
+          "rank": 2,
+          "player": "Rachel M",
+          "value": 3,
+          "context": "2025 Week 2 - 2025 Week 4",
+          "isActive": false
+        },
+        {
+          "rank": 3,
+          "player": "Rachel F",
+          "value": 2,
+          "context": "2022 Week 3 - 2022 Week 4",
+          "isActive": false
+        },
+        {
+          "rank": 3,
+          "player": "Carly",
+          "value": 2,
+          "context": "2024 Week 6 - 2024 Playoff 2",
+          "isActive": false
+        },
+        {
+          "rank": 3,
+          "player": "Brittany",
+          "value": 2,
+          "context": "2025 Week 6 - 2026 Week 1",
+          "isActive": false
+        },
+        {
+          "rank": 6,
+          "player": "Becca",
+          "value": 1,
+          "context": "2022 Week 3",
+          "isActive": false
+        },
+        {
+          "rank": 6,
+          "player": "Allie",
+          "value": 1,
+          "context": "2023 Week 6",
+          "isActive": false
+        },
+        {
+          "rank": 6,
+          "player": "Emma",
+          "value": 1,
+          "context": "2024 Week 5",
+          "isActive": false
+        },
+        {
+          "rank": 6,
+          "player": "Jennie",
+          "value": 1,
+          "context": "2024 Week 1",
+          "isActive": false
+        }
+      ]
+    },
+    {
+      "category": "Longest Streak Without Losing to a Woman",
+      "subcategory": "Streaks (All-Time)",
+      "scope": "All-Time (Reg and Post Season)",
+      "entries": [
+        {
+          "rank": 1,
+          "player": "Nick",
+          "value": 7,
+          "context": "2023 Week 3 - 2024 Week 4",
+          "isActive": false
+        },
+        {
+          "rank": 2,
+          "player": "Austin",
+          "value": 6,
+          "context": "2022 Week 1 - 2023 Week 3",
+          "isActive": false
+        },
+        {
+          "rank": 3,
+          "player": "Richie",
+          "value": 5,
+          "context": "2024 Week 4 - 2024 Championship",
+          "isActive": false
+        },
+        {
+          "rank": 3,
+          "player": "Michael",
+          "value": 5,
+          "context": "2023 Championship - Present",
+          "isActive": true
+        },
+        {
+          "rank": 5,
+          "player": "Luke",
+          "value": 4,
+          "context": "2022 Week 5 - 2023 Week 6",
+          "isActive": false
+        },
+        {
+          "rank": 5,
+          "player": "Sam",
+          "value": 4,
+          "context": "2024 Week 3 - 2024 Week 6",
+          "isActive": false
+        },
+        {
+          "rank": 7,
+          "player": "Dan",
+          "value": 3,
+          "context": "2022 Week 4 - 2023 Week 3",
+          "isActive": false
+        },
+        {
+          "rank": 7,
+          "player": "Ryan",
+          "value": 3,
+          "context": "2024 Week 2 - 2024 Week 4",
+          "isActive": false
+        },
+        {
+          "rank": 7,
+          "player": "Cody",
+          "value": 3,
+          "context": "2024 Week 4 - 2024 Week 6",
+          "isActive": false
+        },
+        {
+          "rank": 10,
+          "player": "Josh",
+          "value": 2,
+          "context": "2022 Week 2 - 2022 Week 5",
+          "isActive": false
+        },
+        {
+          "rank": 10,
+          "player": "Jack M",
+          "value": 2,
+          "context": "2025 Week 1 - 2025 Week 2",
+          "isActive": false
+        },
+        {
+          "rank": 10,
+          "player": "Ian",
+          "value": 2,
+          "context": "2024 Week 4 - 2024 Week 5",
+          "isActive": false
+        },
+        {
+          "rank": 13,
+          "player": "Tyler",
+          "value": 1,
+          "context": "2024 Week 1",
+          "isActive": false
+        },
+        {
+          "rank": 13,
+          "player": "Steve",
+          "value": 1,
+          "context": "2025 Week 3",
+          "isActive": false
+        },
+        {
+          "rank": 13,
+          "player": "Jack C",
+          "value": 1,
+          "context": "2026 Week 2",
+          "isActive": false
+        }
+      ]
+    },
+    {
       "category": "Active Win Streak",
       "subcategory": "Streaks (Active)",
       "scope": "All-Time (Reg and Post Season)",
@@ -4171,6 +4353,69 @@
           "player": "Ian",
           "value": 1,
           "context": "2026 Week 3",
+          "isActive": true
+        }
+      ]
+    },
+    {
+      "category": "Active Streak Without Losing to a Man",
+      "subcategory": "Streaks (Active)",
+      "scope": "All-Time (Reg and Post Season)",
+      "entries": [
+        {
+          "rank": 1,
+          "player": "Rachel M",
+          "value": 2,
+          "context": "2026 Week 2 - Present",
+          "isActive": true
+        },
+        {
+          "rank": 2,
+          "player": "Ashley",
+          "value": 1,
+          "context": "2026 Week 3",
+          "isActive": true
+        },
+        {
+          "rank": 2,
+          "player": "Carly",
+          "value": 1,
+          "context": "2026 Week 3",
+          "isActive": true
+        }
+      ]
+    },
+    {
+      "category": "Active Streak Without Losing to a Woman",
+      "subcategory": "Streaks (Active)",
+      "scope": "All-Time (Reg and Post Season)",
+      "entries": [
+        {
+          "rank": 1,
+          "player": "Michael",
+          "value": 5,
+          "context": "2025 Week 6 - Present",
+          "isActive": true
+        },
+        {
+          "rank": 2,
+          "player": "Austin",
+          "value": 2,
+          "context": "2026 Week 1 - Present",
+          "isActive": true
+        },
+        {
+          "rank": 3,
+          "player": "Richie",
+          "value": 1,
+          "context": "2026 Week 2",
+          "isActive": true
+        },
+        {
+          "rank": 3,
+          "player": "Jack M",
+          "value": 1,
+          "context": "2026 Week 2",
           "isActive": true
         }
       ]
@@ -8202,6 +8447,188 @@
       ]
     },
     {
+      "category": "Longest Streak Without Losing to a Man",
+      "subcategory": "Streaks (All-Time)",
+      "scope": "All-Time (Regular Season)",
+      "entries": [
+        {
+          "rank": 1,
+          "player": "Ashley",
+          "value": 5,
+          "context": "2024 Week 5 - 2025 Week 3",
+          "isActive": false
+        },
+        {
+          "rank": 2,
+          "player": "Rachel M",
+          "value": 3,
+          "context": "2025 Week 2 - 2025 Week 4",
+          "isActive": false
+        },
+        {
+          "rank": 3,
+          "player": "Rachel F",
+          "value": 2,
+          "context": "2022 Week 3 - 2022 Week 4",
+          "isActive": false
+        },
+        {
+          "rank": 3,
+          "player": "Carly",
+          "value": 2,
+          "context": "2025 Week 3 - 2025 Week 4",
+          "isActive": false
+        },
+        {
+          "rank": 3,
+          "player": "Brittany",
+          "value": 2,
+          "context": "2025 Week 6 - 2026 Week 1",
+          "isActive": false
+        },
+        {
+          "rank": 6,
+          "player": "Becca",
+          "value": 1,
+          "context": "2022 Week 3",
+          "isActive": false
+        },
+        {
+          "rank": 6,
+          "player": "Allie",
+          "value": 1,
+          "context": "2023 Week 6",
+          "isActive": false
+        },
+        {
+          "rank": 6,
+          "player": "Emma",
+          "value": 1,
+          "context": "2024 Week 5",
+          "isActive": false
+        },
+        {
+          "rank": 6,
+          "player": "Jennie",
+          "value": 1,
+          "context": "2024 Week 1",
+          "isActive": false
+        }
+      ]
+    },
+    {
+      "category": "Longest Streak Without Losing to a Woman",
+      "subcategory": "Streaks (All-Time)",
+      "scope": "All-Time (Regular Season)",
+      "entries": [
+        {
+          "rank": 1,
+          "player": "Nick",
+          "value": 6,
+          "context": "2023 Week 3 - 2024 Week 4",
+          "isActive": false
+        },
+        {
+          "rank": 1,
+          "player": "Austin",
+          "value": 6,
+          "context": "2022 Week 1 - 2023 Week 3",
+          "isActive": false
+        },
+        {
+          "rank": 3,
+          "player": "Cody",
+          "value": 5,
+          "context": "2024 Week 4 - 2025 Week 2",
+          "isActive": false
+        },
+        {
+          "rank": 4,
+          "player": "Richie",
+          "value": 4,
+          "context": "2023 Week 5 - 2024 Week 2",
+          "isActive": false
+        },
+        {
+          "rank": 4,
+          "player": "Michael",
+          "value": 4,
+          "context": "2024 Week 1 - 2024 Week 5",
+          "isActive": false
+        },
+        {
+          "rank": 4,
+          "player": "Luke",
+          "value": 4,
+          "context": "2022 Week 5 - 2023 Week 6",
+          "isActive": false
+        },
+        {
+          "rank": 4,
+          "player": "Sam",
+          "value": 4,
+          "context": "2024 Week 3 - 2024 Week 6",
+          "isActive": false
+        },
+        {
+          "rank": 8,
+          "player": "Dan",
+          "value": 3,
+          "context": "2022 Week 4 - 2023 Week 3",
+          "isActive": false
+        },
+        {
+          "rank": 8,
+          "player": "Ryan",
+          "value": 3,
+          "context": "2024 Week 2 - 2024 Week 4",
+          "isActive": false
+        },
+        {
+          "rank": 10,
+          "player": "Josh",
+          "value": 2,
+          "context": "2022 Week 2 - 2022 Week 5",
+          "isActive": false
+        },
+        {
+          "rank": 10,
+          "player": "Jack M",
+          "value": 2,
+          "context": "2025 Week 1 - 2025 Week 2",
+          "isActive": false
+        },
+        {
+          "rank": 10,
+          "player": "Ian",
+          "value": 2,
+          "context": "2024 Week 4 - 2024 Week 5",
+          "isActive": false
+        },
+        {
+          "rank": 13,
+          "player": "Tyler",
+          "value": 1,
+          "context": "2024 Week 1",
+          "isActive": false
+        },
+        {
+          "rank": 13,
+          "player": "Steve",
+          "value": 1,
+          "context": "2025 Week 3",
+          "isActive": false
+        },
+        {
+          "rank": 13,
+          "player": "Jack C",
+          "value": 1,
+          "context": "2026 Week 2",
+          "isActive": false
+        }
+      ]
+    },
+    {
       "category": "Active Win Streak",
       "subcategory": "Streaks (Active)",
       "scope": "All-Time (Regular Season)",
@@ -8750,6 +9177,69 @@
           "player": "Ian",
           "value": 1,
           "context": "2026 Week 3",
+          "isActive": true
+        }
+      ]
+    },
+    {
+      "category": "Active Streak Without Losing to a Man",
+      "subcategory": "Streaks (Active)",
+      "scope": "All-Time (Regular Season)",
+      "entries": [
+        {
+          "rank": 1,
+          "player": "Rachel M",
+          "value": 2,
+          "context": "2026 Week 2 - Present",
+          "isActive": true
+        },
+        {
+          "rank": 2,
+          "player": "Ashley",
+          "value": 1,
+          "context": "2026 Week 3",
+          "isActive": true
+        },
+        {
+          "rank": 2,
+          "player": "Carly",
+          "value": 1,
+          "context": "2026 Week 3",
+          "isActive": true
+        }
+      ]
+    },
+    {
+      "category": "Active Streak Without Losing to a Woman",
+      "subcategory": "Streaks (Active)",
+      "scope": "All-Time (Regular Season)",
+      "entries": [
+        {
+          "rank": 1,
+          "player": "Michael",
+          "value": 3,
+          "context": "2025 Week 6 - Present",
+          "isActive": true
+        },
+        {
+          "rank": 2,
+          "player": "Austin",
+          "value": 2,
+          "context": "2026 Week 1 - Present",
+          "isActive": true
+        },
+        {
+          "rank": 3,
+          "player": "Richie",
+          "value": 1,
+          "context": "2026 Week 2",
+          "isActive": true
+        },
+        {
+          "rank": 3,
+          "player": "Jack M",
+          "value": 1,
+          "context": "2026 Week 2",
           "isActive": true
         }
       ]
@@ -14689,6 +15179,503 @@
           "value": 1,
           "context": "2026 Week 3 - Present",
           "isActive": true
+        }
+      ]
+    },
+    {
+      "category": "Longest Streak Without Losing to a Man (Season)",
+      "subcategory": "Streaks",
+      "scope": "Single Season Records",
+      "entries": [
+        {
+          "rank": 1,
+          "player": "Rachel M",
+          "value": 3,
+          "context": "2025 Week 2 - 2025 Week 4",
+          "isActive": false
+        },
+        {
+          "rank": 1,
+          "player": "Ashley",
+          "value": 3,
+          "context": "2025 Week 1 - 2025 Week 3",
+          "isActive": false
+        },
+        {
+          "rank": 3,
+          "player": "Rachel F",
+          "value": 2,
+          "context": "2022 Week 3 - 2022 Week 4",
+          "isActive": false
+        },
+        {
+          "rank": 3,
+          "player": "Rachel M",
+          "value": 2,
+          "context": "2024 Week 5 - 2024 Week 6",
+          "isActive": false
+        },
+        {
+          "rank": 3,
+          "player": "Ashley",
+          "value": 2,
+          "context": "2024 Week 5 - 2024 Week 6",
+          "isActive": false
+        },
+        {
+          "rank": 3,
+          "player": "Carly",
+          "value": 2,
+          "context": "2025 Week 3 - 2025 Week 4",
+          "isActive": false
+        },
+        {
+          "rank": 3,
+          "player": "Rachel F",
+          "value": 2,
+          "context": "2025 Week 2 - 2025 Week 3",
+          "isActive": false
+        },
+        {
+          "rank": 3,
+          "player": "Rachel M",
+          "value": 2,
+          "context": "2026 Week 2 - Present",
+          "isActive": true
+        },
+        {
+          "rank": 9,
+          "player": "Becca",
+          "value": 1,
+          "context": "2022 Week 3",
+          "isActive": false
+        },
+        {
+          "rank": 9,
+          "player": "Ashley",
+          "value": 1,
+          "context": "2022 Week 4",
+          "isActive": false
+        },
+        {
+          "rank": 9,
+          "player": "Allie",
+          "value": 1,
+          "context": "2023 Week 6",
+          "isActive": false
+        },
+        {
+          "rank": 9,
+          "player": "Rachel F",
+          "value": 1,
+          "context": "2023 Week 2",
+          "isActive": false
+        },
+        {
+          "rank": 9,
+          "player": "Rachel M",
+          "value": 1,
+          "context": "2023 Week 1",
+          "isActive": false
+        },
+        {
+          "rank": 9,
+          "player": "Allie",
+          "value": 1,
+          "context": "2024 Week 3",
+          "isActive": false
+        },
+        {
+          "rank": 9,
+          "player": "Emma",
+          "value": 1,
+          "context": "2024 Week 5",
+          "isActive": false
+        },
+        {
+          "rank": 9,
+          "player": "Jennie",
+          "value": 1,
+          "context": "2024 Week 1",
+          "isActive": false
+        },
+        {
+          "rank": 9,
+          "player": "Carly",
+          "value": 1,
+          "context": "2024 Week 1",
+          "isActive": false
+        },
+        {
+          "rank": 9,
+          "player": "Rachel F",
+          "value": 1,
+          "context": "2024 Week 3",
+          "isActive": false
+        },
+        {
+          "rank": 9,
+          "player": "Brittany",
+          "value": 1,
+          "context": "2025 Week 6",
+          "isActive": false
+        },
+        {
+          "rank": 9,
+          "player": "Ashley",
+          "value": 1,
+          "context": "2026 Week 1",
+          "isActive": true
+        },
+        {
+          "rank": 9,
+          "player": "Carly",
+          "value": 1,
+          "context": "2026 Week 3",
+          "isActive": true
+        },
+        {
+          "rank": 9,
+          "player": "Rachel F",
+          "value": 1,
+          "context": "2026 Week 1",
+          "isActive": false
+        },
+        {
+          "rank": 9,
+          "player": "Brittany",
+          "value": 1,
+          "context": "2026 Week 1",
+          "isActive": false
+        }
+      ]
+    },
+    {
+      "category": "Longest Streak Without Losing to a Girl (Season)",
+      "subcategory": "Streaks",
+      "scope": "Single Season Records",
+      "entries": [
+        {
+          "rank": 1,
+          "player": "Austin",
+          "value": 4,
+          "context": "2022 Week 1 - 2022 Week 5",
+          "isActive": false
+        },
+        {
+          "rank": 1,
+          "player": "Nick",
+          "value": 4,
+          "context": "2023 Week 3 - 2023 Week 6",
+          "isActive": false
+        },
+        {
+          "rank": 1,
+          "player": "Michael",
+          "value": 4,
+          "context": "2024 Week 1 - 2024 Week 5",
+          "isActive": false
+        },
+        {
+          "rank": 1,
+          "player": "Austin",
+          "value": 4,
+          "context": "2024 Week 2 - 2024 Week 5",
+          "isActive": false
+        },
+        {
+          "rank": 1,
+          "player": "Sam",
+          "value": 4,
+          "context": "2024 Week 3 - 2024 Week 6",
+          "isActive": false
+        },
+        {
+          "rank": 6,
+          "player": "Richie",
+          "value": 3,
+          "context": "2024 Week 4 - 2024 Week 6",
+          "isActive": false
+        },
+        {
+          "rank": 6,
+          "player": "Cody",
+          "value": 3,
+          "context": "2024 Week 4 - 2024 Week 6",
+          "isActive": false
+        },
+        {
+          "rank": 6,
+          "player": "Ryan",
+          "value": 3,
+          "context": "2024 Week 2 - 2024 Week 4",
+          "isActive": false
+        },
+        {
+          "rank": 9,
+          "player": "Dan",
+          "value": 2,
+          "context": "2022 Week 4 - 2022 Week 5",
+          "isActive": false
+        },
+        {
+          "rank": 9,
+          "player": "Josh",
+          "value": 2,
+          "context": "2022 Week 2 - 2022 Week 5",
+          "isActive": false
+        },
+        {
+          "rank": 9,
+          "player": "Nick",
+          "value": 2,
+          "context": "2022 Week 1 - 2022 Week 2",
+          "isActive": false
+        },
+        {
+          "rank": 9,
+          "player": "Michael",
+          "value": 2,
+          "context": "2022 Week 1 - 2022 Week 3",
+          "isActive": false
+        },
+        {
+          "rank": 9,
+          "player": "Luke",
+          "value": 2,
+          "context": "2022 Week 1 - 2022 Week 2",
+          "isActive": false
+        },
+        {
+          "rank": 9,
+          "player": "Michael",
+          "value": 2,
+          "context": "2023 Week 2 - 2023 Week 3",
+          "isActive": false
+        },
+        {
+          "rank": 9,
+          "player": "Richie",
+          "value": 2,
+          "context": "2023 Week 5 - 2023 Week 6",
+          "isActive": false
+        },
+        {
+          "rank": 9,
+          "player": "Luke",
+          "value": 2,
+          "context": "2023 Week 4 - 2023 Week 6",
+          "isActive": false
+        },
+        {
+          "rank": 9,
+          "player": "Austin",
+          "value": 2,
+          "context": "2023 Week 2 - 2023 Week 3",
+          "isActive": false
+        },
+        {
+          "rank": 9,
+          "player": "Josh",
+          "value": 2,
+          "context": "2023 Week 5 - 2023 Week 6",
+          "isActive": false
+        },
+        {
+          "rank": 9,
+          "player": "Dan",
+          "value": 2,
+          "context": "2024 Week 4 - 2024 Week 5",
+          "isActive": false
+        },
+        {
+          "rank": 9,
+          "player": "Josh",
+          "value": 2,
+          "context": "2024 Week 4 - 2024 Week 5",
+          "isActive": false
+        },
+        {
+          "rank": 9,
+          "player": "Ian",
+          "value": 2,
+          "context": "2024 Week 4 - 2024 Week 5",
+          "isActive": false
+        },
+        {
+          "rank": 9,
+          "player": "Nick",
+          "value": 2,
+          "context": "2024 Week 2 - 2024 Week 4",
+          "isActive": false
+        },
+        {
+          "rank": 9,
+          "player": "Sam",
+          "value": 2,
+          "context": "2025 Week 4 - 2025 Week 5",
+          "isActive": false
+        },
+        {
+          "rank": 9,
+          "player": "Jack M",
+          "value": 2,
+          "context": "2025 Week 1 - 2025 Week 2",
+          "isActive": false
+        },
+        {
+          "rank": 9,
+          "player": "Cody",
+          "value": 2,
+          "context": "2025 Week 1 - 2025 Week 2",
+          "isActive": false
+        },
+        {
+          "rank": 9,
+          "player": "Austin",
+          "value": 2,
+          "context": "2025 Week 4 - 2025 Week 5",
+          "isActive": false
+        },
+        {
+          "rank": 9,
+          "player": "Dan",
+          "value": 2,
+          "context": "2025 Week 2 - 2025 Week 4",
+          "isActive": false
+        },
+        {
+          "rank": 9,
+          "player": "Michael",
+          "value": 2,
+          "context": "2026 Week 1 - Present",
+          "isActive": true
+        },
+        {
+          "rank": 9,
+          "player": "Austin",
+          "value": 2,
+          "context": "2026 Week 1 - Present",
+          "isActive": true
+        },
+        {
+          "rank": 30,
+          "player": "Ryan",
+          "value": 1,
+          "context": "2022 Week 6",
+          "isActive": false
+        },
+        {
+          "rank": 30,
+          "player": "Richie",
+          "value": 1,
+          "context": "2022 Week 1",
+          "isActive": false
+        },
+        {
+          "rank": 30,
+          "player": "Dan",
+          "value": 1,
+          "context": "2023 Week 3",
+          "isActive": false
+        },
+        {
+          "rank": 30,
+          "player": "Jack M",
+          "value": 1,
+          "context": "2023 Week 3",
+          "isActive": false
+        },
+        {
+          "rank": 30,
+          "player": "Ryan",
+          "value": 1,
+          "context": "2023 Week 6",
+          "isActive": false
+        },
+        {
+          "rank": 30,
+          "player": "Tyler",
+          "value": 1,
+          "context": "2024 Week 1",
+          "isActive": false
+        },
+        {
+          "rank": 30,
+          "player": "Jack M",
+          "value": 1,
+          "context": "2024 Week 4",
+          "isActive": false
+        },
+        {
+          "rank": 30,
+          "player": "Richie",
+          "value": 1,
+          "context": "2025 Week 3",
+          "isActive": false
+        },
+        {
+          "rank": 30,
+          "player": "Steve",
+          "value": 1,
+          "context": "2025 Week 3",
+          "isActive": false
+        },
+        {
+          "rank": 30,
+          "player": "Michael",
+          "value": 1,
+          "context": "2025 Week 1",
+          "isActive": false
+        },
+        {
+          "rank": 30,
+          "player": "Nick",
+          "value": 1,
+          "context": "2025 Week 6",
+          "isActive": false
+        },
+        {
+          "rank": 30,
+          "player": "Ian",
+          "value": 1,
+          "context": "2025 Week 5",
+          "isActive": false
+        },
+        {
+          "rank": 30,
+          "player": "Richie",
+          "value": 1,
+          "context": "2026 Week 2",
+          "isActive": true
+        },
+        {
+          "rank": 30,
+          "player": "Nick",
+          "value": 1,
+          "context": "2026 Week 1",
+          "isActive": false
+        },
+        {
+          "rank": 30,
+          "player": "Jack M",
+          "value": 1,
+          "context": "2026 Week 2",
+          "isActive": true
+        },
+        {
+          "rank": 30,
+          "player": "Jack C",
+          "value": 1,
+          "context": "2026 Week 2",
+          "isActive": false
+        },
+        {
+          "rank": 30,
+          "player": "Ian",
+          "value": 1,
+          "context": "2026 Week 2",
+          "isActive": false
         }
       ]
     },

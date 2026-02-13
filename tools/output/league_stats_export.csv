@@ -543,6 +543,30 @@ Category,Subcategory,Scope,Rank,Player,Value,Context,IsActive
 "Longest Bottom Half Streak (3rd/4th)","Streaks (All-Time)","All-Time (Reg and Post Season)",20,"Jack M",2,"2023 Week 1 - 2023 Week 2",false
 "Longest Bottom Half Streak (3rd/4th)","Streaks (All-Time)","All-Time (Reg and Post Season)",20,"Rachel M",2,"2024 Week 3 - 2024 Week 4",false
 "Longest Bottom Half Streak (3rd/4th)","Streaks (All-Time)","All-Time (Reg and Post Season)",25,"Brian",1,"2022 Week 2",false
+"Longest Streak Without Losing to a Man","Streaks (All-Time)","All-Time (Reg and Post Season)",1,"Ashley",5,"2024 Week 5 - 2025 Week 3",false
+"Longest Streak Without Losing to a Man","Streaks (All-Time)","All-Time (Reg and Post Season)",2,"Rachel M",3,"2025 Week 2 - 2025 Week 4",false
+"Longest Streak Without Losing to a Man","Streaks (All-Time)","All-Time (Reg and Post Season)",3,"Rachel F",2,"2022 Week 3 - 2022 Week 4",false
+"Longest Streak Without Losing to a Man","Streaks (All-Time)","All-Time (Reg and Post Season)",3,"Carly",2,"2024 Week 6 - 2024 Playoff 2",false
+"Longest Streak Without Losing to a Man","Streaks (All-Time)","All-Time (Reg and Post Season)",3,"Brittany",2,"2025 Week 6 - 2026 Week 1",false
+"Longest Streak Without Losing to a Man","Streaks (All-Time)","All-Time (Reg and Post Season)",6,"Becca",1,"2022 Week 3",false
+"Longest Streak Without Losing to a Man","Streaks (All-Time)","All-Time (Reg and Post Season)",6,"Allie",1,"2023 Week 6",false
+"Longest Streak Without Losing to a Man","Streaks (All-Time)","All-Time (Reg and Post Season)",6,"Emma",1,"2024 Week 5",false
+"Longest Streak Without Losing to a Man","Streaks (All-Time)","All-Time (Reg and Post Season)",6,"Jennie",1,"2024 Week 1",false
+"Longest Streak Without Losing to a Woman","Streaks (All-Time)","All-Time (Reg and Post Season)",1,"Nick",7,"2023 Week 3 - 2024 Week 4",false
+"Longest Streak Without Losing to a Woman","Streaks (All-Time)","All-Time (Reg and Post Season)",2,"Austin",6,"2022 Week 1 - 2023 Week 3",false
+"Longest Streak Without Losing to a Woman","Streaks (All-Time)","All-Time (Reg and Post Season)",3,"Richie",5,"2024 Week 4 - 2024 Championship",false
+"Longest Streak Without Losing to a Woman","Streaks (All-Time)","All-Time (Reg and Post Season)",3,"Michael",5,"2023 Championship - Present",true
+"Longest Streak Without Losing to a Woman","Streaks (All-Time)","All-Time (Reg and Post Season)",5,"Luke",4,"2022 Week 5 - 2023 Week 6",false
+"Longest Streak Without Losing to a Woman","Streaks (All-Time)","All-Time (Reg and Post Season)",5,"Sam",4,"2024 Week 3 - 2024 Week 6",false
+"Longest Streak Without Losing to a Woman","Streaks (All-Time)","All-Time (Reg and Post Season)",7,"Dan",3,"2022 Week 4 - 2023 Week 3",false
+"Longest Streak Without Losing to a Woman","Streaks (All-Time)","All-Time (Reg and Post Season)",7,"Ryan",3,"2024 Week 2 - 2024 Week 4",false
+"Longest Streak Without Losing to a Woman","Streaks (All-Time)","All-Time (Reg and Post Season)",7,"Cody",3,"2024 Week 4 - 2024 Week 6",false
+"Longest Streak Without Losing to a Woman","Streaks (All-Time)","All-Time (Reg and Post Season)",10,"Josh",2,"2022 Week 2 - 2022 Week 5",false
+"Longest Streak Without Losing to a Woman","Streaks (All-Time)","All-Time (Reg and Post Season)",10,"Jack M",2,"2025 Week 1 - 2025 Week 2",false
+"Longest Streak Without Losing to a Woman","Streaks (All-Time)","All-Time (Reg and Post Season)",10,"Ian",2,"2024 Week 4 - 2024 Week 5",false
+"Longest Streak Without Losing to a Woman","Streaks (All-Time)","All-Time (Reg and Post Season)",13,"Tyler",1,"2024 Week 1",false
+"Longest Streak Without Losing to a Woman","Streaks (All-Time)","All-Time (Reg and Post Season)",13,"Steve",1,"2025 Week 3",false
+"Longest Streak Without Losing to a Woman","Streaks (All-Time)","All-Time (Reg and Post Season)",13,"Jack C",1,"2026 Week 2",false
 "Active Win Streak","Streaks (Active)","All-Time (Reg and Post Season)",1,"Austin",2,"2026 Week 1 - Present",true
 "Active Win Streak","Streaks (Active)","All-Time (Reg and Post Season)",2,"Josh",1,"2026 Week 3",true
 "Active Win Streak","Streaks (Active)","All-Time (Reg and Post Season)",2,"Ashley",1,"2026 Week 3",true
@@ -614,6 +638,13 @@ Category,Subcategory,Scope,Rank,Player,Value,Context,IsActive
 "Active Bottom Half Streak","Streaks (Active)","All-Time (Reg and Post Season)",7,"Rachel F",1,"2026 Week 2",true
 "Active Bottom Half Streak","Streaks (Active)","All-Time (Reg and Post Season)",7,"Michael",1,"2026 Week 3",true
 "Active Bottom Half Streak","Streaks (Active)","All-Time (Reg and Post Season)",7,"Ian",1,"2026 Week 3",true
+"Active Streak Without Losing to a Man","Streaks (Active)","All-Time (Reg and Post Season)",1,"Rachel M",2,"2026 Week 2 - Present",true
+"Active Streak Without Losing to a Man","Streaks (Active)","All-Time (Reg and Post Season)",2,"Ashley",1,"2026 Week 3",true
+"Active Streak Without Losing to a Man","Streaks (Active)","All-Time (Reg and Post Season)",2,"Carly",1,"2026 Week 3",true
+"Active Streak Without Losing to a Woman","Streaks (Active)","All-Time (Reg and Post Season)",1,"Michael",5,"2025 Week 6 - Present",true
+"Active Streak Without Losing to a Woman","Streaks (Active)","All-Time (Reg and Post Season)",2,"Austin",2,"2026 Week 1 - Present",true
+"Active Streak Without Losing to a Woman","Streaks (Active)","All-Time (Reg and Post Season)",3,"Richie",1,"2026 Week 2",true
+"Active Streak Without Losing to a Woman","Streaks (Active)","All-Time (Reg and Post Season)",3,"Jack M",1,"2026 Week 2",true
 "Fastest to 10 Career Points (# Games)","Speed Records","All-Time (Reg and Post Season)",1,"Michael",4,,false
 "Fastest to 10 Career Points (# Games)","Speed Records","All-Time (Reg and Post Season)",2,"Nick",5,,false
 "Fastest to 10 Career Points (# Games)","Speed Records","All-Time (Reg and Post Season)",2,"Luke",5,,false
@@ -1219,6 +1250,30 @@ Category,Subcategory,Scope,Rank,Player,Value,Context,IsActive
 "Longest Bottom Half Streak (3rd/4th)","Streaks (All-Time)","All-Time (Regular Season)",19,"Jack M",2,"2023 Week 1 - 2023 Week 2",false
 "Longest Bottom Half Streak (3rd/4th)","Streaks (All-Time)","All-Time (Regular Season)",19,"Rachel M",2,"2024 Week 3 - 2024 Week 4",false
 "Longest Bottom Half Streak (3rd/4th)","Streaks (All-Time)","All-Time (Regular Season)",25,"Brian",1,"2022 Week 2",false
+"Longest Streak Without Losing to a Man","Streaks (All-Time)","All-Time (Regular Season)",1,"Ashley",5,"2024 Week 5 - 2025 Week 3",false
+"Longest Streak Without Losing to a Man","Streaks (All-Time)","All-Time (Regular Season)",2,"Rachel M",3,"2025 Week 2 - 2025 Week 4",false
+"Longest Streak Without Losing to a Man","Streaks (All-Time)","All-Time (Regular Season)",3,"Rachel F",2,"2022 Week 3 - 2022 Week 4",false
+"Longest Streak Without Losing to a Man","Streaks (All-Time)","All-Time (Regular Season)",3,"Carly",2,"2025 Week 3 - 2025 Week 4",false
+"Longest Streak Without Losing to a Man","Streaks (All-Time)","All-Time (Regular Season)",3,"Brittany",2,"2025 Week 6 - 2026 Week 1",false
+"Longest Streak Without Losing to a Man","Streaks (All-Time)","All-Time (Regular Season)",6,"Becca",1,"2022 Week 3",false
+"Longest Streak Without Losing to a Man","Streaks (All-Time)","All-Time (Regular Season)",6,"Allie",1,"2023 Week 6",false
+"Longest Streak Without Losing to a Man","Streaks (All-Time)","All-Time (Regular Season)",6,"Emma",1,"2024 Week 5",false
+"Longest Streak Without Losing to a Man","Streaks (All-Time)","All-Time (Regular Season)",6,"Jennie",1,"2024 Week 1",false
+"Longest Streak Without Losing to a Woman","Streaks (All-Time)","All-Time (Regular Season)",1,"Nick",6,"2023 Week 3 - 2024 Week 4",false
+"Longest Streak Without Losing to a Woman","Streaks (All-Time)","All-Time (Regular Season)",1,"Austin",6,"2022 Week 1 - 2023 Week 3",false
+"Longest Streak Without Losing to a Woman","Streaks (All-Time)","All-Time (Regular Season)",3,"Cody",5,"2024 Week 4 - 2025 Week 2",false
+"Longest Streak Without Losing to a Woman","Streaks (All-Time)","All-Time (Regular Season)",4,"Richie",4,"2023 Week 5 - 2024 Week 2",false
+"Longest Streak Without Losing to a Woman","Streaks (All-Time)","All-Time (Regular Season)",4,"Michael",4,"2024 Week 1 - 2024 Week 5",false
+"Longest Streak Without Losing to a Woman","Streaks (All-Time)","All-Time (Regular Season)",4,"Luke",4,"2022 Week 5 - 2023 Week 6",false
+"Longest Streak Without Losing to a Woman","Streaks (All-Time)","All-Time (Regular Season)",4,"Sam",4,"2024 Week 3 - 2024 Week 6",false
+"Longest Streak Without Losing to a Woman","Streaks (All-Time)","All-Time (Regular Season)",8,"Dan",3,"2022 Week 4 - 2023 Week 3",false
+"Longest Streak Without Losing to a Woman","Streaks (All-Time)","All-Time (Regular Season)",8,"Ryan",3,"2024 Week 2 - 2024 Week 4",false
+"Longest Streak Without Losing to a Woman","Streaks (All-Time)","All-Time (Regular Season)",10,"Josh",2,"2022 Week 2 - 2022 Week 5",false
+"Longest Streak Without Losing to a Woman","Streaks (All-Time)","All-Time (Regular Season)",10,"Jack M",2,"2025 Week 1 - 2025 Week 2",false
+"Longest Streak Without Losing to a Woman","Streaks (All-Time)","All-Time (Regular Season)",10,"Ian",2,"2024 Week 4 - 2024 Week 5",false
+"Longest Streak Without Losing to a Woman","Streaks (All-Time)","All-Time (Regular Season)",13,"Tyler",1,"2024 Week 1",false
+"Longest Streak Without Losing to a Woman","Streaks (All-Time)","All-Time (Regular Season)",13,"Steve",1,"2025 Week 3",false
+"Longest Streak Without Losing to a Woman","Streaks (All-Time)","All-Time (Regular Season)",13,"Jack C",1,"2026 Week 2",false
 "Active Win Streak","Streaks (Active)","All-Time (Regular Season)",1,"Austin",2,"2026 Week 1 - Present",true
 "Active Win Streak","Streaks (Active)","All-Time (Regular Season)",2,"Josh",1,"2026 Week 3",true
 "Active Win Streak","Streaks (Active)","All-Time (Regular Season)",2,"Ashley",1,"2026 Week 3",true
@@ -1290,6 +1345,13 @@ Category,Subcategory,Scope,Rank,Player,Value,Context,IsActive
 "Active Bottom Half Streak","Streaks (Active)","All-Time (Regular Season)",7,"Rachel F",1,"2026 Week 2",true
 "Active Bottom Half Streak","Streaks (Active)","All-Time (Regular Season)",7,"Michael",1,"2026 Week 3",true
 "Active Bottom Half Streak","Streaks (Active)","All-Time (Regular Season)",7,"Ian",1,"2026 Week 3",true
+"Active Streak Without Losing to a Man","Streaks (Active)","All-Time (Regular Season)",1,"Rachel M",2,"2026 Week 2 - Present",true
+"Active Streak Without Losing to a Man","Streaks (Active)","All-Time (Regular Season)",2,"Ashley",1,"2026 Week 3",true
+"Active Streak Without Losing to a Man","Streaks (Active)","All-Time (Regular Season)",2,"Carly",1,"2026 Week 3",true
+"Active Streak Without Losing to a Woman","Streaks (Active)","All-Time (Regular Season)",1,"Michael",3,"2025 Week 6 - Present",true
+"Active Streak Without Losing to a Woman","Streaks (Active)","All-Time (Regular Season)",2,"Austin",2,"2026 Week 1 - Present",true
+"Active Streak Without Losing to a Woman","Streaks (Active)","All-Time (Regular Season)",3,"Richie",1,"2026 Week 2",true
+"Active Streak Without Losing to a Woman","Streaks (Active)","All-Time (Regular Season)",3,"Jack M",1,"2026 Week 2",true
 "Fastest to 10 Career Points (# Games)","Speed Records","All-Time (Regular Season)",1,"Michael",4,,false
 "Fastest to 10 Career Points (# Games)","Speed Records","All-Time (Regular Season)",2,"Nick",5,,false
 "Fastest to 10 Career Points (# Games)","Speed Records","All-Time (Regular Season)",2,"Luke",5,,false
@@ -2195,6 +2257,75 @@ Category,Subcategory,Scope,Rank,Player,Value,Context,IsActive
 "Longest Bottom Half Streak (Season)","Streaks","Single Season Records",53,"Rachel F",1,"2026 Week 2 - Present",true
 "Longest Bottom Half Streak (Season)","Streaks","Single Season Records",53,"Jack M",1,"2026 Week 1",false
 "Longest Bottom Half Streak (Season)","Streaks","Single Season Records",53,"Ian",1,"2026 Week 3 - Present",true
+"Longest Streak Without Losing to a Man (Season)","Streaks","Single Season Records",1,"Rachel M",3,"2025 Week 2 - 2025 Week 4",false
+"Longest Streak Without Losing to a Man (Season)","Streaks","Single Season Records",1,"Ashley",3,"2025 Week 1 - 2025 Week 3",false
+"Longest Streak Without Losing to a Man (Season)","Streaks","Single Season Records",3,"Rachel F",2,"2022 Week 3 - 2022 Week 4",false
+"Longest Streak Without Losing to a Man (Season)","Streaks","Single Season Records",3,"Rachel M",2,"2024 Week 5 - 2024 Week 6",false
+"Longest Streak Without Losing to a Man (Season)","Streaks","Single Season Records",3,"Ashley",2,"2024 Week 5 - 2024 Week 6",false
+"Longest Streak Without Losing to a Man (Season)","Streaks","Single Season Records",3,"Carly",2,"2025 Week 3 - 2025 Week 4",false
+"Longest Streak Without Losing to a Man (Season)","Streaks","Single Season Records",3,"Rachel F",2,"2025 Week 2 - 2025 Week 3",false
+"Longest Streak Without Losing to a Man (Season)","Streaks","Single Season Records",3,"Rachel M",2,"2026 Week 2 - Present",true
+"Longest Streak Without Losing to a Man (Season)","Streaks","Single Season Records",9,"Becca",1,"2022 Week 3",false
+"Longest Streak Without Losing to a Man (Season)","Streaks","Single Season Records",9,"Ashley",1,"2022 Week 4",false
+"Longest Streak Without Losing to a Man (Season)","Streaks","Single Season Records",9,"Allie",1,"2023 Week 6",false
+"Longest Streak Without Losing to a Man (Season)","Streaks","Single Season Records",9,"Rachel F",1,"2023 Week 2",false
+"Longest Streak Without Losing to a Man (Season)","Streaks","Single Season Records",9,"Rachel M",1,"2023 Week 1",false
+"Longest Streak Without Losing to a Man (Season)","Streaks","Single Season Records",9,"Allie",1,"2024 Week 3",false
+"Longest Streak Without Losing to a Man (Season)","Streaks","Single Season Records",9,"Emma",1,"2024 Week 5",false
+"Longest Streak Without Losing to a Man (Season)","Streaks","Single Season Records",9,"Jennie",1,"2024 Week 1",false
+"Longest Streak Without Losing to a Man (Season)","Streaks","Single Season Records",9,"Carly",1,"2024 Week 1",false
+"Longest Streak Without Losing to a Man (Season)","Streaks","Single Season Records",9,"Rachel F",1,"2024 Week 3",false
+"Longest Streak Without Losing to a Man (Season)","Streaks","Single Season Records",9,"Brittany",1,"2025 Week 6",false
+"Longest Streak Without Losing to a Man (Season)","Streaks","Single Season Records",9,"Ashley",1,"2026 Week 1",true
+"Longest Streak Without Losing to a Man (Season)","Streaks","Single Season Records",9,"Carly",1,"2026 Week 3",true
+"Longest Streak Without Losing to a Man (Season)","Streaks","Single Season Records",9,"Rachel F",1,"2026 Week 1",false
+"Longest Streak Without Losing to a Man (Season)","Streaks","Single Season Records",9,"Brittany",1,"2026 Week 1",false
+"Longest Streak Without Losing to a Girl (Season)","Streaks","Single Season Records",1,"Austin",4,"2022 Week 1 - 2022 Week 5",false
+"Longest Streak Without Losing to a Girl (Season)","Streaks","Single Season Records",1,"Nick",4,"2023 Week 3 - 2023 Week 6",false
+"Longest Streak Without Losing to a Girl (Season)","Streaks","Single Season Records",1,"Michael",4,"2024 Week 1 - 2024 Week 5",false
+"Longest Streak Without Losing to a Girl (Season)","Streaks","Single Season Records",1,"Austin",4,"2024 Week 2 - 2024 Week 5",false
+"Longest Streak Without Losing to a Girl (Season)","Streaks","Single Season Records",1,"Sam",4,"2024 Week 3 - 2024 Week 6",false
+"Longest Streak Without Losing to a Girl (Season)","Streaks","Single Season Records",6,"Richie",3,"2024 Week 4 - 2024 Week 6",false
+"Longest Streak Without Losing to a Girl (Season)","Streaks","Single Season Records",6,"Cody",3,"2024 Week 4 - 2024 Week 6",false
+"Longest Streak Without Losing to a Girl (Season)","Streaks","Single Season Records",6,"Ryan",3,"2024 Week 2 - 2024 Week 4",false
+"Longest Streak Without Losing to a Girl (Season)","Streaks","Single Season Records",9,"Dan",2,"2022 Week 4 - 2022 Week 5",false
+"Longest Streak Without Losing to a Girl (Season)","Streaks","Single Season Records",9,"Josh",2,"2022 Week 2 - 2022 Week 5",false
+"Longest Streak Without Losing to a Girl (Season)","Streaks","Single Season Records",9,"Nick",2,"2022 Week 1 - 2022 Week 2",false
+"Longest Streak Without Losing to a Girl (Season)","Streaks","Single Season Records",9,"Michael",2,"2022 Week 1 - 2022 Week 3",false
+"Longest Streak Without Losing to a Girl (Season)","Streaks","Single Season Records",9,"Luke",2,"2022 Week 1 - 2022 Week 2",false
+"Longest Streak Without Losing to a Girl (Season)","Streaks","Single Season Records",9,"Michael",2,"2023 Week 2 - 2023 Week 3",false
+"Longest Streak Without Losing to a Girl (Season)","Streaks","Single Season Records",9,"Richie",2,"2023 Week 5 - 2023 Week 6",false
+"Longest Streak Without Losing to a Girl (Season)","Streaks","Single Season Records",9,"Luke",2,"2023 Week 4 - 2023 Week 6",false
+"Longest Streak Without Losing to a Girl (Season)","Streaks","Single Season Records",9,"Austin",2,"2023 Week 2 - 2023 Week 3",false
+"Longest Streak Without Losing to a Girl (Season)","Streaks","Single Season Records",9,"Josh",2,"2023 Week 5 - 2023 Week 6",false
+"Longest Streak Without Losing to a Girl (Season)","Streaks","Single Season Records",9,"Dan",2,"2024 Week 4 - 2024 Week 5",false
+"Longest Streak Without Losing to a Girl (Season)","Streaks","Single Season Records",9,"Josh",2,"2024 Week 4 - 2024 Week 5",false
+"Longest Streak Without Losing to a Girl (Season)","Streaks","Single Season Records",9,"Ian",2,"2024 Week 4 - 2024 Week 5",false
+"Longest Streak Without Losing to a Girl (Season)","Streaks","Single Season Records",9,"Nick",2,"2024 Week 2 - 2024 Week 4",false
+"Longest Streak Without Losing to a Girl (Season)","Streaks","Single Season Records",9,"Sam",2,"2025 Week 4 - 2025 Week 5",false
+"Longest Streak Without Losing to a Girl (Season)","Streaks","Single Season Records",9,"Jack M",2,"2025 Week 1 - 2025 Week 2",false
+"Longest Streak Without Losing to a Girl (Season)","Streaks","Single Season Records",9,"Cody",2,"2025 Week 1 - 2025 Week 2",false
+"Longest Streak Without Losing to a Girl (Season)","Streaks","Single Season Records",9,"Austin",2,"2025 Week 4 - 2025 Week 5",false
+"Longest Streak Without Losing to a Girl (Season)","Streaks","Single Season Records",9,"Dan",2,"2025 Week 2 - 2025 Week 4",false
+"Longest Streak Without Losing to a Girl (Season)","Streaks","Single Season Records",9,"Michael",2,"2026 Week 1 - Present",true
+"Longest Streak Without Losing to a Girl (Season)","Streaks","Single Season Records",9,"Austin",2,"2026 Week 1 - Present",true
+"Longest Streak Without Losing to a Girl (Season)","Streaks","Single Season Records",30,"Ryan",1,"2022 Week 6",false
+"Longest Streak Without Losing to a Girl (Season)","Streaks","Single Season Records",30,"Richie",1,"2022 Week 1",false
+"Longest Streak Without Losing to a Girl (Season)","Streaks","Single Season Records",30,"Dan",1,"2023 Week 3",false
+"Longest Streak Without Losing to a Girl (Season)","Streaks","Single Season Records",30,"Jack M",1,"2023 Week 3",false
+"Longest Streak Without Losing to a Girl (Season)","Streaks","Single Season Records",30,"Ryan",1,"2023 Week 6",false
+"Longest Streak Without Losing to a Girl (Season)","Streaks","Single Season Records",30,"Tyler",1,"2024 Week 1",false
+"Longest Streak Without Losing to a Girl (Season)","Streaks","Single Season Records",30,"Jack M",1,"2024 Week 4",false
+"Longest Streak Without Losing to a Girl (Season)","Streaks","Single Season Records",30,"Richie",1,"2025 Week 3",false
+"Longest Streak Without Losing to a Girl (Season)","Streaks","Single Season Records",30,"Steve",1,"2025 Week 3",false
+"Longest Streak Without Losing to a Girl (Season)","Streaks","Single Season Records",30,"Michael",1,"2025 Week 1",false
+"Longest Streak Without Losing to a Girl (Season)","Streaks","Single Season Records",30,"Nick",1,"2025 Week 6",false
+"Longest Streak Without Losing to a Girl (Season)","Streaks","Single Season Records",30,"Ian",1,"2025 Week 5",false
+"Longest Streak Without Losing to a Girl (Season)","Streaks","Single Season Records",30,"Richie",1,"2026 Week 2",true
+"Longest Streak Without Losing to a Girl (Season)","Streaks","Single Season Records",30,"Nick",1,"2026 Week 1",false
+"Longest Streak Without Losing to a Girl (Season)","Streaks","Single Season Records",30,"Jack M",1,"2026 Week 2",true
+"Longest Streak Without Losing to a Girl (Season)","Streaks","Single Season Records",30,"Jack C",1,"2026 Week 2",false
+"Longest Streak Without Losing to a Girl (Season)","Streaks","Single Season Records",30,"Ian",1,"2026 Week 2",false
 "Most Points in Rookie Season (All-Time)","Rookie Records","Single Season Records",1,"Nick",14,"2022",false
 "Most Points in Rookie Season (All-Time)","Rookie Records","Single Season Records",2,"Cody",13,"2024",false
 "Most Points in Rookie Season (All-Time)","Rookie Records","Single Season Records",3,"Michael",12,"2022",false

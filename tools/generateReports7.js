@@ -16,6 +16,15 @@ const HTML_FILE = path.join(ANALYSIS_DIR, 'index.html');
 // SCORING SYSTEM
 const POINTS = { 1: 3, 2: 2, 3: 1, 4: 0 };
 
+// GENDER MAPPING (Inferred from Schedules.txt)
+const GENDER_MAP = {
+    "Brian": "M", "Dan": "M", "Ryan": "M", "Josh": "M", "Nick": "M", 
+    "Austin": "M", "Richie": "M", "Luke": "M", "Michael": "M", "Steve": "M", 
+    "Tyler": "M", "Jack M": "M", "Jack C": "M", "Cody": "M", "Ian": "M", "Sam": "M",
+    "Rachel F": "F", "Becca": "F", "Ashley": "F", "Allie": "F", "Carly": "F", 
+    "Rachel M": "F", "Emma": "F", "Jennie": "F", "Brittany": "F"
+};
+
 // GLOBAL ACCUMULATORS
 const csvRows = ["Category,Subcategory,Scope,Rank,Player,Value,Context,IsActive"];
 const jsonOutput = {
@@ -45,6 +54,14 @@ function main() {
         const allGames = parseSchedule(scheduleData);
         console.log(`Successfully parsed ${allGames.length} completed games.`);
         allGames.sort((a, b) => (a.season - b.season) || (a.weekIndex - b.weekIndex));
+
+        // 1b. Build Game Context Map (GameID -> Array of Players)
+        // This is crucial for determining opponents in specific games
+        const gamesById = {};
+        allGames.forEach(g => {
+            if (!gamesById[g.gameId]) gamesById[g.gameId] = [];
+            gamesById[g.gameId].push(g);
+        });
 
         // 2. Identify Active Players (Played in the most recent season)
         const maxSeason = Math.max(...allGames.map(g => g.season));
@@ -105,6 +122,8 @@ function main() {
             processStat("Longest Winless Streak", "Streaks (All-Time)", scope, getStreaks(dataset, g => g.place !== 1, activePlayersSet));
             processStat("Longest Top Half Streak (1st/2nd)", "Streaks (All-Time)", scope, getStreaks(dataset, g => g.place <= 2, activePlayersSet));
             processStat("Longest Bottom Half Streak (3rd/4th)", "Streaks (All-Time)", scope, getStreaks(dataset, g => g.place >= 3, activePlayersSet));
+            processStat("Longest Streak Without Losing to a Man", "Streaks (All-Time)", scope, getGenderStreaks(dataset, 'M', gamesById, activePlayersSet, false));
+            processStat("Longest Streak Without Losing to a Woman", "Streaks (All-Time)", scope, getGenderStreaks(dataset, 'F', gamesById, activePlayersSet, false));
             
 
             processStat("Active Win Streak", "Streaks (Active)", scope, getActiveStreaks(dataset, g => g.place === 1, activePlayersSet));
@@ -115,8 +134,9 @@ function main() {
             processStat("Active Winless Streak", "Streaks (Active)", scope, getActiveStreaks(dataset, g => g.place !== 1, activePlayersSet));
             processStat("Active Top Half Streak", "Streaks (Active)", scope, getActiveStreaks(dataset, g => g.place <= 2, activePlayersSet));
             processStat("Active Bottom Half Streak", "Streaks (Active)", scope, getActiveStreaks(dataset, g => g.place >= 3, activePlayersSet));
-
-
+            processStat("Active Streak Without Losing to a Man", "Streaks (Active)", scope, getGenderStreaks(dataset, 'M', gamesById, activePlayersSet, true));
+            processStat("Active Streak Without Losing to a Woman", "Streaks (Active)", scope, getGenderStreaks(dataset, 'F', gamesById, activePlayersSet, true));
+            
             // 5. Speed Records
             [10, 20, 30, 40, 50, 60].forEach(target => {
                 processStat(`Fastest to ${target} Career Points (# Games)`, "Speed Records", scope, getFastestToCareerPoints(dataset, target));
@@ -139,6 +159,11 @@ function main() {
         processStat("Longest Top Half Streak (Season)", "Streaks", SCOPE_SEASON, getSingleSeasonStreaks(regSeasonGames, g => g.place <= 2, activePlayersSet));
         processStat("Longest Winless Streak (Season)", "Streaks", SCOPE_SEASON, getSingleSeasonStreaks(regSeasonGames, g => g.place !== 1, activePlayersSet));
         processStat("Longest Bottom Half Streak (Season)", "Streaks", SCOPE_SEASON, getSingleSeasonStreaks(regSeasonGames, g => g.place >= 3, activePlayersSet));
+
+
+        // Single Season Gender Streaks
+        processStat("Longest Streak Without Losing to a Man (Season)", "Streaks", SCOPE_SEASON, getSingleSeasonGenderStreaks(regSeasonGames, 'M', gamesById, activePlayersSet));
+        processStat("Longest Streak Without Losing to a Girl (Season)", "Streaks", SCOPE_SEASON, getSingleSeasonGenderStreaks(regSeasonGames, 'F', gamesById, activePlayersSet));
 
         // -- Rookie Records --
         const rookieRecords = getRookieSeasonRecords(regSeasonGames);
@@ -555,6 +580,8 @@ function generateHtmlDashboard(data) {
                 infoText = "Calculates the toughest strength of schedule for a player that still made playoffs";
             }else if (board.category.includes("Worst Enemies")) {
                 infoText = "The first player's average points in games featuring the second";
+            }else if (board.category.includes("Without Losing to")) {
+                infoText = "Counts consecutive games played where at least one opponent of the specific gender was present, and the player finished better than all of them.";
             }
 
             // Create SVG icon if tooltip text exists
@@ -1233,6 +1260,147 @@ function getActiveStreaks(games, hitFn, activePlayersSet) {
     }
     return results.sort((a, b) => b.value - a.value);
 }
+
+// =============================================
+// NEW: Gender Streak Logic
+// =============================================
+
+function getGenderStreaks(games, targetGender, gamesById, activePlayersSet, activeOnly) {
+    const grouped = groupByPlayer(games);
+    const results = [];
+
+    for (const [player, records] of Object.entries(grouped)) {
+        // Skip retired players ONLY if looking for active streaks specifically OR if the player gender matches the win streak gender
+        if ((activeOnly && activePlayersSet && !activePlayersSet.has(player)) || GENDER_MAP[player] === targetGender) continue;
+
+        records.sort((a,b) => (a.season - b.season) || (a.weekIndex - b.weekIndex));
+
+        let current = 0;
+        let max = 0;
+        let startDate = "";
+        let endDate = "";
+        let tempStart = "";
+        let activeStartDate = "";
+
+        // Iterate games
+        for (const g of records) {
+            // 1. Get Opponents for this game
+            const allInGame = gamesById[g.gameId] || [];
+            const opponents = allInGame.filter(p => p.player !== player);
+            
+            // 2. Filter for Target Gender
+            const targetOpponents = opponents.filter(op => GENDER_MAP[op.player] === targetGender);
+
+            // 3. Skip games where no target gender was present
+            // The streak does not break, but it does not increment.
+            if (targetOpponents.length === 0) {
+                continue;
+            }
+
+            // 4. Check Result (Did I lose to ANY of them?)
+            // Lost = My Place > Their Place (Since 1 is best)
+            // e.g. I got 3rd, She got 2nd. 3 > 2 => Lost.
+            const lostToTarget = targetOpponents.some(op => g.place > op.place);
+
+            if (!lostToTarget) {
+                // Streak Continues
+                if (current === 0) {
+                    tempStart = `${g.season} ${g.weekLabel}`;
+                }
+                current++;
+                
+                // Track max
+                if (current > max) {
+                    max = current;
+                    startDate = tempStart;
+                    endDate = `${g.season} ${g.weekLabel}`;
+                }
+            } else {
+                // Streak Breaks
+                current = 0;
+            }
+        }
+        
+        // Finalize Logic
+        let finalValue = activeOnly ? current : max;
+        
+        // If Active Only, capture the start date of the CURRENT streak
+        // We need to backtrack to find when the current streak started if we didn't track it explicitly
+        // Simplified: If current > 0, we can use tempStart which holds the start of the current running streak
+        
+        let isActive = false;
+        
+        if (activeOnly) {
+            if (current > 0) {
+                isActive = true;
+                const context = current === 1 ? `(${tempStart})` : `(${tempStart} - Present)`;
+                results.push({ player, value: current, isActive: true, extra: context, startDate: tempStart, endDate: 'Present' });
+            }
+        } else {
+             // For All-Time Max
+             // Determine if the MAX streak is also the ACTIVE streak
+             if (max > 0 && current === max) {
+                 // Check if player is actually active in league
+                 if (!activePlayersSet || activePlayersSet.has(player)) {
+                     isActive = true;
+                 }
+             }
+
+             let context = "";
+             if (max > 0) {
+                 if (isActive) {
+                      context = max === 1 ? `(${startDate})` : `(${startDate} - Present)`;
+                 } else {
+                      context = max === 1 ? `(${startDate})` : `(${startDate} - ${endDate})`;
+                 }
+                 results.push({ player, value: max, isActive: isActive, extra: context, startDate: startDate, endDate: endDate });
+             }
+        }
+    }
+    return results.sort((a, b) => b.value - a.value);
+}
+
+// Single Season Wrapper for Gender Streaks
+function getSingleSeasonGenderStreaks(games, targetGender, gamesById, activePlayersSet) {
+    const bySeason = {};
+    games.forEach(g => {
+        if (!bySeason[g.season]) bySeason[g.season] = [];
+        bySeason[g.season].push(g);
+    });
+
+    const currentSeason = Math.max(...games.map(g => g.season));
+    const results = [];
+
+    for (const [season, seasonGames] of Object.entries(bySeason)) {
+        const streaks = getGenderStreaks(seasonGames, targetGender, gamesById, activePlayersSet, false);
+        
+        streaks.forEach(r => {
+            const isSeasonActive = parseInt(season) === currentSeason;
+            // Only mark active if it's the current season AND the streak is still alive
+            const finalActive = r.isActive && isSeasonActive;
+            
+            let context = "";
+            if (finalActive) {
+                 context = r.value === 1 ? `(${r.startDate})` : `(${r.startDate} - Present)`;
+            } else {
+                 context = r.value === 1 ? `(${r.startDate})` : `(${r.startDate} - ${r.endDate})`;
+            }
+
+            results.push({ 
+                player: r.player, 
+                value: r.value, 
+                extra: context, 
+                isActive: finalActive 
+            });
+        });
+    }
+    
+    // Sort and Deduplicate players (keep their best season)
+    // Actually, usually we want to see the top records regardless of player duplication?
+    // Existing getSingleSeasonStreaks keeps all.
+    return results.sort((a, b) => b.value - a.value);
+}
+
 
 function getWinRates(games, isHome, minGames = 1) {
     const grouped = groupByPlayer(games);
