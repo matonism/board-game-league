@@ -143,6 +143,7 @@ function main() {
             });
         });
 
+        
         // --- SECTION 2: Single Season Records ---
         const SCOPE_SEASON = "Single Season Records";
         const playerSeasons = getPlayerSeasonStats(regSeasonGames);
@@ -163,6 +164,7 @@ function main() {
 
         // Single Season Gender Streaks
         processStat("Longest Streak Without Losing to a Man (Season)", "Streaks", SCOPE_SEASON, getSingleSeasonGenderStreaks(regSeasonGames, 'M', gamesById, activePlayersSet));
+            
         processStat("Longest Streak Without Losing to a Girl (Season)", "Streaks", SCOPE_SEASON, getSingleSeasonGenderStreaks(regSeasonGames, 'F', gamesById, activePlayersSet));
 
         // -- Rookie Records --
@@ -277,6 +279,40 @@ function main() {
         processStat("Best Start (2 Games) to Miss Playoffs", "Collapses", SCOPE_METRICS, seasonMetrics.bestMisses2);
         processStat("Best Start (3 Games) to Miss Playoffs", "Collapses", SCOPE_METRICS, seasonMetrics.bestMisses3);
         processStat("Best Start (4 Games) to Miss Playoffs", "Collapses", SCOPE_METRICS, seasonMetrics.bestMisses4);
+
+        // --- SECTION 7: Trends / Timeframe Performance ---
+        const SCOPE_TRENDS = "Trends (Regular Season)";
+                
+        // Define the timeframes we want to analyze
+        const timeframes = [
+            { label: "Last 5 Games", type: "games", value: 5 },
+            { label: "Last 10 Games", type: "games", value: 10 },
+            { label: "Last 2 Seasons", type: "season", value: 2 },
+            { label: "Last 3 Seasons", type: "season", value: 3 }
+        ];
+
+        timeframes.forEach(tf => {
+            // Create a specific dataset for this timeframe using filterDataset helper
+            const tfData = filterDataset(regSeasonGames, tf.type, tf.value, maxSeason);
+            
+            // Use the Label (e.g., "Last 10 Games") as the Subcategory so they appear as buttons in the UI
+            const subCat = tf.label;
+
+            // Generate Stats for this specific timeframe
+            // We use a lower minGames threshold for short timeframes (e.g. 3 games)
+            const minG = tf.type === 'games' && tf.value <= 5 ? 2 : 3;
+
+            processStat("Average Points per Game", subCat, SCOPE_TRENDS, getAveragePoints(tfData, minG));
+            processStat("Win %", subCat, SCOPE_TRENDS, getPlacementRates(tfData, g => g.place === 1, minG));
+            
+            processStat(`% of 2nd Place Finishes`, subCat, SCOPE_TRENDS, getPlacementRates(tfData, g => g.place === 2, minG));
+            processStat(`% of 3rd Place Finishes`, subCat, SCOPE_TRENDS, getPlacementRates(tfData, g => g.place === 3, minG));
+            processStat(`% of 4th Place Finishes`, subCat, SCOPE_TRENDS, getPlacementRates(tfData, g => g.place === 4, minG));
+            processStat("Top Half Finish % (1st/2nd)", subCat, SCOPE_TRENDS, getPlacementRates(tfData, g => g.place <= 2, minG));
+            processStat("Bottom Half Finish % (3rd/4th)", subCat, SCOPE_TRENDS, getPlacementRates(tfData, g => g.place > 2, minG));
+        });
+
+
 
 
         // 3. Write Outputs
@@ -2275,6 +2311,25 @@ function getBestDuos(games) {
     }
 
     return results.sort((a,b) => b.raw - a.raw);
+}
+
+// NEW: Helper to filter dataset by Timeframe (Season or Games)
+function filterDataset(games, type, value, maxSeason) {
+    if (type === 'season') {
+        const startSeason = Math.max(0, maxSeason - value + 1);
+        return games.filter(g => g.season >= startSeason);
+    } else if (type === 'games') {
+        // Group by player, sort chronological, take top N
+        const grouped = groupByPlayer(games);
+        let result = [];
+        for (const records of Object.values(grouped)) {
+            records.sort((a,b) => (b.season - a.season) || (b.weekIndex - a.weekIndex)); // Descending
+            const subset = records.slice(0, value);
+            result = result.concat(subset);
+        }
+        return result;
+    }
+    return games;
 }
 
 main();

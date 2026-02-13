@@ -310,7 +310,8 @@ function getSnapshot(games, targetSeason) {
             average: totalGames > 0 ? totalPoints / totalGames : 0,
             games: totalGames,
             maxStreaks,
-            gender: myGender
+            gender: myGender,
+            recentGames: records // Store full records for rolling avg calculation
         });
     });
 
@@ -333,7 +334,12 @@ function getSnapshot(games, targetSeason) {
 
         // NEW: Gender Records
         streak_gender_m: getLeader(playerStats, p => p.gender === 'M' ? p.maxStreaks.all.gender : -1),
-        streak_gender_f: getLeader(playerStats, p => p.gender === 'F' ? p.maxStreaks.all.gender : -1)
+        streak_gender_f: getLeader(playerStats, p => p.gender === 'F' ? p.maxStreaks.all.gender : -1),
+
+        // NEW: Rolling Averages (Hot Streaks)
+        best_last_5: getRollingBest(playerStats, 5),
+        best_last_10: getRollingBest(playerStats, 10),
+        best_last_15: getRollingBest(playerStats, 15)
     };
 
     // 3. Season Standings (Regular Season Only)
@@ -401,6 +407,33 @@ function getSnapshot(games, targetSeason) {
     };
 }
 
+// Helper to calculate best average over last N games
+function getRollingBest(stats, n) {
+    let maxAvg = -1;
+    let holders = [];
+
+    stats.forEach(p => {
+        // Must have played at least N games TOTAL to qualify
+        // And obviously must have N games in history
+        if (p.recentGames && p.recentGames.length >= n) {
+            // Take the last N games
+            const slice = p.recentGames.slice(-n);
+            const sum = slice.reduce((acc, g) => acc + g.points, 0);
+            const avg = sum / n;
+
+            if (avg > maxAvg) {
+                maxAvg = avg;
+                holders = [p.player];
+            } else if (Math.abs(avg - maxAvg) < 0.001) { // Floating point safety
+                holders.push(p.player);
+            }
+        }
+    });
+
+    // If no one qualifies (e.g. early in league history), returns -1
+    return { value: maxAvg, holders: holders.sort() };
+}
+
 function getLeader(stats, valueSelector) {
     let maxVal = -1;
     let holders = [];
@@ -456,8 +489,11 @@ const RECORD_TITLES = {
     streak_safe_reg: "Longest No-4th Streak (Regular Season)",
     streak_winless_all: "Longest Winless Streak (All-Time)", 
     streak_winless_reg: "Longest Winless Streak (Regular Season)",
-    streak_gender_m: "Battle of the Sexes (Men)", // NEW
-    streak_gender_f: "Battle of the Sexes (Women)" // NEW
+    streak_gender_m: "Battle of the Sexes (Men)", 
+    streak_gender_f: "Battle of the Sexes (Women)",
+    best_last_5: "Hottest Player (Last 5 Games)",
+    best_last_10: "Hottest Player (Last 10 Games)",
+    best_last_15: "Hottest Player (Last 15 Games)"
 };
 
 function generateStories(prev, curr, activePlayers, weekIndex, isPostSeason, playoffCutoff, gamesHistory, weeklyGames) {
@@ -497,13 +533,31 @@ function generateStories(prev, curr, activePlayers, weekIndex, isPostSeason, pla
         });
     }
 
-    // 2. DETECT RECORD BREAKERS (Includes Winless & Gender)
+    // 2. DETECT RECORD BREAKERS (Includes Winless, Gender, Rolling Avg)
     if (prev.leagueRecords && curr.leagueRecords) {
         Object.keys(curr.leagueRecords).forEach(key => {
             const pRec = prev.leagueRecords[key];
             const cRec = curr.leagueRecords[key];
             const recordName = RECORD_TITLES[key] || key;
-            const formatVal = (val) => key === 'best_average' ? val.toFixed(2) : val;
+            const formatVal = (val) => (key.includes('average') || key.includes('best_last')) ? val.toFixed(2) : val;
+
+            // For Rolling Records, we only care about TAKEOVERS (Leader changed)
+            if (key.includes('best_last')) {
+                if (cRec.value > -1 && !arraysEqual(cRec.holders, pRec.holders)) {
+                    // Check if new leader is active this week
+                    const activeNewLeader = cRec.holders.find(h => activePlayers.has(h));
+                    if (activeNewLeader) {
+                        stories.records.push({
+                            type: 'takeover',
+                            player: cRec.holders.join(' & '),
+                            title: recordName,
+                            text: `<strong>${cRec.holders.join(' & ')}</strong> is now the hottest player over the last ${key.split('_')[2]} games with an average of <strong>${formatVal(cRec.value)}</strong> points.`,
+                            isNegative: false
+                        });
+                    }
+                }
+                return; // Skip standard logic for rolling records
+            }
 
             const activeHolder = cRec.holders.find(h => activePlayers.has(h));
             if (!activeHolder) return; 
