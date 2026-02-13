@@ -33,6 +33,7 @@ const MIN_GAMES_FOR_AVG = 5;
 const STREAK_RANK_THRESHOLD = 5;
 const PLAYOFF_WATCH_START_WEEK = 3; // Start reporting playoff shifts from Week 3
 const MIN_GAMES_FOR_NEMESIS = 4; // Min games played against opponent to trigger "First Win" alert
+const DOMINANCE_STREAK_MIN = 5; // Min streak length to report dominance
 
 if (!fs.existsSync(ANALYSIS_DIR)) {
     fs.mkdirSync(ANALYSIS_DIR);
@@ -138,7 +139,7 @@ function main() {
                 };
             });
 
-            // Group Weekly Results (for Playoff Display)
+            // Group Weekly Results (for Playoff Display AND Results Tab)
             const groupedResults = {};
             weeklyGames.forEach(g => {
                 // Group by Game ID to keep tables together
@@ -298,10 +299,14 @@ function getSnapshot(games, targetSeason) {
             }
         };
 
+        // Master of All Trades Check (Unique Wins)
+        const uniqueWins = new Set(records.filter(r => r.place === 1).map(r => r.gameName)).size;
+
         careerMap[player] = {
             points: totalPoints,
             wins: wins,
-            games: totalGames
+            games: totalGames,
+            uniqueWins: uniqueWins
         };
 
         playerStats.push({
@@ -503,7 +508,9 @@ function generateStories(prev, curr, activePlayers, weekIndex, isPostSeason, pla
         rankChanges: [],
         streakEvents: [],
         playoffWatch: [],
-        nemesis: []
+        nemesis: [],
+        dominance: [],
+        narrative: [] 
     };
 
     // 1. PLAYOFF WATCH (Week 3+ Regular Season)
@@ -517,15 +524,19 @@ function generateStories(prev, curr, activePlayers, weekIndex, isPostSeason, pla
                 const currIn = rCurr.rank <= playoffCutoff;
                 
                 if (!prevIn && currIn) {
+                    // Late Bloomer: If rising into Playoffs after week 3
+                    const type = (weekIndex >= 3 && rPrev.rank > 4) ? 'Late Bloomer' : 'Playoff Contention';
                     stories.playoffWatch.push({
                         player,
                         type: 'rise',
+                        title: type,
                         text: `<strong>${player}</strong> has risen into playoff contention (Rank ${rCurr.rank})!`
                     });
                 } else if (prevIn && !currIn) {
                     stories.playoffWatch.push({
                         player,
                         type: 'fall',
+                        title: 'Playoff Danger',
                         text: `<strong>${player}</strong> has fallen out of playoff position (Rank ${rCurr.rank}).`
                     });
                 }
@@ -618,7 +629,7 @@ function generateStories(prev, curr, activePlayers, weekIndex, isPostSeason, pla
         });
     }
 
-    // 3. NEMESIS CHECK (First win against an opponent)
+    // 3. NEMESIS, DOMINANCE & NARRATIVE CHECKS
     if (weeklyGames && weeklyGames.length > 0) {
         // Group weekly games by table
         const tables = {};
@@ -634,6 +645,77 @@ function generateStories(prev, curr, activePlayers, weekIndex, isPostSeason, pla
             historyTables[g.gameId].push(g);
         });
 
+        // 3a. MASTER OF ALL TRADES CHECK
+        // activePlayers.forEach(player => {
+        //     const pPrev = prev.career[player];
+        //     const pCurr = curr.career[player];
+        //     if (pPrev && pCurr && pCurr.uniqueWins > pPrev.uniqueWins) {
+        //         // If unique wins increased, check milestones (3, 5, 7, 10)
+        //         if ([3, 5, 7, 10].includes(pCurr.uniqueWins)) {
+        //             stories.narrative.push({
+        //                 player,
+        //                 type: 'master',
+        //                 title: 'Master of All Trades',
+        //                 text: `<strong>${player}</strong> has now recorded a win in <strong>${pCurr.uniqueWins}</strong> different games!`
+        //             });
+        //         }
+        //     }
+        // });
+
+        // 3b. GIANT SLAYER & WORST TO FIRST CHECK
+        activePlayers.forEach(player => {
+            // Find this player's games this week
+            const myGames = weeklyGames.filter(g => g.player === player);
+            myGames.forEach(g => {
+                // WORST TO FIRST Check
+                // Find LAST game played before this one
+                const myHistory = curr.playerStats.find(p => p.player === player)?.recentGames || [];
+                // Sort by season/week to find previous game
+                const mySortedHistory = [...myHistory].sort((a,b) => (a.season - b.season) || (a.weekIndex - b.weekIndex));
+                const myIndex = mySortedHistory.findIndex(hg => hg.gameId === g.gameId);
+                
+                if (myIndex > 0) {
+                    const prevGame = mySortedHistory[myIndex - 1];
+                    if (prevGame.place === 4 && g.place === 1) {
+                        stories.narrative.push({
+                            player,
+                            type: 'comeback',
+                            title: 'From Worst to First',
+                            text: `<strong>${player}</strong> bounced back from a 4th place finish to take 1st place in ${g.gameName}!`
+                        });
+                    }
+                }
+
+                // GIANT SLAYER Check (Only if I won or beat them)
+                const table = tables[g.gameId];
+                table.forEach(opp => {
+                    if (opp.player === player) return;
+                    
+                    // Did I beat them? (My place < Their place)
+                    if (g.place < opp.place) {
+                        // Check Ranks entering the week
+                        const myRank = prev.rankLookup[player]?.rank;
+                        const oppRank = prev.rankLookup[opp.player]?.rank;
+                        
+                        // Dynamically determine bottom half based on league size
+                        const totalPlayers = prev.seasonStandings.length;
+                        const bottomHalfThreshold = Math.ceil(totalPlayers / 2);
+
+                        // I am bottom half (> threshold), They are #1
+                        if (myRank > bottomHalfThreshold && oppRank === 1) {
+                            stories.narrative.push({
+                                player,
+                                type: 'slayer',
+                                title: 'Giant Slayer',
+                                text: `<strong>${player}</strong> (Rank ${myRank}) took down the #1 seed <strong>${opp.player}</strong> in ${g.gameName}!`
+                            });
+                        }
+                    }
+                });
+            });
+        });
+
+        // 3c. TIEBREAKER & NEMESIS & DOMINANCE
         Object.values(tables).forEach(table => {
             // For every player in this table
             for (let i = 0; i < table.length; i++) {
@@ -644,31 +726,105 @@ function generateStories(prev, curr, activePlayers, weekIndex, isPostSeason, pla
 
                     // Check if P1 Beat P2 (Lower place is better)
                     if (p1.place < p2.place) {
-                        // Check History: Has P1 ever placed higher than P2 before?
-                        // Also count total games played against each other
+                        // Check History
                         let gamesPlayedTogether = 0;
-                        let priorWins = 0;
+                        let p1Wins = 0; // Prior wins
+                        let p2Wins = 0; // Prior wins
+                        let currentDominanceStreak = 0;
 
                         // Check all history
+                        // We need sorted history for streaks
+                        // Gather all head-to-head games first
+                        const h2hGames = [];
                         Object.values(historyTables).forEach(histTable => {
                             const hP1 = histTable.find(p => p.player === p1.player);
                             const hP2 = histTable.find(p => p.player === p2.player);
-                            
                             if (hP1 && hP2) {
-                                gamesPlayedTogether++;
-                                // Only count PRIOR wins (exclude current game ID if it happens to be in history already, which it is)
-                                if (hP1.gameId !== p1.gameId) {
-                                    if (hP1.place < hP2.place) priorWins++;
+                                h2hGames.push({ p1: hP1, p2: hP2, season: hP1.season, week: hP1.weekIndex });
+                            }
+                        });
+                        
+                        // Sort chronologically
+                        h2hGames.sort((a,b) => (a.season - b.season) || (a.week - b.week));
+
+                        // Iterate to calc stats
+                        h2hGames.forEach(match => {
+                            gamesPlayedTogether++;
+                            // Exclude CURRENT game ID from stats check (prior)
+                            if (match.p1.gameId !== p1.gameId) {
+                                if (match.p1.place < match.p2.place) {
+                                    p1Wins++;
+                                    currentDominanceStreak++;
+                                } else if (match.p2.place < match.p1.place) {
+                                    p2Wins++;
+                                    currentDominanceStreak = 0; // Reset
                                 }
                             }
                         });
 
-                        // If played enough games, and this is the FIRST win
-                        if (gamesPlayedTogether >= MIN_GAMES_FOR_NEMESIS && priorWins === 0) {
+                        // NEMESIS: First win after 4+ games
+                        if (gamesPlayedTogether >= MIN_GAMES_FOR_NEMESIS && p1Wins === 0) {
                             stories.nemesis.push({
                                 player: p1.player,
                                 opponent: p2.player,
-                                count: gamesPlayedTogether
+                                count: gamesPlayedTogether,
+                                title: 'Nemesis Defeated',
+                                text: `<strong>${p1.player}</strong> finally beat <strong>${p2.player}</strong>!`,
+                                subtext: `(First win in ${gamesPlayedTogether} games)`
+                            });
+                        }
+
+                        // DOMINANCE: If P1 extends a streak of beating P2
+                        // Current match counts, so streak is currentDominanceStreak + 1
+                        const totalStreak = currentDominanceStreak + 1;
+                        if (totalStreak >= DOMINANCE_STREAK_MIN) {
+                             stories.dominance.push({
+                                player: p1.player,
+                                opponent: p2.player,
+                                title: 'Dominance',
+                                text: `<strong>${p1.player}</strong> has beaten <strong>${p2.player}</strong> in <strong>${totalStreak}</strong> consecutive games!`,
+                                subtext: `(Active Streak)`
+                            });
+                        }
+
+                        // DOMINANCE BROKEN: If P2 *had* a dominance streak against P1 (>= MIN) and P1 just won (resetting it)
+                        // In this block, P1 won. We need to check if P2 had an active streak against P1 entering this game.
+                        // We can check the reverse streak from our calculated history.
+                        
+                        let reverseStreak = 0;
+                        // Find P2's streak against P1 from history
+                        // We iterate backwards through h2hGames to find consecutive P2 > P1 wins
+                        for (let k = h2hGames.length - 1; k >= 0; k--) {
+                            const match = h2hGames[k];
+                            // Exclude current game (already done by using h2hGames which is history only)
+                            if (match.p1.gameId === p1.gameId) continue; // Should be redundant but safe
+
+                            if (match.p2.place < match.p1.place) {
+                                reverseStreak++;
+                            } else {
+                                break; // Streak ends
+                            }
+                        }
+
+                        if (reverseStreak >= DOMINANCE_STREAK_MIN) {
+                            stories.dominance.push({
+                                player: p1.player,
+                                opponent: p2.player,
+                                title: 'Dominance Broken',
+                                text: `<strong>${p1.player}</strong> ended <strong>${p2.player}</strong>'s <strong>${reverseStreak}</strong>-game winning streak against them!`,
+                                subtext: `(Streak Snapped)`,
+                                icon: '⚔️' // Explicitly set icon for this case
+                            });
+                        }
+
+                        // TIEBREAKER: If record WAS tied (e.g. 2-2) and now P1 leads
+                        if (p1Wins === p2Wins && p1Wins > 0) {
+                             stories.nemesis.push({
+                                player: p1.player,
+                                opponent: p2.player,
+                                title: 'The Tiebreaker',
+                                text: `<strong>${p1.player}</strong> breaks the tie in their head-to-head record against <strong>${p2.player}</strong>.`,
+                                subtext: `(Record is now ${p1Wins + 1} - ${p2Wins})`
                             });
                         }
                     }
@@ -779,7 +935,7 @@ function generateStories(prev, curr, activePlayers, weekIndex, isPostSeason, pla
 
             addStreak('winStreak', 'Win Streak', sCurr, sPrev, 'regWinStreak');
             addStreak('topHalfStreak', 'Top 2 Streak', sCurr, sPrev, 'regTopHalfStreak');
-            addStreak('noLastStreak', 'Safety Streak (Avoiding 4th Place)', sCurr, sPrev, 'regNoLastStreak');
+            addStreak('noLastStreak', 'Safety Streak', sCurr, sPrev, 'regNoLastStreak');
 
             // NEW: Gender Streak (Manual Check)
             if (sCurr.genderStreak >= 3 && sCurr.genderStreak > sPrev.genderStreak) {
@@ -917,7 +1073,8 @@ function generateHtmlDashboard(reports) {
         }
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; }
         .container { max-width: 900px; margin: 0 auto; position: relative; }
-                /* Back Button */
+        
+        /* Back Button */
         .back-btn {
             position: absolute;
             top: 0;
@@ -935,7 +1092,6 @@ function generateHtmlDashboard(reports) {
         }
         .back-btn:hover { background: #f1f5f9; }
 
-        
         /* Header */
         header { text-align: center; margin-bottom: 25px; margin-top: 10px; }
         h1 { margin: 0; color: var(--text); font-size: 1.8em; margin-bottom: 5px;}
@@ -959,7 +1115,7 @@ function generateHtmlDashboard(reports) {
         .panel h2 { margin-top: 0; font-size: 1.2em; border-bottom: 2px solid var(--border); padding-bottom: 10px; margin-bottom: 15px; }
 
         /* Tabbed Highlight Section */
-        .highlight-tabs { display: flex; border-bottom: 2px solid var(--border); margin-bottom: 15px; }
+        .highlight-tabs { display: flex; border-bottom: 2px solid var(--border); margin-bottom: 15px; overflow-x: auto; white-space: nowrap; }
         .tab-btn { padding: 10px 20px; cursor: pointer; font-weight: 600; color: var(--text-muted); border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all 0.2s; }
         .tab-btn:hover { color: var(--primary); }
         .tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); }
@@ -977,9 +1133,13 @@ function generateHtmlDashboard(reports) {
         .card-text { font-size: 0.95em; line-height: 1.4; }
         .sub-text { display: block; font-size: 0.85em; color: #64748b; margin-top: 2px; }
 
-        /* Card Types */
+        /* Filters */
+        .filters { display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap; }
+        select { padding: 6px; border-radius: 4px; border: 1px solid var(--border); font-size: 0.9em; flex-grow: 1; }
+
+        /* Card Colors */
         .news-card.record { border-color: var(--record); background: #f3e8ff; }
-        .news-card.record-bad { border-color: var(--text-muted); background: #f1f5f9; } /* New style for bad records */
+        .news-card.record-bad { border-color: var(--text-muted); background: #f1f5f9; }
         .news-card.milestone { border-color: var(--warning); background: #fefce8; }
         .news-card.climb { border-color: var(--success); background: #f0fdf4; }
         .news-card.fall { border-color: var(--danger); background: #fef2f2; }
@@ -987,9 +1147,10 @@ function generateHtmlDashboard(reports) {
         .news-card.snap { border-color: #64748b; background: #f1f5f9; opacity: 0.8; }
         .news-card.playoff-rise { border-color: var(--playoff); background: #e0e7ff; }
         .news-card.playoff-fall { border-color: var(--text-muted); background: #f3f4f6; }
-        .news-card.nemesis { border-color: #ec4899; background: #fdf2f8; } /* Pink for Nemesis */
+        .news-card.nemesis { border-color: #ec4899; background: #fdf2f8; }
+        .news-card.narrative { border-color: #10b981; background: #ecfdf5; }
 
-        /* Standings Table */
+        /* Tables */
         table { width: 100%; border-collapse: collapse; }
         th { text-align: left; color: #64748b; font-size: 0.8em; text-transform: uppercase; padding-bottom: 10px; }
         td { padding: 8px 0; border-bottom: 1px solid var(--border); font-weight: 500; }
@@ -1004,7 +1165,6 @@ function generateHtmlDashboard(reports) {
         .new { color: var(--primary); font-size: 0.8em; background: #eff6ff; padding: 2px 6px; border-radius: 4px; }
         .dash { color: #cbd5e1; }
 
-        /* Playoff Table */
         .playoff-header { background: var(--playoff); color: white; padding: 5px 10px; border-radius: 4px; font-size: 0.9em; margin-bottom: 10px; display:inline-block;}
         .result-group { margin-bottom: 15px; border: 1px solid var(--border); border-radius: 8px; padding: 10px; }
         .result-title { font-weight: 700; margin-bottom: 5px; color: var(--text-muted); font-size: 0.9em; }
@@ -1015,15 +1175,13 @@ function generateHtmlDashboard(reports) {
             .back-btn { position: static; display: inline-block; margin-bottom: 15px; }
             header { text-align: center; }
         }
-
         @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
-    
     <div class="container">
         <header>
-            <a href="https://bglcompanion.com" class="back-btn">&larr; Back to BGL</a>
+            <a href="https://www.bglcompanion.com" class="back-btn">&larr; Back to BGL</a>
             <h1>BGL Weekly Report</h1>
             <div class="subtitle" id="currentTitle">Select a week</div>
         </header>
@@ -1034,41 +1192,50 @@ function generateHtmlDashboard(reports) {
         </div>
 
         <div class="layout-grid">
-            <!-- Left Column: Standings -->
             <div class="left-col">
-                <!-- Playoff Results (Hidden by default) -->
                 <div id="playoffPanel" class="panel" style="display:none">
                     <h2>Playoff Results</h2>
                     <div id="playoffBody"></div>
                 </div>
-
                 <div class="panel">
                     <h2>Season Standings</h2>
                     <table id="standingsTable">
-                        <thead>
-                            <tr><th>#</th><th>+/-</th><th>Player</th><th style="text-align:right">Pts</th></tr>
-                        </thead>
-                        <tbody id="standingsBody">
-                            <!-- Content -->
-                        </tbody>
+                        <thead><tr><th>#</th><th>+/-</th><th>Player</th><th style="text-align:right">Pts</th></tr></thead>
+                        <tbody id="standingsBody"></tbody>
                     </table>
                     <div id="standingsEmpty" style="display:none" class="empty-state">No standings data</div>
                 </div>
             </div>
 
-            <!-- Right Column: News Feed -->
             <div class="panel">
                 <div class="highlight-tabs">
                     <div class="tab-btn active" onclick="switchTab('news')">News</div>
                     <div class="tab-btn" onclick="switchTab('streaks')">Streaks</div>
+                    <div class="tab-btn" onclick="switchTab('results')">Results</div>
                 </div>
                 
+                <!-- Shared Filters for all tabs -->
+                <div class="filters">
+                    <select id="filterPlayer" onchange="applyFilters()">
+                        <option value="all">All Players</option>
+                    </select>
+                    <!-- Type Filter: Visible mainly for News/Accolades but can be used generally or hidden -->
+                    <select id="filterType" onchange="applyFilters()">
+                        <option value="all">All Types</option>
+                        <option value="record">Records</option>
+                        <option value="milestone">Milestones</option>
+                        <option value="playoff">Playoff Watch</option>
+                        <option value="nemesis">Nemesis/Dominance</option>
+                        <option value="narrative">Narratives</option>
+                    </select>
+                </div>
+
                 <div id="news-tab" class="tab-content active news-stack">
-                    <!-- General News Content -->
+                    <div id="news-feed-container" class="news-stack"></div>
                 </div>
-                <div id="streaks-tab" class="tab-content news-stack">
-                    <!-- Streak Content -->
-                </div>
+                
+                <div id="streaks-tab" class="tab-content news-stack"></div>
+                <div id="results-tab" class="tab-content"></div>
             </div>
         </div>
     </div>
@@ -1083,6 +1250,11 @@ function generateHtmlDashboard(reports) {
         const SEASONS = Object.keys(BY_SEASON).sort((a,b) => b - a);
         let currentSeason = SEASONS[0];
         let currentIndex = 0;
+        
+        // Data Stores for current report
+        let NEWS_ITEMS = []; 
+        let STREAK_ITEMS = [];
+        let RESULT_ITEMS = [];
 
         function getOrdinal(n) {
             const s = ["th", "st", "nd", "rd"];
@@ -1098,9 +1270,16 @@ function generateHtmlDashboard(reports) {
         function switchTab(tabName) {
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
             document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-            
             document.querySelector(\`.tab-btn[onclick="switchTab('\${tabName}')"]\`).classList.add('active');
             document.getElementById(\`\${tabName}-tab\`).classList.add('active');
+            
+            // Show/Hide Type Filter based on Tab
+            const typeFilter = document.getElementById('filterType');
+            if (tabName === 'news') {
+                typeFilter.style.display = 'block';
+            } else {
+                typeFilter.style.display = 'none';
+            }
         }
 
         function renderSeasonNav() {
@@ -1128,100 +1307,87 @@ function generateHtmlDashboard(reports) {
             if (data.season != currentSeason) { currentSeason = data.season; renderSeasonNav(); }
             renderWeekNav(currentSeason);
             
-            // Header with Game Name
+            // Header
             let headerHtml = data.title;
             if (data.gameNames) {
                 headerHtml += \`<br><span style="font-size:0.8em; color:#6366f1; font-weight:600">\${data.gameNames}</span>\`;
             }
             document.getElementById('currentTitle').innerHTML = headerHtml;
 
+            // Playoff Results
             const playoffPanel = document.getElementById('playoffPanel');
-            const playoffBody = document.getElementById('playoffBody');
-            
-            // 1. Playoff Results
             if (data.isPostSeason && data.weeklyResults.length > 0) {
                 playoffPanel.style.display = 'block';
                 let html = '';
                 data.weeklyResults.forEach(table => {
                     html += \`<div class="result-group"><div class="result-title">\${table.gameName}</div><table>\`;
                     table.results.forEach(r => {
-                        html += \`<tr>
-                            <td class="rank-col">\${r.place}</td>
-                            <td class="player-col">\${r.player}</td>
-                            <td class="pts-col">\${r.points || '-'}</td>
-                        </tr>\`;
+                        html += \`<tr><td class="rank-col">\${r.place}</td><td class="player-col">\${r.player}</td><td class="pts-col">\${r.points || '-'}</td></tr>\`;
                     });
                     html += \`</table></div>\`;
                 });
-                playoffBody.innerHTML = html;
+                document.getElementById('playoffBody').innerHTML = html;
             } else {
                 playoffPanel.style.display = 'none';
             }
 
-            // 2. Standings
+            // Standings
             const tbody = document.getElementById('standingsBody');
-            const stdTable = document.getElementById('standingsTable');
-            const stdEmpty = document.getElementById('standingsEmpty');
-            
             tbody.innerHTML = '';
             if (!data.standings || data.standings.length === 0) {
-                stdTable.style.display = 'none';
-                stdEmpty.style.display = 'block';
+                document.getElementById('standingsTable').style.display = 'none';
+                document.getElementById('standingsEmpty').style.display = 'block';
             } else {
-                stdTable.style.display = 'table';
-                stdEmpty.style.display = 'none';
+                document.getElementById('standingsTable').style.display = 'table';
+                document.getElementById('standingsEmpty').style.display = 'none';
                 data.standings.forEach(s => {
                     let moveIcon = '<span class="dash">-</span>';
                     let moveClass = 'neutral';
                     if (s.isNew) { moveIcon = '<span class="new">NEW</span>'; }
                     else if (s.diff > 0) { moveIcon = '▲ ' + s.diff; moveClass = 'positive'; }
                     else if (s.diff < 0) { moveIcon = '▼ ' + Math.abs(s.diff); moveClass = 'negative'; }
-                    
                     const isChamp = s.rank === 1 ? '👑' : '';
-                    tbody.innerHTML += \`<tr>
-                        <td class="rank-col">\${s.rank}</td>
-                        <td class="move-col \${moveClass}">\${moveIcon}</td>
-                        <td class="player-col">\${s.player} \${isChamp}</td>
-                        <td class="pts-col">\${s.points}</td>
-                    </tr>\`;
+                    tbody.innerHTML += \`<tr><td class="rank-col">\${s.rank}</td><td class="move-col \${moveClass}">\${moveIcon}</td><td class="player-col">\${s.player} \${isChamp}</td><td class="pts-col">\${s.points}</td></tr>\`;
                 });
             }
 
-            // 3. Populate News & Streaks Tabs
-            let newsHtml = '';
-            let streaksHtml = '';
+            // --- PREPARE DATA ARRAYS ---
+            NEWS_ITEMS = [];
+            STREAK_ITEMS = [];
+            RESULT_ITEMS = [];
+            
             const news = data.news;
 
-            // --- NEWS TAB CONTENT ---
-            // Playoff Watch
+            // 1. NEWS ITEMS
             if (news.playoffWatch) {
                 news.playoffWatch.forEach(p => {
                     const style = p.type === 'rise' ? 'playoff-rise' : 'playoff-fall';
                     const icon = p.type === 'rise' ? '📈' : '⚠️';
-                    const title = p.type === 'rise' ? 'Playoff Contention' : 'Playoff Danger';
-                    newsHtml += createCard(style, icon, title, p.text);
+                    const title = p.title || (p.type === 'rise' ? 'Playoff Contention' : 'Playoff Danger');
+                    NEWS_ITEMS.push({ type: 'playoff', player: p.player, priority: 100, html: createCard(style, icon, title, p.text) });
                 });
             }
-
-            // League Records
+            
+            
+            if (news.narrative) {
+                news.narrative.forEach(n => {
+                    NEWS_ITEMS.push({ type: 'narrative', player: n.player, priority: 90, html: createCard('narrative', '📜', n.title, n.text) });
+                });
+            }
+            
             if (news.records) {
                 news.records.forEach(r => {
                     const style = r.isNegative ? 'record-bad' : 'record';
                     const icon = r.isNegative ? '🕸️' : '👑';
-                    newsHtml += createCard(style, icon, r.title, r.text);
+                    NEWS_ITEMS.push({ type: 'record', player: r.player, priority: 80, html: createCard(style, icon, r.title, r.text) });
                 });
             }
-            
-            // Nemesis
-            if (news.nemesis) {
-                news.nemesis.forEach(n => {
-                    newsHtml += createCard('nemesis', '⚔️', 'Nemesis Defeated', 
-                        \`<strong>\${n.player}</strong> finally beat <strong>\${n.opponent}</strong>!\`,
-                        \`(First win in \${n.count} games)\`);
+            if (news.dominance) {
+                news.dominance.forEach(d => {
+                    const icon = d.icon || '👑'; 
+                    NEWS_ITEMS.push({ type: 'nemesis', player: d.player, priority: 85, html: createCard('nemesis', icon, d.title, d.text, d.subtext) });
                 });
             }
-            
-            // Milestones & Rank Changes
             news.milestones.forEach(m => {
                 let subtext = \`(Current Total: \${m.value})\`;
                 if (m.speed) {
@@ -1229,28 +1395,100 @@ function generateHtmlDashboard(reports) {
                     const tiePrefix = m.speed.isTie ? "Tied for " : "";
                     subtext += \` <br><span style="font-size:0.9em; color:#6366f1">Reached in \${m.speed.games} games (\${tiePrefix}\${ord} Fastest All-Time)</span>\`;
                 }
-                newsHtml += createCard('milestone', '🏆', 'Historic Milestone', 
-                    \`<strong>\${m.player}</strong> has crossed <strong>\${m.milestone}+</strong> \${m.label}! \`,
-                    subtext
-                );
+                NEWS_ITEMS.push({ type: 'milestone', player: m.player, priority: 70, html: createCard('milestone', '🏆', 'Historic Milestone', \`<strong>\${m.player}</strong> has crossed <strong>\${m.milestone}+</strong> \${m.label}! \`, subtext) });
             });
-            news.rankChanges.filter(r => r.diff >= 3).forEach(r => newsHtml += createCard('climb', '🚀', 'Big Mover', \`<strong>\${r.player}</strong> climbed <strong>\${r.diff}</strong> spots to rank #\${r.currRank}.\`));
-            news.rankChanges.filter(r => r.diff <= -3).forEach(r => newsHtml += createCard('fall', '📉', 'Sliding Down', \`<strong>\${r.player}</strong> fell <strong>\${Math.abs(r.diff)}</strong> spots to rank #\${r.currRank}.\`));
-            
-            if (newsHtml === '') newsHtml = '<div class="empty-state">No general news this week.</div>';
-            document.getElementById('news-tab').innerHTML = newsHtml;
+            if (news.nemesis) {
+                news.nemesis.forEach(n => {
+                    NEWS_ITEMS.push({ type: 'nemesis', player: n.player, priority: 86, html: createCard('nemesis', '⚔️', n.title, n.text, n.subtext) });
+                });
+            }
 
-            // --- STREAKS TAB CONTENT ---
+            // 2. STREAK ITEMS
             news.streakEvents.forEach(s => {
+                let html = '';
                 if(s.status === 'Active') {
-                    streaksHtml += createCard('streak', '🔥', 'Heating Up', \`<strong>\${s.player}</strong> extends their \${s.type} to <strong>\${s.count}</strong> games.\`, s.subtext);
+                    html = createCard('streak', '🔥', 'Heating Up', \`<strong>\${s.player}</strong> extends their \${s.type} to <strong>\${s.count}</strong> games.\`, s.subtext);
                 } else {
-                    streaksHtml += createCard('snap', '💔', 'Streak Snapped', \`<strong>\${s.player}</strong>'s streak of <strong>\${s.count}</strong> \${s.type}s has ended.\`);
+                    html = createCard('snap', '💔', 'Streak Snapped', \`<strong>\${s.player}</strong>'s streak of <strong>\${s.count}</strong> \${s.type}s has ended.\`);
                 }
+                STREAK_ITEMS.push({ player: s.player, html: html });
             });
 
-            if (streaksHtml === '') streaksHtml = '<div class="empty-state">No streak updates this week.</div>';
-            document.getElementById('streaks-tab').innerHTML = streaksHtml;
+            // 3. RESULT ITEMS
+            if (data.weeklyResults) {
+                data.weeklyResults.forEach(table => {
+                    // Extract players from table for filtering
+                    const playersInGame = table.results.map(r => r.player);
+                    let html = \`<div class="result-group"><div class="result-title">\${table.gameName}</div><table>\`;
+                    table.results.forEach(r => {
+                        html += \`<tr><td class="rank-col">\${r.place}</td><td class="player-col">\${r.player}</td><td class="pts-col">\${r.points || '-'}</td></tr>\`;
+                    });
+                    html += \`</table></div>\`;
+                    
+                    // We store one item per table, but map it to all players involved for filtering
+                    RESULT_ITEMS.push({ players: playersInGame, html: html });
+                });
+            }
+
+            // Populate Filter
+            populatePlayerFilter();
+
+            // Render All
+            applyFilters();
+        }
+
+        function populatePlayerFilter() {
+            const select = document.getElementById('filterPlayer');
+            const currentVal = select.value; // Try to preserve selection if possible
+            select.innerHTML = '<option value="all">All Players</option>';
+            
+            const players = new Set();
+            // Gather players from all sources
+            NEWS_ITEMS.forEach(i => i.player && i.player.split('&').forEach(p => players.add(p.trim())));
+            STREAK_ITEMS.forEach(i => i.player && players.add(i.player));
+            RESULT_ITEMS.forEach(i => i.players && i.players.forEach(p => players.add(p)));
+            
+            Array.from(players).sort().forEach(p => {
+                const opt = document.createElement('option');
+                opt.value = p;
+                opt.textContent = p;
+                select.appendChild(opt);
+            });
+            
+            // Restore selection if valid
+            if ([...select.options].some(o => o.value === currentVal)) {
+                select.value = currentVal;
+            }
+        }
+
+        function applyFilters() {
+            const playerFilter = document.getElementById('filterPlayer').value;
+            const typeFilter = document.getElementById('filterType').value;
+            
+            // 1. RENDER NEWS
+            const newsContainer = document.getElementById('news-feed-container');
+            let filteredNews = NEWS_ITEMS.filter(item => {
+                const matchPlayer = playerFilter === 'all' || (item.player && item.player.includes(playerFilter));
+                const matchType = typeFilter === 'all' || item.type === typeFilter;
+                return matchPlayer && matchType;
+            });
+            // Sort by priority always
+            filteredNews.sort((a,b) => b.priority - a.priority);
+            newsContainer.innerHTML = filteredNews.length ? filteredNews.map(i => i.html).join('') : '<div class="empty-state">No news matches filters.</div>';
+
+            // 2. RENDER STREAKS
+            const streaksContainer = document.getElementById('streaks-tab');
+            let filteredStreaks = STREAK_ITEMS.filter(item => {
+                return playerFilter === 'all' || item.player === playerFilter;
+            });
+            streaksContainer.innerHTML = filteredStreaks.length ? filteredStreaks.map(i => i.html).join('') : '<div class="empty-state">No streaks match filters.</div>';
+
+            // 3. RENDER RESULTS
+            const resultsContainer = document.getElementById('results-tab');
+            let filteredResults = RESULT_ITEMS.filter(item => {
+                return playerFilter === 'all' || item.players.includes(playerFilter);
+            });
+            resultsContainer.innerHTML = filteredResults.length ? filteredResults.map(i => i.html).join('') : '<div class="empty-state">No results match filters.</div>';
         }
 
         function createCard(type, icon, title, text, subtext = '') {
