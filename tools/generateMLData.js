@@ -2,15 +2,23 @@ const fs = require('fs');
 const path = require('path');
 
 // --- Configuration ---
+// Adjust paths if necessary based on where you run this
 const OUTPUT_DIR = path.join(__dirname, 'machineLearning');
 const INPUT_DIR = path.join(__dirname, 'output'); 
+// If running in same folder as source files, you might need:
+// const INPUT_DIR = __dirname; 
+
 if (!fs.existsSync(OUTPUT_DIR)){
-    fs.mkdirSync(OUTPUT_DIR);
+    fs.mkdirSync(OUTPUT_DIR, { recursive: true });
 }
 
-const SCHEDULES_FILE = path.join(INPUT_DIR,'Schedules.txt'); // Ensure this matches your filename
-const SUMMARIES_FILE = path.join(INPUT_DIR,'GameSummaries.txt');
-const OUTPUT_FILE = path.join(OUTPUT_DIR,'bgl_ml_features.json');
+// Ensure these filenames match exactly what you have on disk
+const SCHEDULES_FILE = 'Schedules.txt'; 
+const SUMMARIES_FILE = 'GameSummaries.txt';
+const OUTPUT_FILE = path.join(OUTPUT_DIR, 'bgl_ml_features.json');
+
+// --- Constants ---
+const ROOKIE_THRESHOLD = 5; // Games played < 5 = Rookie
 
 // --- Helper Functions ---
 const calculateAverage = (arr) => {
@@ -20,7 +28,7 @@ const calculateAverage = (arr) => {
 };
 
 const calculateStdDev = (arr, mean) => {
-    if (!arr || arr.length < 2) return 1.1; // Default "normal" volatility
+    if (!arr || arr.length < 2) return 1.1; 
     const squareDiffs = arr.map(value => Math.pow(value - mean, 2));
     const avgSquareDiff = calculateAverage(squareDiffs);
     return Math.sqrt(avgSquareDiff);
@@ -47,14 +55,19 @@ const getH2HWinRate = (player, currentOpponents, allPastGames) => {
 
 // Main Execution
 try {
-    const schedules = JSON.parse(fs.readFileSync(SCHEDULES_FILE, 'utf8'));
-    const gameSummaries = JSON.parse(fs.readFileSync(SUMMARIES_FILE, 'utf8'));
+    // Read files (Adjusting path logic to be robust)
+    const schedulesPath = fs.existsSync(path.join(INPUT_DIR, SCHEDULES_FILE)) ? path.join(INPUT_DIR, SCHEDULES_FILE) : SCHEDULES_FILE;
+    const summariesPath = fs.existsSync(path.join(INPUT_DIR, SUMMARIES_FILE)) ? path.join(INPUT_DIR, SUMMARIES_FILE) : SUMMARIES_FILE;
+
+    const schedules = JSON.parse(fs.readFileSync(schedulesPath, 'utf8'));
+    const gameSummaries = JSON.parse(fs.readFileSync(summariesPath, 'utf8'));
     const rows = [];
     
     // --- Global State ---
     const playerHistory = {}; // { Name: { placements: [], playoffApps: 0 } }
     const playerGameHistory = {}; // { Name: { "Catan": [1, 4] } }
     const playerMechanicHistory = {}; // { Name: { "Dice Rolling": [2, 1, 3] } }
+    const playerWinWeights = {}; // { Name: [2.5, 3.1] } -> Difficulties of games they won
     
     const allPastGames = [];  
     const lastSeasonAverage = {}; 
@@ -73,6 +86,7 @@ try {
             
             // Get Game Info
             const gameInfo = gameSummaries[gameName] || { difficulty: "2.0", mechanics: [] };
+            const gameWeight = parseFloat(gameInfo.difficulty || 2.0);
             const mechanicsList = Array.isArray(gameInfo.mechanics) ? gameInfo.mechanics : [];
             const mechanicsStr = mechanicsList.join('|');
 
@@ -105,6 +119,27 @@ try {
                     const stdDev = calculateStdDev(placements, careerAvg);
                     const tenure = placements.length;
                     
+                    // NEW: Rookie Factors
+                    const isRookie = tenure < ROOKIE_THRESHOLD ? 1 : 0;
+                    
+                    // Count how many opponents are rookies
+                    let rookieOpponents = 0;
+                    opponents.forEach(opp => {
+                        const oppTenure = (playerHistory[opp]?.placements?.length || 0);
+                        if (oppTenure < ROOKIE_THRESHOLD) rookieOpponents++;
+                    });
+
+                    // NEW: Complexity Delta
+                    // Does this player prefer Heavy or Light games?
+                    // Calculate avg difficulty of games they have WON (Placement = 1)
+                    // If no wins, default to career avg preference or 2.0
+                    const winWeights = playerWinWeights[player] || [];
+                    const avgWinWeight = winWeights.length > 0 ? calculateAverage(winWeights) : 2.0;
+                    
+                    // Positive Delta = This game is harder than they usually win
+                    // Negative Delta = This game is easier than they usually win
+                    const complexityDelta = gameWeight - avgWinWeight;
+
                     // 2. Recent Form
                     const prevGame = placements.length > 0 ? placements[placements.length - 1] : 2.5;
                     const prev2Avg = placements.length >= 2 
@@ -133,15 +168,13 @@ try {
                         else break;
                     }
 
-                    // 4. Specific Game History (How did they do in THIS game before?)
+                    // 4. Specific Game History
                     const myGameHist = playerGameHistory[player]?.[gameName] || [];
                     const lastTitleFinish = myGameHist.length > 0 ? myGameHist[myGameHist.length - 1] : 2.5;
 
-                    // 5. Mechanic Skill (Average finish in games with THESE mechanics)
-                    // If the game has "Dice" and "Cards", we avg their historical performance in ALL "Dice" and "Cards" games
+                    // 5. Mechanic Skill
                     let mechSum = 0;
                     let mechCount = 0;
-                    
                     if (mechanicsList.length > 0) {
                         mechanicsList.forEach(m => {
                             const mHist = playerMechanicHistory[player]?.[m] || [];
@@ -151,9 +184,7 @@ try {
                             }
                         });
                     }
-                    // If they have never played these mechanics, default to their career avg
                     const mechanicSkill = mechCount > 0 ? (mechSum / mechCount) : careerAvg;
-
 
                     // 6. Opponent Metrics
                     const currentOpponentAvgs = opponents.map(o => {
@@ -174,24 +205,30 @@ try {
                         Week: weekName,
                         Player: player,
                         Game: gameName,
-                        Difficulty: parseFloat(gameInfo.difficulty || 2.0),
+                        Difficulty: gameWeight,
                         IsHome: location.includes(player) ? 1 : 0,
                         
-                        // Skill Features
+                        // Player Attributes
                         CareerAvg: parseFloat(careerAvg.toFixed(3)),
-                        Consistency_StdDev: parseFloat(stdDev.toFixed(3)), // NEW
-                        MechanicSkill: parseFloat(mechanicSkill.toFixed(3)), // NEW
-                        LastTitlePlacement: lastTitleFinish, // NEW
-                        
+                        Consistency_StdDev: parseFloat(stdDev.toFixed(3)),
                         Tenure: tenure,
+                        IsRookie: isRookie, // NEW
+                        ComplexityDelta: parseFloat(complexityDelta.toFixed(3)), // NEW
+                        
+                        // Skill & History
+                        MechanicSkill: parseFloat(mechanicSkill.toFixed(3)),
+                        LastTitlePlacement: lastTitleFinish,
                         PrevGame: prevGame,
                         Prev2Avg: prev2Avg,
                         WinStreak: winStreak,
                         NoLastStreak: noLastStreak,
+                        SecondStreak: secondStreak,
+                        ThirdStreak: thirdStreak,
                         PlayoffAppearances: history.playoffApps,
                         LastSeasonAvg: lastSeasonAverage[player] || 2.5,
                         
-                        // Context Features
+                        // Context / Opponents
+                        RookieOpponents: rookieOpponents, // NEW
                         H2H_WinRate: parseFloat(h2hWinRate.toFixed(3)),
                         SeasonPoints: seasonPoints[player] || 0,
                         SeasonSOS: parseFloat(seasonSOS.toFixed(3)),
@@ -213,6 +250,12 @@ try {
                         if (!playerHistory[player]) playerHistory[player] = { placements: [], playoffApps: 0 };
                         playerHistory[player].placements.push(place);
                         if (weekName.toLowerCase().includes("playoff")) playerHistory[player].playoffApps++;
+
+                        // Win Weight Tracker (NEW)
+                        if (place === 1) {
+                            if (!playerWinWeights[player]) playerWinWeights[player] = [];
+                            playerWinWeights[player].push(gameWeight);
+                        }
 
                         // Game Specific History
                         if (!playerGameHistory[player]) playerGameHistory[player] = {};
@@ -253,7 +296,7 @@ try {
     });
 
     fs.writeFileSync(OUTPUT_FILE, JSON.stringify(rows, null, 2));
-    console.log(`Success! Generated ${rows.length} rows with new AI features.`);
+    console.log(`Success! Generated ${rows.length} rows with Rookie & Complexity features.`);
 
 } catch (err) {
     console.error("Error processing files:", err);

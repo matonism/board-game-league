@@ -21,7 +21,9 @@ features = [
     'PrevGame',            # Last game result
     'Prev2Avg',            # Short-term form
     'WinStreak',           # Current winning streak
-    'NoLastStreak',        # Consistency streak
+    'NoLastStreak',
+    'SecondStreak',
+    'ThirdStreak',        # Consistency streak
     'PlayoffAppearances',  # Clutch factor
     'LastSeasonAvg',       # Recent history
     'H2H_WinRate',         # Specific matchup win rate
@@ -30,7 +32,10 @@ features = [
     'CurrentOppAvg',       # Strength of opponents in THIS game
     'MechanicSkill',
     'Consistency_StdDev',
-    'LastTitlePlacement'
+    'LastTitlePlacement',
+    'IsRookie',
+    'RookieOpponents',
+    'ComplexityDelta'
 
 ]
 
@@ -107,6 +112,8 @@ new_game = {
     'Prev2Avg': 1.5,
     'WinStreak': 1,
     'NoLastStreak': 5,
+    'SecondStreak': 1,
+    'ThirdStreak': 0,
     'PlayoffAppearances': 3,
     'LastSeasonAvg': 2.0,
     'H2H_WinRate': 0.60,      # Good record vs this pod
@@ -115,7 +122,10 @@ new_game = {
     'CurrentOppAvg': 2.4,      # Opponents are decent
     'MechanicSkill': 1,
     'Consistency_StdDev': 2.1,
-    'LastTitlePlacement': 3      # Opponents are decent
+    'LastTitlePlacement': 3,      # Opponents are decent
+    'IsRookie': 0,        # Am I new?
+    'RookieOpponents': 1, # Am I playing against newbies?
+    'ComplexityDelta': 0.539  # Is this game too heavy/light for me?
 }
 
 # Convert dictionary to DataFrame (1 row)

@@ -29,20 +29,29 @@ print(f"Predicting outcomes for {len(predict_df)} upcoming player matches...")
 
 # 3. Define Features
 features = [
-    'Difficulty', 
-    'IsHome', 
-    'CareerAvg', 
-    'Tenure', 
-    'PrevGame', 
-    'Prev2Avg', 
-    'WinStreak', 
-    'NoLastStreak', 
-    'PlayoffAppearances', 
-    'LastSeasonAvg', 
-    'H2H_WinRate', 
-    'SeasonPoints', 
-    # 'SeasonSOS', 
-    'CurrentOppAvg'
+    'Difficulty',          # Game weight
+    'IsHome',              # Home field advantage?
+    'CareerAvg',           # Long-term skill
+    'Tenure',              # Experience (Total games played)
+    'PrevGame',            # Last game result
+    'Prev2Avg',            # Short-term form
+    'WinStreak',           # Current winning streak
+    'NoLastStreak',
+    'SecondStreak',
+    'ThirdStreak',         # Consistency streak
+    'PlayoffAppearances',  # Clutch factor
+    'LastSeasonAvg',       # Recent history
+    'H2H_WinRate',         # Specific matchup win rate
+    'SeasonPoints',        # Current season momentum
+    'SeasonSOS',           # Strength of Schedule faced so far
+    'CurrentOppAvg',       # Strength of opponents in THIS game
+    'MechanicSkill',
+    'Consistency_StdDev',
+    'LastTitlePlacement',
+    'IsRookie',
+    'RookieOpponents',
+    'ComplexityDelta'
+
 ]
 
 # 4. Train the Model
