@@ -36,7 +36,7 @@ const MIN_GAMES_FOR_NEMESIS = 4; // Min games played against opponent to trigger
 const DOMINANCE_STREAK_MIN = 5; // Min streak length to report dominance
 
 if (!fs.existsSync(ANALYSIS_DIR)) {
-    fs.mkdirSync(ANALYSIS_DIR);
+    fs.mkdirSync(ANALYSIS_DIR, { recursive: true });
 }
 
 /**
@@ -813,7 +813,7 @@ function generateStories(prev, curr, activePlayers, weekIndex, isPostSeason, pla
                                 title: 'Dominance Broken',
                                 text: `<strong>${p1.player}</strong> ended <strong>${p2.player}</strong>'s <strong>${reverseStreak}</strong>-game winning streak against them!`,
                                 subtext: `(Streak Snapped)`,
-                                icon: '⚔️' // Explicitly set icon for this case
+                                icon: '⚔️' // Explicitly set icon for this case (SWORDS as requested)
                             });
                         }
 
@@ -1219,14 +1219,18 @@ function generateHtmlDashboard(reports) {
                     <select id="filterPlayer" onchange="applyFilters()">
                         <option value="all">All Players</option>
                     </select>
-                    <!-- Type Filter: Visible mainly for News/Accolades but can be used generally or hidden -->
+                    <!-- Type Filter -->
                     <select id="filterType" onchange="applyFilters()">
-                        <option value="all">All Types</option>
+                        <option value="all">All News Types</option>
                         <option value="record">Records</option>
                         <option value="milestone">Milestones</option>
                         <option value="playoff">Playoff Watch</option>
                         <option value="nemesis">Nemesis/Dominance</option>
                         <option value="narrative">Narratives</option>
+                    </select>
+                    <!-- Streak Filter -->
+                    <select id="filterStreakType" onchange="applyFilters()" style="display:none">
+                        <option value="all">All Streaks</option>
                     </select>
                 </div>
 
@@ -1270,15 +1274,25 @@ function generateHtmlDashboard(reports) {
         function switchTab(tabName) {
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
             document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            
             document.querySelector(\`.tab-btn[onclick="switchTab('\${tabName}')"]\`).classList.add('active');
             document.getElementById(\`\${tabName}-tab\`).classList.add('active');
             
             // Show/Hide Type Filter based on Tab
             const typeFilter = document.getElementById('filterType');
+            const streakFilter = document.getElementById('filterStreakType');
+            
             if (tabName === 'news') {
                 typeFilter.style.display = 'block';
             } else {
                 typeFilter.style.display = 'none';
+            }
+
+            // Show/Hide Streak Filter
+            if (tabName === 'streaks') {
+                streakFilter.style.display = 'block';
+            } else {
+                streakFilter.style.display = 'none';
             }
         }
 
@@ -1367,14 +1381,6 @@ function generateHtmlDashboard(reports) {
                     NEWS_ITEMS.push({ type: 'playoff', player: p.player, priority: 100, html: createCard(style, icon, title, p.text) });
                 });
             }
-            
-            
-            if (news.narrative) {
-                news.narrative.forEach(n => {
-                    NEWS_ITEMS.push({ type: 'narrative', player: n.player, priority: 90, html: createCard('narrative', '📜', n.title, n.text) });
-                });
-            }
-            
             if (news.records) {
                 news.records.forEach(r => {
                     const style = r.isNegative ? 'record-bad' : 'record';
@@ -1395,23 +1401,51 @@ function generateHtmlDashboard(reports) {
                     const tiePrefix = m.speed.isTie ? "Tied for " : "";
                     subtext += \` <br><span style="font-size:0.9em; color:#6366f1">Reached in \${m.speed.games} games (\${tiePrefix}\${ord} Fastest All-Time)</span>\`;
                 }
-                NEWS_ITEMS.push({ type: 'milestone', player: m.player, priority: 70, html: createCard('milestone', '🏆', 'Historic Milestone', \`<strong>\${m.player}</strong> has crossed <strong>\${m.milestone}+</strong> \${m.label}! \`, subtext) });
+                NEWS_ITEMS.push({ type: 'milestone', player: m.player, priority: 70, html: createCard('milestone', '🏆', 'Personal Milestone', \`<strong>\${m.player}</strong> has crossed <strong>\${m.milestone}+</strong> \${m.label}! \`, subtext) });
             });
             if (news.nemesis) {
                 news.nemesis.forEach(n => {
                     NEWS_ITEMS.push({ type: 'nemesis', player: n.player, priority: 86, html: createCard('nemesis', '⚔️', n.title, n.text, n.subtext) });
                 });
             }
+            if (news.narrative) {
+                news.narrative.forEach(n => {
+                    NEWS_ITEMS.push({ type: 'narrative', player: n.player, priority: 90, html: createCard('narrative', '📜', n.title, n.text) });
+                });
+            }
 
             // 2. STREAK ITEMS
             news.streakEvents.forEach(s => {
                 let html = '';
-                if(s.status === 'Active') {
-                    html = createCard('streak', '🔥', 'Heating Up', \`<strong>\${s.player}</strong> extends their \${s.type} to <strong>\${s.count}</strong> games.\`, s.subtext);
-                } else {
-                    html = createCard('snap', '💔', 'Streak Snapped', \`<strong>\${s.player}</strong>'s streak of <strong>\${s.count}</strong> \${s.type}s has ended.\`);
+                // Rename "Safety Streak" to "Podium Streak"
+                let displayType = s.type;
+                let displaySubtext = s.subtext || '';
+                
+                if (displayType.includes('Safety Streak')) {
+                    displayType = displayType.replace('Safety Streak', 'Podium Streak');
+                    if (!displaySubtext) displaySubtext = "(Consecutive Top 3 Finishes)";
+                } else if (displayType.includes('noLastStreak')) {
+                     displayType = 'Podium Streak';
+                     if (!displaySubtext) displaySubtext = "(Consecutive Top 3 Finishes)";
                 }
-                STREAK_ITEMS.push({ player: s.player, html: html });
+
+                // Refine Language
+                let mainText = '';
+                if(s.status === 'Active') {
+                    mainText = \`<strong>\${s.player}</strong> extends their \${displayType} to <strong>\${s.count}</strong> games.\`;
+                    html = createCard('streak', '🔥', 'Heating Up', mainText, displaySubtext);
+                } else {
+                    mainText = \`<strong>\${s.player}</strong>'s \${s.count} game \${displayType} has ended.\`;
+                    html = createCard('snap', '💔', 'Streak Snapped', mainText);
+                }
+                
+                STREAK_ITEMS.push({ 
+                    player: s.player, 
+                    type: displayType, // For filtering
+                    status: s.status, // Active vs Snapped
+                    count: s.count,   // For tie-breaking
+                    html: html 
+                });
             });
 
             // 3. RESULT ITEMS
@@ -1432,6 +1466,7 @@ function generateHtmlDashboard(reports) {
 
             // Populate Filter
             populatePlayerFilter();
+            populateStreakFilter();
 
             // Render All
             applyFilters();
@@ -1439,11 +1474,10 @@ function generateHtmlDashboard(reports) {
 
         function populatePlayerFilter() {
             const select = document.getElementById('filterPlayer');
-            const currentVal = select.value; // Try to preserve selection if possible
+            const currentVal = select.value; 
             select.innerHTML = '<option value="all">All Players</option>';
             
             const players = new Set();
-            // Gather players from all sources
             NEWS_ITEMS.forEach(i => i.player && i.player.split('&').forEach(p => players.add(p.trim())));
             STREAK_ITEMS.forEach(i => i.player && players.add(i.player));
             RESULT_ITEMS.forEach(i => i.players && i.players.forEach(p => players.add(p)));
@@ -1455,15 +1489,36 @@ function generateHtmlDashboard(reports) {
                 select.appendChild(opt);
             });
             
-            // Restore selection if valid
             if ([...select.options].some(o => o.value === currentVal)) {
                 select.value = currentVal;
+            }
+        }
+
+        function populateStreakFilter() {
+            let select = document.getElementById('filterStreakType');
+            const types = new Set();
+            STREAK_ITEMS.forEach(i => types.add(i.type));
+            
+            const currentVal = select ? select.value : 'all';
+            if (select) {
+                select.innerHTML = '<option value="all">All Streaks</option>';
+                Array.from(types).sort().forEach(t => {
+                    const opt = document.createElement('option');
+                    opt.value = t;
+                    opt.textContent = t;
+                    select.appendChild(opt);
+                });
+                if ([...select.options].some(o => o.value === currentVal)) {
+                    select.value = currentVal;
+                }
             }
         }
 
         function applyFilters() {
             const playerFilter = document.getElementById('filterPlayer').value;
             const typeFilter = document.getElementById('filterType').value;
+            const streakFilterEl = document.getElementById('filterStreakType');
+            const streakFilter = streakFilterEl ? streakFilterEl.value : 'all';
             
             // 1. RENDER NEWS
             const newsContainer = document.getElementById('news-feed-container');
@@ -1472,15 +1527,24 @@ function generateHtmlDashboard(reports) {
                 const matchType = typeFilter === 'all' || item.type === typeFilter;
                 return matchPlayer && matchType;
             });
-            // Sort by priority always
             filteredNews.sort((a,b) => b.priority - a.priority);
             newsContainer.innerHTML = filteredNews.length ? filteredNews.map(i => i.html).join('') : '<div class="empty-state">No news matches filters.</div>';
 
             // 2. RENDER STREAKS
             const streaksContainer = document.getElementById('streaks-tab');
             let filteredStreaks = STREAK_ITEMS.filter(item => {
-                return playerFilter === 'all' || item.player === playerFilter;
+                const matchPlayer = playerFilter === 'all' || item.player === playerFilter;
+                const matchStreakType = streakFilter === 'all' || item.type === streakFilter;
+                return matchPlayer && matchStreakType;
             });
+            
+            // Sort Streaks: Active First, Snapped Last. Then by Count Descending.
+            filteredStreaks.sort((a, b) => {
+                if (a.status === 'Active' && b.status !== 'Active') return -1;
+                if (a.status !== 'Active' && b.status === 'Active') return 1;
+                return b.count - a.count;
+            });
+
             streaksContainer.innerHTML = filteredStreaks.length ? filteredStreaks.map(i => i.html).join('') : '<div class="empty-state">No streaks match filters.</div>';
 
             // 3. RENDER RESULTS

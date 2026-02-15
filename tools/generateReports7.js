@@ -143,7 +143,7 @@ function main() {
             });
         });
 
-        
+
         // --- SECTION 2: Single Season Records ---
         const SCOPE_SEASON = "Single Season Records";
         const playerSeasons = getPlayerSeasonStats(regSeasonGames);
@@ -244,11 +244,17 @@ function main() {
         processStat("Biggest Points Jump (Season to Season)", "Risers and Fallers", SCOPE_CROSS, getBiggestPointJumps(regSeasonGames, seasonsWithPlayoffs));
         processStat("Biggest Points Drop (Season to Season)", "Risers and Fallers", SCOPE_CROSS, getBiggestPointDrops(regSeasonGames, seasonsWithPlayoffs));
         
+        // Filter dataset for consistency metrics: Exclude current season if it hasn't finished (no playoffs yet)
+        let consistencyDataset = regSeasonGames;
+        if (!seasonsWithPlayoffs.has(maxSeason)) {
+            consistencyDataset = regSeasonGames.filter(g => g.season !== maxSeason);
+        }
+
         // Consistency (Standard Deviation of Placement) - Min 5 games
-        processStat("Most Consistent Finishers (Game Finishes Std Dev)", "Risers and Fallers", SCOPE_CROSS, getPlacementConsistency(regSeasonGames, 5));
+        processStat("Most Consistent Finishers (Game Finishes Std Dev)", "Risers and Fallers", SCOPE_CROSS, getPlacementConsistency(consistencyDataset, 5));
         
         // NEW: Consistency (Standard Deviation of Season Point Totals) - Min 3 seasons
-        processStat("Most Consistent Scorers (Season Pts Std Dev)", "Risers and Fallers", SCOPE_CROSS, getPointsConsistency(regSeasonGames, 3));
+        processStat("Most Consistent Scorers (Season Pts Std Dev)", "Risers and Fallers", SCOPE_CROSS, getPointsConsistency(consistencyDataset, 3));
         
         // Rivalries / Matchups
         processStat("Most Common Matchups (Regular Season Only)", "Rivalries", SCOPE_CROSS, getMostCommonMatchups(regSeasonGames));
@@ -314,7 +320,7 @@ function main() {
 
 
 
-
+        
         // 3. Write Outputs
         fs.writeFileSync(CSV_FILE, csvRows.join('\n'));
         console.log(`SUCCESS: CSV exported to ${CSV_FILE}`);
