@@ -263,6 +263,7 @@ function main() {
 
         // NEW: Best Duo / Worst Enemies
         processStat("Best Duo (Combined Avg Pts > 2.0)", "Rivalries", SCOPE_CROSS, getBestDuos(regSeasonGames));
+        processStat("Worst Duo (Combined Avg Pts < 2.0)", "Rivalries", SCOPE_CROSS, getBestDuos(regSeasonGames));
         processStat("Worst Enemies (Lowest Avg Score vs Opponent)", "Rivalries", SCOPE_CROSS, getWorstEnemies(regSeasonGames));
 
         // --- SECTION 6: League Metrics ---

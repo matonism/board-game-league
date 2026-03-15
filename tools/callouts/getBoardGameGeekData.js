@@ -21,7 +21,6 @@ async function getBoardGameInfo(queryParams){
             games = decodeURIComponent(games).split(',');
         }
 
-        // console.log(games);
         //Step 1: Search all board games that you need to get data for by name one-by-one
         let searchResults = {};
         //Using standard for loop because forEach cannot handle async await
@@ -29,9 +28,11 @@ async function getBoardGameInfo(queryParams){
             let game = games[i];
             if(game != 'TBD' && game != ''){
                 try{
-                    let XMLResponse = await makeHTTPSRequest('/search/', {query: game.replaceAll(' ', '+'), type: 'boardgame', exact: 1});
-                    // console.log(XMLResponse);
+                    console.log(game);
+                    let XMLResponse = await makeHTTPSRequest('/search/', {query: game.replaceAll(' ', '+'), type: 'boardgame'});
+                    console.log(XMLResponse);
                     searchResults[game] = JSON.parse(convert.xml2json(XMLResponse));
+
                     await setTimeout(()=>{}, 2000);
                     // let response = xml2json(XMLResponse);
                 }catch(error){
@@ -42,11 +43,12 @@ async function getBoardGameInfo(queryParams){
 
         //Step 2: sort the results by year published, and take the most appropriate title
         let gameKeys = Object.keys(searchResults);
+        console.log(searchResults);
         for(let i = 0; i < Object.keys(gameKeys).length; i++){
             // console.log(gameKeys[i]);
             if(searchResults[gameKeys[i]].elements[0].elements){
                 if(gameKeys[i] == 'Harvest'){
-                    // console.log(searchResults[gameKeys[i]].elements[0].elements);
+                    console.log(searchResults[gameKeys[i]].elements[0].elements);
                 }
                 if(Object.keys(gamesToIds).includes(gameKeys[i])){
                     searchResults[gameKeys[i]].elements[0].elements = sortByIdMatch(searchResults[gameKeys[i]].elements[0].elements, gamesToIds[gameKeys[i]]);
@@ -57,7 +59,7 @@ async function getBoardGameInfo(queryParams){
             }
         }
 
-        // console.log(response);
+        console.log(response);
 
         //Step 3: Use the Id to get the full details of each retrieved game
         let detailResults = {};
@@ -201,8 +203,6 @@ async function makeHTTPSRequest(path, params){
             url += '?'
         )
         
-        // console.log('/xmlapi2' + path + '?' + Object.keys(params).reduce((currentValue, nextValue) => currentValue += nextValue + '=' + params[nextValue] + '&',''));
-
         const options = {
             hostname: 'boardgamegeek.com',
             port: 443,
@@ -216,20 +216,17 @@ async function makeHTTPSRequest(path, params){
         
         let dataString = '';
         const req = https.get(options, function(res) {
-            // console.log(res);
             res.on('data', chunk => {
                 dataString += chunk;
             });
             res.on('end', () => {
-                console.log('completed');
-                // console.log(dataString);
                 resolve(dataString);
             });
         });
         
         req.on('error', (e) => {
-            console.error(e);
             reject(e);
+            console.error(e);
         });
     })
 

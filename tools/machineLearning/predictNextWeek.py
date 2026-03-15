@@ -33,6 +33,7 @@ features = [
     'IsHome',              # Home field advantage?
     'CareerAvg',           # Long-term skill
     'Tenure',              # Experience (Total games played)
+    'TenureGap',
     'PrevGame',            # Last game result
     'Prev2Avg',            # Short-term form
     'WinStreak',           # Current winning streak
@@ -43,6 +44,7 @@ features = [
     'LastSeasonAvg',       # Recent history
     'H2H_WinRate',         # Specific matchup win rate
     'SeasonPoints',        # Current season momentum
+    'PointsAbovePace',
     'SeasonSOS',           # Strength of Schedule faced so far
     'CurrentOppAvg',       # Strength of opponents in THIS game
     'MechanicSkill',

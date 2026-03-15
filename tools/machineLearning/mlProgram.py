@@ -11,6 +11,7 @@ df = pd.read_json('machineLearning/bgl_ml_features.json')
 
 # Convert 'Year' to numeric just in case
 df['Year'] = pd.to_numeric(df['Year'])
+# df['weekNum'] = pd.to_numeric(df['weekNum'])
 
 # Define the features (X) we want the model to learn from
 features = [
@@ -18,6 +19,7 @@ features = [
     'IsHome',              # Home field advantage?
     'CareerAvg',           # Long-term skill
     'Tenure',              # Experience (Total games played)
+    'TenureGap',
     'PrevGame',            # Last game result
     'Prev2Avg',            # Short-term form
     'WinStreak',           # Current winning streak
@@ -28,6 +30,7 @@ features = [
     'LastSeasonAvg',       # Recent history
     'H2H_WinRate',         # Specific matchup win rate
     'SeasonPoints',        # Current season momentum
+    'PointsAbovePace',
     'SeasonSOS',           # Strength of Schedule faced so far
     'CurrentOppAvg',       # Strength of opponents in THIS game
     'MechanicSkill',
@@ -47,6 +50,7 @@ target = 'Placement'
 # ==========================================
 # We train on history (2022-2025) and test on the current season (2026)
 train_df = df[df['Year'] < 2026]
+# test_df = df[df['Year'] == 2026 or (df['Year'] == 2025 and df['weekNum'] > 2)]
 test_df = df[df['Year'] == 2026]
 
 # --- NEW LINE: Remove rows with no result for training ---
@@ -108,6 +112,7 @@ new_game = {
     'IsHome': 1,              # Playing at home
     'CareerAvg': 1.88,        # Nick's stats
     'Tenure': 30,
+    'TenureGap': 2,
     'PrevGame': 1,
     'Prev2Avg': 1.5,
     'WinStreak': 1,
@@ -118,6 +123,7 @@ new_game = {
     'LastSeasonAvg': 2.0,
     'H2H_WinRate': 0.60,      # Good record vs this pod
     'SeasonPoints': 10,
+    'PointsAbovePace': 1,
     'SeasonSOS': 2.1,
     'CurrentOppAvg': 2.4,      # Opponents are decent
     'MechanicSkill': 1,

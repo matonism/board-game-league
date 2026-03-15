@@ -2,23 +2,18 @@ const fs = require('fs');
 const path = require('path');
 
 // --- Configuration ---
-// Adjust paths if necessary based on where you run this
 const OUTPUT_DIR = path.join(__dirname, 'machineLearning');
 const INPUT_DIR = path.join(__dirname, 'output'); 
-// If running in same folder as source files, you might need:
-// const INPUT_DIR = __dirname; 
-
 if (!fs.existsSync(OUTPUT_DIR)){
     fs.mkdirSync(OUTPUT_DIR, { recursive: true });
 }
 
-// Ensure these filenames match exactly what you have on disk
 const SCHEDULES_FILE = 'Schedules.txt'; 
 const SUMMARIES_FILE = 'GameSummaries.txt';
 const OUTPUT_FILE = path.join(OUTPUT_DIR, 'bgl_ml_features.json');
 
-// --- Constants ---
-const ROOKIE_THRESHOLD = 5; // Games played < 5 = Rookie
+// --- CONSTANTS ---
+const ROOKIE_THRESHOLD = 5; 
 
 // --- Helper Functions ---
 const calculateAverage = (arr) => {
@@ -37,7 +32,6 @@ const calculateStdDev = (arr, mean) => {
 const getH2HWinRate = (player, currentOpponents, allPastGames) => {
     let wins = 0;
     let games = 0;
-    // Optimization: Filter games once
     const myGames = allPastGames.filter(g => g.players[player] !== undefined);
 
     myGames.forEach(game => {
@@ -55,7 +49,6 @@ const getH2HWinRate = (player, currentOpponents, allPastGames) => {
 
 // Main Execution
 try {
-    // Read files (Adjusting path logic to be robust)
     const schedulesPath = fs.existsSync(path.join(INPUT_DIR, SCHEDULES_FILE)) ? path.join(INPUT_DIR, SCHEDULES_FILE) : SCHEDULES_FILE;
     const summariesPath = fs.existsSync(path.join(INPUT_DIR, SUMMARIES_FILE)) ? path.join(INPUT_DIR, SUMMARIES_FILE) : SUMMARIES_FILE;
 
@@ -64,10 +57,10 @@ try {
     const rows = [];
     
     // --- Global State ---
-    const playerHistory = {}; // { Name: { placements: [], playoffApps: 0 } }
-    const playerGameHistory = {}; // { Name: { "Catan": [1, 4] } }
-    const playerMechanicHistory = {}; // { Name: { "Dice Rolling": [2, 1, 3] } }
-    const playerWinWeights = {}; // { Name: [2.5, 3.1] } -> Difficulties of games they won
+    const playerHistory = {}; 
+    const playerGameHistory = {}; 
+    const playerMechanicHistory = {}; 
+    const playerWinWeights = {}; 
     
     const allPastGames = [];  
     const lastSeasonAverage = {}; 
@@ -80,23 +73,83 @@ try {
         const seasonOpponentSum = {}; 
         const seasonGamesPlayed = {};
 
+        // 1. CALCULATE SEASON CONTEXT (DYNAMICALLY)
+        
+        // A. Count Total Regular Season Players
+        // (Exclude 'Playoff' AND 'Championship' from the regular season pool count, 
+        //  though typically everyone in playoffs was in reg season anyway. 
+        //  Safest to just add everyone from non-postseason weeks.)
+        const uniquePlayersInSeason = new Set();
+        seasonWeeks.forEach(week => {
+            const weekLower = week.week.toLowerCase();
+            if (!weekLower.includes("playoff") && !weekLower.includes("championship")) {
+                week.results.forEach(pod => {
+                    if (pod.players) {
+                        pod.players.forEach(p => uniquePlayersInSeason.add(p.player));
+                    }
+                });
+            }
+        });
+        const totalPlayers = uniquePlayersInSeason.size || 12;
+
+        // B. EXTRAPOLATE PLAYOFF SPOTS (AGGREGATE ALL POST-SEASON WEEKS)
+        // We look for 'Playoff' OR 'Championship'
+        const uniquePlayoffPlayers = new Set();
+        seasonWeeks.forEach(week => {
+            const weekLower = week.week.toLowerCase();
+            if (weekLower.includes("playoff") || weekLower.includes("championship")) {
+                week.results.forEach(pod => {
+                    if (pod.players) {
+                        pod.players.forEach(p => uniquePlayoffPlayers.add(p.player));
+                    }
+                });
+            }
+        });
+
+        let playoffSpots = uniquePlayoffPlayers.size;
+        
+        // Fallback: If no playoffs found (e.g. current season 2026), default to 8
+        if (playoffSpots === 0) {
+            playoffSpots = 8; 
+        }
+
+        // C. Calculate Target Score (The "Cutline")
+        const percentileNeeded = 1 - (playoffSpots / totalPlayers);
+        
+        // Dynamic Pace Formula
+        // 50th percentile = 1.5. 
+        // If you need top 33%, you need significantly more.
+        let seasonTargetPPG = 1.5 + ((percentileNeeded - 0.5) * 2.0);
+        seasonTargetPPG = Math.max(1.0, Math.min(2.5, seasonTargetPPG));
+
+        console.log(`\nSeason ${year}: ${totalPlayers} Players. Found ${playoffSpots} Post-Season Qualifiers.`);
+        console.log(`  -> Difficulty: Top ${(1-percentileNeeded).toFixed(2)*100}% qualify.`);
+        console.log(`  -> Target PPG: ${seasonTargetPPG.toFixed(2)} pts/game`);
+
+        // 2. Process Weeks
         seasonWeeks.forEach(weekData => {
             const weekName = weekData.week;
+            const weekLower = weekName.toLowerCase();
             const gameName = weekData.game;
+
+            let weekNum = 0;
+            const weekMatch = weekName.match(/Week\s+(\d+)/i);
+            if (weekMatch) {
+                weekNum = parseInt(weekMatch[1]);
+            } else if (weekLower.includes("playoff") || weekLower.includes("championship")) {
+                weekNum = 8; // Treat all post-season as "Week 8+"
+            }
             
-            // Get Game Info
             const gameInfo = gameSummaries[gameName] || { difficulty: "2.0", mechanics: [] };
             const gameWeight = parseFloat(gameInfo.difficulty || 2.0);
             const mechanicsList = Array.isArray(gameInfo.mechanics) ? gameInfo.mechanics : [];
-            const mechanicsStr = mechanicsList.join('|');
 
             weekData.results.forEach(pod => {
                 if (!pod.players || pod.players.length === 0) return;
 
-                // --- DETECT FUTURE GAME ---
+                // Detect Future Game
                 let isFutureGame = false;
                 const podResults = {};
-                
                 pod.players.forEach(p => {
                     if (p.placement === undefined || p.placement === null || p.placement === "" || isNaN(parseInt(p.placement))) {
                         isFutureGame = true;
@@ -108,55 +161,40 @@ try {
                 const podPlayers = pod.players.map(p => p.player);
                 const location = pod.location || "";
 
-                // --- GENERATE FEATURES ---
                 podPlayers.forEach(player => {
                     const opponents = podPlayers.filter(p => p !== player);
                     const history = playerHistory[player] || { placements: [], playoffApps: 0 };
                     const placements = history.placements;
                     
-                    // 1. Basic Stats
+                    // Stats
                     const careerAvg = calculateAverage(placements);
                     const stdDev = calculateStdDev(placements, careerAvg);
                     const tenure = placements.length;
-                    
-                    // NEW: Rookie Factors
                     const isRookie = tenure < ROOKIE_THRESHOLD ? 1 : 0;
                     
-                    // Count how many opponents are rookies
                     let rookieOpponents = 0;
                     opponents.forEach(opp => {
-                        const oppTenure = (playerHistory[opp]?.placements?.length || 0);
-                        if (oppTenure < ROOKIE_THRESHOLD) rookieOpponents++;
+                        if ((playerHistory[opp]?.placements?.length || 0) < ROOKIE_THRESHOLD) rookieOpponents++;
                     });
 
-                    // NEW: Complexity Delta
-                    // Does this player prefer Heavy or Light games?
-                    // Calculate avg difficulty of games they have WON (Placement = 1)
-                    // If no wins, default to career avg preference or 2.0
                     const winWeights = playerWinWeights[player] || [];
                     const avgWinWeight = winWeights.length > 0 ? calculateAverage(winWeights) : 2.0;
-                    
-                    // Positive Delta = This game is harder than they usually win
-                    // Negative Delta = This game is easier than they usually win
                     const complexityDelta = gameWeight - avgWinWeight;
 
-                    // 2. Recent Form
                     const prevGame = placements.length > 0 ? placements[placements.length - 1] : 2.5;
                     const prev2Avg = placements.length >= 2 
                         ? (placements[placements.length - 1] + placements[placements.length - 2]) / 2 
                         : 2.5;
 
-                    // 3. Streaks
                     let winStreak = 0;
                     for (let i = placements.length - 1; i >= 0; i--) {
-                        if (placements[i] === 1) winStreak++;
-                        else break;
+                        if (placements[i] === 1) winStreak++; else break;
                     }
                     let noLastStreak = 0;
                     for (let i = placements.length - 1; i >= 0; i--) {
-                        if (placements[i] !== 4) noLastStreak++;
-                        else break;
+                        if (placements[i] !== 4) noLastStreak++; else break;
                     }
+
                     let secondStreak = 0;
                     for (let i = placements.length - 1; i >= 0; i--) {
                         if (placements[i] === 2) secondStreak++;
@@ -167,12 +205,9 @@ try {
                         if (placements[i] === 3) thirdStreak++;
                         else break;
                     }
-
-                    // 4. Specific Game History
                     const myGameHist = playerGameHistory[player]?.[gameName] || [];
                     const lastTitleFinish = myGameHist.length > 0 ? myGameHist[myGameHist.length - 1] : 2.5;
 
-                    // 5. Mechanic Skill
                     let mechSum = 0;
                     let mechCount = 0;
                     if (mechanicsList.length > 0) {
@@ -186,36 +221,43 @@ try {
                     }
                     const mechanicSkill = mechCount > 0 ? (mechSum / mechCount) : careerAvg;
 
-                    // 6. Opponent Metrics
-                    const currentOpponentAvgs = opponents.map(o => {
+                    // Tenure Gap
+                    const currentOpponentAvgs = [];
+                    const currentOpponentTenures = [];
+                    opponents.forEach(o => {
                         const oppHist = playerHistory[o]?.placements || [];
-                        return calculateAverage(oppHist);
+                        currentOpponentAvgs.push(calculateAverage(oppHist));
+                        currentOpponentTenures.push(oppHist.length);
                     });
                     const currentOppAvg = calculateAverage(currentOpponentAvgs);
+                    const avgOpponentTenure = calculateAverage(currentOpponentTenures);
+                    const tenureGap = tenure - avgOpponentTenure;
 
+                    // Season Context
                     const sosSum = seasonOpponentSum[player] || 0;
-                    const sosGames = seasonGamesPlayed[player] || 0;
-                    const seasonSOS = sosGames > 0 ? (sosSum / sosGames) : 2.5;
+                    const currentSeasonGames = seasonGamesPlayed[player] || 0;
+                    const seasonSOS = currentSeasonGames > 0 ? (sosSum / currentSeasonGames) : 2.5;
+                    const mySeasonPoints = seasonPoints[player] || 0;
+                    
+                    // DYNAMIC PACE
+                    const pointsAbovePace = mySeasonPoints - (currentSeasonGames * seasonTargetPPG);
 
                     const h2hWinRate = getH2HWinRate(player, opponents, allPastGames);
 
-                    // Build Row
                     const row = {
                         Year: year,
                         Week: weekName,
+                        WeekNum: weekNum,
                         Player: player,
                         Game: gameName,
                         Difficulty: gameWeight,
                         IsHome: location.includes(player) ? 1 : 0,
-                        
-                        // Player Attributes
                         CareerAvg: parseFloat(careerAvg.toFixed(3)),
                         Consistency_StdDev: parseFloat(stdDev.toFixed(3)),
                         Tenure: tenure,
-                        IsRookie: isRookie, // NEW
-                        ComplexityDelta: parseFloat(complexityDelta.toFixed(3)), // NEW
-                        
-                        // Skill & History
+                        TenureGap: parseFloat(tenureGap.toFixed(1)),
+                        IsRookie: isRookie,
+                        ComplexityDelta: parseFloat(complexityDelta.toFixed(3)),
                         MechanicSkill: parseFloat(mechanicSkill.toFixed(3)),
                         LastTitlePlacement: lastTitleFinish,
                         PrevGame: prevGame,
@@ -226,65 +268,63 @@ try {
                         ThirdStreak: thirdStreak,
                         PlayoffAppearances: history.playoffApps,
                         LastSeasonAvg: lastSeasonAverage[player] || 2.5,
-                        
-                        // Context / Opponents
-                        RookieOpponents: rookieOpponents, // NEW
+                        RookieOpponents: rookieOpponents,
                         H2H_WinRate: parseFloat(h2hWinRate.toFixed(3)),
-                        SeasonPoints: seasonPoints[player] || 0,
+                        SeasonPoints: mySeasonPoints,
+                        PointsAbovePace: parseFloat(pointsAbovePace.toFixed(2)),
                         SeasonSOS: parseFloat(seasonSOS.toFixed(3)),
                         CurrentOppAvg: parseFloat(currentOppAvg.toFixed(3)),
-                        
-                        // TARGET
                         Placement: isFutureGame ? null : podResults[player]
                     };
-
                     rows.push(row);
                 });
 
-                // --- UPDATE HISTORY (ONLY IF GAME IS FINISHED) ---
                 if (!isFutureGame) {
                     podPlayers.forEach(player => {
                         const place = podResults[player];
                         
-                        // Global History
+                        // Update Histories
                         if (!playerHistory[player]) playerHistory[player] = { placements: [], playoffApps: 0 };
                         playerHistory[player].placements.push(place);
-                        if (weekName.toLowerCase().includes("playoff")) playerHistory[player].playoffApps++;
-
-                        // Win Weight Tracker (NEW)
+                        
+                        // Track Playoff Appearances (Playoff OR Championship)
+                        const wName = weekName.toLowerCase();
+                        if (wName.includes("playoff") || wName.includes("championship")) {
+                            // Avoid double counting if someone plays in both? 
+                            // Usually 'Apperances' means seasons qualified.
+                            // But simply incrementing is fine as a 'Post-season Experience' metric.
+                            playerHistory[player].playoffApps++;
+                        }
+                        
                         if (place === 1) {
                             if (!playerWinWeights[player]) playerWinWeights[player] = [];
                             playerWinWeights[player].push(gameWeight);
                         }
-
-                        // Game Specific History
                         if (!playerGameHistory[player]) playerGameHistory[player] = {};
                         if (!playerGameHistory[player][gameName]) playerGameHistory[player][gameName] = [];
                         playerGameHistory[player][gameName].push(place);
-
-                        // Mechanic History
                         if (!playerMechanicHistory[player]) playerMechanicHistory[player] = {};
                         mechanicsList.forEach(m => {
                             if (!playerMechanicHistory[player][m]) playerMechanicHistory[player][m] = [];
                             playerMechanicHistory[player][m].push(place);
                         });
-
-                        // Season Stats
+                        
+                        // Season Points
                         const pts = {1:3, 2:2, 3:1, 4:0}[place] || 0;
                         seasonPoints[player] = (seasonPoints[player] || 0) + pts;
                         seasonGamesPlayed[player] = (seasonGamesPlayed[player] || 0) + 1;
                         
+                        // SOS
                         const opps = podPlayers.filter(p => p !== player);
                         const oppAvgThisGame = calculateAverage(opps.map(o => calculateAverage(playerHistory[o]?.placements || [])));
                         seasonOpponentSum[player] = (seasonOpponentSum[player] || 0) + oppAvgThisGame;
                     });
-
                     allPastGames.push({ year: year, week: weekName, players: podResults });
                 }
             });
         });
 
-        // End of Season Updates
+        // End Season Averages
         Object.keys(seasonPoints).forEach(player => {
             const gamesPlayedThisYear = seasonGamesPlayed[player];
             if (playerHistory[player] && gamesPlayedThisYear > 0) {
@@ -296,7 +336,7 @@ try {
     });
 
     fs.writeFileSync(OUTPUT_FILE, JSON.stringify(rows, null, 2));
-    console.log(`Success! Generated ${rows.length} rows with Rookie & Complexity features.`);
+    console.log(`Success! Generated ${rows.length} rows with corrected Post-Season logic.`);
 
 } catch (err) {
     console.error("Error processing files:", err);

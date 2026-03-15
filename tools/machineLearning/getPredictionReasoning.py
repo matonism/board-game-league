@@ -3,7 +3,7 @@ import numpy as np
 from sklearn.ensemble import RandomForestRegressor
 
 # --- CONFIGURATION ---
-TARGET_PLAYER = "Rachel M"  # Who do you want to explain?
+TARGET_PLAYER = "Rachel F"  # Who do you want to explain?
 TARGET_WEEK = "Week 4"      # Which week?
 TARGET_YEAR = 2026
 
@@ -20,10 +20,10 @@ future_df = df[df['Placement'].isnull()]
 
 # 3. Define Features (Match your build script)
 features = [
-    'Difficulty', 'IsHome', 'CareerAvg', 'Tenure', 
+    'Difficulty', 'IsHome', 'CareerAvg', 'TenureGap',
     'PrevGame', 'Prev2Avg', 'WinStreak', 'NoLastStreak', 
     'PlayoffAppearances', 'LastSeasonAvg', 'H2H_WinRate', 
-    'SeasonPoints', 'SeasonSOS', 'CurrentOppAvg',
+    'SeasonPoints', 'PointsAbovePace', 'SeasonSOS', 'CurrentOppAvg',
     'Consistency_StdDev', 'LastTitlePlacement', 'MechanicSkill',
     'IsRookie', 'RookieOpponents', 'ComplexityDelta'
 ]
