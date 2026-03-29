@@ -1,41 +1,33 @@
-//TODO: Figure out why my PWA just started refreshing each time I change the S3 bucket contents
-//Previously, when I would change the S3 bucket contents, I could close out of the BGL "add to home screen" app and reopen, but no updates would appear
-//I tried adding a service worker here and registering it, and then it started working automatically refreshing with new updates when we reopen the app
-//So I tried removing the references to the service worker completely, deleting the PWA from my phone and reinstalled, but everything was still
-//refreshing as desired. 
-//I am not sure if the presence of a service worker at one point in time caused this, but it seemed like my phone just stopped caching
+// Bump the revision comment in sw.js on each deploy so clients pick up updates.
+// PWA caches are aggressive; changing sw.js is the standard way to force a refresh.
 
-if('serviceWorker' in navigator){
-    navigator.serviceWorker.register('/sw.js', { scope: '/'}).then((registration) => {
-        //registration.addEventListener("updatefound", () => {
-        //    window.location.reload();
-        //})
+if ('serviceWorker' in navigator) {
+  let reloadAfterControllerChange = false;
 
-        // registration.addEventListener('updatefound', () => {
-        //     // An updated service worker has appeared in registration.installing!
-        //     newWorker = registration.installing;
-    
-        //     newWorker.addEventListener('statechange', () => {
-    
-        //         // Has service worker state changed?
-        //         if(newWorker.state == 'installed'){
-        //             console.log('new service worker is running now')
-        //             // There is a new service worker available, show the notification
-        //             if (navigator.serviceWorker.controller) {
-        //                 //window.location.reload();
-        //                 //let notification = document.getElementById('notification ');
-        //                 //notification.className = 'show';
-        //             }
-                    
-        //         }
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (!reloadAfterControllerChange) return;
+    reloadAfterControllerChange = false;
+    window.location.reload();
+  });
 
-        //     });
-        // });
+  navigator.serviceWorker
+    .register('/sw.js', { scope: '/', updateViaCache: 'none' })
+    .then((registration) => {
+      registration.addEventListener('updatefound', () => {
+        // Only auto-reload when replacing an existing worker (not first install).
+        if (navigator.serviceWorker.controller) {
+          reloadAfterControllerChange = true;
+        }
+      });
 
-        // console.log('Service Worker Registered');
+      const pingUpdate = () => registration.update();
+      pingUpdate();
+      document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible') pingUpdate();
+      });
+      window.addEventListener('pageshow', (event) => {
+        if (event.persisted) pingUpdate();
+      });
     })
-
-    navigator.serviceWorker.ready.then((registration) => {
-        // console.log('Service Worker Ready')
-    })
+    .catch(() => {});
 }
