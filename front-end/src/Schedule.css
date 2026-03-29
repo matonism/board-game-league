@@ -16,6 +16,31 @@
     padding-bottom: 1rem;
   }
 
+    .bgl-schedule-section-header-container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+    .bgl-schedule-section-header{
+        padding: 1rem 0;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        width: 28rem;
+        max-width: 95%;
+    }
+    
+    .bgl-schedule-section-header::before, .bgl-schedule-section-header::after {
+        content: '';
+        flex: 1;
+        border-bottom: 1px solid #000;
+    }
+
+    .bgl-schedule-section-header:not(:empty)::before { margin-right: .5em; }
+    .bgl-schedule-section-header:not(:empty)::after { margin-left: .5em; }
+
+
   .bgl-week-header{
     font-size: 1.4rem;
     display: flex;

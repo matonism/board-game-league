@@ -77,17 +77,19 @@ function main() {
                     season: g.season,
                     weekIndex: g.weekIndex,
                     weekLabel: g.weekLabel,
-                    isPostSeason: g.isPostSeason // Track if this week is playoff
+                    isPostSeason: g.isPostSeason,
+                    isTieBreak: g.isTieBreak
                 });
             }
         });
 
-        console.log(`Found ${uniqueWeeks.length} unique weeks of history.`);
+        const reportWeeks = uniqueWeeks.filter(w => !w.isTieBreak);
+        console.log(`Found ${uniqueWeeks.length} unique weeks of history (${reportWeeks.length} excluding tie-break).`);
 
         // 3. Generate Report for EVERY Week
         const reports = [];
 
-        uniqueWeeks.forEach(week => {
+        reportWeeks.forEach(week => {
             // "Current" = All games up to and including this week
             const gamesCurrent = allGames.filter(g => 
                 (g.season < week.season) || 
@@ -210,6 +212,9 @@ function getOrdinal(n) {
 // ==========================================
 
 function getSnapshot(games, targetSeason) {
+    const leagueGamesOnly = games.filter(g => !g.isTieBreak);
+    games = leagueGamesOnly;
+
     // 1. Career Totals & Max Streaks
     const careerMap = {};
     const streaksMap = {}; // Active streaks
@@ -237,7 +242,7 @@ function getSnapshot(games, targetSeason) {
         const totalGames = records.length;
         
         // Reg Season Only Records
-        const regRecords = records.filter(r => !r.isPostSeason);
+        const regRecords = records.filter(r => !r.isPostSeason && !r.isTieBreak);
 
         // Gender Streak Logic
         // We calculate this manually here
@@ -348,7 +353,7 @@ function getSnapshot(games, targetSeason) {
     };
 
     // 3. Season Standings (Regular Season Only)
-    const seasonGames = games.filter(g => g.season === targetSeason && !g.isPostSeason);
+    const seasonGames = games.filter(g => g.season === targetSeason && !g.isPostSeason && !g.isTieBreak);
     const seasonMap = {};
     
     seasonGames.forEach(g => {
@@ -1579,6 +1584,15 @@ function generateHtmlDashboard(reports) {
 // PARSING UTILITIES
 // ==========================================
 
+function isTieBreakWeekLabel(weekLabel) {
+    const n = String(weekLabel)
+        .toLowerCase()
+        .replace(/-/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+    return n.includes('tie break') || n.includes('tiebreaker');
+}
+
 function parseSchedule(data) {
     const games = [];
     let gameIdCounter = 1;
@@ -1587,8 +1601,10 @@ function parseSchedule(data) {
         const season = parseInt(seasonStr);
         weeks.forEach(weekData => {
             const weekLabel = weekData.week;
+            const isTieBreak = isTieBreakWeekLabel(weekLabel);
             const weekIndex = getWeekSortIndex(weekLabel);
-            const isPostSeason = weekLabel.includes('Playoff') || weekLabel.includes('Championship');
+            const isPostSeason =
+                !isTieBreak && (weekLabel.includes('Playoff') || weekLabel.includes('Championship'));
             
             if (weekData.results) {
                 weekData.results.forEach(table => {
@@ -1597,16 +1613,18 @@ function parseSchedule(data) {
                         table.players.forEach(p => {
                             if (p.placement) {
                                 const place = parseInt(p.placement);
+                                const points = isTieBreak ? 0 : (POINTS[place] || 0);
                                 games.push({
                                     gameId: currentGameId,
                                     season: season,
                                     weekLabel: weekLabel,
                                     weekIndex: weekIndex,
                                     isPostSeason: isPostSeason,
+                                    isTieBreak: isTieBreak,
                                     gameName: weekData.game,
                                     player: p.player,
                                     place: place,
-                                    points: POINTS[place] || 0
+                                    points: points
                                 });
                             }
                         });
@@ -1619,6 +1637,7 @@ function parseSchedule(data) {
 }
 
 function getWeekSortIndex(label) {
+    if (isTieBreakWeekLabel(label)) return 19;
     if (label.startsWith("Week")) return parseInt(label.split(' ')[1]);
     if (label.includes("Playoff 1")) return 20;
     if (label.includes("Playoff 2")) return 21;

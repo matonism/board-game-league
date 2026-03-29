@@ -18,7 +18,17 @@ const POINTS = { 1: 3, 2: 2, 3: 1, 4: 0 };
 /** Inaugural season (2022); rookie records only apply for players after this season. */
 const INAUGURAL_SEASON = 2022;
 
+function isTieBreakWeekLabel(weekLabel) {
+    const n = String(weekLabel)
+        .toLowerCase()
+        .replace(/-/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+    return n.includes('tie break') || n.includes('tiebreaker');
+}
+
 function getWeekSortIndex(label) {
+    if (isTieBreakWeekLabel(label)) return 19;
     if (label.startsWith('Week')) return parseInt(label.split(' ')[1], 10);
     if (label.includes('Playoff 1')) return 20;
     if (label.includes('Playoff 2')) return 21;
@@ -33,8 +43,10 @@ function parseSchedule(data) {
         if (Number.isNaN(season)) continue;
         weeks.forEach(weekData => {
             const weekLabel = weekData.week;
+            const isTieBreak = isTieBreakWeekLabel(weekLabel);
             const weekIndex = getWeekSortIndex(weekLabel);
-            const isPostSeason = weekLabel.includes('Playoff') || weekLabel.includes('Championship');
+            const isPostSeason =
+                !isTieBreak && (weekLabel.includes('Playoff') || weekLabel.includes('Championship'));
             if (weekData.results) {
                 weekData.results.forEach(table => {
                     const location = table.location;
@@ -42,15 +54,17 @@ function parseSchedule(data) {
                         table.players.forEach(p => {
                             if (p.placement) {
                                 const place = parseInt(p.placement, 10);
+                                const points = isTieBreak ? 0 : (POINTS[place] || 0);
                                 games.push({
                                     season,
                                     weekLabel,
                                     weekIndex,
                                     isPostSeason,
+                                    isTieBreak,
                                     gameName: weekData.game,
                                     player: p.player,
                                     place,
-                                    points: POINTS[place] || 0,
+                                    points: points,
                                     isHome: location && location.includes(p.player),
                                     location: location || ''
                                 });
@@ -75,8 +89,10 @@ function parseScheduleTables(data) {
         if (Number.isNaN(season)) continue;
         weeks.forEach(weekData => {
             const weekLabel = weekData.week;
+            const isTieBreak = isTieBreakWeekLabel(weekLabel);
             const weekIndex = getWeekSortIndex(weekLabel);
-            const isPostSeason = weekLabel.includes('Playoff') || weekLabel.includes('Championship');
+            const isPostSeason =
+                !isTieBreak && (weekLabel.includes('Playoff') || weekLabel.includes('Championship'));
             if (weekData.results) {
                 weekData.results.forEach(table => {
                     if (table.players && table.players.every(p => p.placement)) {
@@ -85,7 +101,14 @@ function parseScheduleTables(data) {
                             place: parseInt(p.placement, 10)
                         }));
                         if (players.length >= 2) {
-                            tables.push({ season, weekIndex, weekLabel, isPostSeason, players });
+                            tables.push({
+                                season,
+                                weekIndex,
+                                weekLabel,
+                                isPostSeason,
+                                isTieBreak,
+                                players
+                            });
                         }
                     }
                 });

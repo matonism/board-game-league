@@ -29,6 +29,16 @@ const calculateStdDev = (arr, mean) => {
     return Math.sqrt(avgSquareDiff);
 };
 
+/** Matches generateReports7 / DataFormatter (hyphenated "Tie-Break", etc.) */
+function isTieBreakWeekName(weekName) {
+    const n = String(weekName)
+        .toLowerCase()
+        .replace(/-/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+    return n.includes('tie break') || n.includes('tiebreaker');
+}
+
 const getH2HWinRate = (player, currentOpponents, allPastGames) => {
     let wins = 0;
     let games = 0;
@@ -82,7 +92,11 @@ try {
         const uniquePlayersInSeason = new Set();
         seasonWeeks.forEach(week => {
             const weekLower = week.week.toLowerCase();
-            if (!weekLower.includes("playoff") && !weekLower.includes("championship")) {
+            if (
+                !isTieBreakWeekName(week.week) &&
+                !weekLower.includes("playoff") &&
+                !weekLower.includes("championship")
+            ) {
                 week.results.forEach(pod => {
                     if (pod.players) {
                         pod.players.forEach(p => uniquePlayersInSeason.add(p.player));
@@ -129,7 +143,9 @@ try {
         // 2. Process Weeks
         seasonWeeks.forEach(weekData => {
             const weekName = weekData.week;
-            const weekLower = weekName.toLowerCase();
+            if (isTieBreakWeekName(weekName)) {
+                return;
+            }
             const gameName = weekData.game;
 
             let weekNum = 0;

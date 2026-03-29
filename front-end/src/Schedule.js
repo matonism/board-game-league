@@ -4,6 +4,7 @@ import loadingIcon from './images/loading-icon.gif';
 import openNewTab from './images/open-new-tab-icon.png'
 import openHeadlines from './images/news-icon.png';
 import ScheduleTableRow from "./ScheduleTableRow";
+import { isTieBreakWeek } from "./DataFormatter";
 
 
 class Schedule extends React.Component {
@@ -30,11 +31,24 @@ class Schedule extends React.Component {
     displaySchedule(){
         // console.log(this.props.schedule);
         if(this.props.schedule){
+            let tieBreakFlag = false;
+            let playoffFlag = false;
             let scheduleDisplay = this.props.schedule.map((week, index) => {
                 let linkDisplay = this.displayOpenNewPageLink(week.game);
                 let headlinesDisplay = this.displayHeadlinesLink(week);
+                let sectionHeader = '';
+                if(!tieBreakFlag && week.isTieBreak){
+                    tieBreakFlag = true;
+                    sectionHeader = (<div className="bgl-schedule-section-header-container"><div className="bgl-schedule-section-header">Tiebreakers</div></div>);
+                }
+                if(!playoffFlag && week.isPlayoff){
+                    playoffFlag = true;
+                    sectionHeader = (<div className="bgl-schedule-section-header-container"><div className="bgl-schedule-section-header">Playoffs</div></div>);
+                }
+                const tieBreakClass = isTieBreakWeek(week.week) ? ' bgl-week-tiebreak' : '';
                 return (
-                    <div key={this.props.season + index} className="bgl-week-container">
+                    <div key={this.props.season + index} className={'bgl-week-container' + tieBreakClass}>
+                        {sectionHeader}
                         <div className="bgl-week-header">
                             <div>{week.week + ' - ' + week.game}</div>
                             {linkDisplay}

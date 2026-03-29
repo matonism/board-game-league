@@ -63,10 +63,14 @@ function main() {
         console.log(`Successfully parsed ${allGames.length} completed games.`);
         allGames.sort((a, b) => (a.season - b.season) || (a.weekIndex - b.weekIndex));
 
+        /** Regular season + playoffs only; tie-break tables excluded from stats and league points. */
+        const leagueGames = allGames.filter(g => !g.isTieBreak);
+        const tieBreakGames = allGames.filter(g => g.isTieBreak);
+
         // 1b. Build Game Context Map (GameID -> Array of Players)
         // This is crucial for determining opponents in specific games
         const gamesById = {};
-        allGames.forEach(g => {
+        leagueGames.forEach(g => {
             if (!gamesById[g.gameId]) gamesById[g.gameId] = [];
             gamesById[g.gameId].push(g);
         });
@@ -81,8 +85,8 @@ function main() {
         // 3. Identify Inaugural Season (for Rookie exclusions)
         const inauguralSeason = Math.min(...allGames.map(g => g.season));
 
-        const regSeasonGames = allGames.filter(g => !g.isPostSeason);
-        const postSeasonGames = allGames.filter(g => g.isPostSeason);
+        const regSeasonGames = leagueGames.filter(g => !g.isPostSeason);
+        const postSeasonGames = leagueGames.filter(g => g.isPostSeason);
 
         // Seasons whose regular season has finished (Week 6 present in schedule data)
         const seasonsRegularSeasonComplete = buildSeasonsWithRegularSeasonComplete(regSeasonGames);
@@ -96,7 +100,7 @@ function main() {
         const SCOPE_COM = "All-Time (Reg and Post Season)";
 
         [SCOPE_COM, SCOPE_REG].forEach(scope => {
-            const dataset = scope === SCOPE_REG ? regSeasonGames : allGames;
+            const dataset = scope === SCOPE_REG ? regSeasonGames : leagueGames;
             
             // 1. Averages
             processStat("Average Points per Game", "Averages", scope, getAveragePoints(dataset));
@@ -196,9 +200,18 @@ function main() {
         
         processStat("Most Consecutive Playoff Appearances", "Streaks", SCOPE_POST, getConsecutivePlayoffAppearances(postSeasonGames, activePlayersSet));
 
+        // --- SECTION 3b: Tie break (pre-playoff; does not count toward league points) ---
+        const SCOPE_TIEBREAK = "Tie Break (Pre-Playoff)";
+        processStat(
+            "Most Tiebreaker Games Played",
+            "Totals",
+            SCOPE_POST,
+            getTieBreakGamesPlayedLeaderboard(tieBreakGames, leagueGames)
+        );
+
         // --- SECTION 4: Locations (Renamed from Home Field Advantage) ---
         const SCOPE_HOME = "Locations";
-        const homeDataset = allGames; 
+        const homeDataset = leagueGames;
 
         
 
@@ -214,11 +227,11 @@ function main() {
         
         
         // New Leaderboard: Most Games Hosted (Location Popularity)
-        processStat("Most Games Hosted (By Location)", "Totals", SCOPE_HOME, getLocationCounts(allGames));
+        processStat("Most Games Hosted (By Location)", "Totals", SCOPE_HOME, getLocationCounts(leagueGames));
         processStat("Most Home Games Played (By Player)", "Totals", SCOPE_HOME, getCounts(homeDataset, g => g.isHome));
 
         // NEW: Least Recent Host
-        processStat("Last Hosted (Active Players)", "Totals", SCOPE_HOME, getLeastRecentHost(allGames, activePlayersSet));
+        processStat("Last Hosted (Active Players)", "Totals", SCOPE_HOME, getLeastRecentHost(leagueGames, activePlayersSet));
 
         processStat("Most Wins at Home", "Totals", SCOPE_HOME, getCounts(homeDataset, g => g.isHome && g.place === 1));
         processStat("Most Wins Away", "Totals", SCOPE_HOME, getCounts(homeDataset, g => !g.isHome && g.place === 1));
@@ -229,14 +242,14 @@ function main() {
         processStat("Fewest Home Games Played (Single Season)", "Single Season", SCOPE_HOME, getFewestHomeGamesInSeason(homeDataset, seasonsRegularSeasonComplete));
         
         // NEW: Neutral Site Stats
-        processStat("Most Games Played at Neutral Sites", "Neutral Sites", SCOPE_HOME, getNeutralSiteCounts(allGames));
-        processStat("Most Popular Neutral Sites", "Neutral Sites", SCOPE_HOME, getNeutralSiteLocationCounts(allGames));
+        processStat("Most Games Played at Neutral Sites", "Neutral Sites", SCOPE_HOME, getNeutralSiteCounts(leagueGames));
+        processStat("Most Popular Neutral Sites", "Neutral Sites", SCOPE_HOME, getNeutralSiteLocationCounts(leagueGames));
 
         // --- SECTION 5: Cross Season ---
         const SCOPE_CROSS = "Cross Season";
         const minRequiredGames = 2;
         for(let w=1; w<=6; w++) {
-            processStat(`Best Week ${w} Performance Avg (Min ${minRequiredGames} games)`, "Averages by Week", SCOPE_CROSS, getWeeklyAverages(allGames, w, minRequiredGames));
+            processStat(`Best Week ${w} Performance Avg (Min ${minRequiredGames} games)`, "Averages by Week", SCOPE_CROSS, getWeeklyAverages(leagueGames, w, minRequiredGames));
         }
         
         // NEW: The Opener and The Closer
@@ -264,8 +277,8 @@ function main() {
         
         // Rivalries / Matchups
         processStat("Most Common Matchups (Regular Season Only)", "Rivalries", SCOPE_CROSS, getMostCommonMatchups(regSeasonGames));
-        processStat("Least Played Matchups (Active Players Only - Max 1 Game)", "Rivalries", SCOPE_CROSS, getLeastPlayedMatchups(allGames, activePlayersSet));
-        processStat("Longest Matchup Droughts (> 6 Weeks Since Last Play)", "Rivalries", SCOPE_CROSS, getMatchupDroughts(allGames, activePlayersSet));
+        processStat("Least Played Matchups (Active Players Only - Max 1 Game)", "Rivalries", SCOPE_CROSS, getLeastPlayedMatchups(leagueGames, activePlayersSet));
+        processStat("Longest Matchup Droughts (> 6 Weeks Since Last Play)", "Rivalries", SCOPE_CROSS, getMatchupDroughts(leagueGames, activePlayersSet));
 
         // NEW: Best Duo / Worst Enemies
         processStat("Best Duo (Combined Avg Pts > 2.0)", "Rivalries", SCOPE_CROSS, getBestDuos(regSeasonGames));
@@ -274,7 +287,7 @@ function main() {
 
         // --- SECTION 6: League Metrics ---
         const SCOPE_METRICS = "League Metrics";
-        const seasonMetrics = calculateSeasonMetrics(allGames);
+        const seasonMetrics = calculateSeasonMetrics(leagueGames);
         
         processStat("Lowest Points to Qualify for Playoffs", "Cutoffs", SCOPE_METRICS, seasonMetrics.lowestQualifiers);
         
@@ -282,7 +295,7 @@ function main() {
         const sosStats = calculateStrengthOfSchedule(regSeasonGames);
         processStat("Hardest Strength of Schedule (All-Time Avg Opponent Pts)", "Difficulty", SCOPE_METRICS, sosStats.hardest);
         processStat("Easiest Strength of Schedule (All-Time Avg Opponent Pts)", "Difficulty", SCOPE_METRICS, sosStats.easiest);
-        processStat("Hardest Path to Playoffs (Single Season SoS)", "Difficulty", SCOPE_METRICS, getHardestPathToPlayoffs(regSeasonGames, allGames));
+        processStat("Hardest Path to Playoffs (Single Season SoS)", "Difficulty", SCOPE_METRICS, getHardestPathToPlayoffs(regSeasonGames, leagueGames));
 
         
         processStat("Worst Start (2 Games) to Make Playoffs", "Comebacks", SCOPE_METRICS, seasonMetrics.worstStarts2);
@@ -627,6 +640,8 @@ function generateHtmlDashboard(data) {
                 infoText = "Highest combined average score per game when playing at the same table (Min 5 games).";
             }else if (board.category.includes("Hardest Path to Playoffs")) {
                 infoText = "Calculates the toughest strength of schedule for a player that still made playoffs";
+            } else if (board.category.includes("Tiebreaker Games")) {
+                infoText = "Count of pre-playoff tie-break tables played (seed/seeding games). Does not award league points.";
             }else if (board.category.includes("Worst Enemies")) {
                 infoText = "The first player's average points in games featuring the second";
             }else if (board.category.includes("Without Losing to")) {
@@ -758,6 +773,16 @@ function processStat(category, subcategory, scope, sortedList) {
 // PARSING LOGIC
 // =============================================
 
+function isTieBreakWeekLabel(weekLabel) {
+    const n = String(weekLabel)
+        .toLowerCase()
+        .replace(/-/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+    // "Tie Break", "Tie-Break", "Tiebreaker", "tie breaker seeding", etc.
+    return n.includes('tie break') || n.includes('tiebreaker');
+}
+
 function parseSchedule(data) {
     const games = [];
     let gameIdCounter = 1; // Unique ID for each table result
@@ -766,9 +791,11 @@ function parseSchedule(data) {
         const season = parseInt(seasonStr);
         weeks.forEach(weekData => {
             const weekLabel = weekData.week;
+            const isTieBreak = isTieBreakWeekLabel(weekLabel);
             const weekIndex = getWeekSortIndex(weekLabel);
             // Updated regex to catch "Championship" as a post-season game
-            const isPostSeason = weekLabel.includes('Playoff') || weekLabel.includes('Championship');
+            const isPostSeason =
+                !isTieBreak && (weekLabel.includes('Playoff') || weekLabel.includes('Championship'));
             if (weekData.results) {
                 weekData.results.forEach(table => {
                     const currentGameId = gameIdCounter++; // Assign ID
@@ -787,16 +814,18 @@ function parseSchedule(data) {
                         table.players.forEach(p => {
                             if (p.placement) {
                                 const place = parseInt(p.placement);
+                                const points = isTieBreak ? 0 : (POINTS[place] || 0);
                                 games.push({
                                     gameId: currentGameId, // Pass ID through
                                     season: season,
                                     weekLabel: weekLabel,
                                     weekIndex: weekIndex,
                                     isPostSeason: isPostSeason,
+                                    isTieBreak: isTieBreak,
                                     gameName: weekData.game,
                                     player: p.player,
                                     place: place,
-                                    points: POINTS[place] || 0,
+                                    points: points,
                                     isHome: location !== null ? location.includes(p.player) : false,
                                     isNeutral: isNeutralSite, 
                                     location: location
@@ -812,6 +841,7 @@ function parseSchedule(data) {
 }
 
 function getWeekSortIndex(label) {
+    if (isTieBreakWeekLabel(label)) return 19;
     if (label.startsWith("Week")) return parseInt(label.split(' ')[1]);
     if (label.includes("Playoff 1")) return 20;
     if (label.includes("Playoff 2")) return 21;
@@ -1070,6 +1100,25 @@ function getCounts(games, filterFn) {
         results.push({ player, value: count });
     }
     return results.sort((a, b) => b.value - a.value);
+}
+
+/**
+ * Tie-break tables played per player. Includes everyone who appears in leagueGames so the
+ * leaderboard is never empty when there is schedule data (zeros when no tie-break rows exist).
+ * Players who only appear in tieBreakGames (edge case) are included too.
+ */
+function getTieBreakGamesPlayedLeaderboard(tieBreakGames, leagueGames) {
+    const counts = {};
+    leagueGames.forEach(g => {
+        counts[g.player] = 0;
+    });
+    tieBreakGames.forEach(g => {
+        if (counts[g.player] === undefined) counts[g.player] = 0;
+        counts[g.player]++;
+    });
+    return Object.entries(counts)
+        .map(([player, value]) => ({ player, value }))
+        .sort((a, b) => b.value - a.value || String(a.player).localeCompare(String(b.player)));
 }
 
 // NEW: Location Counts based on raw game data (not per player)
@@ -2142,7 +2191,7 @@ function getWeeklyAverages(games, weekNum, minRequiredGames) {
 
 // NEW: League Metrics Calculation
 function calculateSeasonMetrics(allGames) {
-    const regGames = allGames.filter(g => !g.isPostSeason);
+    const regGames = allGames.filter(g => !g.isPostSeason && !g.isTieBreak);
     const seasons = {};
     
     // Group reg season data

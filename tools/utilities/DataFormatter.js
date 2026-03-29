@@ -1,6 +1,20 @@
 // import {getBoardGameGeekIds } from "./callouts/CalloutFactory";
 import locations from "./locations.json" with {type: 'json'};
 
+const MAX_SLOTS_PER_TABLE = 8;
+
+/**
+ * Pre-playoff tie-break weeks (column A), e.g. "Tie Break", "Tiebreaker (4 vs 5)".
+ * Parsed into schedule with isTieBreak; not scored as regular season or playoffs.
+ */
+export function isTieBreakWeek(weekLabel) {
+    const n = String(weekLabel)
+        .toLowerCase()
+        .replace(/-/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+    return n.includes('tie break') || n.includes('tiebreaker');
+}
 
 export function createScheduleObject(response) {
     if(response?.values?.length > 0 && response.values[0].length === 5){
@@ -17,20 +31,18 @@ export function createScheduleObject(response) {
     let schedule = [];
     let playoffRowStart = 0;
 
-    //Regular Season
+    // Regular season: stop when a row is not a regular-season week (tie-break, playoff, championship, etc.)
     for(let rowIndex = 0; rowIndex < response.values.length; rowIndex++){
 
         let row = response.values[rowIndex];
         let rowReference = rowIndex % rowsBetweenWeeksInSpreadsheet;
 
-        //Weekly title rows in spreadsheet
         if(rowReference === 0){
 
-            if(row[0].toLowerCase().includes('championship') || row[0].toLowerCase().includes('playoff')){
+            if(!isRegularSeason(row[0])){
                 playoffRowStart = rowIndex;
                 break;
             }
-            console.log(row);
             schedule.push({
                 week: row[0], 
                 game: row[1], 
@@ -40,7 +52,7 @@ export function createScheduleObject(response) {
                 album: []
             });
         
-        //Group rows & placement rows
+            //Group rows & placement rows
         }else if(rowReference % rowsPerGroup === 1){
             let placementRow = response.values[rowIndex + 1];
             let subRow = response.values[rowIndex + 2];
@@ -48,7 +60,7 @@ export function createScheduleObject(response) {
 
             let newGroup = [];
             for(let j = 1; j <= numberOfPlayersPerGame; j++){
-                if(row[j]){
+                    if(row[j]){
                     let placement = placementRow[j];
                     let sub = subRow[j]
                     let playerEntry ={player: row[j].trim(), placement: placement};
@@ -63,20 +75,10 @@ export function createScheduleObject(response) {
                 let location = placementRow[5] ? placementRow[5] : null;
                 scheduleToUpdate.results.push({location: location, players: newGroup});
             }
-
-            //For album, we need to match the naming convention (ex: 2_3) to the given week (2) and given group (3)
-            // if(scheduleToUpdate.results?.length > 0 && scheduleToUpdate.results[scheduleToUpdate.results.length-1][0]?.placement){
-                
-            //     if(scheduleToUpdate.week === 'championship'){
-            //         scheduleToUpdate.album.push('championship')
-            //     }else{
-            //         scheduleToUpdate.album.push(schedule.length + '_' + scheduleToUpdate.results.length)
-            //     }
-            // }
         }
     }
 
-    //Playoffs and championship setup
+    // Tie-break weeks, playoffs, and championship (same block structure as front-end)
     let rowsBetweenChampionshipWeeks = 1 * rowsPerGroup + infoHeaderRows;
     for(let rowIndex = playoffRowStart; rowIndex < response.values.length; rowIndex++){
         let row = response.values[rowIndex];
@@ -88,13 +90,15 @@ export function createScheduleObject(response) {
                 dates: row[2], 
                 headlines: row[3],
                 results: [],
-                album: []
+                album: [],
+                isTieBreak: isTieBreakWeek(row[0]),
+                isPlayoff: isPlayoff(row[0]) && !isChampionship(row[0]),
+                isChampionship: isChampionship(row[0])
             });
         }else if(rowReference % rowsPerGroup === 1){
             let placementRow = response.values[rowIndex + 1];
             let subRow = response.values[rowIndex + 2];
             let scheduleToUpdate = schedule[schedule.length - 1];
-            // scheduleToUpdate.results.push([]);
             let newGroup = [];
             for(let j = 1; j <= numberOfPlayersPerGame; j++){
                 if(row[j]){
@@ -106,25 +110,12 @@ export function createScheduleObject(response) {
                     } 
                     newGroup.push(playerEntry);
                 }
-                // let groupToUpdate = scheduleToUpdate.results[scheduleToUpdate.results.length-1];
             }
 
             if(newGroup.length > 0){
                 let location = placementRow[5] ? placementRow[5] : null;
                 scheduleToUpdate.results.push({location: location, players: newGroup});
             }
-
-            //For album, we need to match the naming convention (ex: 2_3) to the given week (2) and given group (3)
-            // if(scheduleToUpdate.results?.length > 0 && scheduleToUpdate.results[scheduleToUpdate.results.length-1][0]?.placement){
-                
-            //     if(scheduleToUpdate.week === 'championship'){
-            //         scheduleToUpdate.album.push('championship')
-            //     }else if(scheduleToUpdate.week.includes('playoff')){
-            //         scheduleToUpdate.album.push(scheduleToUpdate.week.replaceAll(' ', '_'));
-            //     }else{
-            //         scheduleToUpdate.album.push(schedule.length + '_' + scheduleToUpdate.results.length)
-            //     }
-            // }
         }
     }
     // response.values.forEach((row, rowIndex) => {
@@ -151,9 +142,20 @@ function getNumberOfGamesPerWeek(scheduleResponse, rowsPerGroup){
 }
 
 export function isRegularSeason(weekLabel){
-    if(weekLabel.toLowerCase().includes('championship') || weekLabel.toLowerCase().includes('playoff')){
+    const weekLabelLower = weekLabel.toLowerCase();
+    if (isTieBreakWeek(weekLabelLower)) return false;
+    if(weekLabelLower.includes('championship') || weekLabelLower.includes('playoff')){
         return false;
-    }else if(weekLabel.toLowerCase().includes('week')){
+    }else if(weekLabelLower.includes('week')){
+        return true;
+    }
+    return false;
+}
+
+/** Playoff or championship label (not tie-break). */
+export function isPlayoff(weekLabel){
+    const weekLabelLower = weekLabel.toLowerCase();
+    if(weekLabelLower.includes('championship') || weekLabelLower.includes('playoff')){
         return true;
     }
     return false;
@@ -164,6 +166,96 @@ export function isChampionship(weekLabel){
         return true;
     }
     return false;
+}
+
+function collectTieBreakGroups(schedule) {
+    const groups = [];
+    schedule.forEach(week => {
+        if (!isTieBreakWeek(week.week.toLowerCase())) return;
+        week.results.forEach(group => {
+            const withPlace = (group.players || []).filter(
+                p => p && p.placement !== undefined && p.placement !== '' && !Number.isNaN(parseInt(p.placement, 10))
+            );
+            if (withPlace.length < 2) return;
+            const namesSorted = withPlace.map(p => p.player.trim()).sort();
+            const groupId = namesSorted.join('|');
+            groups.push({
+                groupId,
+                entries: withPlace.map(p => ({
+                    player: p.player.trim(),
+                    place: parseInt(p.placement, 10)
+                }))
+            });
+        });
+    });
+    return groups;
+}
+
+function applyTieBreakToStandings(schedule, standingsArray) {
+    const groups = collectTieBreakGroups(schedule);
+    groups.forEach(({ groupId, entries }) => {
+        entries.forEach(e => {
+            const row = standingsArray.find(r => r.player === e.player);
+            if (row && row.tieBreakGroupId == null) {
+                row.tieBreakGroupId = groupId;
+                row.tieBreakPlace = e.place;
+            }
+        });
+    });
+    groups.forEach(({ entries }) => {
+        const nameSet = new Set(entries.map(e => e.player));
+        const indices = [];
+        standingsArray.forEach((r, i) => {
+            if (nameSet.has(r.player)) indices.push(i);
+        });
+        if (indices.length !== entries.length) return;
+        indices.sort((a, b) => a - b);
+        if (indices[indices.length - 1] - indices[0] !== indices.length - 1) return;
+        const minI = indices[0];
+        const byPlace = [...entries].sort((a, b) => a.place - b.place);
+        const orderedRows = byPlace.map(e => standingsArray.find(r => r.player === e.player)).filter(Boolean);
+        if (orderedRows.length !== entries.length) return;
+        standingsArray.splice(minI, orderedRows.length, ...orderedRows);
+    });
+}
+
+/** Per-player and per-round tie-break data for leaderboards / weekly reports (no league points). */
+function buildTieBreakReporting(schedule) {
+    const byPlayer = {};
+    const rounds = [];
+    schedule.forEach(week => {
+        if (!isTieBreakWeek(week.week.toLowerCase())) return;
+        week.results.forEach(group => {
+            const placements = [];
+            const groupPlayers = group.players || [];
+            groupPlayers.forEach(p => {
+                if (p.placement === undefined || p.placement === '' || Number.isNaN(parseInt(p.placement, 10))) return;
+                const place = parseInt(p.placement, 10);
+                const name = p.player.trim();
+                placements.push({ player: name, place });
+                if (!byPlayer[name]) {
+                    byPlayer[name] = { games: 0, wins: 0, gameLog: [] };
+                }
+                byPlayer[name].games++;
+                if (place === 1) byPlayer[name].wins++;
+                byPlayer[name].gameLog.push({
+                    week: week.week,
+                    game: week.game,
+                    place,
+                    opponents: groupPlayers.filter(o => o.player.trim() !== name).map(o => o.player.trim())
+                });
+            });
+            if (placements.length > 0) {
+                rounds.push({
+                    week: week.week,
+                    game: week.game,
+                    location: group.location || null,
+                    placements
+                });
+            }
+        });
+    });
+    return { byPlayer, rounds };
 }
 
 export function createStandingsObject(schedule){
@@ -212,8 +304,15 @@ export function createStandingsObject(schedule){
         let score = standings.regularSeason[player].score;
         let gamesToPlay = standings.regularSeason[player].gamesToPlay;
         let weeklyScores = standings.regularSeason[player].weeklyScores;
-        // let strengthOfSchedule = gamesPlayed > 0 ? score / gamesPlayed : 0;
-        return {player: player, points: score, gamesPlayed: gamesPlayed, gamesToPlay: gamesToPlay, weeklyScores};
+        return {
+            player: player,
+            points: score,
+            gamesPlayed: gamesPlayed,
+            gamesToPlay: gamesToPlay,
+            weeklyScores,
+            tieBreakGroupId: null,
+            tieBreakPlace: null
+        };
     })
     standingsArray.sort((a, b) => {
         if(a.points > b.points) {
@@ -239,6 +338,8 @@ export function createStandingsObject(schedule){
         return 1;
     })
 
+    applyTieBreakToStandings(schedule, standingsArray);
+
     let mostRecentPlacement = 1;
     standingsArray.forEach((person, index) => {
 
@@ -258,7 +359,15 @@ export function createStandingsObject(schedule){
                 }
                 max--;
             }
-            if(arePlacementsIdentical){
+            const sameTieBreakGame =
+                a.tieBreakGroupId &&
+                b.tieBreakGroupId &&
+                a.tieBreakGroupId === b.tieBreakGroupId &&
+                a.tieBreakPlace !== b.tieBreakPlace;
+            if (arePlacementsIdentical && sameTieBreakGame) {
+                person.placement = index + 1;
+                mostRecentPlacement = index + 1;
+            }else if(arePlacementsIdentical){
                 person.placement = mostRecentPlacement;
             }else{
                 person.placement = index + 1;
@@ -295,6 +404,7 @@ export function createStandingsObject(schedule){
 
     standings.regularSeason = standingsArray;
     standings.championship = championshipArray;
+    standings.tieBreak = buildTieBreakReporting(schedule);
     return standings;
 }
 
@@ -376,6 +486,7 @@ export function getImageFileNamesToLoad(schedule, response){
     let mostPossibleImages = 0;
     let championshipPlayed = false;
     schedule.forEach(week=>{
+        if(isTieBreakWeek(week.week.toLowerCase())) return;
         if(isRegularSeason(week.week.toLowerCase())){ 
             week.results.forEach(group => {
                 let performance = group.players[0];
@@ -490,6 +601,7 @@ export function createHistoricalDataObject(data){
 
     let analysisObject = {};
     let postSeasonObject = {};
+    let tieBreakObject = {};
     Object.keys(schedules).forEach((year) => {
         
         let schedule = schedules[year];
@@ -573,6 +685,33 @@ export function createHistoricalDataObject(data){
                             })
                         }
                         
+                    })
+                })
+            }else if(isTieBreakWeek(week.week.toLowerCase())){
+                week.results.forEach((group, groupIndex) => {
+                    let location = group.location;
+                    group.players.forEach(performance => {
+                        if(performance.placement){
+                            if(!tieBreakObject[performance.player]){
+                                tieBreakObject[performance.player] = {
+                                    name: performance.player,
+                                    gamesPlayed: 0,
+                                    wins: 0,
+                                    gamePerformance: [],
+                                    category: 'tieBreak'
+                                }
+                            }
+                            tieBreakObject[performance.player].gamesPlayed++;
+                            const pl = parseInt(performance.placement, 10);
+                            if(pl === 1) tieBreakObject[performance.player].wins++;
+                            tieBreakObject[performance.player].gamePerformance.push({
+                                game: week.game,
+                                season: year,
+                                week: week.week,
+                                placement: performance.placement,
+                                leaguePoints: 0
+                            });
+                        }
                     })
                 })
             }else{
@@ -793,9 +932,34 @@ export function createHistoricalDataObject(data){
         }
     })
 
+    Object.values(tieBreakObject).forEach(player => {
+        player.gamePerformance.sort((a, b) => {
+            if(a.season > b.season) {
+                return -1;
+            }else if(a.season < b.season){
+                return 1;
+            }else{
+                if(a.week > b.week){
+                    return -1
+                }else{
+                    return 1;
+                }
+            }
+        })
+    })
+
+    let tieBreakArray = Object.values(tieBreakObject).sort((a, b) => {
+        if(a.wins > b.wins) return -1;
+        if(a.wins < b.wins) return 1;
+        if(a.gamesPlayed > b.gamesPlayed) return -1;
+        if(a.gamesPlayed < b.gamesPlayed) return 1;
+        return 0;
+    })
+
     return {
         regularSeason: analysisArray,
         postSeason: postSeasonArray,
+        tieBreak: tieBreakArray,
         schedules: schedules
     };
 

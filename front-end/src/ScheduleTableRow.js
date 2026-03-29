@@ -27,6 +27,22 @@ const ScheduleTableRow = props => {
         }
     }
 
+    function getTableCells(){
+        let cells = [];
+        for(let i = 0; i < group.length; i++){
+            cells.push(<td className="bgl-table-cell">{group[i].sub ? group[i].player + ' (' + group[i].sub + ')' : group[i].player}</td>);
+        }
+        return cells;
+    }
+
+    function getPlacementCells(){
+        let cells = [];
+        for(let i = 0; i < group.length; i++){
+            cells.push(<td className="bgl-table-placement-cell">{group[i].placement}</td>);
+        }
+        return cells;
+    }
+
     return (
         <>
             <tbody key={"table-" + props.index}>
@@ -34,17 +50,11 @@ const ScheduleTableRow = props => {
                     <td className="bgl-table-title-cell">
                         <div data-name={props.index} onClick={openScheduler}>Group {props.index + 1}</div>
                     </td>
-                    <td className="bgl-table-cell">{group[0].sub ? group[0].player + ' (' + group[0].sub + ')' : group[0].player}</td>
-                    <td className="bgl-table-cell">{group[1].sub ? group[1].player + ' (' + group[1].sub + ')' : group[1].player}</td>
-                    <td className="bgl-table-cell">{group[2].sub ? group[2].player + ' (' + group[2].sub + ')' : group[2].player}</td>
-                    <td className="bgl-table-cell">{group[3].sub ? group[3].player + ' (' + group[3].sub + ')' : group[3].player}</td>
+                    {getTableCells()}
                 </tr>
                 <tr  key={"place-row-" + props.index} className="bgl-table-row placement-row">
                     <td className="bgl-table-subtitle-cell">Placement</td>
-                    <td className="bgl-table-placement-cell">{group[0].placement}</td>
-                    <td className="bgl-table-placement-cell">{group[1].placement}</td>
-                    <td className="bgl-table-placement-cell">{group[2].placement}</td>
-                    <td className="bgl-table-placement-cell">{group[3].placement}</td>
+                    {getPlacementCells()}
                 </tr>
             </tbody>
             {getScheduleUI()}

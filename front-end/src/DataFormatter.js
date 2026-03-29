@@ -1,5 +1,20 @@
 import {getBoardGameGeekIds } from "./callouts/CalloutFactory";
 
+/** Max player columns read per table (tie-break games may have more than 4). */
+const MAX_SLOTS_PER_TABLE = 8;
+
+/**
+ * Pre-playoff tie-break weeks from the sheet (e.g. "Tie Break", "Tiebreaker (4 vs 5)").
+ * Not scored as regular season or playoffs; used only for standings order.
+ */
+export function isTieBreakWeek(weekLabel) {
+    const n = String(weekLabel)
+        .toLowerCase()
+        .replace(/-/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+    return n.includes('tie break') || n.includes('tiebreaker');
+}
 
 export function createScheduleObject(response) {
 
@@ -24,7 +39,8 @@ export function createScheduleObject(response) {
         //Weekly title rows in spreadsheet
         if(rowReference === 0){
 
-            if(row[0].toLowerCase().includes('championship') || row[0].toLowerCase().includes('playoff')){
+            //If not regular season, we're done here and need to start parsing the tiebreaker games and playoffs
+            if(!isRegularSeason(row[0])){
                 playoffRowStart = rowIndex;
                 break;
             }
@@ -46,7 +62,7 @@ export function createScheduleObject(response) {
 
             let newGroup = [];
             for(let j = 1; j <= numberOfPlayersPerGame; j++){
-                if(row[j]){
+                    if(row[j]){
                     let placement = placementRow[j];
                     let sub = subRow[j]
                     let playerEntry ={player: row[j].trim(), placement: placement};
@@ -74,7 +90,7 @@ export function createScheduleObject(response) {
         }
     }
 
-    //Playoffs and championship setup
+    //tieberakers, Playoffs and championship setup
     let rowsBetweenChampionshipWeeks = 1 * rowsPerGroup + infoHeaderRows;
     for(let rowIndex = playoffRowStart; rowIndex < response.values.length; rowIndex++){
         let row = response.values[rowIndex];
@@ -86,7 +102,10 @@ export function createScheduleObject(response) {
                 dates: row[2], 
                 headlines: row[3],
                 results: [],
-                album: []
+                album: [],
+                isTieBreak: isTieBreakWeek(row[0]),
+                isPlayoff: isPlayoff(row[0]) && !isChampionship(row[0]),
+                isChampionship: isChampionship(row[0])
             });
         }else if(rowReference % rowsPerGroup === 1){
             let placementRow = response.values[rowIndex + 1];
@@ -148,9 +167,19 @@ function getNumberOfGamesPerWeek(scheduleResponse, rowsPerGroup){
 }
 
 export function isRegularSeason(weekLabel){
-    if(weekLabel.toLowerCase().includes('championship') || weekLabel.toLowerCase().includes('playoff')){
+    const weekLabelLower = weekLabel.toLowerCase();
+    if (isTieBreakWeek(weekLabelLower)) return false;
+    if(weekLabelLower.includes('championship') || weekLabelLower.includes('playoff')){
         return false;
-    }else if(weekLabel.toLowerCase().includes('week')){
+    }else if(weekLabelLower.includes('week')){
+        return true;
+    }
+    return false;
+}
+
+export function isPlayoff(weekLabel){
+    const weekLabelLower = weekLabel.toLowerCase();
+    if(weekLabelLower.includes('championship') || weekLabelLower.includes('playoff')){
         return true;
     }
     return false;
@@ -210,7 +239,15 @@ export function createStandingsObject(schedule){
         let gamesToPlay = standings.regularSeason[player].gamesToPlay;
         let weeklyScores = standings.regularSeason[player].weeklyScores;
         // let strengthOfSchedule = gamesPlayed > 0 ? score / gamesPlayed : 0;
-        return {player: player, points: score, gamesPlayed: gamesPlayed, gamesToPlay: gamesToPlay, weeklyScores};
+        return {
+            player: player,
+            points: score,
+            gamesPlayed: gamesPlayed,
+            gamesToPlay: gamesToPlay,
+            weeklyScores,
+            tieBreakGroupId: null,
+            tieBreakPlace: null
+        };
     })
     standingsArray.sort((a, b) => {
         if(a.points > b.points) {
@@ -236,6 +273,10 @@ export function createStandingsObject(schedule){
         return 1;
     })
 
+    //Pass in mostly sorted standings array to attach tie-break metadata and reorder contiguous tied blocks
+    applyTieBreakToStandings(schedule, standingsArray);
+
+    //Break ties by standard rules (points, then weekly scores, placement count, then playoff tie break games)
     let mostRecentPlacement = 1;
     standingsArray.forEach((person, index) => {
 
@@ -255,7 +296,15 @@ export function createStandingsObject(schedule){
                 }
                 max--;
             }
-            if(arePlacementsIdentical){
+            const sameTieBreakGame =
+                a.tieBreakGroupId &&
+                b.tieBreakGroupId &&
+                a.tieBreakGroupId === b.tieBreakGroupId &&
+                a.tieBreakPlace !== b.tieBreakPlace;
+            if (arePlacementsIdentical && sameTieBreakGame) {
+                person.placement = index + 1;
+                mostRecentPlacement = index + 1;
+            }else if(arePlacementsIdentical){
                 person.placement = mostRecentPlacement;
             }else{
                 person.placement = index + 1;
@@ -297,6 +346,60 @@ export function createStandingsObject(schedule){
 
 export function getPlacementCount(player, placement){
     return player.weeklyScores.filter(score => score === placement).length;
+}
+
+
+
+function collectTieBreakGroups(schedule) {
+    const groups = [];
+    schedule.forEach(week => {
+        if (!isTieBreakWeek(week.week.toLowerCase())) return;
+        week.results.forEach(group => {
+            const withPlace = (group.players || []).filter(
+                p => p && p.placement !== undefined && p.placement !== '' && !Number.isNaN(parseInt(p.placement, 10))
+            );
+            if (withPlace.length < 2) return;
+            const namesSorted = withPlace.map(p => p.player.trim()).sort();
+            const groupId = namesSorted.join('|');
+            groups.push({
+                groupId,
+                entries: withPlace.map(p => ({
+                    player: p.player.trim(),
+                    place: parseInt(p.placement, 10)
+                }))
+            });
+        });
+    });
+    return groups;
+}
+
+/** Attach tie-break meta and reorder contiguous tied blocks in the sorted standings array. */
+function applyTieBreakToStandings(schedule, standingsArray) {
+    const groups = collectTieBreakGroups(schedule);
+    groups.forEach(({ groupId, entries }) => {
+        entries.forEach(e => {
+            const row = standingsArray.find(r => r.player === e.player);
+            if (row && row.tieBreakGroupId == null) {
+                row.tieBreakGroupId = groupId;
+                row.tieBreakPlace = e.place;
+            }
+        });
+    });
+    groups.forEach(({ entries }) => {
+        const nameSet = new Set(entries.map(e => e.player));
+        const indices = [];
+        standingsArray.forEach((r, i) => {
+            if (nameSet.has(r.player)) indices.push(i);
+        });
+        if (indices.length !== entries.length) return;
+        indices.sort((a, b) => a - b);
+        if (indices[indices.length - 1] - indices[0] !== indices.length - 1) return;
+        const minI = indices[0];
+        const byPlace = [...entries].sort((a, b) => a.place - b.place);
+        const orderedRows = byPlace.map(e => standingsArray.find(r => r.player === e.player)).filter(Boolean);
+        if (orderedRows.length !== entries.length) return;
+        standingsArray.splice(minI, orderedRows.length, ...orderedRows);
+    });
 }
 
 export function createStrengthOfScheduleObject(schedule, standings){
@@ -373,6 +476,7 @@ export function getImageFileNamesToLoad(schedule, response){
     let mostPossibleImages = 0;
     let championshipPlayed = false;
     schedule.forEach(week=>{
+        if(isTieBreakWeek(week.week.toLowerCase())) return;
         if(isRegularSeason(week.week.toLowerCase())){ 
             week.results.forEach(group => {
                 let performance = group[0];
@@ -492,6 +596,7 @@ export function createHistoricalDataObject(data){
         let schedule = schedules[year];
 
         schedule.forEach(week=>{
+            if(isTieBreakWeek(week.week.toLowerCase())) return;
             if(isRegularSeason(week.week.toLowerCase())){ 
                 week.results.forEach(group => {
                     // gamesPerWeek = group.length;
