@@ -1,0 +1,124 @@
+Analyzing filtered dependency logic for ~8M scenarios...
+
+=== BGL 2026 DEPENDENCY EXPLAINER (FILTERED) ===
+
+AUSTIN (Overall Chance: 99.33%)
+  If they finish 1st: GUARANTEED IN
+  If they finish 2nd: GUARANTEED IN
+  If they finish 3rd (99.91% chance):
+    -> No strict single dependencies (relies on a chaotic mix of other outcomes)
+  If they finish 4th (97.40% chance):
+    -> No strict single dependencies (relies on a chaotic mix of other outcomes)
+--------------------------------------------------
+IAN (Overall Chance: 99.26%)
+  If they finish 1st: GUARANTEED IN
+  If they finish 2nd: GUARANTEED IN
+  If they finish 3rd (99.83% chance):
+    -> No strict single dependencies (relies on a chaotic mix of other outcomes)
+  If they finish 4th (97.22% chance):
+    -> No strict single dependencies (relies on a chaotic mix of other outcomes)
+--------------------------------------------------
+JOSH (Overall Chance: 92.12%)
+  If they finish 1st: GUARANTEED IN
+  If they finish 2nd: GUARANTEED IN
+  If they finish 3rd (99.74% chance):
+    -> No strict single dependencies (relies on a chaotic mix of other outcomes)
+  If they finish 4th (68.75% chance):
+    -> No strict single dependencies (relies on a chaotic mix of other outcomes)
+--------------------------------------------------
+NICK (Overall Chance: 87.26%)
+  If they finish 1st: GUARANTEED IN
+  If they finish 2nd: GUARANTEED IN
+  If they finish 3rd (99.74% chance):
+    -> No strict single dependencies (relies on a chaotic mix of other outcomes)
+  If they finish 4th (49.31% chance):
+    -> No strict single dependencies (relies on a chaotic mix of other outcomes)
+--------------------------------------------------
+MICHAEL (Overall Chance: 76.77%)
+  If they finish 1st: GUARANTEED IN
+  If they finish 2nd: GUARANTEED IN
+  If they finish 3rd (83.85% chance):
+    -> No strict single dependencies (relies on a chaotic mix of other outcomes)
+  If they finish 4th (23.21% chance):
+    -> No strict single dependencies (relies on a chaotic mix of other outcomes)
+--------------------------------------------------
+ASHLEY (Overall Chance: 70.85%)
+  If they finish 1st: GUARANTEED IN
+  If they finish 2nd: GUARANTEED IN
+  If they finish 3rd (73.44% chance):
+    -> No strict single dependencies (relies on a chaotic mix of other outcomes)
+  If they finish 4th (9.95% chance):
+    -> No strict single dependencies (relies on a chaotic mix of other outcomes)
+--------------------------------------------------
+RACHEL M (Overall Chance: 35.59%)
+  If they finish 1st: GUARANTEED IN
+  If they finish 2nd (42.36% chance):
+    -> No strict single dependencies (relies on a chaotic mix of other outcomes)
+--------------------------------------------------
+JACK M (Overall Chance: 35.59%)
+  If they finish 1st: GUARANTEED IN
+  If they finish 2nd (42.36% chance):
+    -> No strict single dependencies (relies on a chaotic mix of other outcomes)
+--------------------------------------------------
+CARLY (Overall Chance: 28.07%)
+  If they finish 1st (97.31% chance):
+    -> No strict single dependencies (relies on a chaotic mix of other outcomes)
+  If they finish 2nd (14.99% chance):
+    -> No strict single dependencies (relies on a chaotic mix of other outcomes)
+--------------------------------------------------
+JACK C (Overall Chance: 24.00%)
+  If they finish 1st (93.23% chance):
+    -> No strict single dependencies (relies on a chaotic mix of other outcomes)
+  If they finish 2nd (2.78% chance), they strictly NEED:
+    -> Rachel M gets 3rd or 4th
+    -> Jack M gets 3rd or 4th
+    -> Carly gets 3rd or 4th
+    -> Sam gets 3rd or 4th
+    -> Brittany gets 2nd or worse
+    -> Rachel F gets 2nd or worse
+    -> Dan gets 2nd or worse
+    -> Ryan gets 1st
+--------------------------------------------------
+SAM (Overall Chance: 22.48%)
+  If they finish 1st (88.54% chance):
+    -> No strict single dependencies (relies on a chaotic mix of other outcomes)
+  If they finish 2nd (1.39% chance), they strictly NEED:
+    -> Cody gets 1st or 2nd
+    -> Austin gets 1st or 2nd
+    -> Rachel M gets 3rd or 4th
+    -> Jack M gets 3rd or 4th
+    -> Carly gets 3rd or 4th
+    -> Brittany gets 3rd or 4th
+    -> Jack C gets 3rd or 4th
+    -> Rachel F gets 2nd or worse
+    -> Dan gets 2nd or worse
+    -> Ryan gets 1st
+--------------------------------------------------
+BRITTANY (Overall Chance: 22.48%)
+  If they finish 1st (88.54% chance):
+    -> No strict single dependencies (relies on a chaotic mix of other outcomes)
+  If they finish 2nd (1.39% chance), they strictly NEED:
+    -> Rachel M gets 3rd or 4th
+    -> Jack M gets 3rd or 4th
+    -> Carly gets 3rd or 4th
+    -> Sam gets 2nd
+    -> Jack C gets 3rd or 4th
+    -> Rachel F gets 2nd or worse
+    -> Dan gets 2nd or worse
+    -> Ryan gets 1st
+--------------------------------------------------
+RACHEL F (Overall Chance: 5.73%)
+  If they finish 1st (22.92% chance):
+    -> No strict single dependencies (relies on a chaotic mix of other outcomes)
+--------------------------------------------------
+DAN (Overall Chance: 0.46%)
+  If they finish 1st (1.85% chance), they strictly NEED:
+    -> Rachel M gets 3rd or 4th
+    -> Jack M gets 3rd or 4th
+    -> Carly gets 3rd or 4th
+    -> Sam gets 2nd or worse
+    -> Brittany gets 2nd or worse
+    -> Jack C gets 2nd or worse
+    -> Rachel F gets 2nd or worse
+    -> Ryan gets 1st
+--------------------------------------------------

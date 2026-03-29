@@ -16,6 +16,14 @@ const HTML_FILE = path.join(ANALYSIS_DIR, 'index.html');
 // SCORING SYSTEM
 const POINTS = { 1: 3, 2: 2, 3: 1, 4: 0 };
 
+/** Regular season is treated as finished once this week has results (playoffs not required). */
+const REGULAR_SEASON_LAST_WEEK = 6;
+
+/** When inferring qualifiers (no playoff rows yet): league size at or above this uses more spots. */
+const INFERRED_QUALIFIERS_LARGE_LEAGUE_MIN_PLAYERS = 20;
+const INFERRED_QUALIFIERS_COUNT_SMALL = 4;
+const INFERRED_QUALIFIERS_COUNT_LARGE = 8;
+
 // GENDER MAPPING (Inferred from Schedules.txt)
 const GENDER_MAP = {
     "Brian": "M", "Dan": "M", "Ryan": "M", "Josh": "M", "Nick": "M", 
@@ -70,16 +78,14 @@ function main() {
         );
         // console.log(`Identified ${activePlayersSet.size} active players in season ${maxSeason}.`);
 
-        // 3. Identify Seasons with Playoffs (Completed Seasons)
-        const seasonsWithPlayoffs = new Set(
-            allGames.filter(g => g.isPostSeason).map(g => g.season)
-        );
-
-        // 4. Identify Inaugural Season (for Rookie exclusions)
+        // 3. Identify Inaugural Season (for Rookie exclusions)
         const inauguralSeason = Math.min(...allGames.map(g => g.season));
 
         const regSeasonGames = allGames.filter(g => !g.isPostSeason);
         const postSeasonGames = allGames.filter(g => g.isPostSeason);
+
+        // Seasons whose regular season has finished (Week 6 present in schedule data)
+        const seasonsRegularSeasonComplete = buildSeasonsWithRegularSeasonComplete(regSeasonGames);
 
         console.log("\n========================================");
         console.log("       LEAGUE ANALYTICS REPORT");
@@ -220,7 +226,7 @@ function main() {
 
         // Single Season Stats
         processStat("Most Home Games Played (Single Season)", "Single Season", SCOPE_HOME, getMostHomeGamesInSeason(homeDataset));
-        processStat("Fewest Home Games Played (Single Season)", "Single Season", SCOPE_HOME, getFewestHomeGamesInSeason(homeDataset, seasonsWithPlayoffs));
+        processStat("Fewest Home Games Played (Single Season)", "Single Season", SCOPE_HOME, getFewestHomeGamesInSeason(homeDataset, seasonsRegularSeasonComplete));
         
         // NEW: Neutral Site Stats
         processStat("Most Games Played at Neutral Sites", "Neutral Sites", SCOPE_HOME, getNeutralSiteCounts(allGames));
@@ -241,12 +247,12 @@ function main() {
 
 
         // Risers and Fallers
-        processStat("Biggest Points Jump (Season to Season)", "Risers and Fallers", SCOPE_CROSS, getBiggestPointJumps(regSeasonGames, seasonsWithPlayoffs));
-        processStat("Biggest Points Drop (Season to Season)", "Risers and Fallers", SCOPE_CROSS, getBiggestPointDrops(regSeasonGames, seasonsWithPlayoffs));
+        processStat("Biggest Points Jump (Season to Season)", "Risers and Fallers", SCOPE_CROSS, getBiggestPointJumps(regSeasonGames, seasonsRegularSeasonComplete));
+        processStat("Biggest Points Drop (Season to Season)", "Risers and Fallers", SCOPE_CROSS, getBiggestPointDrops(regSeasonGames, seasonsRegularSeasonComplete));
         
-        // Filter dataset for consistency metrics: Exclude current season if it hasn't finished (no playoffs yet)
+        // Filter dataset for consistency metrics: Exclude current season until Week 6 is in the data
         let consistencyDataset = regSeasonGames;
-        if (!seasonsWithPlayoffs.has(maxSeason)) {
+        if (!seasonsRegularSeasonComplete.has(maxSeason)) {
             consistencyDataset = regSeasonGames.filter(g => g.season !== maxSeason);
         }
 
@@ -813,6 +819,59 @@ function getWeekSortIndex(label) {
     return 99;
 }
 
+function buildSeasonsWithRegularSeasonComplete(regSeasonGames) {
+    const s = new Set();
+    regSeasonGames.forEach(g => {
+        if (g.weekIndex >= REGULAR_SEASON_LAST_WEEK) s.add(g.season);
+    });
+    return s;
+}
+
+/**
+ * Top N by regular-season points when playoff games are not in the file yet.
+ * N is 8 if the season has at least INFERRED_QUALIFIERS_LARGE_LEAGUE_MIN_PLAYERS unique players, else 4.
+ */
+function topRegularSeasonQualifiersByPoints(regGamesForSeason) {
+    const totals = {};
+    regGamesForSeason.forEach(g => {
+        totals[g.player] = (totals[g.player] || 0) + g.points;
+    });
+    const playerCount = Object.keys(totals).length;
+    const n =
+        playerCount >= INFERRED_QUALIFIERS_LARGE_LEAGUE_MIN_PLAYERS
+            ? INFERRED_QUALIFIERS_COUNT_LARGE
+            : INFERRED_QUALIFIERS_COUNT_SMALL;
+    return new Set(
+        Object.entries(totals)
+            .sort((a, b) => b[1] - a[1])
+            .slice(0, n)
+            .map(([p]) => p)
+    );
+}
+
+/**
+ * Playoff qualifier set per season: from postseason games when present,
+ * otherwise inferred from regular-season standings after Week 6 is complete.
+ */
+function buildPlayoffQualifiersBySeason(allGames, regSeasonGames) {
+    const qualifiers = {};
+    allGames.filter(g => g.isPostSeason).forEach(g => {
+        if (!qualifiers[g.season]) qualifiers[g.season] = new Set();
+        qualifiers[g.season].add(g.player);
+    });
+    const regComplete = buildSeasonsWithRegularSeasonComplete(regSeasonGames);
+    const bySeason = {};
+    regSeasonGames.forEach(g => {
+        if (!bySeason[g.season]) bySeason[g.season] = [];
+        bySeason[g.season].push(g);
+    });
+    for (const season of regComplete) {
+        if (qualifiers[season] && qualifiers[season].size > 0) continue;
+        qualifiers[season] = topRegularSeasonQualifiersByPoints(bySeason[season] || []);
+    }
+    return qualifiers;
+}
+
 // =============================================
 // STAT CALCULATIONS
 // =============================================
@@ -901,14 +960,9 @@ function calculateStrengthOfSchedule(games) {
 
 // NEW: Hardest Path to Playoffs (Single Season SoS for Qualifiers)
 function getHardestPathToPlayoffs(regGames, allGames) {
-    // 1. Identify Playoff Qualifiers per Season
-    const qualifiers = {}; // Season -> Set(Players)
-    allGames.filter(g => g.isPostSeason).forEach(g => {
-        if(!qualifiers[g.season]) qualifiers[g.season] = new Set();
-        qualifiers[g.season].add(g.player);
-    });
+    const qualifiers = buildPlayoffQualifiersBySeason(allGames, regGames);
 
-    // 2. Calculate Season-Specific SoS for everyone
+    // Calculate Season-Specific SoS for everyone
     // We need player averages PER SEASON, not all-time
     const seasonResults = [];
     
@@ -920,8 +974,8 @@ function getHardestPathToPlayoffs(regGames, allGames) {
     });
 
     for (const [season, sGames] of Object.entries(gamesBySeason)) {
-        const sQualifiers = qualifiers[season];
-        if (!sQualifiers) continue;
+        const sQualifiers = qualifiers[parseInt(season, 10)];
+        if (!sQualifiers || sQualifiers.size === 0) continue;
 
         // Calcavgs for this season
         const sGrouped = groupByPlayer(sGames);
@@ -1103,7 +1157,7 @@ function getMostHomeGamesInSeason(games) {
 }
 
 // NEW: Fewest Home Games in a Single Season
-function getFewestHomeGamesInSeason(games, seasonsWithPlayoffs) {
+function getFewestHomeGamesInSeason(games, seasonsRegComplete) {
     const seasonPlayers = {}; // Season -> Set of Players
     const hostCounts = {};    // Key: Player|Season -> count
 
@@ -1123,9 +1177,8 @@ function getFewestHomeGamesInSeason(games, seasonsWithPlayoffs) {
 
     // 2. Iterate seasons and players to find counts (including 0)
     for (const [season, players] of Object.entries(seasonPlayers)) {
-        // Exclude incomplete seasons (those without playoffs yet)
-        // If seasonsWithPlayoffs is provided, use it. Otherwise, proceed (fallback).
-        if (seasonsWithPlayoffs && !seasonsWithPlayoffs.has(parseInt(season))) {
+        // Exclude seasons still before Week 6 in the data
+        if (seasonsRegComplete && !seasonsRegComplete.has(parseInt(season, 10))) {
             continue;
         }
 
@@ -1622,7 +1675,7 @@ function getSophomoreSeasonRecords(games) {
 }
 
 // NEW: Biggest Point Jump
-function getBiggestPointJumps(games, seasonsWithPlayoffs) {
+function getBiggestPointJumps(games, seasonsRegComplete) {
     const grouped = groupByPlayer(games);
     const results = [];
     
@@ -1647,9 +1700,7 @@ function getBiggestPointJumps(games, seasonsWithPlayoffs) {
             
             // Check if currentYear is the latest season
             if (currentYear === latestSeason) {
-                // Only include if playoffs have started for this season
-                // If seasonsWithPlayoffs is provided and doesn't contain currentYear, skip
-                if (seasonsWithPlayoffs && !seasonsWithPlayoffs.has(currentYear)) {
+                if (seasonsRegComplete && !seasonsRegComplete.has(currentYear)) {
                     continue;
                 }
             }
@@ -1672,7 +1723,7 @@ function getBiggestPointJumps(games, seasonsWithPlayoffs) {
 }
 
 // NEW: Biggest Point Drops
-function getBiggestPointDrops(games, seasonsWithPlayoffs) {
+function getBiggestPointDrops(games, seasonsRegComplete) {
     const grouped = groupByPlayer(games);
     const results = [];
     
@@ -1697,9 +1748,7 @@ function getBiggestPointDrops(games, seasonsWithPlayoffs) {
             
             // Check if currentYear is the latest season
             if (currentYear === latestSeason) {
-                // Only include if playoffs have started for this season
-                // If seasonsWithPlayoffs is provided and doesn't contain currentYear, skip
-                if (seasonsWithPlayoffs && !seasonsWithPlayoffs.has(currentYear)) {
+                if (seasonsRegComplete && !seasonsRegComplete.has(currentYear)) {
                     continue;
                 }
             }
@@ -2098,7 +2147,7 @@ function calculateSeasonMetrics(allGames) {
     
     // Group reg season data
     regGames.forEach(g => {
-        if (!seasons[g.season]) seasons[g.season] = { players: {}, playoffQualifiers: new Set(), hasPlayoffs: false };
+        if (!seasons[g.season]) seasons[g.season] = { players: {}, playoffQualifiers: new Set() };
         if (!seasons[g.season].players[g.player]) seasons[g.season].players[g.player] = { 
             total: 0, 
             week2: 0,
@@ -2113,13 +2162,13 @@ function calculateSeasonMetrics(allGames) {
         if (g.weekIndex <= 4) pData.week4 += g.points;
     });
 
-    // Determine who made playoffs each year AND if the season has had playoffs
-    allGames.filter(g => g.isPostSeason).forEach(g => {
-        if (seasons[g.season]) {
-            seasons[g.season].playoffQualifiers.add(g.player);
-            seasons[g.season].hasPlayoffs = true; // Mark season as having playoffs
-        }
-    });
+    const regSeasonFinishedSeasons = buildSeasonsWithRegularSeasonComplete(regGames);
+    const qualifiersBySeason = buildPlayoffQualifiersBySeason(allGames, regGames);
+    for (const [season, data] of Object.entries(seasons)) {
+        const sn = parseInt(season, 10);
+        const q = qualifiersBySeason[sn];
+        data.playoffQualifiers = q ? new Set(q) : new Set();
+    }
 
     const lowestQualifiers = [];
     
@@ -2134,8 +2183,7 @@ function calculateSeasonMetrics(allGames) {
     const bestMisses4 = [];
 
     for (const [season, data] of Object.entries(seasons)) {
-        // SKIP current/ongoing seasons that haven't had playoffs yet
-        if (!data.hasPlayoffs) continue;
+        if (!regSeasonFinishedSeasons.has(parseInt(season, 10))) continue;
 
         let seasonMinQual = 999;
         let seasonMinPlayer = "";

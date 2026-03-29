@@ -1,0 +1,38 @@
+Detected 4 completed games and 1 unplayed games.
+Calculating 24 remaining possible futures...\n
+Cody (Overall Chance: 100.00%)
+  If 1st: GUARANTEED
+  If 2nd: GUARANTEED
+  If 3rd: GUARANTEED
+  If 4th: GUARANTEED
+
+Ian (Overall Chance: 100.00%)
+  If 1st: GUARANTEED (LOCKED IN)
+
+Josh (Overall Chance: 100.00%)
+  If 2nd: GUARANTEED (LOCKED IN)
+
+Ashley (Overall Chance: 100.00%)
+  If 2nd: GUARANTEED (LOCKED IN)
+
+Michael (Overall Chance: 100.00%)
+  If 1st: GUARANTEED (LOCKED IN)
+
+Rachel M (Overall Chance: 100.00%)
+  If 1st: GUARANTEED (LOCKED IN)
+
+Jack M (Overall Chance: 100.00%)
+  If 1st: GUARANTEED (LOCKED IN)
+
+Austin (Overall Chance: 91.67%)
+  If 1st: GUARANTEED
+  If 2nd: GUARANTEED
+  If 3rd: GUARANTEED
+  If 4th: 66.67% chance
+
+Carly (Overall Chance: 8.33%)
+  If 1st: 33.33% chance
+  If 2nd: ELIMINATED
+  If 3rd: ELIMINATED
+  If 4th: ELIMINATED
+
