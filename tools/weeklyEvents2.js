@@ -1186,7 +1186,7 @@ function generateHtmlDashboard(reports) {
 <body>
     <div class="container">
         <header>
-            <a href="https://www.bglcompanion.com" class="back-btn">&larr; Back to BGL</a>
+            <a href="https://bglcompanion.com" class="back-btn">&larr; Back to BGL</a>
             <h1>BGL Weekly Report</h1>
             <div class="subtitle" id="currentTitle">Select a week</div>
         </header>

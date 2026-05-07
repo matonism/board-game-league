@@ -285,8 +285,62 @@ function main() {
         processStat("Worst Duo (Combined Avg Pts < 2.0)", "Rivalries", SCOPE_CROSS, getBestDuos(regSeasonGames));
         processStat("Worst Enemies (Lowest Avg Score vs Opponent)", "Rivalries", SCOPE_CROSS, getWorstEnemies(regSeasonGames));
 
-        // --- SECTION 6: League Metrics ---
-        const SCOPE_METRICS = "League Metrics";
+        // Per-player opponent / teammate splits (regular season for avgs / counts; droughts use full league schedule like Rivalries)
+        const SCOPE_PLAYER_MATCHUPS = "Player Matchups";
+        const MIN_VS_OPPONENT = 3;
+        const MIN_WITH_PARTNER = 3;
+        const oppByPlayer = buildOpponentStatsByPlayer(regSeasonGames);
+        const duoByPlayer = buildDuoStatsByPlayer(regSeasonGames);
+        const matchupPlayers = [...new Set(regSeasonGames.map(g => g.player))].sort((a, b) =>
+            a.localeCompare(b)
+        );
+
+        for (const pname of matchupPlayers) {
+            const gamesVsList = getOpponentGameCountsList(pname, oppByPlayer);
+            const droughtList = getMatchupDroughtsForPlayer(pname, leagueGames, activePlayersSet);
+            const bestVs = getRankedOpponentsForPlayer(pname, oppByPlayer, MIN_VS_OPPONENT, true);
+            const worstVs = getRankedOpponentsForPlayer(pname, oppByPlayer, MIN_VS_OPPONENT, false);
+            const bestWith = getRankedPartnersForPlayer(pname, duoByPlayer, MIN_WITH_PARTNER, true);
+            const worstWith = getRankedPartnersForPlayer(pname, duoByPlayer, MIN_WITH_PARTNER, false);
+            if (
+                gamesVsList.length === 0 &&
+                droughtList.length === 0 &&
+                bestVs.length + worstVs.length + bestWith.length + worstWith.length === 0
+            ) {
+                continue;
+            }
+
+            processStat("Games vs Each Opponent", pname, SCOPE_PLAYER_MATCHUPS, gamesVsList);
+            
+            processStat(
+                "Longest Matchup Droughts (> 6 Weeks Since Last Play)",
+                pname,
+                SCOPE_PLAYER_MATCHUPS,
+                droughtList
+            );
+            processStat(`Best Against (Avg Pts, Min ${MIN_VS_OPPONENT} Games)`, pname, SCOPE_PLAYER_MATCHUPS,bestVs);
+            processStat(
+                `Worst Against (Avg Pts, Min ${MIN_VS_OPPONENT} Games)`,
+                pname,
+                SCOPE_PLAYER_MATCHUPS,
+                worstVs
+            );
+            processStat(
+                `Best With (Combined Table Avg, Min ${MIN_WITH_PARTNER} Games)`,
+                pname,
+                SCOPE_PLAYER_MATCHUPS,
+                bestWith
+            );
+            processStat(
+                `Worst With (Combined Table Avg, Min ${MIN_WITH_PARTNER} Games)`,
+                pname,
+                SCOPE_PLAYER_MATCHUPS,
+                worstWith
+            );
+        }
+
+        // --- SECTION 6: Historic Performances (playoff cutoffs, SoS, comeback/collapse stories) ---
+        const SCOPE_METRICS = "Historic Performances";
         const seasonMetrics = calculateSeasonMetrics(leagueGames);
         
         processStat("Lowest Points to Qualify for Playoffs", "Cutoffs", SCOPE_METRICS, seasonMetrics.lowestQualifiers);
@@ -646,6 +700,20 @@ function generateHtmlDashboard(data) {
                 infoText = "The first player's average points in games featuring the second";
             }else if (board.category.includes("Without Losing to")) {
                 infoText = "Counts consecutive games played where at least one opponent of the specific gender was present, and the player finished better than all of them.";
+            } else if (board.scope === "Player Matchups") {
+                if (board.category === "Games vs Each Opponent") {
+                    infoText = "<strong>Regular season only.</strong> Number of games at the same table as each opponent (every shared game counts once). Sorted by most games together.";
+                } else if (board.category.startsWith("Best Against")) {
+                    infoText = "<strong>Regular season only.</strong> Your average league points in games at the same table as this opponent. Opponents need the minimum number of shared games shown in the title.";
+                } else if (board.category.startsWith("Worst Against")) {
+                    infoText = "<strong>Regular season only.</strong> Your average league points when this opponent was at your table. Lower means tougher matchups for you (or worse finishes). Minimum shared games in the title.";
+                } else if (board.category.startsWith("Best With")) {
+                    infoText = "<strong>Regular season only.</strong> Combined average points (you + this player) per game at the same table. Minimum shared games in the title.";
+                } else if (board.category.startsWith("Worst With")) {
+                    infoText = "<strong>Regular season only.</strong> Lowest combined averages with this player at your table. Minimum shared games in the title.";
+                } else if (board.category.includes("Matchup Droughts")) {
+                    infoText = "<strong>Reg + post season.</strong> Only <strong>current</strong> league players appear as opponents. Same rules as Rivalries: weeks since you last shared a table (must be &gt; 6), or if you never have, overlapping weeks where you both played but not together (&gt; 6 chances). Sorted by longest drought.";
+                }
             }
 
             // Create SVG icon if tooltip text exists
@@ -1415,8 +1483,8 @@ function getGenderStreaks(games, targetGender, gamesById, activePlayersSet, acti
     const results = [];
 
     for (const [player, records] of Object.entries(grouped)) {
-        // Skip retired players ONLY if looking for active streaks specifically OR if the player gender matches the win streak gender
-        if ((activeOnly && activePlayersSet && !activePlayersSet.has(player)) || GENDER_MAP[player] === targetGender) continue;
+        // Skip retired players only when listing active streaks (same as other active streak boards)
+        if (activeOnly && activePlayersSet && !activePlayersSet.has(player)) continue;
 
         records.sort((a,b) => (a.season - b.season) || (a.weekIndex - b.weekIndex));
 
@@ -2189,7 +2257,7 @@ function getWeeklyAverages(games, weekNum, minRequiredGames) {
     return results;
 }
 
-// NEW: League Metrics Calculation
+// NEW: Historic Performances / playoff-path calculations (SCOPE_METRICS tab)
 function calculateSeasonMetrics(allGames) {
     const regGames = allGames.filter(g => !g.isPostSeason && !g.isTieBreak);
     const seasons = {};
@@ -2434,6 +2502,207 @@ function filterDataset(games, type, value, maxSeason) {
         return result;
     }
     return games;
+}
+
+/** focal player -> opponent -> { pts: sum of focal's points, games } */
+function buildOpponentStatsByPlayer(games) {
+    const tables = {};
+    games.forEach(g => {
+        if (!tables[g.gameId]) tables[g.gameId] = [];
+        tables[g.gameId].push(g);
+    });
+    const byPlayer = {};
+    Object.values(tables).forEach(tableGames => {
+        for (let i = 0; i < tableGames.length; i++) {
+            const p1 = tableGames[i];
+            for (let j = 0; j < tableGames.length; j++) {
+                if (i === j) continue;
+                const enemy = tableGames[j];
+                if (!byPlayer[p1.player]) byPlayer[p1.player] = {};
+                if (!byPlayer[p1.player][enemy.player]) {
+                    byPlayer[p1.player][enemy.player] = { pts: 0, games: 0 };
+                }
+                byPlayer[p1.player][enemy.player].pts += p1.points;
+                byPlayer[p1.player][enemy.player].games++;
+            }
+        }
+    });
+    return byPlayer;
+}
+
+/** focal player -> partner at same table -> { pts: sum of combined pts per game, games } */
+function buildDuoStatsByPlayer(games) {
+    const tables = {};
+    games.forEach(g => {
+        if (!tables[g.gameId]) tables[g.gameId] = [];
+        tables[g.gameId].push(g);
+    });
+    const byPlayer = {};
+    Object.values(tables).forEach(tableGames => {
+        const players = [...tableGames].sort((a, b) => a.player.localeCompare(b.player));
+        for (let i = 0; i < players.length; i++) {
+            for (let j = i + 1; j < players.length; j++) {
+                const p1 = players[i];
+                const p2 = players[j];
+                const combined = p1.points + p2.points;
+                if (!byPlayer[p1.player]) byPlayer[p1.player] = {};
+                if (!byPlayer[p1.player][p2.player]) {
+                    byPlayer[p1.player][p2.player] = { pts: 0, games: 0 };
+                }
+                byPlayer[p1.player][p2.player].pts += combined;
+                byPlayer[p1.player][p2.player].games++;
+                if (!byPlayer[p2.player]) byPlayer[p2.player] = {};
+                if (!byPlayer[p2.player][p1.player]) {
+                    byPlayer[p2.player][p1.player] = { pts: 0, games: 0 };
+                }
+                byPlayer[p2.player][p1.player].pts += combined;
+                byPlayer[p2.player][p1.player].games++;
+            }
+        }
+    });
+    return byPlayer;
+}
+
+function getRankedOpponentsForPlayer(focalPlayer, oppByPlayer, minGames, highestFirst) {
+    const stats = oppByPlayer[focalPlayer];
+    if (!stats) return [];
+    const results = [];
+    for (const [opp, s] of Object.entries(stats)) {
+        if (s.games < minGames) continue;
+        const avg = s.pts / s.games;
+        results.push({
+            player: opp,
+            value: avg.toFixed(2),
+            raw: avg,
+            extra: `(${s.games} games)`
+        });
+    }
+    results.sort((a, b) => (highestFirst ? b.raw - a.raw : a.raw - b.raw));
+    return results;
+}
+
+function getRankedPartnersForPlayer(focalPlayer, duoByPlayer, minGames, highestFirst) {
+    const stats = duoByPlayer[focalPlayer];
+    if (!stats) return [];
+    const results = [];
+    for (const [partner, s] of Object.entries(stats)) {
+        if (s.games < minGames) continue;
+        const avg = s.pts / s.games;
+        results.push({
+            player: partner,
+            value: avg.toFixed(2),
+            raw: avg,
+            extra: `(${s.games} games)`
+        });
+    }
+    results.sort((a, b) => (highestFirst ? b.raw - a.raw : a.raw - b.raw));
+    return results;
+}
+
+/** Every opponent faced at least once; value = shared game count (regular season). */
+function getOpponentGameCountsList(focalPlayer, oppByPlayer) {
+    const stats = oppByPlayer[focalPlayer];
+    if (!stats) return [];
+    const results = [];
+    for (const [opp, s] of Object.entries(stats)) {
+        results.push({
+            player: opp,
+            value: s.games,
+            raw: s.games,
+            extra: ""
+        });
+    }
+    results.sort((a, b) => b.raw - a.raw || String(a.player).localeCompare(String(b.player)));
+    return results;
+}
+
+/**
+ * Per focal player: pairwise matchup drought vs each **current** (active-season) opponent only,
+ * same thresholds as getMatchupDroughts (&gt; 6 weeks since last shared table, or never met with &gt; 6 overlapping weeks).
+ */
+function getMatchupDroughtsForPlayer(focalPlayer, games, activePlayersSet) {
+    const gamesByWeek = {};
+    const weekKeys = [];
+    const playerWeeks = {};
+
+    games.forEach(g => {
+        const weekKey = `${g.season}|${g.weekIndex}|${g.weekLabel}`;
+        if (!gamesByWeek[weekKey]) {
+            gamesByWeek[weekKey] = [];
+            weekKeys.push(weekKey);
+        }
+        gamesByWeek[weekKey].push(g);
+        if (!playerWeeks[g.player]) playerWeeks[g.player] = new Set();
+        playerWeeks[g.player].add(weekKey);
+    });
+
+    const uniqueWeeks = [...new Set(weekKeys)];
+    const currentWeekIndex = uniqueWeeks.length - 1;
+
+    const allPlayers = new Set(games.map(g => g.player));
+    allPlayers.delete(focalPlayer);
+
+    const results = [];
+    for (const opp of allPlayers) {
+        if (!activePlayersSet || !activePlayersSet.has(opp)) continue;
+
+        let lastMatchupIdx = -1;
+        let lastMatchupLabel = "";
+
+        for (let w = currentWeekIndex; w >= 0; w--) {
+            const weekKey = uniqueWeeks[w];
+            const weekGames = gamesByWeek[weekKey];
+            const tables = {};
+            weekGames.forEach(g => {
+                if (!tables[g.gameId]) tables[g.gameId] = [];
+                tables[g.gameId].push(g.player);
+            });
+
+            let pairFound = false;
+            for (const players of Object.values(tables)) {
+                if (players.includes(focalPlayer) && players.includes(opp)) {
+                    pairFound = true;
+                    break;
+                }
+            }
+
+            if (pairFound) {
+                lastMatchupIdx = w;
+                const parts = weekKey.split("|");
+                lastMatchupLabel = `${parts[0]} ${parts[2]}`;
+                break;
+            }
+        }
+
+        if (lastMatchupIdx !== -1) {
+            const droughtWeeks = currentWeekIndex - lastMatchupIdx;
+            if (droughtWeeks > 6) {
+                results.push({
+                    player: opp,
+                    value: droughtWeeks,
+                    raw: droughtWeeks,
+                    extra: `(Last: ${lastMatchupLabel})`
+                });
+            }
+        } else {
+            let chances = 0;
+            const wFocal = playerWeeks[focalPlayer] || new Set();
+            const wOpp = playerWeeks[opp] || new Set();
+            uniqueWeeks.forEach(wk => {
+                if (wFocal.has(wk) && wOpp.has(wk)) chances++;
+            });
+            if (chances > 6) {
+                results.push({
+                    player: opp,
+                    value: chances,
+                    raw: chances,
+                    extra: `(Never Met - ${chances} chances)`
+                });
+            }
+        }
+    }
+
+    return results.sort((a, b) => b.raw - a.raw);
 }
 
 main();

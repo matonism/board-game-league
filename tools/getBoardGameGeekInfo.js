@@ -8,7 +8,7 @@ async function method(){
 
         // let allGames = DataFormatter.getAllGames(formattedData.schedules);
         // let gameSummaries = await getBoardGameInfo({games: allGames});
-        let gameSummaries = await getBoardGameInfo({games: 'Parks (Second Edition)'});
+        let gameSummaries = await getBoardGameInfo({games: 'Wyrmspan'});
         console.log(gameSummaries);
         // fileWriter.createFile('output/', "GameSummariesWroth", 'json', JSON.stringify(gameSummaries));
 

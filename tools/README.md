@@ -21,3 +21,9 @@ run: .\updateLeagueAfterGame.bat -d
 
 To do a full upload of all the Weekly Events and Leaderboard AFTER UPDATING THE REACT APP ITSELF:
 run: .\updateLeagueAfterGame.bat -d -b
+
+
+To get Board Game Summaries, you must run the following command after updating the getBoardGameGeekInfo.js to pull data for the game you want:
+node getBoardGameGeekInfo.js
+
+Then copy the json response into GameSummaries.txt
