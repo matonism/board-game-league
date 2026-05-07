@@ -657,7 +657,7 @@ export function createHistoricalDataObject(data){
                                 if(performance !== performance2){
                                     if(!analysisObject[performance.player].headToHead[performance2.player]){
                                         analysisObject[performance.player].headToHead[performance2.player] = {
-                                            name: performance2.player,
+                                            opponent: performance2.player,
                                             wins: 0,
                                             losses: 0,
                                             winRate: 0,
@@ -668,7 +668,7 @@ export function createHistoricalDataObject(data){
                                     let headToHead = analysisObject[performance.player].headToHead[performance2.player];
                                     headToHead.gamesPlayed++;
 
-                                    headToHead.games.push({name: week.game, year: year, placement: performance.placement, opponentPlacement: performance2.placement})
+                                    headToHead.games.push({gameName: week.game, year: year, placement: performance.placement, opponentPlacement: performance2.placement})
                                     if(performance.placement > performance2.placement){
                                         headToHead.losses++;
                                     }else{
@@ -776,7 +776,7 @@ export function createHistoricalDataObject(data){
                                 if(performance !== performance2){
                                     if(!postSeasonObject[performance.player].headToHead[performance2.player]){
                                         postSeasonObject[performance.player].headToHead[performance2.player] = {
-                                            name: performance2.player,
+                                            opponent: performance2.player,
                                             wins: 0,
                                             losses: 0,
                                             winRate: 0,
@@ -786,7 +786,7 @@ export function createHistoricalDataObject(data){
                                     }
                                     let headToHead = postSeasonObject[performance.player].headToHead[performance2.player];
                                     headToHead.gamesPlayed++;
-                                    headToHead.games.push({name: week.game, year: year, placement: performance.placement, opponentPlacement: performance2.placement})
+                                    headToHead.games.push({gameName: week.game, year: year, placement: performance.placement, opponentPlacement: performance2.placement})
 
                                     if(performance.placement > performance2.placement){
                                         headToHead.losses++;
