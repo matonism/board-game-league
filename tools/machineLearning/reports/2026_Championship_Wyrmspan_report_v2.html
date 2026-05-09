@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BGL ML Report — 2026 Championship: Wyrmspan</title>
+  <style>
+    :root {
+      --bg: #0b0f17;
+      --panel: rgba(255,255,255,0.06);
+      --panel2: rgba(255,255,255,0.08);
+      --text: rgba(255,255,255,0.92);
+      --muted: rgba(255,255,255,0.65);
+      --muted2: rgba(255,255,255,0.5);
+      --border: rgba(255,255,255,0.12);
+      --good: #2dd4bf;
+      --bad: #fb7185;
+      --accent: #60a5fa;
+      --shadow: 0 18px 60px rgba(0,0,0,0.45);
+      --radius: 16px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: var(--sans);
+      color: var(--text);
+      background:
+        radial-gradient(1200px 600px at 20% 0%, rgba(96,165,250,0.22), transparent 60%),
+        radial-gradient(900px 500px at 70% 10%, rgba(45,212,191,0.14), transparent 60%),
+        radial-gradient(800px 420px at 50% 100%, rgba(251,113,133,0.10), transparent 60%),
+        var(--bg);
+    }
+    a { color: var(--accent); }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 28px 18px 60px; }
+    .hero {
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 18px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+    .heroTop { display:flex; gap: 14px; align-items: baseline; justify-content: space-between; flex-wrap: wrap; }
+    h1 { font-size: 22px; margin: 0; letter-spacing: 0.2px; }
+    .muted { color: var(--muted); }
+    .muted2 { color: var(--muted2); }
+    .small { font-size: 12px; }
+    .mono { font-family: var(--mono); }
+    .grid { display:grid; grid-template-columns: 1.2fr 0.8fr; gap: 16px; margin-top: 14px; }
+    @media (max-width: 960px) { .grid { grid-template-columns: 1fr; } }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 14px;
+    }
+    .kvs { display:grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    @media (max-width: 640px) { .kvs { grid-template-columns: 1fr; } }
+    .kv { display:flex; gap: 10px; align-items: baseline; padding: 8px 10px; border-radius: 12px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); }
+    .kv .k { width: 120px; color: var(--muted); font-size: 12px; }
+    .kv .v { flex: 1; font-weight: 600; }
+    .chips { display:flex; flex-wrap: wrap; gap: 8px; }
+    .chip {
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(96,165,250,0.10);
+      border: 1px solid rgba(96,165,250,0.24);
+      color: rgba(255,255,255,0.88);
+      font-size: 12px;
+    }
+    .sectionTitle { margin: 20px 0 10px; display:flex; align-items: center; justify-content: space-between; gap: 8px; }
+    .sectionTitle h2 { font-size: 16px; margin: 0; }
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.04));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 14px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.35);
+      margin-top: 14px;
+    }
+    .cardHeader { display:flex; align-items: center; justify-content: space-between; gap: 10px; }
+    h3 { margin: 0; font-size: 16px; }
+    h4 { margin: 0 0 6px; font-size: 13px; color: rgba(255,255,255,0.86); }
+    .titleRow { display:flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .subRow { margin-top: 8px; display:flex; gap: 10px; flex-wrap: wrap; }
+    .pill {
+      display:inline-flex;
+      gap: 6px;
+      align-items: baseline;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.10);
+      color: rgba(255,255,255,0.86);
+      font-size: 12px;
+    }
+    .badge {
+      display:inline-flex;
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: rgba(45,212,191,0.12);
+      border: 1px solid rgba(45,212,191,0.26);
+      color: rgba(255,255,255,0.9);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .grid2 { display:grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 12px; }
+    @media (max-width: 960px) { .grid2 { grid-template-columns: 1fr; } }
+    .tableWrap { overflow:auto; border-radius: 14px; border: 1px solid rgba(255,255,255,0.10); }
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+      background: rgba(0,0,0,0.10);
+    }
+    .table th, .table td {
+      padding: 9px 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      vertical-align: top;
+    }
+    .table th {
+      text-align: left;
+      color: rgba(255,255,255,0.78);
+      background: rgba(255,255,255,0.04);
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+    .table.compact th, .table.compact td { padding: 8px 9px; }
+    .num { text-align: right; font-variant-numeric: tabular-nums; }
+    .good { color: var(--good); font-weight: 700; }
+    .bad { color: var(--bad); font-weight: 700; }
+    .link {
+      appearance: none;
+      border: none;
+      background: transparent;
+      color: rgba(255,255,255,0.92);
+      padding: 0;
+      font: inherit;
+      cursor: pointer;
+      text-decoration: underline;
+      text-decoration-color: rgba(96,165,250,0.55);
+    }
+    .link:hover { color: rgba(96,165,250,0.95); }
+
+    /* Tooltip */
+    .tip {
+      position: fixed;
+      inset: auto auto 16px 16px;
+      max-width: 420px;
+      background: rgba(12,16,26,0.92);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 14px;
+      padding: 12px 12px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      display: none;
+      z-index: 1000;
+    }
+    .tipHeader { display:flex; align-items:flex-start; justify-content: space-between; gap: 10px; }
+    .tipTitle { font-weight: 800; }
+    .tipClose {
+      appearance:none; border:none; background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.85);
+      padding: 6px 9px; border-radius: 10px; cursor:pointer;
+    }
+    .tipClose:hover { background: rgba(255,255,255,0.10); }
+    .tipBody { margin-top: 8px; color: rgba(255,255,255,0.78); line-height: 1.35; }
+    .tipMeta { margin-top: 10px; color: rgba(255,255,255,0.62); font-size: 12px; }
+    .footer { margin-top: 20px; color: rgba(255,255,255,0.52); font-size: 12px; }
+    .callout {
+      border: 1px dashed rgba(255,255,255,0.18);
+      border-radius: 14px;
+      padding: 10px 12px;
+      background: rgba(255,255,255,0.03);
+      color: rgba(255,255,255,0.72);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="hero">
+      <div class="heroTop">
+        <h1>BGL ML Report — 2026 Championship: Wyrmspan</h1>
+        <div class="muted small">Generated from `bgl_ml_features.json`</div>
+      </div>
+      <div class="grid">
+        <div class="panel">
+          <div class="sectionTitle"><h2>Context</h2></div>
+          <div class="kvs"><div class='kv'><div class='k'>Year</div><div class='v'>2026</div></div><div class='kv'><div class='k'>Week</div><div class='v'>Championship</div></div><div class='kv'><div class='k'>Game</div><div class='v'>Wyrmspan</div></div><div class='kv'><div class='k'>PodId</div><div class='v'>2026__Championship__Wyrmspan__pod1</div></div><div class='kv'><div class='k'>Mode</div><div class='v'>inseason</div></div><div class='kv'><div class='k'>Prob sims</div><div class='v'>50,000</div></div><div class='kv'><div class='k'>Temperature</div><div class='v'>0.50</div></div></div>
+          <div style="margin-top: 12px" class="callout">
+            <b>How to read this report:</b> Expected placement is the RandomForest output (lower is better).
+            Probabilities are from a Monte Carlo simulation that turns expected placement into a “strength” score and samples full finish orders.
+            Click any factor name to see a plain-English explanation.
+          </div>
+        </div>
+        <div class="panel">
+          <div class="sectionTitle"><h2>Game mechanics</h2></div>
+          <div class="chips"><span class="chip">End Game Bonuses</span><span class="chip">Hand Management</span><span class="chip">Once-Per-Game Abilities</span><span class="chip">Open Drafting</span><span class="chip">Solo / Solitaire Game</span><span class="chip">Track Movement</span><span class="chip">Turn Order: Progressive</span></div>
+          <div class="sectionTitle" style="margin-top: 14px"><h2>Similar games</h2></div>
+          <table class='table'><thead><tr><th>Game</th><th class='num'>Similarity</th></tr></thead><tbody><tr><td>Wingspan</td><td class='num'>0.60</td></tr><tr><td>Sagrada</td><td class='num'>0.31</td></tr><tr><td>Tokaido</td><td class='num'>0.27</td></tr><tr><td>Cascadia</td><td class='num'>0.27</td></tr><tr><td>Ticket to Ride</td><td class='num'>0.25</td></tr><tr><td>Calico</td><td class='num'>0.23</td></tr><tr><td>Bonsai</td><td class='num'>0.23</td></tr><tr><td>Wondrous Creatures</td><td class='num'>0.23</td></tr><tr><td>Wroth</td><td class='num'>0.21</td></tr><tr><td>Heat: Pedal to the Metal</td><td class='num'>0.20</td></tr></tbody></table>
+        </div>
+      </div>
+    </div>
+
+    <div class="sectionTitle">
+      <h2>Model feature weights (global)</h2>
+      <div class="muted small">RandomForest `feature_importances_` (not linear coefficients)</div>
+    </div>
+    <div class="panel">
+      <div class="tableWrap">
+        <table class="table">
+          <thead>
+            <tr><th>Factor</th><th>Variable</th><th class="num">Weight</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><button class='link' data-feature='MechanicSkill'>Skill on similar mechanics</button></td><td class='mono muted'>MechanicSkill</td><td class='num'>0.0742</td></tr><tr><td><button class='link' data-feature='Consistency_StdDev'>Consistency (lower is steadier)</button></td><td class='mono muted'>Consistency_StdDev</td><td class='num'>0.0625</td></tr><tr><td><button class='link' data-feature='Elo'>Player rating (Elo)</button></td><td class='mono muted'>Elo</td><td class='num'>0.0574</td></tr><tr><td><button class='link' data-feature='CurrentOppStd'>Opponent strength spread</button></td><td class='mono muted'>CurrentOppStd</td><td class='num'>0.0528</td></tr><tr><td><button class='link' data-feature='CurrentOppAvg'>Opponent strength in this pod</button></td><td class='mono muted'>CurrentOppAvg</td><td class='num'>0.0515</td></tr><tr><td><button class='link' data-feature='OppAvgElo'>Opponent Elo (avg)</button></td><td class='mono muted'>OppAvgElo</td><td class='num'>0.0513</td></tr><tr><td><button class='link' data-feature='SeasonSOS'>Strength of schedule so far</button></td><td class='mono muted'>SeasonSOS</td><td class='num'>0.0511</td></tr><tr><td><button class='link' data-feature='H2H_WinRate'>Head-to-head win rate vs pod</button></td><td class='mono muted'>H2H_WinRate</td><td class='num'>0.0485</td></tr><tr><td><button class='link' data-feature='CareerAvg'>Career average placement</button></td><td class='mono muted'>CareerAvg</td><td class='num'>0.0441</td></tr><tr><td><button class='link' data-feature='OppStdElo'>Opponent Elo (spread)</button></td><td class='mono muted'>OppStdElo</td><td class='num'>0.0434</td></tr><tr><td><button class='link' data-feature='PointsAbovePace'>Points above qualifying pace</button></td><td class='mono muted'>PointsAbovePace</td><td class='num'>0.0433</td></tr><tr><td><button class='link' data-feature='ComplexityDelta'>Game vs preferred complexity</button></td><td class='mono muted'>ComplexityDelta</td><td class='num'>0.0401</td></tr><tr><td><button class='link' data-feature='CurrentOppMax'>Strongest opponent (avg)</button></td><td class='mono muted'>CurrentOppMax</td><td class='num'>0.0377</td></tr><tr><td><button class='link' data-feature='OppMaxElo'>Opponent Elo (max)</button></td><td class='mono muted'>OppMaxElo</td><td class='num'>0.0372</td></tr><tr><td><button class='link' data-feature='EloGames'>Elo sample size</button></td><td class='mono muted'>EloGames</td><td class='num'>0.0322</td></tr><tr><td><button class='link' data-feature='LastSeasonAvg'>Last season average placement</button></td><td class='mono muted'>LastSeasonAvg</td><td class='num'>0.0277</td></tr><tr><td><button class='link' data-feature='CurrentOppMin'>Weakest opponent (avg)</button></td><td class='mono muted'>CurrentOppMin</td><td class='num'>0.0268</td></tr><tr><td><button class='link' data-feature='NoLastStreak'>Streak of not finishing last</button></td><td class='mono muted'>NoLastStreak</td><td class='num'>0.0246</td></tr><tr><td><button class='link' data-feature='MechanicSkillSamples'>Mechanic skill sample size</button></td><td class='mono muted'>MechanicSkillSamples</td><td class='num'>0.0235</td></tr><tr><td><button class='link' data-feature='Difficulty'>Game complexity (BGG weight)</button></td><td class='mono muted'>Difficulty</td><td class='num'>0.0224</td></tr><tr><td><button class='link' data-feature='TenureGap'>Experience gap vs opponents</button></td><td class='mono muted'>TenureGap</td><td class='num'>0.0205</td></tr><tr><td><button class='link' data-feature='SeasonPoints'>Season points so far</button></td><td class='mono muted'>SeasonPoints</td><td class='num'>0.0204</td></tr><tr><td><button class='link' data-feature='Prev2Avg'>Recent form (last 2 avg)</button></td><td class='mono muted'>Prev2Avg</td><td class='num'>0.0203</td></tr><tr><td><button class='link' data-feature='SecondStreak'>Current 2nd-place streak</button></td><td class='mono muted'>SecondStreak</td><td class='num'>0.0159</td></tr><tr><td><button class='link' data-feature='PrevGame'>Last result</button></td><td class='mono muted'>PrevGame</td><td class='num'>0.0127</td></tr><tr><td><button class='link' data-feature='IsHome'>Home-field advantage</button></td><td class='mono muted'>IsHome</td><td class='num'>0.0110</td></tr><tr><td><button class='link' data-feature='ThirdStreak'>Current 3rd-place streak</button></td><td class='mono muted'>ThirdStreak</td><td class='num'>0.0106</td></tr><tr><td><button class='link' data-feature='WinStreak'>Current win streak</button></td><td class='mono muted'>WinStreak</td><td class='num'>0.0104</td></tr><tr><td><button class='link' data-feature='PlayoffAppearances'>Post-season experience</button></td><td class='mono muted'>PlayoffAppearances</td><td class='num'>0.0087</td></tr><tr><td><button class='link' data-feature='LastTitlePlacement'>Last time playing this game</button></td><td class='mono muted'>LastTitlePlacement</td><td class='num'>0.0070</td></tr><tr><td><button class='link' data-feature='RookieOpponents'>Number of rookies in pod</button></td><td class='mono muted'>RookieOpponents</td><td class='num'>0.0055</td></tr><tr><td><button class='link' data-feature='Tenure'>Games played (experience)</button></td><td class='mono muted'>Tenure</td><td class='num'>0.0037</td></tr><tr><td><button class='link' data-feature='IsRookie'>Rookie flag</button></td><td class='mono muted'>IsRookie</td><td class='num'>0.0011</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="sectionTitle">
+      <h2>Pod breakdown</h2>
+      <div class="muted small">“Impact” compares player value to average winner profile, scaled by feature weight</div>
+    </div>
+
+    
+            <section class="card">
+              <div class="cardHeader">
+                <div>
+                  <div class="titleRow">
+                    <h3>Michael</h3>
+                    <span class="badge">exp place 2.05</span>
+                  </div>
+                  <div class="subRow">
+                    <span class="pill">P(1st): <b>46.7%</b></span>
+                    <span class="pill">P(top2): <b>77.5%</b></span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="grid2">
+                <div>
+                  <h4>Hurting odds</h4>
+                  <div class="muted small">Biggest positive “impact” values push expected placement worse.</div>
+                  <div class="tableWrap">
+                    <table class="table compact">
+                      <thead>
+                        <tr><th>Factor</th><th class="num">Value</th><th class="num">Avg winner</th><th class="num">Impact</th></tr>
+                      </thead>
+                      <tbody>
+                        <tr><td><button class='link' data-feature='NoLastStreak'>Streak of not finishing last</button></td><td class='num mono'>3.000</td><td class='num mono muted'>5.000</td><td class='num mono bad'>+0.0491</td></tr><tr><td><button class='link' data-feature='SeasonSOS'>Strength of schedule so far</button></td><td class='num mono'>2.546</td><td class='num mono muted'>2.460</td><td class='num mono bad'>+0.0044</td></tr><tr><td><button class='link' data-feature='OppMaxElo'>Opponent Elo (max)</button></td><td class='num mono'>1678.800</td><td class='num mono muted'>1678.725</td><td class='num mono bad'>+0.0028</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div>
+                  <h4>Helping odds</h4>
+                  <div class="muted small">Most negative “impact” values push expected placement better.</div>
+                  <div class="tableWrap">
+                    <table class="table compact">
+                      <thead>
+                        <tr><th>Factor</th><th class="num">Value</th><th class="num">Avg winner</th><th class="num">Impact</th></tr>
+                      </thead>
+                      <tbody>
+                        <tr><td><button class='link' data-feature='Elo'>Player rating (Elo)</button></td><td class='num mono'>1678.500</td><td class='num mono muted'>1629.625</td><td class='num mono good'>-2.8054</td></tr><tr><td><button class='link' data-feature='OppAvgElo'>Opponent Elo (avg)</button></td><td class='num mono'>1613.300</td><td class='num mono muted'>1629.625</td><td class='num mono good'>-0.8381</td></tr><tr><td><button class='link' data-feature='EloGames'>Elo sample size</button></td><td class='num mono'>108.000</td><td class='num mono muted'>95.250</td><td class='num mono good'>-0.4103</td></tr><tr><td><button class='link' data-feature='MechanicSkill'>Skill on similar mechanics</button></td><td class='num mono'>1.734</td><td class='num mono muted'>2.127</td><td class='num mono good'>-0.0292</td></tr><tr><td><button class='link' data-feature='PlayoffAppearances'>Post-season experience</button></td><td class='num mono'>6.000</td><td class='num mono muted'>3.250</td><td class='num mono good'>-0.0238</td></tr><tr><td><button class='link' data-feature='PointsAbovePace'>Points above qualifying pace</button></td><td class='num mono'>3.100</td><td class='num mono muted'>2.600</td><td class='num mono good'>-0.0216</td></tr><tr><td><button class='link' data-feature='WinStreak'>Current win streak</button></td><td class='num mono'>3.000</td><td class='num mono muted'>1.250</td><td class='num mono good'>-0.0182</td></tr><tr><td><button class='link' data-feature='SecondStreak'>Current 2nd-place streak</button></td><td class='num mono'>0.000</td><td class='num mono muted'>1.000</td><td class='num mono good'>-0.0159</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </section>
+            
+            <section class="card">
+              <div class="cardHeader">
+                <div>
+                  <div class="titleRow">
+                    <h3>Austin</h3>
+                    <span class="badge">exp place 2.41</span>
+                  </div>
+                  <div class="subRow">
+                    <span class="pill">P(1st): <b>22.8%</b></span>
+                    <span class="pill">P(top2): <b>51.1%</b></span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="grid2">
+                <div>
+                  <h4>Hurting odds</h4>
+                  <div class="muted small">Biggest positive “impact” values push expected placement worse.</div>
+                  <div class="tableWrap">
+                    <table class="table compact">
+                      <thead>
+                        <tr><th>Factor</th><th class="num">Value</th><th class="num">Avg winner</th><th class="num">Impact</th></tr>
+                      </thead>
+                      <tbody>
+                        <tr><td><button class='link' data-feature='NoLastStreak'>Streak of not finishing last</button></td><td class='num mono'>3.000</td><td class='num mono muted'>5.000</td><td class='num mono bad'>+0.0491</td></tr><tr><td><button class='link' data-feature='Consistency_StdDev'>Consistency (lower is steadier)</button></td><td class='num mono'>0.998</td><td class='num mono muted'>1.062</td><td class='num mono bad'>+0.0040</td></tr><tr><td><button class='link' data-feature='SeasonSOS'>Strength of schedule so far</button></td><td class='num mono'>2.499</td><td class='num mono muted'>2.460</td><td class='num mono bad'>+0.0020</td></tr><tr><td><button class='link' data-feature='ComplexityDelta'>Game vs preferred complexity</button></td><td class='num mono'>0.788</td><td class='num mono muted'>0.776</td><td class='num mono bad'>+0.0005</td></tr><tr><td><button class='link' data-feature='CurrentOppMin'>Weakest opponent (avg)</button></td><td class='num mono'>1.917</td><td class='num mono muted'>1.923</td><td class='num mono bad'>+0.0002</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div>
+                  <h4>Helping odds</h4>
+                  <div class="muted small">Most negative “impact” values push expected placement better.</div>
+                  <div class="tableWrap">
+                    <table class="table compact">
+                      <thead>
+                        <tr><th>Factor</th><th class="num">Value</th><th class="num">Avg winner</th><th class="num">Impact</th></tr>
+                      </thead>
+                      <tbody>
+                        <tr><td><button class='link' data-feature='Elo'>Player rating (Elo)</button></td><td class='num mono'>1678.800</td><td class='num mono muted'>1629.625</td><td class='num mono good'>-2.8226</td></tr><tr><td><button class='link' data-feature='OppAvgElo'>Opponent Elo (avg)</button></td><td class='num mono'>1613.200</td><td class='num mono muted'>1629.625</td><td class='num mono good'>-0.8432</td></tr><tr><td><button class='link' data-feature='EloGames'>Elo sample size</button></td><td class='num mono'>102.000</td><td class='num mono muted'>95.250</td><td class='num mono good'>-0.2172</td></tr><tr><td><button class='link' data-feature='PointsAbovePace'>Points above qualifying pace</button></td><td class='num mono'>4.100</td><td class='num mono muted'>2.600</td><td class='num mono good'>-0.0649</td></tr><tr><td><button class='link' data-feature='SeasonPoints'>Season points so far</button></td><td class='num mono'>16.000</td><td class='num mono muted'>14.500</td><td class='num mono good'>-0.0306</td></tr><tr><td><button class='link' data-feature='SecondStreak'>Current 2nd-place streak</button></td><td class='num mono'>0.000</td><td class='num mono muted'>1.000</td><td class='num mono good'>-0.0159</td></tr><tr><td><button class='link' data-feature='CareerAvg'>Career average placement</button></td><td class='num mono'>1.941</td><td class='num mono muted'>2.238</td><td class='num mono good'>-0.0131</td></tr><tr><td><button class='link' data-feature='MechanicSkill'>Skill on similar mechanics</button></td><td class='num mono'>1.990</td><td class='num mono muted'>2.127</td><td class='num mono good'>-0.0102</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </section>
+            
+            <section class="card">
+              <div class="cardHeader">
+                <div>
+                  <div class="titleRow">
+                    <h3>Jack M</h3>
+                    <span class="badge">exp place 2.56</span>
+                  </div>
+                  <div class="subRow">
+                    <span class="pill">P(1st): <b>17.1%</b></span>
+                    <span class="pill">P(top2): <b>39.7%</b></span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="grid2">
+                <div>
+                  <h4>Hurting odds</h4>
+                  <div class="muted small">Biggest positive “impact” values push expected placement worse.</div>
+                  <div class="tableWrap">
+                    <table class="table compact">
+                      <thead>
+                        <tr><th>Factor</th><th class="num">Value</th><th class="num">Avg winner</th><th class="num">Impact</th></tr>
+                      </thead>
+                      <tbody>
+                        <tr><td><button class='link' data-feature='Elo'>Player rating (Elo)</button></td><td class='num mono'>1589.000</td><td class='num mono muted'>1629.625</td><td class='num mono bad'>+2.3319</td></tr><tr><td><button class='link' data-feature='OppAvgElo'>Opponent Elo (avg)</button></td><td class='num mono'>1643.200</td><td class='num mono muted'>1629.625</td><td class='num mono bad'>+0.6969</td></tr><tr><td><button class='link' data-feature='EloGames'>Elo sample size</button></td><td class='num mono'>78.000</td><td class='num mono muted'>95.250</td><td class='num mono bad'>+0.5552</td></tr><tr><td><button class='link' data-feature='PointsAbovePace'>Points above qualifying pace</button></td><td class='num mono'>1.100</td><td class='num mono muted'>2.600</td><td class='num mono bad'>+0.0649</td></tr><tr><td><button class='link' data-feature='SeasonPoints'>Season points so far</button></td><td class='num mono'>13.000</td><td class='num mono muted'>14.500</td><td class='num mono bad'>+0.0306</td></tr><tr><td><button class='link' data-feature='MechanicSkill'>Skill on similar mechanics</button></td><td class='num mono'>2.363</td><td class='num mono muted'>2.127</td><td class='num mono bad'>+0.0175</td></tr><tr><td><button class='link' data-feature='WinStreak'>Current win streak</button></td><td class='num mono'>0.000</td><td class='num mono muted'>1.250</td><td class='num mono bad'>+0.0130</td></tr><tr><td><button class='link' data-feature='PlayoffAppearances'>Post-season experience</button></td><td class='num mono'>2.000</td><td class='num mono muted'>3.250</td><td class='num mono bad'>+0.0108</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div>
+                  <h4>Helping odds</h4>
+                  <div class="muted small">Most negative “impact” values push expected placement better.</div>
+                  <div class="tableWrap">
+                    <table class="table compact">
+                      <thead>
+                        <tr><th>Factor</th><th class="num">Value</th><th class="num">Avg winner</th><th class="num">Impact</th></tr>
+                      </thead>
+                      <tbody>
+                        <tr><td><button class='link' data-feature='OppStdElo'>Opponent Elo (spread)</button></td><td class='num mono'>50.200</td><td class='num mono muted'>46.475</td><td class='num mono good'>-0.1616</td></tr><tr><td><button class='link' data-feature='NoLastStreak'>Streak of not finishing last</button></td><td class='num mono'>6.000</td><td class='num mono muted'>5.000</td><td class='num mono good'>-0.0246</td></tr><tr><td><button class='link' data-feature='LastSeasonAvg'>Last season average placement</button></td><td class='num mono'>2.143</td><td class='num mono muted'>2.307</td><td class='num mono good'>-0.0045</td></tr><tr><td><button class='link' data-feature='CurrentOppStd'>Opponent strength spread</button></td><td class='num mono'>0.368</td><td class='num mono muted'>0.306</td><td class='num mono good'>-0.0033</td></tr><tr><td><button class='link' data-feature='CurrentOppMax'>Strongest opponent (avg)</button></td><td class='num mono'>2.710</td><td class='num mono muted'>2.629</td><td class='num mono good'>-0.0031</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </section>
+            
+            <section class="card">
+              <div class="cardHeader">
+                <div>
+                  <div class="titleRow">
+                    <h3>Josh</h3>
+                    <span class="badge">exp place 2.68</span>
+                  </div>
+                  <div class="subRow">
+                    <span class="pill">P(1st): <b>13.4%</b></span>
+                    <span class="pill">P(top2): <b>31.8%</b></span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="grid2">
+                <div>
+                  <h4>Hurting odds</h4>
+                  <div class="muted small">Biggest positive “impact” values push expected placement worse.</div>
+                  <div class="tableWrap">
+                    <table class="table compact">
+                      <thead>
+                        <tr><th>Factor</th><th class="num">Value</th><th class="num">Avg winner</th><th class="num">Impact</th></tr>
+                      </thead>
+                      <tbody>
+                        <tr><td><button class='link' data-feature='Elo'>Player rating (Elo)</button></td><td class='num mono'>1572.200</td><td class='num mono muted'>1629.625</td><td class='num mono bad'>+3.2962</td></tr><tr><td><button class='link' data-feature='OppAvgElo'>Opponent Elo (avg)</button></td><td class='num mono'>1648.800</td><td class='num mono muted'>1629.625</td><td class='num mono bad'>+0.9844</td></tr><tr><td><button class='link' data-feature='OppStdElo'>Opponent Elo (spread)</button></td><td class='num mono'>42.200</td><td class='num mono muted'>46.475</td><td class='num mono bad'>+0.1855</td></tr><tr><td><button class='link' data-feature='EloGames'>Elo sample size</button></td><td class='num mono'>93.000</td><td class='num mono muted'>95.250</td><td class='num mono bad'>+0.0724</td></tr><tr><td><button class='link' data-feature='SecondStreak'>Current 2nd-place streak</button></td><td class='num mono'>3.000</td><td class='num mono muted'>1.000</td><td class='num mono bad'>+0.0318</td></tr><tr><td><button class='link' data-feature='LastSeasonAvg'>Last season average placement</button></td><td class='num mono'>3.167</td><td class='num mono muted'>2.307</td><td class='num mono bad'>+0.0238</td></tr><tr><td><button class='link' data-feature='MechanicSkill'>Skill on similar mechanics</button></td><td class='num mono'>2.422</td><td class='num mono muted'>2.127</td><td class='num mono bad'>+0.0219</td></tr><tr><td><button class='link' data-feature='PointsAbovePace'>Points above qualifying pace</button></td><td class='num mono'>2.100</td><td class='num mono muted'>2.600</td><td class='num mono bad'>+0.0216</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div>
+                  <h4>Helping odds</h4>
+                  <div class="muted small">Most negative “impact” values push expected placement better.</div>
+                  <div class="tableWrap">
+                    <table class="table compact">
+                      <thead>
+                        <tr><th>Factor</th><th class="num">Value</th><th class="num">Avg winner</th><th class="num">Impact</th></tr>
+                      </thead>
+                      <tbody>
+                        <tr><td><button class='link' data-feature='NoLastStreak'>Streak of not finishing last</button></td><td class='num mono'>8.000</td><td class='num mono muted'>5.000</td><td class='num mono good'>-0.0737</td></tr><tr><td><button class='link' data-feature='Consistency_StdDev'>Consistency (lower is steadier)</button></td><td class='num mono'>1.197</td><td class='num mono muted'>1.062</td><td class='num mono good'>-0.0084</td></tr><tr><td><button class='link' data-feature='SeasonSOS'>Strength of schedule so far</button></td><td class='num mono'>2.301</td><td class='num mono muted'>2.460</td><td class='num mono good'>-0.0081</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </section>
+            
+
+    <div class="footer">
+      <div><b>Notes:</b></div>
+      <ul>
+        <li>“Impact” is an interpretability heuristic (gap × importance × direction). It helps explain the model, but it is not the model itself.</li>
+        <li>Probabilities depend on the simulation temperature; lower temperature makes favorites win more often.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="tip" class="tip" role="dialog" aria-modal="false">
+    <div class="tipHeader">
+      <div>
+        <div id="tipTitle" class="tipTitle"></div>
+        <div id="tipVar" class="tipMeta"></div>
+      </div>
+      <button id="tipClose" class="tipClose">Close</button>
+    </div>
+    <div id="tipBody" class="tipBody"></div>
+  </div>
+
+  <script>
+    const GLOSSARY = {"CareerAvg": {"label": "Career average placement", "tooltip": "Average placement across all recorded games. Lower is better (1.0 is perfect)."}, "ComplexityDelta": {"label": "Game vs preferred complexity", "tooltip": "Game difficulty minus the average difficulty of games the player wins. Positive means the game is harder than their typical winning comfort zone."}, "Consistency_StdDev": {"label": "Consistency (lower is steadier)", "tooltip": "Standard deviation of placements. Lower means more consistent outcomes."}, "CurrentOppAvg": {"label": "Opponent strength in this pod", "tooltip": "Average historical strength of the opponents in this specific pod."}, "CurrentOppMax": {"label": "Strongest opponent (avg)", "tooltip": "Worst (highest) opponent career average in this pod."}, "CurrentOppMin": {"label": "Weakest opponent (avg)", "tooltip": "Best (lowest) opponent career average in this pod."}, "CurrentOppStd": {"label": "Opponent strength spread", "tooltip": "Standard deviation of opponents' historical average placements (spread in opponent quality)."}, "Difficulty": {"label": "Game complexity (BGG weight)", "tooltip": "BoardGameGeek weight for the game. Higher usually means more complex decisions."}, "Elo": {"label": "Player rating (Elo)", "tooltip": "Pre-match Elo rating computed from historical games only (updated after each completed game). Higher is stronger."}, "EloGames": {"label": "Elo sample size", "tooltip": "How many pairwise Elo updates contributed to the rating (a rough uncertainty proxy)."}, "H2H_WinRate": {"label": "Head-to-head win rate vs pod", "tooltip": "Across historical games, fraction of pairwise matchups vs these opponents where this player's placement beat the opponent's."}, "IsHome": {"label": "Home-field advantage", "tooltip": "1 if the game location string contains the player's name, else 0. This is a rough proxy for home advantage."}, "IsRookie": {"label": "Rookie flag", "tooltip": "1 if player has fewer than ROOKIE_THRESHOLD total games in the dataset."}, "LastSeasonAvg": {"label": "Last season average placement", "tooltip": "Player average placement during the prior season they played."}, "LastTitlePlacement": {"label": "Last time playing this game", "tooltip": "Player\u2019s last placement the last time they played THIS exact game (or 2.5 if never)."}, "MechanicSkill": {"label": "Skill on similar mechanics", "tooltip": "Average placement the player tends to earn on mechanics similar to this game (estimated from their mechanic history). Lower is better."}, "MechanicSkillSamples": {"label": "Mechanic skill sample size", "tooltip": "How many mechanics had prior history for this player (higher = more reliable mechanic skill)."}, "NoLastStreak": {"label": "Streak of not finishing last", "tooltip": "How many consecutive games the player avoided last place (4th)."}, "OppAvgElo": {"label": "Opponent Elo (avg)", "tooltip": "Average Elo rating of opponents in this pod (pre-match)."}, "OppMaxElo": {"label": "Opponent Elo (max)", "tooltip": "Highest opponent Elo rating in this pod."}, "OppStdElo": {"label": "Opponent Elo (spread)", "tooltip": "Spread (std dev) of opponent Elo ratings in this pod."}, "PlayoffAppearances": {"label": "Post-season experience", "tooltip": "Count of past post-season games the player has participated in (playoffs + championship)."}, "PointsAbovePace": {"label": "Points above qualifying pace", "tooltip": "SeasonPoints minus (gamesPlayed * targetPPG). TargetPPG depends on how hard it is to qualify that season."}, "Prev2Avg": {"label": "Recent form (last 2 avg)", "tooltip": "Average of the player's last two placements (or 2.5 if insufficient history)."}, "PrevGame": {"label": "Last result", "tooltip": "The player's placement in their most recent prior game (or 2.5 if none)."}, "RookieOpponents": {"label": "Number of rookies in pod", "tooltip": "How many opponents in the pod are rookies (few recorded games)."}, "SeasonPoints": {"label": "Season points so far", "tooltip": "3/2/1/0 scoring for 1st/2nd/3rd/4th accumulated this season so far."}, "SeasonSOS": {"label": "Strength of schedule so far", "tooltip": "Average opponent strength faced so far this season (based on opponents' historical averages)."}, "SecondStreak": {"label": "Current 2nd-place streak", "tooltip": "How many consecutive 2nd-place finishes entering this game."}, "Tenure": {"label": "Games played (experience)", "tooltip": "How many recorded games the player has in the dataset."}, "TenureGap": {"label": "Experience gap vs opponents", "tooltip": "Player tenure minus the average tenure of opponents in this pod. Positive means more experienced than the pod on average."}, "ThirdStreak": {"label": "Current 3rd-place streak", "tooltip": "How many consecutive 3rd-place finishes entering this game."}, "WinStreak": {"label": "Current win streak", "tooltip": "How many consecutive 1st-place finishes entering this game."}};
+    const tip = document.getElementById('tip');
+    const tipTitle = document.getElementById('tipTitle');
+    const tipVar = document.getElementById('tipVar');
+    const tipBody = document.getElementById('tipBody');
+    const tipClose = document.getElementById('tipClose');
+
+    function showTip(feature) {
+      const info = GLOSSARY[feature];
+      if (!info) return;
+      tipTitle.textContent = info.label || feature;
+      tipVar.textContent = feature;
+      tipBody.textContent = info.tooltip || '';
+      tip.style.display = 'block';
+    }
+
+    function hideTip() {
+      tip.style.display = 'none';
+    }
+
+    document.addEventListener('click', (e) => {
+      const el = e.target.closest('[data-feature]');
+      if (!el) return;
+      e.preventDefault();
+      showTip(el.getAttribute('data-feature'));
+    });
+
+    tipClose.addEventListener('click', hideTip);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') hideTip();
+    });
+  </script>
+</body>
+</html>

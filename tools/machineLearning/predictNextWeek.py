@@ -1,5 +1,6 @@
 import pandas as pd
 from sklearn.ensemble import RandomForestRegressor
+from pathlib import Path
 
 # --- CONFIGURATION ---
 # We don't even need to specify the week anymore! 
@@ -7,7 +8,8 @@ from sklearn.ensemble import RandomForestRegressor
 
 # 1. Load the Data
 try:
-    df = pd.read_json('machineLearning/bgl_ml_features.json')
+    data_path = Path(__file__).resolve().parent / 'bgl_ml_features.json'
+    df = pd.read_json(data_path)
 except ValueError:
     print("Error: Could not read JSON. Did you run 'node buildMLDataset.js'?")
     exit()
@@ -69,14 +71,14 @@ predict_df['Predicted_Rank'] = model.predict(X_predict)
 
 # 6. Formatting the Output
 print("\n" + "="*40)
-print("📢  BGL PREDICTIONS: UPCOMING WEEK  📢")
+print("BGL PREDICTIONS: UPCOMING WEEK")
 print("="*40 + "\n")
 
 # Group by Game and Year/Week to handle multiple weeks if necessary
 groups = predict_df.groupby(['Year', 'Week', 'Game'])
 
 for (year, week, game), group_data in groups:
-    print(f"📅 {year} {week}: {game}")
+    print(f"{year} {week}: {game}")
     print("-" * 30)
     
     # We assume players in the same pod appear sequentially in the JSON.
@@ -96,7 +98,7 @@ for (year, week, game), group_data in groups:
         # Sort this specific pod by their predicted rank (lowest is best)
         pod.sort(key=lambda x: x['Predicted_Rank'])
         
-        print(f"  🏆 Matchup {i//pod_size + 1}")
+        print(f"  Matchup {i//pod_size + 1}")
         for rank, p in enumerate(pod, 1):
             # We print the raw model score (e.g. 1.8) to show confidence
             print(f"    {rank}. {p['Player']} (Score: {p['Predicted_Rank']:.2f})")

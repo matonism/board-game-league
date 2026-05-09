@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "generated_at": "2026-05-07T01:43:18.264Z",
+    "generated_at": "2026-05-07T21:35:27.713Z",
     "description": "League Analytics Data"
   },
   "leaderboards": [
@@ -158,6 +158,133 @@
           "player": "Allie",
           "value": "0.75",
           "context": "16 games"
+        }
+      ]
+    },
+    {
+      "category": "Elo Leaderboard",
+      "subcategory": "Ratings",
+      "scope": "All-Time (Reg and Post Season)",
+      "entries": [
+        {
+          "rank": 1,
+          "player": "Austin",
+          "value": "1678.8",
+          "context": "102 pairwise"
+        },
+        {
+          "rank": 2,
+          "player": "Michael",
+          "value": "1678.5",
+          "context": "108 pairwise"
+        },
+        {
+          "rank": 3,
+          "player": "Cody",
+          "value": "1605.3",
+          "context": "63 pairwise"
+        },
+        {
+          "rank": 4,
+          "player": "Jack M",
+          "value": "1589.0",
+          "context": "78 pairwise"
+        },
+        {
+          "rank": 5,
+          "player": "Josh",
+          "value": "1572.2",
+          "context": "93 pairwise"
+        },
+        {
+          "rank": 6,
+          "player": "Ashley",
+          "value": "1564.8",
+          "context": "99 pairwise"
+        },
+        {
+          "rank": 7,
+          "player": "Rachel M",
+          "value": "1557.7",
+          "context": "81 pairwise"
+        },
+        {
+          "rank": 8,
+          "player": "Ian",
+          "value": "1548.6",
+          "context": "63 pairwise"
+        },
+        {
+          "rank": 9,
+          "player": "Sam",
+          "value": "1540.0",
+          "context": "57 pairwise"
+        },
+        {
+          "rank": 10,
+          "player": "Nick",
+          "value": "1529.7",
+          "context": "99 pairwise"
+        },
+        {
+          "rank": 11,
+          "player": "Richie",
+          "value": "1525.7",
+          "context": "105 pairwise"
+        },
+        {
+          "rank": 12,
+          "player": "Rachel F",
+          "value": "1490.7",
+          "context": "93 pairwise"
+        },
+        {
+          "rank": 13,
+          "player": "Brittany",
+          "value": "1477.4",
+          "context": "36 pairwise"
+        },
+        {
+          "rank": 14,
+          "player": "Dan",
+          "value": "1468.9",
+          "context": "93 pairwise"
+        },
+        {
+          "rank": 15,
+          "player": "Carly",
+          "value": "1452.7",
+          "context": "78 pairwise"
+        },
+        {
+          "rank": 16,
+          "player": "Jack C",
+          "value": "1445.1",
+          "context": "36 pairwise"
+        },
+        {
+          "rank": 17,
+          "player": "Tyler",
+          "value": "1419.2",
+          "context": "72 pairwise"
+        },
+        {
+          "rank": 18,
+          "player": "Steve",
+          "value": "1386.6",
+          "context": "72 pairwise"
+        },
+        {
+          "rank": 19,
+          "player": "Emma",
+          "value": "1369.2",
+          "context": "54 pairwise"
+        },
+        {
+          "rank": 20,
+          "player": "Ryan",
+          "value": "1335.8",
+          "context": "93 pairwise"
         }
       ]
     },
@@ -5270,6 +5397,133 @@
           "player": "Allie",
           "value": "0.75",
           "context": "16 games"
+        }
+      ]
+    },
+    {
+      "category": "Elo Leaderboard",
+      "subcategory": "Ratings",
+      "scope": "All-Time (Regular Season)",
+      "entries": [
+        {
+          "rank": 1,
+          "player": "Cody",
+          "value": "1636.8",
+          "context": "54 pairwise"
+        },
+        {
+          "rank": 2,
+          "player": "Austin",
+          "value": "1623.0",
+          "context": "90 pairwise"
+        },
+        {
+          "rank": 3,
+          "player": "Michael",
+          "value": "1618.7",
+          "context": "90 pairwise"
+        },
+        {
+          "rank": 4,
+          "player": "Rachel M",
+          "value": "1591.3",
+          "context": "72 pairwise"
+        },
+        {
+          "rank": 5,
+          "player": "Jack M",
+          "value": "1578.2",
+          "context": "72 pairwise"
+        },
+        {
+          "rank": 6,
+          "player": "Ian",
+          "value": "1576.0",
+          "context": "54 pairwise"
+        },
+        {
+          "rank": 7,
+          "player": "Sam",
+          "value": "1560.2",
+          "context": "54 pairwise"
+        },
+        {
+          "rank": 8,
+          "player": "Ashley",
+          "value": "1556.8",
+          "context": "90 pairwise"
+        },
+        {
+          "rank": 9,
+          "player": "Josh",
+          "value": "1553.7",
+          "context": "90 pairwise"
+        },
+        {
+          "rank": 10,
+          "player": "Nick",
+          "value": "1537.8",
+          "context": "90 pairwise"
+        },
+        {
+          "rank": 11,
+          "player": "Richie",
+          "value": "1534.1",
+          "context": "90 pairwise"
+        },
+        {
+          "rank": 12,
+          "player": "Rachel F",
+          "value": "1492.2",
+          "context": "90 pairwise"
+        },
+        {
+          "rank": 13,
+          "player": "Brittany",
+          "value": "1475.3",
+          "context": "36 pairwise"
+        },
+        {
+          "rank": 14,
+          "player": "Dan",
+          "value": "1472.3",
+          "context": "90 pairwise"
+        },
+        {
+          "rank": 15,
+          "player": "Jack C",
+          "value": "1446.7",
+          "context": "36 pairwise"
+        },
+        {
+          "rank": 16,
+          "player": "Carly",
+          "value": "1445.2",
+          "context": "72 pairwise"
+        },
+        {
+          "rank": 17,
+          "player": "Tyler",
+          "value": "1420.0",
+          "context": "72 pairwise"
+        },
+        {
+          "rank": 18,
+          "player": "Steve",
+          "value": "1387.7",
+          "context": "72 pairwise"
+        },
+        {
+          "rank": 19,
+          "player": "Emma",
+          "value": "1369.5",
+          "context": "54 pairwise"
+        },
+        {
+          "rank": 20,
+          "player": "Ryan",
+          "value": "1344.4",
+          "context": "90 pairwise"
         }
       ]
     },
@@ -12896,6 +13150,547 @@
           "player": "Josh",
           "value": 0,
           "context": "2026"
+        }
+      ]
+    },
+    {
+      "category": "SOS-Adjusted Points per Game (Completed Regular Seasons)",
+      "subcategory": "Averages",
+      "scope": "Single Season Records",
+      "entries": [
+        {
+          "rank": 1,
+          "player": "Nick",
+          "value": "2.618",
+          "context": "2023 pts=16 sos=1.315"
+        },
+        {
+          "rank": 2,
+          "player": "Cody",
+          "value": "2.496",
+          "context": "2026 pts=15 sos=1.491"
+        },
+        {
+          "rank": 3,
+          "player": "Rachel M",
+          "value": "2.367",
+          "context": "2025 pts=14 sos=1.583"
+        },
+        {
+          "rank": 4,
+          "player": "Nick",
+          "value": "2.342",
+          "context": "2022 pts=14 sos=1.509"
+        },
+        {
+          "rank": 5,
+          "player": "Richie",
+          "value": "2.286",
+          "context": "2024 pts=14 sos=1.398"
+        },
+        {
+          "rank": 6,
+          "player": "Austin",
+          "value": "2.222",
+          "context": "2026 pts=13 sos=1.639"
+        },
+        {
+          "rank": 7,
+          "player": "Sam",
+          "value": "2.189",
+          "context": "2025 pts=13 sos=1.556"
+        },
+        {
+          "rank": 8,
+          "player": "Rachel F",
+          "value": "2.175",
+          "context": "2024 pts=13 sos=1.537"
+        },
+        {
+          "rank": 9,
+          "player": "Cody",
+          "value": "2.171",
+          "context": "2024 pts=13 sos=1.528"
+        },
+        {
+          "rank": 10,
+          "player": "Michael",
+          "value": "2.166",
+          "context": "2023 pts=13 sos=1.435"
+        },
+        {
+          "rank": 11,
+          "player": "Nick",
+          "value": "2.145",
+          "context": "2024 pts=13 sos=1.463"
+        },
+        {
+          "rank": 12,
+          "player": "Ian",
+          "value": "2.137",
+          "context": "2026 pts=13 sos=1.426"
+        },
+        {
+          "rank": 13,
+          "player": "Austin",
+          "value": "2.118",
+          "context": "2023 pts=13 sos=1.315"
+        },
+        {
+          "rank": 14,
+          "player": "Josh",
+          "value": "2.059",
+          "context": "2026 pts=12 sos=1.648"
+        },
+        {
+          "rank": 15,
+          "player": "Michael",
+          "value": "2.023",
+          "context": "2024 pts=12 sos=1.574"
+        },
+        {
+          "rank": 16,
+          "player": "Rachel M",
+          "value": "2.003",
+          "context": "2023 pts=12 sos=1.444"
+        },
+        {
+          "rank": 17,
+          "player": "Michael",
+          "value": "1.990",
+          "context": "2022 pts=12 sos=1.463"
+        },
+        {
+          "rank": 18,
+          "player": "Michael",
+          "value": "1.989",
+          "context": "2026 pts=12 sos=1.472"
+        },
+        {
+          "rank": 19,
+          "player": "Austin",
+          "value": "1.975",
+          "context": "2024 pts=12 sos=1.454"
+        },
+        {
+          "rank": 20,
+          "player": "Jack M",
+          "value": "1.970",
+          "context": "2025 pts=12 sos=1.426"
+        },
+        {
+          "rank": 21,
+          "player": "Michael",
+          "value": "1.967",
+          "context": "2025 pts=12 sos=1.417"
+        },
+        {
+          "rank": 22,
+          "player": "Richie",
+          "value": "1.933",
+          "context": "2025 pts=12 sos=1.333"
+        },
+        {
+          "rank": 23,
+          "player": "Richie",
+          "value": "1.850",
+          "context": "2022 pts=11 sos=1.528"
+        },
+        {
+          "rank": 24,
+          "player": "Ashley",
+          "value": "1.848",
+          "context": "2026 pts=11 sos=1.537"
+        },
+        {
+          "rank": 25,
+          "player": "Austin",
+          "value": "1.826",
+          "context": "2025 pts=11 sos=1.481"
+        },
+        {
+          "rank": 26,
+          "player": "Luke",
+          "value": "1.820",
+          "context": "2022 pts=11 sos=1.454"
+        },
+        {
+          "rank": 27,
+          "player": "Carly",
+          "value": "1.808",
+          "context": "2024 pts=11 sos=1.454"
+        },
+        {
+          "rank": 28,
+          "player": "Ashley",
+          "value": "1.807",
+          "context": "2025 pts=11 sos=1.435"
+        },
+        {
+          "rank": 29,
+          "player": "Jack M",
+          "value": "1.804",
+          "context": "2026 pts=11 sos=1.426"
+        },
+        {
+          "rank": 30,
+          "player": "Ian",
+          "value": "1.774",
+          "context": "2025 pts=11 sos=1.352"
+        },
+        {
+          "rank": 31,
+          "player": "Rachel M",
+          "value": "1.770",
+          "context": "2026 pts=11 sos=1.343"
+        },
+        {
+          "rank": 32,
+          "player": "Rachel F",
+          "value": "1.763",
+          "context": "2025 pts=11 sos=1.324"
+        },
+        {
+          "rank": 32,
+          "player": "Dan",
+          "value": "1.763",
+          "context": "2025 pts=11 sos=1.324"
+        },
+        {
+          "rank": 34,
+          "player": "Ashley",
+          "value": "1.716",
+          "context": "2024 pts=10 sos=1.639"
+        },
+        {
+          "rank": 35,
+          "player": "Ashley",
+          "value": "1.684",
+          "context": "2023 pts=10 sos=1.481"
+        },
+        {
+          "rank": 36,
+          "player": "Richie",
+          "value": "1.677",
+          "context": "2023 pts=10 sos=1.463"
+        },
+        {
+          "rank": 37,
+          "player": "Dan",
+          "value": "1.661",
+          "context": "2022 pts=10 sos=1.472"
+        },
+        {
+          "rank": 38,
+          "player": "Nick",
+          "value": "1.659",
+          "context": "2026 pts=10 sos=1.481"
+        },
+        {
+          "rank": 39,
+          "player": "Rachel M",
+          "value": "1.649",
+          "context": "2024 pts=10 sos=1.472"
+        },
+        {
+          "rank": 40,
+          "player": "Tyler",
+          "value": "1.567",
+          "context": "2025 pts=9 sos=1.667"
+        },
+        {
+          "rank": 41,
+          "player": "Josh",
+          "value": "1.556",
+          "context": "2024 pts=9 sos=1.657"
+        },
+        {
+          "rank": 42,
+          "player": "Sam",
+          "value": "1.548",
+          "context": "2026 pts=9 sos=1.620"
+        },
+        {
+          "rank": 43,
+          "player": "Ryan",
+          "value": "1.538",
+          "context": "2022 pts=9 sos=1.583"
+        },
+        {
+          "rank": 44,
+          "player": "Ryan",
+          "value": "1.534",
+          "context": "2024 pts=10 sos=1.185"
+        },
+        {
+          "rank": 45,
+          "player": "Brian",
+          "value": "1.527",
+          "context": "2022 pts=3 sos=1.556"
+        },
+        {
+          "rank": 46,
+          "player": "Austin",
+          "value": "1.520",
+          "context": "2022 pts=9 sos=1.537"
+        },
+        {
+          "rank": 47,
+          "player": "Rachel F",
+          "value": "1.506",
+          "context": "2023 pts=9 sos=1.454"
+        },
+        {
+          "rank": 48,
+          "player": "Jack M",
+          "value": "1.490",
+          "context": "2024 pts=9 sos=1.491"
+        },
+        {
+          "rank": 49,
+          "player": "Sam",
+          "value": "1.486",
+          "context": "2024 pts=9 sos=1.481"
+        },
+        {
+          "rank": 50,
+          "player": "Steve",
+          "value": "1.356",
+          "context": "2025 pts=8 sos=1.556"
+        },
+        {
+          "rank": 51,
+          "player": "Cody",
+          "value": "1.344",
+          "context": "2025 pts=8 sos=1.528"
+        },
+        {
+          "rank": 52,
+          "player": "Carly",
+          "value": "1.332",
+          "context": "2023 pts=8 sos=1.435"
+        },
+        {
+          "rank": 53,
+          "player": "Brittany",
+          "value": "1.330",
+          "context": "2025 pts=8 sos=1.491"
+        },
+        {
+          "rank": 54,
+          "player": "Steve",
+          "value": "1.329",
+          "context": "2023 pts=8 sos=1.426"
+        },
+        {
+          "rank": 55,
+          "player": "Jack C",
+          "value": "1.315",
+          "context": "2026 pts=8 sos=1.454"
+        },
+        {
+          "rank": 56,
+          "player": "Brittany",
+          "value": "1.289",
+          "context": "2026 pts=8 sos=1.389"
+        },
+        {
+          "rank": 57,
+          "player": "Jack M",
+          "value": "1.236",
+          "context": "2023 pts=7 sos=1.611"
+        },
+        {
+          "rank": 58,
+          "player": "Carly",
+          "value": "1.222",
+          "context": "2026 pts=7 sos=1.639"
+        },
+        {
+          "rank": 59,
+          "player": "Jennie",
+          "value": "1.190",
+          "context": "2024 pts=7 sos=1.574"
+        },
+        {
+          "rank": 60,
+          "player": "Dan",
+          "value": "1.182",
+          "context": "2024 pts=7 sos=1.556"
+        },
+        {
+          "rank": 61,
+          "player": "Tyler",
+          "value": "1.173",
+          "context": "2023 pts=7 sos=1.454"
+        },
+        {
+          "rank": 62,
+          "player": "Richie",
+          "value": "1.170",
+          "context": "2026 pts=7 sos=1.509"
+        },
+        {
+          "rank": 63,
+          "player": "Nick",
+          "value": "1.167",
+          "context": "2025 pts=7 sos=1.500"
+        },
+        {
+          "rank": 64,
+          "player": "Tyler",
+          "value": "1.164",
+          "context": "2024 pts=7 sos=1.509"
+        },
+        {
+          "rank": 65,
+          "player": "Dan",
+          "value": "1.163",
+          "context": "2026 pts=7 sos=1.491"
+        },
+        {
+          "rank": 66,
+          "player": "Josh",
+          "value": "1.155",
+          "context": "2023 pts=7 sos=1.407"
+        },
+        {
+          "rank": 67,
+          "player": "Rachel F",
+          "value": "1.153",
+          "context": "2022 pts=7 sos=1.454"
+        },
+        {
+          "rank": 68,
+          "player": "Ashley",
+          "value": "1.116",
+          "context": "2022 pts=7 sos=1.361"
+        },
+        {
+          "rank": 69,
+          "player": "Luke",
+          "value": "1.106",
+          "context": "2023 pts=7 sos=1.287"
+        },
+        {
+          "rank": 70,
+          "player": "Rachel F",
+          "value": "1.100",
+          "context": "2026 pts=7 sos=1.333"
+        },
+        {
+          "rank": 71,
+          "player": "Allie",
+          "value": "1.038",
+          "context": "2022 pts=4 sos=1.583"
+        },
+        {
+          "rank": 72,
+          "player": "Becca",
+          "value": "1.013",
+          "context": "2022 pts=6 sos=1.519"
+        },
+        {
+          "rank": 73,
+          "player": "Allie",
+          "value": "0.897",
+          "context": "2024 pts=5 sos=1.676"
+        },
+        {
+          "rank": 74,
+          "player": "Josh",
+          "value": "0.867",
+          "context": "2025 pts=5 sos=1.583"
+        },
+        {
+          "rank": 75,
+          "player": "Jack C",
+          "value": "0.863",
+          "context": "2025 pts=5 sos=1.574"
+        },
+        {
+          "rank": 76,
+          "player": "Steve",
+          "value": "0.859",
+          "context": "2026 pts=5 sos=1.565"
+        },
+        {
+          "rank": 77,
+          "player": "Josh",
+          "value": "0.857",
+          "context": "2022 pts=5 sos=1.546"
+        },
+        {
+          "rank": 78,
+          "player": "Ian",
+          "value": "0.856",
+          "context": "2024 pts=5 sos=1.574"
+        },
+        {
+          "rank": 79,
+          "player": "Emma",
+          "value": "0.853",
+          "context": "2024 pts=5 sos=1.565"
+        },
+        {
+          "rank": 80,
+          "player": "Emma",
+          "value": "0.826",
+          "context": "2026 pts=5 sos=1.481"
+        },
+        {
+          "rank": 80,
+          "player": "Tyler",
+          "value": "0.826",
+          "context": "2026 pts=5 sos=1.481"
+        },
+        {
+          "rank": 82,
+          "player": "Emma",
+          "value": "0.800",
+          "context": "2025 pts=4 sos=1.833"
+        },
+        {
+          "rank": 83,
+          "player": "Dan",
+          "value": "0.725",
+          "context": "2023 pts=4 sos=1.583"
+        },
+        {
+          "rank": 84,
+          "player": "Carly",
+          "value": "0.707",
+          "context": "2025 pts=4 sos=1.602"
+        },
+        {
+          "rank": 85,
+          "player": "Ryan",
+          "value": "0.696",
+          "context": "2026 pts=4 sos=1.574"
+        },
+        {
+          "rank": 86,
+          "player": "Ryan",
+          "value": "0.677",
+          "context": "2023 pts=4 sos=1.463"
+        },
+        {
+          "rank": 87,
+          "player": "Ryan",
+          "value": "0.641",
+          "context": "2025 pts=4 sos=1.435"
+        },
+        {
+          "rank": 88,
+          "player": "Allie",
+          "value": "0.495",
+          "context": "2023 pts=3 sos=1.426"
+        },
+        {
+          "rank": 89,
+          "player": "Steve",
+          "value": "0.179",
+          "context": "2024 pts=1 sos=1.546"
         }
       ]
     },

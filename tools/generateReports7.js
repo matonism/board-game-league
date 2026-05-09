@@ -104,6 +104,7 @@ function main() {
             
             // 1. Averages
             processStat("Average Points per Game", "Averages", scope, getAveragePoints(dataset));
+            processStat("Elo Leaderboard", "Ratings", scope, getEloLeaderboard(dataset, { activePlayersSet }));
 
             // 2. Placement Rates - Min 5 Games
             const minGames = 5;
@@ -163,6 +164,14 @@ function main() {
         processStat("Most 2nd Places", "Totals", SCOPE_SEASON, getRankedRecords(playerSeasons, 'place_2'));
         processStat("Most 3rd Places", "Totals", SCOPE_SEASON, getRankedRecords(playerSeasons, 'place_3'));
         processStat("Most 4th Places", "Totals", SCOPE_SEASON, getRankedRecords(playerSeasons, 'place_4'));
+
+        // NEW: Completed regular-season leaderboard (SOS-adjusted PPG)
+        processStat(
+            "SOS-Adjusted Points per Game (Completed Regular Seasons)",
+            "Averages",
+            SCOPE_SEASON,
+            getSeasonAdjustedPPGLeaderboard(regSeasonGames, seasonsRegularSeasonComplete)
+        );
 
         // For single season streaks, we still pass activePlayersSet to verify if the streak is CURRENTLY active in the league
         processStat("Longest Win Streak (Season)", "Streaks", SCOPE_SEASON, getSingleSeasonStreaks(regSeasonGames, g => g.place === 1, activePlayersSet));
@@ -350,6 +359,8 @@ function main() {
         processStat("Hardest Strength of Schedule (All-Time Avg Opponent Pts)", "Difficulty", SCOPE_METRICS, sosStats.hardest);
         processStat("Easiest Strength of Schedule (All-Time Avg Opponent Pts)", "Difficulty", SCOPE_METRICS, sosStats.easiest);
         processStat("Hardest Path to Playoffs (Single Season SoS)", "Difficulty", SCOPE_METRICS, getHardestPathToPlayoffs(regSeasonGames, leagueGames));
+
+        // (Elo leaderboards moved to All-Time scopes)
 
         
         processStat("Worst Start (2 Games) to Make Playoffs", "Comebacks", SCOPE_METRICS, seasonMetrics.worstStarts2);
@@ -688,6 +699,10 @@ function generateHtmlDashboard(data) {
                 infoText = "<strong>(+) Positive:</strong> Better at HOME.<br><strong>(-) Negative:</strong> Better AWAY.";
             } else if (board.category.includes("Strength of Schedule")) {
                 infoText = "Calculated as the average regular season score of all opponents faced.";
+            } else if (board.category.includes("SOS-Adjusted Points per Game")) {
+                infoText = "<strong>Completed regular seasons only.</strong><br><br><strong>Adjusted PPG</strong> = Season PPG + (Season SoS - Season baseline opponent strength) × 0.4.<br><br><strong>SoS</strong> here is average opponent points per game (higher = tougher schedule).";
+            } else if (board.category.includes("Elo Leaderboard")) {
+                infoText = "<strong>Elo rating</strong> is a skill rating system used in chess/sports.<br><br>Everyone starts at <strong>1500</strong>. After each table, we do pairwise updates: you gain rating for finishing ahead of higher-rated opponents and lose rating for finishing behind lower-rated opponents.<br><br><strong>Value</strong> is current Elo. Context shows how many pairwise comparisons contributed.";
             } else if (board.category.includes("Worst Enemies")) {
                 infoText = "Lowest average score when playing against this specific opponent (Min 3 games).";
             } else if (board.category.includes("Best Duo")) {
@@ -1054,6 +1069,149 @@ function calculateStrengthOfSchedule(games) {
     const easiest = [...results].sort((a,b) => a.raw - b.raw);
 
     return { hardest, easiest, playerAvgs }; // Return playerAvgs for reuse
+}
+
+// =============================================
+// NEW: Season SOS-adjusted PPG leaderboard (completed seasons)
+// =============================================
+function getSeasonAdjustedPPGLeaderboard(regSeasonGames, seasonsRegularSeasonComplete) {
+    // Group games by season
+    const gamesBySeason = {};
+    regSeasonGames.forEach(g => {
+        if (!gamesBySeason[g.season]) gamesBySeason[g.season] = [];
+        gamesBySeason[g.season].push(g);
+    });
+
+    const results = [];
+
+    for (const [seasonStr, sGames] of Object.entries(gamesBySeason)) {
+        const season = parseInt(seasonStr, 10);
+        if (!seasonsRegularSeasonComplete.has(season)) continue;
+
+        // Player avg points (within season)
+        const grouped = groupByPlayer(sGames);
+        const playerAvgs = {};
+        for (const [player, recs] of Object.entries(grouped)) {
+            playerAvgs[player] = recs.reduce((acc, r) => acc + r.points, 0) / recs.length;
+        }
+
+        // Table map (gameId -> players)
+        const tables = {};
+        sGames.forEach(g => {
+            if (!tables[g.gameId]) tables[g.gameId] = [];
+            tables[g.gameId].push(g.player);
+        });
+
+        // Season SOS per player = avg opponent avg points (within season)
+        const seasonSOS = {};
+        for (const [player, recs] of Object.entries(grouped)) {
+            let sumOpp = 0;
+            let countOpp = 0;
+            recs.forEach(r => {
+                const ps = tables[r.gameId] || [];
+                ps.forEach(opp => {
+                    if (opp === player) return;
+                    if (playerAvgs[opp] === undefined) return;
+                    sumOpp += playerAvgs[opp];
+                    countOpp++;
+                });
+            });
+            seasonSOS[player] = countOpp > 0 ? (sumOpp / countOpp) : 0;
+        }
+
+        // League baseline opponent strength for this season (avg of playerAvgs)
+        const baselineOpp = Object.values(playerAvgs).length
+            ? Object.values(playerAvgs).reduce((a, b) => a + b, 0) / Object.values(playerAvgs).length
+            : 1.5;
+
+        // Season PPG and adjusted PPG:
+        // Harder SoS => higher seasonSOS (avg opponent points higher).
+        // We add a modest boost relative to baseline.
+        const SOS_ADJ_WEIGHT = 0.4;
+
+        for (const [player, recs] of Object.entries(grouped)) {
+            const points = recs.reduce((acc, r) => acc + r.points, 0);
+            const gamesPlayed = recs.length;
+            const ppg = gamesPlayed > 0 ? points / gamesPlayed : 0;
+            const sos = seasonSOS[player] ?? baselineOpp;
+            const adj = ppg + ((sos - baselineOpp) * SOS_ADJ_WEIGHT);
+
+            results.push({
+                player,
+                value: adj.toFixed(3),
+                raw: adj,
+                extra: `(${season}) pts=${points} sos=${sos.toFixed(3)}`,
+                season
+            });
+        }
+    }
+
+    return results.sort((a, b) => b.raw - a.raw);
+}
+
+// =============================================
+// NEW: Elo leaderboards
+// =============================================
+function getEloLeaderboard(games, opts = {}) {
+    const START = 1500;
+    const K = 24;
+    const activePlayersSet = opts.activePlayersSet || null;
+
+    // Ensure chronological order (season, weekIndex, then table)
+    const ordered = [...games].sort((a, b) =>
+        (a.season - b.season) || (a.weekIndex - b.weekIndex) || (a.gameId - b.gameId)
+    );
+
+    const elo = {};
+    const eloGames = {};
+
+    // Group by table (gameId) for pairwise comparisons
+    const byTable = {};
+    ordered.forEach(g => {
+        if (!byTable[g.gameId]) byTable[g.gameId] = [];
+        byTable[g.gameId].push(g);
+    });
+
+    const expected = (ra, rb) => 1 / (1 + Math.pow(10, (rb - ra) / 400));
+
+    Object.values(byTable).forEach(tableGames => {
+        // Only process if we have placements
+        if (!tableGames || tableGames.length < 2) return;
+
+        // Pairwise updates
+        for (let i = 0; i < tableGames.length; i++) {
+            for (let j = i + 1; j < tableGames.length; j++) {
+                const a = tableGames[i];
+                const b = tableGames[j];
+                const pa = a.place;
+                const pb = b.place;
+                if (pa === undefined || pb === undefined) continue;
+
+                const ra = elo[a.player] ?? START;
+                const rb = elo[b.player] ?? START;
+                const ea = expected(ra, rb);
+                const eb = 1 - ea;
+
+                const sa = pa < pb ? 1 : 0;
+                const sb = 1 - sa;
+
+                elo[a.player] = ra + K * (sa - ea);
+                elo[b.player] = rb + K * (sb - eb);
+                eloGames[a.player] = (eloGames[a.player] ?? 0) + 1;
+                eloGames[b.player] = (eloGames[b.player] ?? 0) + 1;
+            }
+        }
+    });
+
+    return Object.keys(elo)
+        .filter(player => !activePlayersSet || activePlayersSet.has(player))
+        .map(player => ({
+            player,
+            value: (elo[player] ?? START).toFixed(1),
+            raw: (elo[player] ?? START),
+            extra: `(${eloGames[player] ?? 0} pairwise)`,
+        }))
+        .sort((a, b) => b.raw - a.raw);
 }
 
 // NEW: Hardest Path to Playoffs (Single Season SoS for Qualifiers)

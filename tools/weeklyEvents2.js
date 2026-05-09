@@ -132,12 +132,48 @@ function main() {
                 } else {
                     isNew = true;
                 }
+
+                const eloCurr = snapCurrent.elo?.[s.player] ?? null;
+                const eloPrev = snapPrevious.elo?.[s.player] ?? null;
+                const eloDiff = (eloCurr !== null && eloPrev !== null) ? (eloCurr - eloPrev) : null;
+
                 return {
                     rank: s.rank,
                     player: s.player,
                     points: s.points,
+                    elo: eloCurr,
+                    eloDiff: eloDiff,
                     diff: diff,
                     isNew: isNew
+                };
+            });
+
+            // Elo standings (ranked by Elo, movement vs previous week)
+            const eloPlayers = Array.from(activePlayersInWeek);
+            const eloRankedCurr = eloPlayers
+                .map(p => ({ player: p, elo: snapCurrent.elo?.[p] ?? 1500 }))
+                .sort((a, b) => b.elo - a.elo);
+            const eloRankedPrev = eloPlayers
+                .map(p => ({ player: p, elo: snapPrevious.elo?.[p] ?? 1500 }))
+                .sort((a, b) => b.elo - a.elo);
+
+            const prevEloRank = {};
+            eloRankedPrev.forEach((r, idx) => { prevEloRank[r.player] = idx + 1; });
+
+            const formattedEloStandings = eloRankedCurr.map((r, idx) => {
+                const rank = idx + 1;
+                const prevRank = prevEloRank[r.player];
+                const isNew = prevRank === undefined;
+                const diff = isNew ? 0 : (prevRank - rank);
+                const eloPrev = snapPrevious.elo?.[r.player] ?? null;
+                const eloDiff = (eloPrev !== null && eloPrev !== undefined) ? (r.elo - eloPrev) : null;
+                return {
+                    rank,
+                    player: r.player,
+                    elo: r.elo,
+                    eloDiff,
+                    diff,
+                    isNew
                 };
             });
 
@@ -171,6 +207,7 @@ function main() {
                 title: `Season ${week.season} - ${week.weekLabel}`,
                 isPostSeason: week.isPostSeason,
                 standings: formattedStandings,
+                eloStandings: formattedEloStandings,
                 weeklyResults: Object.values(groupedResults), // Array of tables
                 news: stories
             });
@@ -232,6 +269,9 @@ function getSnapshot(games, targetSeason) {
         if(!byPlayer[g.player]) byPlayer[g.player] = [];
         byPlayer[g.player].push(g);
     });
+
+    // Elo ratings up to this snapshot (exclude tie-break; include reg + post).
+    const eloMap = calculateElo(games);
 
     Object.keys(byPlayer).forEach(player => {
         const records = byPlayer[player];
@@ -413,8 +453,60 @@ function getSnapshot(games, targetSeason) {
         seasonStandings: rankedStandings,
         rankLookup: rankLookup,
         leagueRecords: leagueRecords,
-        playerStats: playerStats
+        playerStats: playerStats,
+        elo: eloMap
     };
+}
+
+// ==========================================
+// ELO (pairwise within each table)
+// ==========================================
+function calculateElo(games) {
+    const START = 1500;
+    const K = 24;
+
+    const ordered = [...games].sort((a, b) =>
+        (a.season - b.season) || (a.weekIndex - b.weekIndex) || (a.gameId - b.gameId)
+    );
+
+    const elo = {};
+
+    const byTable = {};
+    ordered.forEach(g => {
+        if (!byTable[g.gameId]) byTable[g.gameId] = [];
+        byTable[g.gameId].push(g);
+    });
+
+    const expected = (ra, rb) => 1 / (1 + Math.pow(10, (rb - ra) / 400));
+
+    Object.values(byTable).forEach(tableGames => {
+        if (!tableGames || tableGames.length < 2) return;
+        for (let i = 0; i < tableGames.length; i++) {
+            for (let j = i + 1; j < tableGames.length; j++) {
+                const a = tableGames[i];
+                const b = tableGames[j];
+                if (a.place === undefined || b.place === undefined) continue;
+
+                const ra = elo[a.player] ?? START;
+                const rb = elo[b.player] ?? START;
+                const ea = expected(ra, rb);
+                const eb = 1 - ea;
+
+                const sa = a.place < b.place ? 1 : 0;
+                const sb = 1 - sa;
+
+                elo[a.player] = ra + K * (sa - ea);
+                elo[b.player] = rb + K * (sb - eb);
+            }
+        }
+    });
+
+    // Round to 1 decimal for display consistency
+    const rounded = {};
+    Object.keys(elo).forEach(p => {
+        rounded[p] = Math.round(elo[p] * 10) / 10;
+    });
+    return rounded;
 }
 
 // Helper to calculate best average over last N games
@@ -1129,6 +1221,13 @@ function generateHtmlDashboard(reports) {
         .tab-content { display: none !important; }
         .tab-content.active { display: flex !important; flex-direction: column; gap: 12px; animation: fadeIn 0.3s ease-in; }
 
+        /* Standings Tabs (separate from highlight tabs) */
+        .standings-tab-btn { padding: 10px 20px; cursor: pointer; font-weight: 600; color: var(--text-muted); border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all 0.2s; }
+        .standings-tab-btn:hover { color: var(--primary); }
+        .standings-tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); }
+        .standings-tab-content { display: none !important; }
+        .standings-tab-content.active { display: block !important; animation: fadeIn 0.3s ease-in; }
+
         /* News Cards */
         .news-stack { display: flex; flex-direction: column; gap: 12px; }
         .news-card { display: flex; align-items: center; padding: 12px; border-radius: 8px; border-left: 4px solid #ccc; background: #f8fafc; animation: fadeIn 0.3s ease-in; }
@@ -1163,6 +1262,9 @@ function generateHtmlDashboard(reports) {
         .rank-col { width: 30px; color: #94a3b8; font-weight: 700; }
         .move-col { width: 40px; font-size: 0.8em; font-weight: 700; }
         .pts-col { text-align: right; font-weight: 700; color: var(--primary); }
+        .pts-col.positive { color: #22c55e; }
+        .pts-col.negative { color: #ef4444; }
+        .pts-col.neutral { color: var(--muted); }
         
         .positive { color: var(--success); }
         .negative { color: var(--danger); }
@@ -1202,17 +1304,33 @@ function generateHtmlDashboard(reports) {
                     <h2>Playoff Results</h2>
                     <div id="playoffBody"></div>
                 </div>
-                <div class="panel">
-                    <h2>Season Standings</h2>
-                    <table id="standingsTable">
-                        <thead><tr><th>#</th><th>+/-</th><th>Player</th><th style="text-align:right">Pts</th></tr></thead>
-                        <tbody id="standingsBody"></tbody>
-                    </table>
-                    <div id="standingsEmpty" style="display:none" class="empty-state">No standings data</div>
+                <div class="panel" id="standingsPanel">
+                    <div class="highlight-tabs" style="margin-bottom: 10px">
+                        <div class="standings-tab-btn active" onclick="switchStandingsTab('season')">Season</div>
+                        <div class="standings-tab-btn" onclick="switchStandingsTab('elo')">Elo</div>
+                    </div>
+
+                    <div id="season-standings-tab" class="standings-tab-content active">
+                        <h2 style="margin-top:0">Season Standings</h2>
+                        <table id="standingsTable">
+                            <thead><tr><th>#</th><th>+/-</th><th>Player</th><th style="text-align:right">Pts</th></tr></thead>
+                            <tbody id="standingsBody"></tbody>
+                        </table>
+                        <div id="standingsEmpty" style="display:none" class="empty-state">No standings data</div>
+                    </div>
+
+                    <div id="elo-standings-tab" class="standings-tab-content">
+                        <h2 style="margin-top:0">Elo Standings</h2>
+                        <table id="eloTable">
+                            <thead><tr><th>#</th><th>+/-</th><th>Player</th><th style="text-align:right">Elo</th><th style="text-align:right">Δ</th></tr></thead>
+                            <tbody id="eloBody"></tbody>
+                        </table>
+                        <div id="eloEmpty" style="display:none" class="empty-state">No Elo data</div>
+                    </div>
                 </div>
             </div>
 
-            <div class="panel">
+            <div class="panel" id="highlightsPanel">
                 <div class="highlight-tabs">
                     <div class="tab-btn active" onclick="switchTab('news')">News</div>
                     <div class="tab-btn" onclick="switchTab('streaks')">Streaks</div>
@@ -1277,10 +1395,12 @@ function generateHtmlDashboard(reports) {
         }
         
         function switchTab(tabName) {
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            const panel = document.getElementById('highlightsPanel');
+            if (!panel) return;
+            panel.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            panel.querySelectorAll('#news-tab, #streaks-tab, #results-tab').forEach(c => c.classList.remove('active'));
             
-            document.querySelector(\`.tab-btn[onclick="switchTab('\${tabName}')"]\`).classList.add('active');
+            panel.querySelector(\`.tab-btn[onclick="switchTab('\${tabName}')"]\`).classList.add('active');
             document.getElementById(\`\${tabName}-tab\`).classList.add('active');
             
             // Show/Hide Type Filter based on Tab
@@ -1299,6 +1419,20 @@ function generateHtmlDashboard(reports) {
             } else {
                 streakFilter.style.display = 'none';
             }
+        }
+
+        function switchStandingsTab(tabName) {
+            // Only affect the standings panel tabs (left column)
+            const panel = document.getElementById('standingsPanel');
+            if (!panel) return;
+            panel.querySelectorAll('.highlight-tabs .standings-tab-btn').forEach(b => b.classList.remove('active'));
+            panel.querySelectorAll('#season-standings-tab, #elo-standings-tab').forEach(c => c.classList.remove('active'));
+
+            const btn = panel.querySelector('.highlight-tabs .standings-tab-btn[onclick="switchStandingsTab(\\'' + tabName + '\\')"]');
+            if (btn) btn.classList.add('active');
+
+            const target = document.getElementById(tabName + '-standings-tab');
+            if (target) target.classList.add('active');
         }
 
         function renderSeasonNav() {
@@ -1367,6 +1501,38 @@ function generateHtmlDashboard(reports) {
                     else if (s.diff < 0) { moveIcon = '▼ ' + Math.abs(s.diff); moveClass = 'negative'; }
                     const isChamp = s.rank === 1 ? '👑' : '';
                     tbody.innerHTML += \`<tr><td class="rank-col">\${s.rank}</td><td class="move-col \${moveClass}">\${moveIcon}</td><td class="player-col">\${s.player} \${isChamp}</td><td class="pts-col">\${s.points}</td></tr>\`;
+                });
+            }
+
+            // Elo standings
+            const eloBody = document.getElementById('eloBody');
+            eloBody.innerHTML = '';
+            if (!data.eloStandings || data.eloStandings.length === 0) {
+                document.getElementById('eloTable').style.display = 'none';
+                document.getElementById('eloEmpty').style.display = 'block';
+            } else {
+                document.getElementById('eloTable').style.display = 'table';
+                document.getElementById('eloEmpty').style.display = 'none';
+                data.eloStandings.forEach(s => {
+                    let moveIcon = '<span class="dash">-</span>';
+                    let moveClass = 'neutral';
+                    if (s.isNew) { moveIcon = '<span class="new">NEW</span>'; }
+                    else if (s.diff > 0) { moveIcon = '▲ ' + s.diff; moveClass = 'positive'; }
+                    else if (s.diff < 0) { moveIcon = '▼ ' + Math.abs(s.diff); moveClass = 'negative'; }
+
+                    const eloVal = (s.elo === null || s.elo === undefined) ? '-' : Number(s.elo).toFixed(1);
+                    const d = s.eloDiff;
+                    const eloDiffStr = (d === null || d === undefined) ? '-' : (d >= 0 ? ('+' + Number(d).toFixed(1)) : ('' + Number(d).toFixed(1)));
+                    const eloDiffClass = (d === null || d === undefined) ? 'neutral' : (d >= 0 ? 'positive' : 'negative');
+
+                    eloBody.innerHTML +=
+                        '<tr>' +
+                        '<td class="rank-col">' + s.rank + '</td>' +
+                        '<td class="move-col ' + moveClass + '">' + moveIcon + '</td>' +
+                        '<td class="player-col">' + s.player + '</td>' +
+                        '<td class="pts-col">' + eloVal + '</td>' +
+                        '<td class="pts-col ' + eloDiffClass + '">' + eloDiffStr + '</td>' +
+                        '</tr>';
                 });
             }
 

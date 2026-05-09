@@ -1,0 +1,2 @@
+timestamp_utc,data_file,mode,seed,sims,temperature,n_estimators,min_train_rows,max_pods,pods_evaluated,skipped,mean_mae,mean_brier,mean_logloss
+2026-05-07T22:34:58Z,C:\Users\micha\Development\Web\board-game-league\tools\machineLearning\bgl_ml_features.json,inseason,42,5000,0.5,150,80,100,100,1,0.943295,0.541241,1.454529

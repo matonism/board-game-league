@@ -2,12 +2,14 @@ import pandas as pd
 import numpy as np
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_absolute_error, r2_score
+from pathlib import Path
 
 # ==========================================
 # 1. LOAD AND PREPARE DATA
 # ==========================================
 # Load the dataset you generated
-df = pd.read_json('machineLearning/bgl_ml_features.json')
+data_path = Path(__file__).resolve().parent / 'bgl_ml_features.json'
+df = pd.read_json(data_path)
 
 # Convert 'Year' to numeric just in case
 df['Year'] = pd.to_numeric(df['Year'])

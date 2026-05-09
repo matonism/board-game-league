@@ -24,6 +24,26 @@ Category,Subcategory,Scope,Rank,Player,Value,Context,IsActive
 "Average Points per Game","Averages","All-Time (Reg and Post Season)",23,"Steve",0.92,"24 games",false
 "Average Points per Game","Averages","All-Time (Reg and Post Season)",24,"Emma",0.78,"18 games",false
 "Average Points per Game","Averages","All-Time (Reg and Post Season)",25,"Allie",0.75,"16 games",false
+"Elo Leaderboard","Ratings","All-Time (Reg and Post Season)",1,"Austin",1678.8,"102 pairwise",false
+"Elo Leaderboard","Ratings","All-Time (Reg and Post Season)",2,"Michael",1678.5,"108 pairwise",false
+"Elo Leaderboard","Ratings","All-Time (Reg and Post Season)",3,"Cody",1605.3,"63 pairwise",false
+"Elo Leaderboard","Ratings","All-Time (Reg and Post Season)",4,"Jack M",1589.0,"78 pairwise",false
+"Elo Leaderboard","Ratings","All-Time (Reg and Post Season)",5,"Josh",1572.2,"93 pairwise",false
+"Elo Leaderboard","Ratings","All-Time (Reg and Post Season)",6,"Ashley",1564.8,"99 pairwise",false
+"Elo Leaderboard","Ratings","All-Time (Reg and Post Season)",7,"Rachel M",1557.7,"81 pairwise",false
+"Elo Leaderboard","Ratings","All-Time (Reg and Post Season)",8,"Ian",1548.6,"63 pairwise",false
+"Elo Leaderboard","Ratings","All-Time (Reg and Post Season)",9,"Sam",1540.0,"57 pairwise",false
+"Elo Leaderboard","Ratings","All-Time (Reg and Post Season)",10,"Nick",1529.7,"99 pairwise",false
+"Elo Leaderboard","Ratings","All-Time (Reg and Post Season)",11,"Richie",1525.7,"105 pairwise",false
+"Elo Leaderboard","Ratings","All-Time (Reg and Post Season)",12,"Rachel F",1490.7,"93 pairwise",false
+"Elo Leaderboard","Ratings","All-Time (Reg and Post Season)",13,"Brittany",1477.4,"36 pairwise",false
+"Elo Leaderboard","Ratings","All-Time (Reg and Post Season)",14,"Dan",1468.9,"93 pairwise",false
+"Elo Leaderboard","Ratings","All-Time (Reg and Post Season)",15,"Carly",1452.7,"78 pairwise",false
+"Elo Leaderboard","Ratings","All-Time (Reg and Post Season)",16,"Jack C",1445.1,"36 pairwise",false
+"Elo Leaderboard","Ratings","All-Time (Reg and Post Season)",17,"Tyler",1419.2,"72 pairwise",false
+"Elo Leaderboard","Ratings","All-Time (Reg and Post Season)",18,"Steve",1386.6,"72 pairwise",false
+"Elo Leaderboard","Ratings","All-Time (Reg and Post Season)",19,"Emma",1369.2,"54 pairwise",false
+"Elo Leaderboard","Ratings","All-Time (Reg and Post Season)",20,"Ryan",1335.8,"93 pairwise",false
 "% of 1st Place Finishes (Min 5 Games)","Placement Rates","All-Time (Reg and Post Season)",1,"Michael",50.0%,"18/36",false
 "% of 1st Place Finishes (Min 5 Games)","Placement Rates","All-Time (Reg and Post Season)",2,"Austin",44.1%,"15/34",false
 "% of 1st Place Finishes (Min 5 Games)","Placement Rates","All-Time (Reg and Post Season)",3,"Nick",39.4%,"13/33",false
@@ -774,6 +794,26 @@ Category,Subcategory,Scope,Rank,Player,Value,Context,IsActive
 "Average Points per Game","Averages","All-Time (Regular Season)",23,"Steve",0.92,"24 games",false
 "Average Points per Game","Averages","All-Time (Regular Season)",24,"Emma",0.78,"18 games",false
 "Average Points per Game","Averages","All-Time (Regular Season)",25,"Allie",0.75,"16 games",false
+"Elo Leaderboard","Ratings","All-Time (Regular Season)",1,"Cody",1636.8,"54 pairwise",false
+"Elo Leaderboard","Ratings","All-Time (Regular Season)",2,"Austin",1623.0,"90 pairwise",false
+"Elo Leaderboard","Ratings","All-Time (Regular Season)",3,"Michael",1618.7,"90 pairwise",false
+"Elo Leaderboard","Ratings","All-Time (Regular Season)",4,"Rachel M",1591.3,"72 pairwise",false
+"Elo Leaderboard","Ratings","All-Time (Regular Season)",5,"Jack M",1578.2,"72 pairwise",false
+"Elo Leaderboard","Ratings","All-Time (Regular Season)",6,"Ian",1576.0,"54 pairwise",false
+"Elo Leaderboard","Ratings","All-Time (Regular Season)",7,"Sam",1560.2,"54 pairwise",false
+"Elo Leaderboard","Ratings","All-Time (Regular Season)",8,"Ashley",1556.8,"90 pairwise",false
+"Elo Leaderboard","Ratings","All-Time (Regular Season)",9,"Josh",1553.7,"90 pairwise",false
+"Elo Leaderboard","Ratings","All-Time (Regular Season)",10,"Nick",1537.8,"90 pairwise",false
+"Elo Leaderboard","Ratings","All-Time (Regular Season)",11,"Richie",1534.1,"90 pairwise",false
+"Elo Leaderboard","Ratings","All-Time (Regular Season)",12,"Rachel F",1492.2,"90 pairwise",false
+"Elo Leaderboard","Ratings","All-Time (Regular Season)",13,"Brittany",1475.3,"36 pairwise",false
+"Elo Leaderboard","Ratings","All-Time (Regular Season)",14,"Dan",1472.3,"90 pairwise",false
+"Elo Leaderboard","Ratings","All-Time (Regular Season)",15,"Jack C",1446.7,"36 pairwise",false
+"Elo Leaderboard","Ratings","All-Time (Regular Season)",16,"Carly",1445.2,"72 pairwise",false
+"Elo Leaderboard","Ratings","All-Time (Regular Season)",17,"Tyler",1420.0,"72 pairwise",false
+"Elo Leaderboard","Ratings","All-Time (Regular Season)",18,"Steve",1387.7,"72 pairwise",false
+"Elo Leaderboard","Ratings","All-Time (Regular Season)",19,"Emma",1369.5,"54 pairwise",false
+"Elo Leaderboard","Ratings","All-Time (Regular Season)",20,"Ryan",1344.4,"90 pairwise",false
 "% of 1st Place Finishes (Min 5 Games)","Placement Rates","All-Time (Regular Season)",1,"Michael",46.7%,"14/30",false
 "% of 1st Place Finishes (Min 5 Games)","Placement Rates","All-Time (Regular Season)",2,"Nick",43.3%,"13/30",false
 "% of 1st Place Finishes (Min 5 Games)","Placement Rates","All-Time (Regular Season)",3,"Richie",40.0%,"12/30",false
@@ -1938,6 +1978,95 @@ Category,Subcategory,Scope,Rank,Player,Value,Context,IsActive
 "Most 4th Places","Totals","Single Season Records",76,"Austin",0,"2025",false
 "Most 4th Places","Totals","Single Season Records",76,"Cody",0,"2026",false
 "Most 4th Places","Totals","Single Season Records",76,"Josh",0,"2026",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",1,"Nick",2.618,"2023 pts=16 sos=1.315",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",2,"Cody",2.496,"2026 pts=15 sos=1.491",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",3,"Rachel M",2.367,"2025 pts=14 sos=1.583",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",4,"Nick",2.342,"2022 pts=14 sos=1.509",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",5,"Richie",2.286,"2024 pts=14 sos=1.398",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",6,"Austin",2.222,"2026 pts=13 sos=1.639",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",7,"Sam",2.189,"2025 pts=13 sos=1.556",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",8,"Rachel F",2.175,"2024 pts=13 sos=1.537",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",9,"Cody",2.171,"2024 pts=13 sos=1.528",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",10,"Michael",2.166,"2023 pts=13 sos=1.435",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",11,"Nick",2.145,"2024 pts=13 sos=1.463",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",12,"Ian",2.137,"2026 pts=13 sos=1.426",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",13,"Austin",2.118,"2023 pts=13 sos=1.315",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",14,"Josh",2.059,"2026 pts=12 sos=1.648",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",15,"Michael",2.023,"2024 pts=12 sos=1.574",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",16,"Rachel M",2.003,"2023 pts=12 sos=1.444",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",17,"Michael",1.990,"2022 pts=12 sos=1.463",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",18,"Michael",1.989,"2026 pts=12 sos=1.472",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",19,"Austin",1.975,"2024 pts=12 sos=1.454",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",20,"Jack M",1.970,"2025 pts=12 sos=1.426",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",21,"Michael",1.967,"2025 pts=12 sos=1.417",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",22,"Richie",1.933,"2025 pts=12 sos=1.333",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",23,"Richie",1.850,"2022 pts=11 sos=1.528",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",24,"Ashley",1.848,"2026 pts=11 sos=1.537",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",25,"Austin",1.826,"2025 pts=11 sos=1.481",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",26,"Luke",1.820,"2022 pts=11 sos=1.454",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",27,"Carly",1.808,"2024 pts=11 sos=1.454",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",28,"Ashley",1.807,"2025 pts=11 sos=1.435",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",29,"Jack M",1.804,"2026 pts=11 sos=1.426",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",30,"Ian",1.774,"2025 pts=11 sos=1.352",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",31,"Rachel M",1.770,"2026 pts=11 sos=1.343",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",32,"Rachel F",1.763,"2025 pts=11 sos=1.324",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",32,"Dan",1.763,"2025 pts=11 sos=1.324",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",34,"Ashley",1.716,"2024 pts=10 sos=1.639",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",35,"Ashley",1.684,"2023 pts=10 sos=1.481",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",36,"Richie",1.677,"2023 pts=10 sos=1.463",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",37,"Dan",1.661,"2022 pts=10 sos=1.472",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",38,"Nick",1.659,"2026 pts=10 sos=1.481",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",39,"Rachel M",1.649,"2024 pts=10 sos=1.472",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",40,"Tyler",1.567,"2025 pts=9 sos=1.667",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",41,"Josh",1.556,"2024 pts=9 sos=1.657",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",42,"Sam",1.548,"2026 pts=9 sos=1.620",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",43,"Ryan",1.538,"2022 pts=9 sos=1.583",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",44,"Ryan",1.534,"2024 pts=10 sos=1.185",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",45,"Brian",1.527,"2022 pts=3 sos=1.556",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",46,"Austin",1.520,"2022 pts=9 sos=1.537",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",47,"Rachel F",1.506,"2023 pts=9 sos=1.454",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",48,"Jack M",1.490,"2024 pts=9 sos=1.491",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",49,"Sam",1.486,"2024 pts=9 sos=1.481",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",50,"Steve",1.356,"2025 pts=8 sos=1.556",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",51,"Cody",1.344,"2025 pts=8 sos=1.528",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",52,"Carly",1.332,"2023 pts=8 sos=1.435",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",53,"Brittany",1.330,"2025 pts=8 sos=1.491",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",54,"Steve",1.329,"2023 pts=8 sos=1.426",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",55,"Jack C",1.315,"2026 pts=8 sos=1.454",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",56,"Brittany",1.289,"2026 pts=8 sos=1.389",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",57,"Jack M",1.236,"2023 pts=7 sos=1.611",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",58,"Carly",1.222,"2026 pts=7 sos=1.639",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",59,"Jennie",1.190,"2024 pts=7 sos=1.574",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",60,"Dan",1.182,"2024 pts=7 sos=1.556",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",61,"Tyler",1.173,"2023 pts=7 sos=1.454",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",62,"Richie",1.170,"2026 pts=7 sos=1.509",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",63,"Nick",1.167,"2025 pts=7 sos=1.500",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",64,"Tyler",1.164,"2024 pts=7 sos=1.509",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",65,"Dan",1.163,"2026 pts=7 sos=1.491",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",66,"Josh",1.155,"2023 pts=7 sos=1.407",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",67,"Rachel F",1.153,"2022 pts=7 sos=1.454",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",68,"Ashley",1.116,"2022 pts=7 sos=1.361",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",69,"Luke",1.106,"2023 pts=7 sos=1.287",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",70,"Rachel F",1.100,"2026 pts=7 sos=1.333",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",71,"Allie",1.038,"2022 pts=4 sos=1.583",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",72,"Becca",1.013,"2022 pts=6 sos=1.519",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",73,"Allie",0.897,"2024 pts=5 sos=1.676",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",74,"Josh",0.867,"2025 pts=5 sos=1.583",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",75,"Jack C",0.863,"2025 pts=5 sos=1.574",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",76,"Steve",0.859,"2026 pts=5 sos=1.565",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",77,"Josh",0.857,"2022 pts=5 sos=1.546",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",78,"Ian",0.856,"2024 pts=5 sos=1.574",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",79,"Emma",0.853,"2024 pts=5 sos=1.565",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",80,"Emma",0.826,"2026 pts=5 sos=1.481",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",80,"Tyler",0.826,"2026 pts=5 sos=1.481",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",82,"Emma",0.800,"2025 pts=4 sos=1.833",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",83,"Dan",0.725,"2023 pts=4 sos=1.583",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",84,"Carly",0.707,"2025 pts=4 sos=1.602",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",85,"Ryan",0.696,"2026 pts=4 sos=1.574",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",86,"Ryan",0.677,"2023 pts=4 sos=1.463",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",87,"Ryan",0.641,"2025 pts=4 sos=1.435",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",88,"Allie",0.495,"2023 pts=3 sos=1.426",false
+"SOS-Adjusted Points per Game (Completed Regular Seasons)","Averages","Single Season Records",89,"Steve",0.179,"2024 pts=1 sos=1.546",false
 "Longest Win Streak (Season)","Streaks","Single Season Records",1,"Nick",3,"2023 Week 3 - 2023 Week 5",false
 "Longest Win Streak (Season)","Streaks","Single Season Records",1,"Austin",3,"2023 Week 1 - 2023 Week 3",false
 "Longest Win Streak (Season)","Streaks","Single Season Records",1,"Richie",3,"2024 Week 4 - 2024 Week 6",false

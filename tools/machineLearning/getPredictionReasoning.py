@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 from sklearn.ensemble import RandomForestRegressor
+from pathlib import Path
 
 # --- CONFIGURATION ---
 TARGET_PLAYER = "Rachel F"  # Who do you want to explain?
@@ -9,7 +10,8 @@ TARGET_YEAR = 2026
 
 # 1. Load Data
 try:
-    df = pd.read_json('machineLearning/bgl_ml_features.json')
+    data_path = Path(__file__).resolve().parent / 'bgl_ml_features.json'
+    df = pd.read_json(data_path)
 except ValueError:
     print("Error: Could not find bgl_ml_features.json")
     exit()
@@ -68,7 +70,7 @@ if target_row.empty:
 target_row = target_row.iloc[0] # Get the single row (Series)
 
 # 8. Calculate "Reasons"
-print(f"\n🕵️‍♀️ EXPLAINING PREDICTION FOR: {TARGET_PLAYER} ({TARGET_WEEK}) 🕵️‍♀️")
+print(f"\nEXPLAINING PREDICTION FOR: {TARGET_PLAYER} ({TARGET_WEEK})")
 print(f"Game: {target_row['Game']} (Difficulty: {target_row['Difficulty']})")
 
 predicted_rank = model.predict([target_row[features]])[0]
@@ -112,7 +114,7 @@ for feat in features:
 reasons.sort(key=lambda x: x['Impact'], reverse=True)
 
 # Print Top 3 "Reasons for Losing" (Factors pushing rank HIGHER)
-print("🔻 TOP FACTORS HURTING HER ODDS (Pushing Rank to 3rd/4th):")
+print("TOP FACTORS HURTING ODDS (pushing rank worse):")
 for r in reasons[:4]:
     if r['Impact'] > 0:
         print(f"  • {r['Feature']}: {r['Rachel']:.2f}")
@@ -121,7 +123,7 @@ for r in reasons[:4]:
 print("\n")
 
 # Print Top 3 "Strengths" (Factors keeping her competitive)
-print("✅ TOP STRENGTHS (Pushing Rank to 1st):")
+print("TOP STRENGTHS (pushing rank better):")
 for r in reversed(reasons[-4:]):
     if r['Impact'] < 0:
         print(f"  • {r['Feature']}: {r['Rachel']:.2f}")
