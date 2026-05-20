@@ -27,6 +27,22 @@ export function getWeekReportSortIndex(weekLabel) {
     return 99;
 }
 
+/**
+ * True when weeklyEvents2.js would emit a report for this schedule week (excludes tie-break
+ * weeks and weeks with no entered placements yet).
+ */
+export function weekHasWeeklyReport(week) {
+    if (!week || week.isTieBreak || isTieBreakWeek(week.week)) return false;
+    if (!week.results?.length) return false;
+    for (const group of week.results) {
+        for (const p of group.players || []) {
+            // Same rule as standings: any entered placement means results exist for this week.
+            if (p.placement) return true;
+        }
+    }
+    return false;
+}
+
 export function createScheduleObject(response) {
 
     //IF Cell F1 is populated, we're hiding this season

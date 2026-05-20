@@ -3,8 +3,10 @@ import './Schedule.css';
 import loadingIcon from './images/loading-icon.gif';
 import openNewTab from './images/open-new-tab-icon.png'
 import openHeadlines from './images/news-icon.png';
+import { ReactComponent as StandingsIcon } from './images/standings-icon.svg';
 import ScheduleTableRow from "./ScheduleTableRow";
-import { isTieBreakWeek } from "./DataFormatter";
+import { isTieBreakWeek, getWeekReportSortIndex, weekHasWeeklyReport } from "./DataFormatter";
+import Constants from "./Constants";
 
 
 class Schedule extends React.Component {
@@ -18,6 +20,7 @@ class Schedule extends React.Component {
         this.getScheduleScreen = this.getScheduleScreen.bind(this);
         this.loadingScreen = this.loadingScreen.bind(this);  
         this.displayOpenNewPageLink = this.displayOpenNewPageLink.bind(this);
+        this.displayWeeklyReportLink = this.displayWeeklyReportLink.bind(this);
     }
 
     componentDidMount(){
@@ -36,6 +39,7 @@ class Schedule extends React.Component {
             let scheduleDisplay = this.props.schedule.map((week, index) => {
                 let linkDisplay = this.displayOpenNewPageLink(week.game);
                 let headlinesDisplay = this.displayHeadlinesLink(week);
+                let weeklyReportDisplay = this.displayWeeklyReportLink(week);
                 let sectionHeader = '';
                 if(!tieBreakFlag && week.isTieBreak){
                     tieBreakFlag = true;
@@ -55,6 +59,7 @@ class Schedule extends React.Component {
                         </div>
                         <div className="bgl-week-subheader">
                             <div>{week.dates}</div>
+                            {weeklyReportDisplay}
                             {headlinesDisplay}
                         </div>
                         <div className="bgl-week-table-container">
@@ -111,6 +116,21 @@ class Schedule extends React.Component {
             link = (<div className="headlines-link-container"><a target="_blank" rel="noreferrer" href={week.headlines}><img className="bgg-link" src={openHeadlines} alt="openheadlines"/></a></div>)
         } 
         return link;
+    }
+
+    displayWeeklyReportLink(week){
+        if (!weekHasWeeklyReport(week)) {
+            return <></>;
+        }
+        const weekIdx = getWeekReportSortIndex(week.week);
+        const url = `${Constants.WEEKLY_REPORT_BASE_URL}?year=${encodeURIComponent(this.props.season)}&week=${weekIdx}`;
+        return (
+            <div className="weekly-report-link-container">
+                <a target="_blank" rel="noreferrer" href={url} title="Weekly report" aria-label="Weekly report">
+                    <StandingsIcon className="weekly-report-icon" />
+                </a>
+            </div>
+        );
     }
 
     render(){

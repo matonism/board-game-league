@@ -107,6 +107,28 @@
     padding-left: 0.25rem;
 }
 
+.weekly-report-link-container{
+    display: flex;
+    align-items: center;
+    padding-left: 0.35rem;
+    flex-shrink: 0;
+    height: 0.75rem;
+    width: 0.75rem;
+}
+
+.weekly-report-link-container a{
+    display: flex;
+    align-items: center;
+    line-height: 0;
+}
+
+.weekly-report-icon{
+    max-height: 100%;
+    max-width: 100%;
+    display: block;
+    cursor: pointer;
+}
+
 @media screen and (max-width: 600px) {
     .bgl-week-table{
         min-width: 95vw;

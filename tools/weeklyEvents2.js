@@ -1391,7 +1391,22 @@ function generateHtmlDashboard(reports) {
 
         function init() {
             renderSeasonNav();
-            selectReport(0);
+            let startIndex = 0;
+            try {
+                const params = new URLSearchParams(window.location.search);
+                const y = params.get('year') || params.get('season');
+                const w = params.get('week');
+                if (y != null && y !== '' && w != null && w !== '') {
+                    const seasonNum = parseInt(y, 10);
+                    const weekNum = parseInt(w, 10);
+                    if (!Number.isNaN(seasonNum) && !Number.isNaN(weekNum)) {
+                        const targetId = seasonNum + '_' + weekNum;
+                        const found = REPORTS.findIndex(r => r.id === targetId);
+                        if (found >= 0) startIndex = found;
+                    }
+                }
+            } catch (e) { /* ignore bad query strings */ }
+            selectReport(startIndex);
         }
         
         function switchTab(tabName) {

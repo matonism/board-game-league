@@ -24,7 +24,13 @@ const Constants = {
     LOCAL_STORAGE_INSTALL_NOTIFICATION: 'bgl-install-notification',
     LOCAL_STORAGE_LEAGUE_INFO_DEFERRED: 'bgl-information-modal-deferred',
 
-    SEASONS: ['2026', '2025', '2024', '2023', '2022']
+    SEASONS: ['2026', '2025', '2024', '2023', '2022'],
+
+    // LEAGUE_ANALYTICS_URL: 'https://bglcompanion.com/analysis',
+    // WEEKLY_REPORT_BASE_URL: 'https://bglcompanion.com/weeklyReport/index.html'
+    LEAGUE_ANALYTICS_URL: '/analysis',
+    // Use index.html so S3/CloudFront serves the static report (not SPA index.html) and keeps ?year=&week=
+    WEEKLY_REPORT_BASE_URL: '/weeklyReport/index.html'
 }
 
 export default Constants;
