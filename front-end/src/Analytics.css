@@ -1,0 +1,39 @@
+.analytics-dashboard-shell {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.analytics-footnote {
+    margin: 0 0 0.5rem;
+    padding: 0 0.5rem;
+    font-size: 0.82rem;
+    color: #475569;
+    text-align: center;
+}
+
+.analytics-legacy-link {
+    display: block;
+    text-align: center;
+    margin-bottom: 0.75rem;
+    font-size: 0.85rem;
+    color: #2563eb;
+}
+
+.analytics-legacy-link:hover {
+    text-decoration: underline;
+}
+
+.analytics-loading {
+    padding: 2rem;
+}
+
+.analytics-message {
+    max-width: 28rem;
+    margin: 1.5rem auto;
+    padding: 1.25rem 1.5rem;
+    background-color: beige;
+    border-radius: 0.8rem;
+    text-align: center;
+    box-sizing: border-box;
+    color: #1e293b;
+}

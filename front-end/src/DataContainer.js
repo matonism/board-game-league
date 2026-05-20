@@ -9,6 +9,7 @@ import Standings from "./Standings";
 import Results from "./Results";
 import PowerRankings from "./PowerRankings";
 import Album from "./Album";
+import Analytics from "./Analytics";
 import { createScheduleObject, createStandingsObject, createStrengthOfScheduleObject, getPowerRankingsObjects, createBoardGameHyperlinkMap } from "./DataFormatter";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { setActiveTabClass } from "./utilities/activeTabSelector";
@@ -182,6 +183,9 @@ const DataContainer = props => {
     }
 
     function getCurrentDisplay(){
+        if(displayedScreen === 'analytics'){
+            return (<Analytics></Analytics>);
+        }
         if(scheduleResponse.isFetching || powerRankingsResponse.isFetching){
             return (<div className="loading-icon-container"><img src={loadingIcon} alt="loading"></img></div>)
         }else if(notAvailable){
@@ -226,6 +230,8 @@ const DataContainer = props => {
         if(powerRankings && powerRankings.length > 0){
             displayOptions.push((<div data-name="powerRankings" key="powerRankings" className={"toggle-button " + (displayedScreen === "powerRankings" ? "active": "")} onClick={toggleDisplay}>Power Rankings</div>));
         }
+
+        displayOptions.push((<div data-name="analytics" key="analytics" className={"toggle-button " + (displayedScreen === "analytics" ? "active": "")} onClick={toggleDisplay}>Analytics</div>));
 
         if(scheduleData.schedule){
             displayOptions.push((<div data-name="album" key="album" className={"toggle-button " + (displayedScreen === "album" ? "active": "")} onClick={toggleDisplay}>Album</div>));

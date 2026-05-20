@@ -1,0 +1,310 @@
+.league-analytics-header{
+    padding: 1rem 0 1rem;
+    font-size: 2rem;
+}
+
+.lad-root {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0.75rem 0.5rem 2rem;
+    box-sizing: border-box;
+    color: #1e293b;
+}
+
+.lad-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.lad-tab-btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #64748b;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.lad-tab-btn.lad-tab-active {
+    background: #2563eb;
+    color: #fff;
+}
+
+.lad-pane {
+    animation: lad-fade 0.2s ease-in;
+}
+
+@keyframes lad-fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.lad-subnav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.lad-jump-label {
+    font-size: 0.8rem;
+    color: #64748b;
+    margin-right: 0.25rem;
+}
+
+.lad-subnav-btn {
+    font-size: 0.8rem;
+    padding: 0.35rem 0.65rem;
+    background: #eff6ff;
+    color: #2563eb;
+    border: 1px solid #bfdbfe;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.lad-subnav-btn:hover {
+    background: #dbeafe;
+}
+
+.lad-subcat-header {
+    color: #64748b;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 0.35rem;
+    margin: 1.5rem 0 0.75rem;
+    font-size: 1.05rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    scroll-margin-top: 4rem;
+}
+
+.lad-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+}
+
+.lad-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e2e8f0;
+}
+
+.lad-card-title {
+    margin: 0 0 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #f1f5f9;
+    font-size: 1rem;
+    color: #2563eb;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+
+.lad-tooltip-container {
+    display: inline-block;
+    position: relative;
+    flex-shrink: 0;
+    margin-left: 6px;
+    vertical-align: middle;
+}
+
+.lad-info-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: help;
+    color: #64748b;
+    opacity: 0.7;
+    transition: opacity 0.15s, color 0.15s;
+}
+
+.lad-info-icon:hover {
+    opacity: 1;
+    color: #2563eb;
+}
+
+/* Position (left/top/width) set in JS so the bubble stays inside the viewport */
+.lad-tooltip-text {
+    visibility: hidden;
+    width: 240px;
+    max-width: min(240px, calc(100vw - 2rem));
+    background-color: #1e293b;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 10px;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    margin: 0;
+    opacity: 0;
+    transition: opacity 0.15s ease-out;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    font-weight: normal;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    pointer-events: none;
+}
+
+.lad-tooltip-text::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: var(--lad-arrow-left, 50%);
+    transform: translateX(-50%);
+    margin-top: 0;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #1e293b transparent transparent transparent;
+}
+
+/* Tooltip rendered below the icon (not enough space above) */
+.lad-tooltip-text.lad-tooltip-text--below::after {
+    top: auto;
+    bottom: 100%;
+    margin-top: 0;
+    margin-bottom: 0;
+    border-color: transparent transparent #1e293b transparent;
+}
+
+.lad-table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    font-size: 0.92rem;
+}
+
+.lad-col-rank {
+    width: 12%;
+}
+
+.lad-col-player {
+    width: 38%;
+}
+
+.lad-col-val {
+    width: 18%;
+}
+
+.lad-table--no-notes .lad-col-rank {
+    width: 12%;
+}
+
+.lad-table--no-notes .lad-col-player {
+    width: 43%;
+}
+
+.lad-table--no-notes .lad-col-val {
+    width: 45%;
+}
+
+.lad-col-ctx {
+    width: 32%;
+}
+
+.lad-th {
+    color: #64748b;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 0.35rem 0.25rem 0.45rem 0;
+    border-bottom: 1px solid #e2e8f0;
+    vertical-align: bottom;
+}
+
+.lad-th-rank,
+.lad-th-player {
+    text-align: left;
+}
+
+.lad-th-val {
+    text-align: right;
+    padding-right: 0.35rem;
+}
+
+.lad-th-ctx {
+    text-align: right;
+    padding-left: 0.25rem;
+}
+
+.lad-th-ctx-label {
+    font-size: 0.7rem;
+}
+
+.lad-td {
+    padding: 0.45rem 0.25rem;
+    border-bottom: 1px solid #f1f5f9;
+    vertical-align: top;
+}
+
+.lad-td-rank {
+    text-align: left;
+    font-weight: 700;
+    color: #94a3b8;
+}
+
+.lad-td-player {
+    text-align: left;
+    word-wrap: break-word;
+}
+
+.lad-td-val {
+    text-align: right;
+    font-weight: 700;
+    padding-right: 0.35rem;
+}
+
+.lad-val-main {
+    font-weight: inherit;
+}
+
+.lad-td-ctx {
+    font-size: 0.82rem;
+    color: #64748b;
+    text-align: right;
+}
+
+.lad-row-hidden {
+    display: none;
+}
+
+.lad-active {
+    color: #16a34a;
+    font-weight: 700;
+    font-size: 0.8rem;
+}
+
+.lad-expand {
+    margin-top: 0.75rem;
+    width: 100%;
+    padding: 0.4rem;
+    border: none;
+    background: none;
+    color: #2563eb;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.lad-expand:hover {
+    text-decoration: underline;
+}
+
+.lad-empty {
+    text-align: center;
+    padding: 2rem;
+    color: #64748b;
+}

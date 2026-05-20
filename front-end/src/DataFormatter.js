@@ -16,6 +16,17 @@ export function isTieBreakWeek(weekLabel) {
     return n.includes('tie break') || n.includes('tiebreaker');
 }
 
+/** Matches tools/weeklyEvents2.js getWeekSortIndex — used for weekly report URLs (?year=&week=). */
+export function getWeekReportSortIndex(weekLabel) {
+    const label = String(weekLabel);
+    if (isTieBreakWeek(weekLabel)) return 19;
+    if (label.startsWith('Week')) return parseInt(label.split(' ')[1], 10);
+    if (label.includes('Playoff 1')) return 20;
+    if (label.includes('Playoff 2')) return 21;
+    if (label.includes('Championship')) return 22;
+    return 99;
+}
+
 export function createScheduleObject(response) {
 
     //IF Cell F1 is populated, we're hiding this season
@@ -479,14 +490,14 @@ export function getImageFileNamesToLoad(schedule, response){
         if(isTieBreakWeek(week.week.toLowerCase())) return;
         if(isRegularSeason(week.week.toLowerCase())){ 
             week.results.forEach(group => {
-                let performance = group[0];
+                let performance = group.players[0];
                 if(performance?.placement){
                     mostPossibleImages++;
                 }
             })
         }else{
             week.results.forEach(group => {
-                let performance = group[0];
+                let performance = group.players[0];
                 if(performance?.placement){
                     championshipPlayed = true;
                 }
@@ -587,19 +598,17 @@ export function createHistoricalDataObject(data){
         }
     })
 
-    console.log(schedules);
-
     let analysisObject = {};
     let postSeasonObject = {};
+    let tieBreakObject = {};
     Object.keys(schedules).forEach((year) => {
         
         let schedule = schedules[year];
 
-        schedule.forEach(week=>{
-            if(isTieBreakWeek(week.week.toLowerCase())) return;
+        schedule.forEach((week, weekIndex)=>{
             if(isRegularSeason(week.week.toLowerCase())){ 
-                week.results.forEach(group => {
-                    // gamesPerWeek = group.length;
+                week.results.forEach((group, groupIndex) => {
+                    let location = group.location;
                     group.players.forEach(performance => {
                         if(performance.placement){
                             if(!analysisObject[performance.player]){
@@ -612,14 +621,21 @@ export function createHistoricalDataObject(data){
                                     gamePerformance: [],
                                     opponents: [],
                                     uniqueOpponents: [],
-                                    points: 0
+                                    points: 0,
+                                    homeGames: 0
                                 }
-                                // let player = standings.regularSeason.find(standing => { return standing.player === performance.player})
-                                // sosObject[performance.player] = {strengthOfScheduleTotal: 0, gamesPlayed: player.gamesPlayed, gamesToPlay: player.gamesToPlay};
+                            }
+
+                            let isHomeGame = false;
+                            if(location !== null){
+                                isHomeGame = location.includes(performance.player);
+                            }
+                            if(isHomeGame){
+                                analysisObject[performance.player].homeGames++;
                             }
 
                             analysisObject[performance.player].gamesPlayed++;
-                            analysisObject[performance.player].gamePerformance.push({game: week.game, season: year, week: week.week, placement: performance.placement});
+                            analysisObject[performance.player].gamePerformance.push({game: week.game, season: year, week: week.week, placement: performance.placement, home: isHomeGame, location: location});
                             if(performance.placement === "1"){
                                 analysisObject[performance.player].placements.first++;
                             }else if(performance.placement === "2"){
@@ -649,7 +665,6 @@ export function createHistoricalDataObject(data){
                                     headToHead.gamesPlayed++;
 
                                     headToHead.games.push({gameName: week.game, year: year, placement: performance.placement, opponentPlacement: performance2.placement})
-
                                     if(performance.placement > performance2.placement){
                                         headToHead.losses++;
                                     }else{
@@ -668,9 +683,35 @@ export function createHistoricalDataObject(data){
                         
                     })
                 })
+            }else if(isTieBreakWeek(week.week.toLowerCase())){
+                week.results.forEach((group, groupIndex) => {
+                    group.players.forEach(performance => {
+                        if(performance.placement){
+                            if(!tieBreakObject[performance.player]){
+                                tieBreakObject[performance.player] = {
+                                    name: performance.player,
+                                    gamesPlayed: 0,
+                                    wins: 0,
+                                    gamePerformance: [],
+                                    category: 'tieBreak'
+                                }
+                            }
+                            tieBreakObject[performance.player].gamesPlayed++;
+                            const pl = parseInt(performance.placement, 10);
+                            if(pl === 1) tieBreakObject[performance.player].wins++;
+                            tieBreakObject[performance.player].gamePerformance.push({
+                                game: week.game,
+                                season: year,
+                                week: week.week,
+                                placement: performance.placement,
+                                leaguePoints: 0
+                            });
+                        }
+                    })
+                })
             }else{
-                week.results.forEach(group => {
-                    // gamesPerWeek = group.length;
+                week.results.forEach((group, groupIndex) => {
+                    let location = group.location;
                     group.players.forEach(performance => {
 
                         if(performance.placement){
@@ -688,8 +729,15 @@ export function createHistoricalDataObject(data){
                                     gamePerformance: [],
                                     opponents: [],
                                     uniqueOpponents: [],
-                                    points: 0
+                                    points: 0,
+                                    homeGames: 0
                                 }
+                            }
+                            
+
+                            let isHomeGame = location.includes(performance.player);
+                            if(isHomeGame){
+                                postSeasonObject[performance.player].homeGames++;
                             }
 
                             if(!postSeasonObject[performance.player].appearanceArray.includes(year)){
@@ -697,7 +745,7 @@ export function createHistoricalDataObject(data){
                                 postSeasonObject[performance.player].playoffAppearances++;
                             }
                             
-                            postSeasonObject[performance.player].gamePerformance.push({game: week.game, week: week.week, season: year, placement: performance.placement});
+                            postSeasonObject[performance.player].gamePerformance.push({game: week.game, week: week.week, season: year, placement: performance.placement, home: isHomeGame, location: location});
                             postSeasonObject[performance.player].gamesPlayed++;
                             if(isChampionship(week.week.toLowerCase())){
                                 postSeasonObject[performance.player].championshipAppearances++;
@@ -732,7 +780,6 @@ export function createHistoricalDataObject(data){
                                     }
                                     let headToHead = postSeasonObject[performance.player].headToHead[performance2.player];
                                     headToHead.gamesPlayed++;
-
                                     headToHead.games.push({gameName: week.game, year: year, placement: performance.placement, opponentPlacement: performance2.placement})
 
                                     if(performance.placement > performance2.placement){
@@ -879,9 +926,35 @@ export function createHistoricalDataObject(data){
         }
     })
 
+    Object.values(tieBreakObject).forEach(player => {
+        player.gamePerformance.sort((a, b) => {
+            if(a.season > b.season) {
+                return -1;
+            }else if(a.season < b.season){
+                return 1;
+            }else{
+                if(a.week > b.week){
+                    return -1
+                }else{
+                    return 1;
+                }
+            }
+        })
+    })
+
+    let tieBreakArray = Object.values(tieBreakObject).sort((a, b) => {
+        if(a.wins > b.wins) return -1;
+        if(a.wins < b.wins) return 1;
+        if(a.gamesPlayed > b.gamesPlayed) return -1;
+        if(a.gamesPlayed < b.gamesPlayed) return 1;
+        return 0;
+    })
+
     return {
         regularSeason: analysisArray,
-        postSeason: postSeasonArray
+        postSeason: postSeasonArray,
+        tieBreak: tieBreakArray,
+        schedules: schedules
     };
 
 }

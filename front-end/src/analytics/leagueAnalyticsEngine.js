@@ -1,808 +1,33 @@
-const fs = require('fs');
-const path = require('path');
-
-// CONFIGURATION
-const OUTPUT_DIR = path.join(__dirname, 'output');
-const ANALYSIS_DIR = path.join(__dirname, 'addToBuild/analysis'); 
-if (!fs.existsSync(ANALYSIS_DIR)){
-    fs.mkdirSync(ANALYSIS_DIR);
-}
-
-const DATA_FILE = path.join(OUTPUT_DIR, 'Schedules.txt');
-const CSV_FILE = path.join(OUTPUT_DIR, 'league_stats_export.csv');
-const JSON_FILE = path.join(OUTPUT_DIR, 'leagueLeaderboard.txt');
-const HTML_FILE = path.join(ANALYSIS_DIR, 'index.html');
-
-// SCORING SYSTEM
+/**
+ * League analytics for the React app (browser).
+ *
+ * Stats logic is intentionally duplicated from tools/generateReports7.js (constants,
+ * processStat, helpers, and computeLeagueAnalytics ≈ main()'s stat pipeline). When you
+ * change formulas or leaderboards, update BOTH files.
+ *
+ * Input: same JSON shape as tools/output/Schedules.txt (object keyed by season year).
+ *
+ * Long-term: one shared module required by generateReports7 for export and by this app.
+ */
 const POINTS = { 1: 3, 2: 2, 3: 1, 4: 0 };
 
-/** Regular season is treated as finished once this week has results (playoffs not required). */
 const REGULAR_SEASON_LAST_WEEK = 6;
 
-/** When inferring qualifiers (no playoff rows yet): league size at or above this uses more spots. */
 const INFERRED_QUALIFIERS_LARGE_LEAGUE_MIN_PLAYERS = 20;
 const INFERRED_QUALIFIERS_COUNT_SMALL = 4;
 const INFERRED_QUALIFIERS_COUNT_LARGE = 8;
 
-// GENDER MAPPING (Inferred from Schedules.txt)
 const GENDER_MAP = {
-    "Brian": "M", "Dan": "M", "Ryan": "M", "Josh": "M", "Nick": "M", 
-    "Austin": "M", "Richie": "M", "Luke": "M", "Michael": "M", "Steve": "M", 
+    "Brian": "M", "Dan": "M", "Ryan": "M", "Josh": "M", "Nick": "M",
+    "Austin": "M", "Richie": "M", "Luke": "M", "Michael": "M", "Steve": "M",
     "Tyler": "M", "Jack M": "M", "Jack C": "M", "Cody": "M", "Ian": "M", "Sam": "M",
-    "Rachel F": "F", "Becca": "F", "Ashley": "F", "Allie": "F", "Carly": "F", 
+    "Rachel F": "F", "Becca": "F", "Ashley": "F", "Allie": "F", "Carly": "F",
     "Rachel M": "F", "Emma": "F", "Jennie": "F", "Brittany": "F"
 };
 
-// GLOBAL ACCUMULATORS
-const csvRows = ["Category,Subcategory,Scope,Rank,Player,Value,Context,IsActive"];
-const jsonOutput = {
-    metadata: {
-        generated_at: new Date().toISOString(),
-        description: "League Analytics Data"
-    },
-    leaderboards: []
-};
-
-/**
- * Main Execution Block
- */
-function main() {
-    console.log("Reading data from:", DATA_FILE);
-
-    if (!fs.existsSync(DATA_FILE)) {
-        console.error("Error: output/Schedules.txt not found.");
-        return;
-    }
-
-    try {
-        const rawData = fs.readFileSync(DATA_FILE, 'utf8');
-        const scheduleData = JSON.parse(rawData);
-
-        // 1. Parse and Sort
-        const allGames = parseSchedule(scheduleData);
-        console.log(`Successfully parsed ${allGames.length} completed games.`);
-        allGames.sort((a, b) => (a.season - b.season) || (a.weekIndex - b.weekIndex));
-
-        /** Regular season + playoffs only; tie-break tables excluded from stats and league points. */
-        const leagueGames = allGames.filter(g => !g.isTieBreak);
-        const tieBreakGames = allGames.filter(g => g.isTieBreak);
-
-        // 1b. Build Game Context Map (GameID -> Array of Players)
-        // This is crucial for determining opponents in specific games
-        const gamesById = {};
-        leagueGames.forEach(g => {
-            if (!gamesById[g.gameId]) gamesById[g.gameId] = [];
-            gamesById[g.gameId].push(g);
-        });
-
-        // 2. Identify Active Players (Played in the most recent season)
-        const maxSeason = Math.max(...allGames.map(g => g.season));
-        const activePlayersSet = new Set(
-            allGames.filter(g => g.season === maxSeason).map(g => g.player)
-        );
-        // console.log(`Identified ${activePlayersSet.size} active players in season ${maxSeason}.`);
-
-        // 3. Identify Inaugural Season (for Rookie exclusions)
-        const inauguralSeason = Math.min(...allGames.map(g => g.season));
-
-        const regSeasonGames = leagueGames.filter(g => !g.isPostSeason);
-        const postSeasonGames = leagueGames.filter(g => g.isPostSeason);
-
-        // Seasons whose regular season has finished (Week 6 present in schedule data)
-        const seasonsRegularSeasonComplete = buildSeasonsWithRegularSeasonComplete(regSeasonGames);
-
-        console.log("\n========================================");
-        console.log("       LEAGUE ANALYTICS REPORT");
-        console.log("========================================");
-
-        // --- SECTION 1: Aggregate Stats ---
-        const SCOPE_REG = "All-Time (Regular Season)";
-        const SCOPE_COM = "All-Time (Reg and Post Season)";
-
-        [SCOPE_COM, SCOPE_REG].forEach(scope => {
-            const dataset = scope === SCOPE_REG ? regSeasonGames : leagueGames;
-            
-            // 1. Averages
-            processStat("Average Points per Game", "Averages", scope, getAveragePoints(dataset));
-            processStat("Elo Leaderboard", "Ratings", scope, getEloLeaderboard(dataset, { activePlayersSet }));
-
-            // 2. Placement Rates - Min 5 Games
-            const minGames = 5;
-            processStat(`% of 1st Place Finishes (Min ${minGames} Games)`, "Placement Rates", scope, getPlacementRates(dataset, g => g.place === 1, minGames));
-            processStat(`% of 2nd Place Finishes (Min ${minGames} Games)`, "Placement Rates", scope, getPlacementRates(dataset, g => g.place === 2, minGames));
-            processStat(`% of 3rd Place Finishes (Min ${minGames} Games)`, "Placement Rates", scope, getPlacementRates(dataset, g => g.place === 3, minGames));
-            processStat(`% of 4th Place Finishes (Min ${minGames} Games)`, "Placement Rates", scope, getPlacementRates(dataset, g => g.place === 4, minGames));
-            processStat(`% of Top Half Finishes (Min ${minGames} Games)`, "Placement Rates", scope, getPlacementRates(dataset, g => g.place <= 2, minGames));
-            processStat(`% of Bottom Half Finishes (Min ${minGames} Games)`, "Placement Rates", scope, getPlacementRates(dataset, g => g.place >= 3, minGames));
-
-            // 3. Totals
-            processStat("Points Leaders", "Totals", scope, getSums(dataset, 'points'));
-            processStat("Most 1st Places", "Totals", scope, getCounts(dataset, g => g.place === 1));
-            processStat("Most 2nd Places", "Totals", scope, getCounts(dataset, g => g.place === 2));
-            processStat("Most 3rd Places", "Totals", scope, getCounts(dataset, g => g.place === 3));
-            processStat("Most 4th Places", "Totals", scope, getCounts(dataset, g => g.place === 4));
-            processStat("Top Half Finishes (1st/2nd)", "Totals", scope, getCounts(dataset, g => g.place <= 2));
-            processStat("Bottom Half Finishes (3rd/4th)", "Totals", scope, getCounts(dataset, g => g.place >= 3));
-            
-            // 4. Streaks
-            processStat("Longest Win Streak", "Streaks (All-Time)", scope, getStreaks(dataset, g => g.place === 1, activePlayersSet));
-            processStat("Longest 2nd Place Streak", "Streaks (All-Time)", scope, getStreaks(dataset, g => g.place === 2, activePlayersSet));
-            processStat("Longest 3rd Place Streak", "Streaks (All-Time)", scope, getStreaks(dataset, g => g.place === 3, activePlayersSet));
-            processStat("Longest 4th Place Streak", "Streaks (All-Time)", scope, getStreaks(dataset, g => g.place === 4, activePlayersSet));
-            processStat("Longest Streak w/o 4th", "Streaks (All-Time)", scope, getStreaks(dataset, g => g.place !== 4, activePlayersSet));
-            processStat("Longest Winless Streak", "Streaks (All-Time)", scope, getStreaks(dataset, g => g.place !== 1, activePlayersSet));
-            processStat("Longest Top Half Streak (1st/2nd)", "Streaks (All-Time)", scope, getStreaks(dataset, g => g.place <= 2, activePlayersSet));
-            processStat("Longest Bottom Half Streak (3rd/4th)", "Streaks (All-Time)", scope, getStreaks(dataset, g => g.place >= 3, activePlayersSet));
-            processStat("Longest Streak Without Losing to a Man", "Streaks (All-Time)", scope, getGenderStreaks(dataset, 'M', gamesById, activePlayersSet, false));
-            processStat("Longest Streak Without Losing to a Woman", "Streaks (All-Time)", scope, getGenderStreaks(dataset, 'F', gamesById, activePlayersSet, false));
-            
-
-            processStat("Active Win Streak", "Streaks (Active)", scope, getActiveStreaks(dataset, g => g.place === 1, activePlayersSet));
-            processStat("Active 2nd Place Streak", "Streaks (Active)", scope, getActiveStreaks(dataset, g => g.place === 2, activePlayersSet));
-            processStat("Active 3rd Place Streak", "Streaks (Active)", scope, getActiveStreaks(dataset, g => g.place === 3, activePlayersSet));
-            processStat("Active 4th Place Streak", "Streaks (Active)", scope, getActiveStreaks(dataset, g => g.place === 4, activePlayersSet));
-            processStat("Active Streak w/o 4th", "Streaks (Active)", scope, getActiveStreaks(dataset, g => g.place !== 4, activePlayersSet));
-            processStat("Active Winless Streak", "Streaks (Active)", scope, getActiveStreaks(dataset, g => g.place !== 1, activePlayersSet));
-            processStat("Active Top Half Streak", "Streaks (Active)", scope, getActiveStreaks(dataset, g => g.place <= 2, activePlayersSet));
-            processStat("Active Bottom Half Streak", "Streaks (Active)", scope, getActiveStreaks(dataset, g => g.place >= 3, activePlayersSet));
-            processStat("Active Streak Without Losing to a Man", "Streaks (Active)", scope, getGenderStreaks(dataset, 'M', gamesById, activePlayersSet, true));
-            processStat("Active Streak Without Losing to a Woman", "Streaks (Active)", scope, getGenderStreaks(dataset, 'F', gamesById, activePlayersSet, true));
-            
-            // 5. Speed Records
-            [10, 20, 30, 40, 50, 60].forEach(target => {
-                processStat(`Fastest to ${target} Career Points (# Games)`, "Speed Records", scope, getFastestToCareerPoints(dataset, target));
-            });
-        });
-
-
-        // --- SECTION 2: Single Season Records ---
-        const SCOPE_SEASON = "Single Season Records";
-        const playerSeasons = getPlayerSeasonStats(regSeasonGames);
-
-        processStat("Most Points (Season)", "Totals", SCOPE_SEASON, getRankedRecords(playerSeasons, 'points'));
-        processStat("Most 1st Places", "Totals", SCOPE_SEASON, getRankedRecords(playerSeasons, 'place_1'));
-        processStat("Most 2nd Places", "Totals", SCOPE_SEASON, getRankedRecords(playerSeasons, 'place_2'));
-        processStat("Most 3rd Places", "Totals", SCOPE_SEASON, getRankedRecords(playerSeasons, 'place_3'));
-        processStat("Most 4th Places", "Totals", SCOPE_SEASON, getRankedRecords(playerSeasons, 'place_4'));
-
-        // NEW: Completed regular-season leaderboard (SOS-adjusted PPG)
-        processStat(
-            "SOS-Adjusted Points per Game (Completed Regular Seasons)",
-            "Averages",
-            SCOPE_SEASON,
-            getSeasonAdjustedPPGLeaderboard(regSeasonGames, seasonsRegularSeasonComplete)
-        );
-
-        // For single season streaks, we still pass activePlayersSet to verify if the streak is CURRENTLY active in the league
-        processStat("Longest Win Streak (Season)", "Streaks", SCOPE_SEASON, getSingleSeasonStreaks(regSeasonGames, g => g.place === 1, activePlayersSet));
-        processStat("Longest Streak w/o 4th (Season)", "Streaks", SCOPE_SEASON, getSingleSeasonStreaks(regSeasonGames, g => g.place !== 4, activePlayersSet));
-        processStat("Longest Top Half Streak (Season)", "Streaks", SCOPE_SEASON, getSingleSeasonStreaks(regSeasonGames, g => g.place <= 2, activePlayersSet));
-        processStat("Longest Winless Streak (Season)", "Streaks", SCOPE_SEASON, getSingleSeasonStreaks(regSeasonGames, g => g.place !== 1, activePlayersSet));
-        processStat("Longest Bottom Half Streak (Season)", "Streaks", SCOPE_SEASON, getSingleSeasonStreaks(regSeasonGames, g => g.place >= 3, activePlayersSet));
-
-
-        // Single Season Gender Streaks
-        processStat("Longest Streak Without Losing to a Man (Season)", "Streaks", SCOPE_SEASON, getSingleSeasonGenderStreaks(regSeasonGames, 'M', gamesById, activePlayersSet));
-            
-        processStat("Longest Streak Without Losing to a Girl (Season)", "Streaks", SCOPE_SEASON, getSingleSeasonGenderStreaks(regSeasonGames, 'F', gamesById, activePlayersSet));
-
-        // -- Rookie Records --
-        const rookieRecords = getRookieSeasonRecords(regSeasonGames);
-        processStat("Most Points in Rookie Season (All-Time)", "Rookie Records", SCOPE_SEASON, rookieRecords);
-        
-        const rookieRecordsExcl = rookieRecords.filter(r => r.season > inauguralSeason);
-        processStat(`Most Points in Rookie Season (Excl. ${inauguralSeason})`, "Rookie Records", SCOPE_SEASON, rookieRecordsExcl);
-
-        // -- Sophomore Records --
-        const sophRecords = getSophomoreSeasonRecords(regSeasonGames);
-        processStat("Best Sophomore Season (All-Time)", "Rookie Records", SCOPE_SEASON, sophRecords);
-
-        const sophRecordsExcl = sophRecords.filter(r => r.rookieSeason > inauguralSeason); 
-        processStat(`Best Sophomore Season (Excl. Class of ${inauguralSeason})`, "Rookie Records", SCOPE_SEASON, sophRecordsExcl);
-
-
-        // --- SECTION 3: Post Season ---
-        const SCOPE_POST = "Post Season Only";
-        processStat("Most Playoff Appearances", "Totals", SCOPE_POST, getPlayoffAppearances(postSeasonGames));
-        processStat("Most Championship Appearances", "Totals", SCOPE_POST, getChampionshipAppearances(postSeasonGames));
-        processStat("Most Championship Titles", "Totals", SCOPE_POST, getChampionshipTitles(postSeasonGames));
-        
-        processStat("Most Consecutive Playoff Appearances", "Streaks", SCOPE_POST, getConsecutivePlayoffAppearances(postSeasonGames, activePlayersSet));
-
-        // --- SECTION 3b: Tie break (pre-playoff; does not count toward league points) ---
-        const SCOPE_TIEBREAK = "Tie Break (Pre-Playoff)";
-        processStat(
-            "Most Tiebreaker Games Played",
-            "Totals",
-            SCOPE_POST,
-            getTieBreakGamesPlayedLeaderboard(tieBreakGames, leagueGames)
-        );
-
-        // --- SECTION 4: Locations (Renamed from Home Field Advantage) ---
-        const SCOPE_HOME = "Locations";
-        const homeDataset = leagueGames;
-
-        
-
-        processStat("Home Win % (Min 5 Home Games)", "Averages", SCOPE_HOME, getWinRates(homeDataset, true, 5));
-        processStat("Away Win % (Min 5 Away Games)", "Averages", SCOPE_HOME, getWinRates(homeDataset, false, 5));
-        processStat("Home vs Away Point Differential (Min 5 Games Each)", "Averages", SCOPE_HOME, getLocationPointDifferential(homeDataset, 5));
-
-        processStat("% of Games Played at Home (Min 5 Games)", "Averages", SCOPE_HOME, getLocationPercent(homeDataset, true, 5));
-        processStat("% of Games Played Away (Min 5 Games)", "Averages", SCOPE_HOME, getLocationPercent(homeDataset, false, 5));
-
-        processStat("Average Points at Home (Min 5 Home Games)", "Averages", SCOPE_HOME, getLocationAveragePoints(homeDataset, true, 5));
-        processStat("Average Points Away (Min 5 Away Games)", "Averages", SCOPE_HOME, getLocationAveragePoints(homeDataset, false, 5));
-        
-        
-        // New Leaderboard: Most Games Hosted (Location Popularity)
-        processStat("Most Games Hosted (By Location)", "Totals", SCOPE_HOME, getLocationCounts(leagueGames));
-        processStat("Most Home Games Played (By Player)", "Totals", SCOPE_HOME, getCounts(homeDataset, g => g.isHome));
-
-        // NEW: Least Recent Host
-        processStat("Last Hosted (Active Players)", "Totals", SCOPE_HOME, getLeastRecentHost(leagueGames, activePlayersSet));
-
-        processStat("Most Wins at Home", "Totals", SCOPE_HOME, getCounts(homeDataset, g => g.isHome && g.place === 1));
-        processStat("Most Wins Away", "Totals", SCOPE_HOME, getCounts(homeDataset, g => !g.isHome && g.place === 1));
-        
-
-        // Single Season Stats
-        processStat("Most Home Games Played (Single Season)", "Single Season", SCOPE_HOME, getMostHomeGamesInSeason(homeDataset));
-        processStat("Fewest Home Games Played (Single Season)", "Single Season", SCOPE_HOME, getFewestHomeGamesInSeason(homeDataset, seasonsRegularSeasonComplete));
-        
-        // NEW: Neutral Site Stats
-        processStat("Most Games Played at Neutral Sites", "Neutral Sites", SCOPE_HOME, getNeutralSiteCounts(leagueGames));
-        processStat("Most Popular Neutral Sites", "Neutral Sites", SCOPE_HOME, getNeutralSiteLocationCounts(leagueGames));
-
-        // --- SECTION 5: Cross Season ---
-        const SCOPE_CROSS = "Cross Season";
-        const minRequiredGames = 2;
-        for(let w=1; w<=6; w++) {
-            processStat(`Best Week ${w} Performance Avg (Min ${minRequiredGames} games)`, "Averages by Week", SCOPE_CROSS, getWeeklyAverages(leagueGames, w, minRequiredGames));
-        }
-        
-        // NEW: The Opener and The Closer
-        const openers = getSplitPerformance(regSeasonGames, [1, 2, 3], minRequiredGames);
-        const closers = getSplitPerformance(regSeasonGames, [4, 5, 6], minRequiredGames);
-        processStat(`The Opener (Avg Pts Wks 1-3) (Min ${minRequiredGames} games)`, "Averages by Week", SCOPE_CROSS, openers);
-        processStat(`The Closer (Avg Pts Wks 4-6) (Min ${minRequiredGames} games)`, "Averages by Week", SCOPE_CROSS, closers);
-
-
-        // Risers and Fallers
-        processStat("Biggest Points Jump (Season to Season)", "Risers and Fallers", SCOPE_CROSS, getBiggestPointJumps(regSeasonGames, seasonsRegularSeasonComplete));
-        processStat("Biggest Points Drop (Season to Season)", "Risers and Fallers", SCOPE_CROSS, getBiggestPointDrops(regSeasonGames, seasonsRegularSeasonComplete));
-        
-        // Filter dataset for consistency metrics: Exclude current season until Week 6 is in the data
-        let consistencyDataset = regSeasonGames;
-        if (!seasonsRegularSeasonComplete.has(maxSeason)) {
-            consistencyDataset = regSeasonGames.filter(g => g.season !== maxSeason);
-        }
-
-        // Consistency (Standard Deviation of Placement) - Min 5 games
-        processStat("Most Consistent Finishers (Game Finishes Std Dev)", "Risers and Fallers", SCOPE_CROSS, getPlacementConsistency(consistencyDataset, 5));
-        
-        // NEW: Consistency (Standard Deviation of Season Point Totals) - Min 3 seasons
-        processStat("Most Consistent Scorers (Season Pts Std Dev)", "Risers and Fallers", SCOPE_CROSS, getPointsConsistency(consistencyDataset, 3));
-        
-        // Rivalries / Matchups
-        processStat("Most Common Matchups (Regular Season Only)", "Rivalries", SCOPE_CROSS, getMostCommonMatchups(regSeasonGames));
-        processStat("Least Played Matchups (Active Players Only - Max 1 Game)", "Rivalries", SCOPE_CROSS, getLeastPlayedMatchups(leagueGames, activePlayersSet));
-        processStat("Longest Matchup Droughts (> 6 Weeks Since Last Play)", "Rivalries", SCOPE_CROSS, getMatchupDroughts(leagueGames, activePlayersSet));
-
-        // NEW: Best Duo / Worst Enemies
-        processStat("Best Duo (Combined Avg Pts > 2.0)", "Rivalries", SCOPE_CROSS, getBestDuos(regSeasonGames));
-        processStat("Worst Duo (Combined Avg Pts < 2.0)", "Rivalries", SCOPE_CROSS, getBestDuos(regSeasonGames));
-        processStat("Worst Enemies (Lowest Avg Score vs Opponent)", "Rivalries", SCOPE_CROSS, getWorstEnemies(regSeasonGames));
-
-        // Per-player opponent / teammate splits (regular season for avgs / counts; droughts use full league schedule like Rivalries)
-        const SCOPE_PLAYER_MATCHUPS = "Player Matchups";
-        const MIN_VS_OPPONENT = 3;
-        const MIN_WITH_PARTNER = 3;
-        const oppByPlayer = buildOpponentStatsByPlayer(regSeasonGames);
-        const duoByPlayer = buildDuoStatsByPlayer(regSeasonGames);
-        const matchupPlayers = [...new Set(regSeasonGames.map(g => g.player))].sort((a, b) =>
-            a.localeCompare(b)
-        );
-
-        for (const pname of matchupPlayers) {
-            const gamesVsList = getOpponentGameCountsList(pname, oppByPlayer);
-            const droughtList = getMatchupDroughtsForPlayer(pname, leagueGames, activePlayersSet);
-            const bestVs = getRankedOpponentsForPlayer(pname, oppByPlayer, MIN_VS_OPPONENT, true);
-            const worstVs = getRankedOpponentsForPlayer(pname, oppByPlayer, MIN_VS_OPPONENT, false);
-            const bestWith = getRankedPartnersForPlayer(pname, duoByPlayer, MIN_WITH_PARTNER, true);
-            const worstWith = getRankedPartnersForPlayer(pname, duoByPlayer, MIN_WITH_PARTNER, false);
-            if (
-                gamesVsList.length === 0 &&
-                droughtList.length === 0 &&
-                bestVs.length + worstVs.length + bestWith.length + worstWith.length === 0
-            ) {
-                continue;
-            }
-
-            processStat("Games vs Each Opponent", pname, SCOPE_PLAYER_MATCHUPS, gamesVsList);
-            
-            processStat(
-                "Longest Matchup Droughts (> 6 Weeks Since Last Play)",
-                pname,
-                SCOPE_PLAYER_MATCHUPS,
-                droughtList
-            );
-            processStat(`Best Against (Avg Pts, Min ${MIN_VS_OPPONENT} Games)`, pname, SCOPE_PLAYER_MATCHUPS,bestVs);
-            processStat(
-                `Worst Against (Avg Pts, Min ${MIN_VS_OPPONENT} Games)`,
-                pname,
-                SCOPE_PLAYER_MATCHUPS,
-                worstVs
-            );
-            processStat(
-                `Best With (Combined Table Avg, Min ${MIN_WITH_PARTNER} Games)`,
-                pname,
-                SCOPE_PLAYER_MATCHUPS,
-                bestWith
-            );
-            processStat(
-                `Worst With (Combined Table Avg, Min ${MIN_WITH_PARTNER} Games)`,
-                pname,
-                SCOPE_PLAYER_MATCHUPS,
-                worstWith
-            );
-        }
-
-        // --- SECTION 6: Historic Performances (playoff cutoffs, SoS, comeback/collapse stories) ---
-        const SCOPE_METRICS = "Historic Performances";
-        const seasonMetrics = calculateSeasonMetrics(leagueGames);
-        
-        processStat("Lowest Points to Qualify for Playoffs", "Cutoffs", SCOPE_METRICS, seasonMetrics.lowestQualifiers);
-        
-        // Strength of Schedule
-        const sosStats = calculateStrengthOfSchedule(regSeasonGames);
-        processStat("Hardest Strength of Schedule (All-Time Avg Opponent Pts)", "Difficulty", SCOPE_METRICS, sosStats.hardest);
-        processStat("Easiest Strength of Schedule (All-Time Avg Opponent Pts)", "Difficulty", SCOPE_METRICS, sosStats.easiest);
-        processStat("Hardest Path to Playoffs (Single Season SoS)", "Difficulty", SCOPE_METRICS, getHardestPathToPlayoffs(regSeasonGames, leagueGames));
-
-        // (Elo leaderboards moved to All-Time scopes)
-
-        
-        processStat("Worst Start (2 Games) to Make Playoffs", "Comebacks", SCOPE_METRICS, seasonMetrics.worstStarts2);
-        processStat("Worst Start (3 Games) to Make Playoffs", "Comebacks", SCOPE_METRICS, seasonMetrics.worstStarts3);
-        processStat("Worst Start (4 Games) to Make Playoffs", "Comebacks", SCOPE_METRICS, seasonMetrics.worstStarts4);
-        
-        processStat("Best Start (2 Games) to Miss Playoffs", "Collapses", SCOPE_METRICS, seasonMetrics.bestMisses2);
-        processStat("Best Start (3 Games) to Miss Playoffs", "Collapses", SCOPE_METRICS, seasonMetrics.bestMisses3);
-        processStat("Best Start (4 Games) to Miss Playoffs", "Collapses", SCOPE_METRICS, seasonMetrics.bestMisses4);
-
-        // --- SECTION 7: Trends / Timeframe Performance ---
-        const SCOPE_TRENDS = "Trends (Regular Season)";
-                
-        // Define the timeframes we want to analyze
-        const timeframes = [
-            { label: "Last 5 Games", type: "games", value: 5 },
-            { label: "Last 10 Games", type: "games", value: 10 },
-            { label: "Last 2 Seasons", type: "season", value: 2 },
-            { label: "Last 3 Seasons", type: "season", value: 3 }
-        ];
-
-        timeframes.forEach(tf => {
-            // Create a specific dataset for this timeframe using filterDataset helper
-            const tfData = filterDataset(regSeasonGames, tf.type, tf.value, maxSeason);
-            
-            // Use the Label (e.g., "Last 10 Games") as the Subcategory so they appear as buttons in the UI
-            const subCat = tf.label;
-
-            // Generate Stats for this specific timeframe
-            // We use a lower minGames threshold for short timeframes (e.g. 3 games)
-            const minG = tf.type === 'games' && tf.value <= 5 ? 2 : 3;
-
-            processStat("Average Points per Game", subCat, SCOPE_TRENDS, getAveragePoints(tfData, minG));
-            processStat("Win %", subCat, SCOPE_TRENDS, getPlacementRates(tfData, g => g.place === 1, minG));
-            
-            processStat(`% of 2nd Place Finishes`, subCat, SCOPE_TRENDS, getPlacementRates(tfData, g => g.place === 2, minG));
-            processStat(`% of 3rd Place Finishes`, subCat, SCOPE_TRENDS, getPlacementRates(tfData, g => g.place === 3, minG));
-            processStat(`% of 4th Place Finishes`, subCat, SCOPE_TRENDS, getPlacementRates(tfData, g => g.place === 4, minG));
-            processStat("Top Half Finish % (1st/2nd)", subCat, SCOPE_TRENDS, getPlacementRates(tfData, g => g.place <= 2, minG));
-            processStat("Bottom Half Finish % (3rd/4th)", subCat, SCOPE_TRENDS, getPlacementRates(tfData, g => g.place > 2, minG));
-        });
-
-
-
-        
-        // 3. Write Outputs
-        fs.writeFileSync(CSV_FILE, csvRows.join('\n'));
-        console.log(`SUCCESS: CSV exported to ${CSV_FILE}`);
-
-        fs.writeFileSync(JSON_FILE, JSON.stringify(jsonOutput, null, 2));
-        console.log(`SUCCESS: JSON exported to ${JSON_FILE}`);
-
-        // 4. GENERATE HTML DASHBOARD
-        generateHtmlDashboard(jsonOutput);
-        console.log(`SUCCESS: HTML Dashboard exported to ${HTML_FILE}`);
-
-    } catch (err) {
-        console.error("Error processing data:", err);
-    }
-}
-
-// =============================================
-// HTML GENERATOR
-// =============================================
-
-function generateHtmlDashboard(data) {
-    const htmlContent = `
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>League Analytics Dashboard</title>
-    <style>
-        :root { --primary: #2563eb; --bg: #f8fafc; --surface: #ffffff; --text: #1e293b; --border: #e2e8f0; --active-streak: #16a34a; }
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; }
-        .container { max-width: 1200px; margin: 0 auto; }
-        header { margin-bottom: 30px; text-align: center; position: relative; }
-        h1 { margin: 0; color: var(--primary); }
-        .timestamp { color: #64748b; font-size: 0.9em; }
-        
-        /* Back Button */
-        .back-btn {
-            position: absolute;
-            top: 0;
-            left: 0;
-            text-decoration: none;
-            color: var(--primary);
-            font-weight: 600;
-            padding: 8px 15px;
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            font-size: 0.9em;
-            transition: all 0.2s;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-        }
-        .back-btn:hover { background: #f1f5f9; }
-
-        /* Tabs */
-        .tabs { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; justify-content: center; margin-top: 20px; }
-        .tab-btn { padding: 10px 20px; border: none; background: var(--surface); cursor: pointer; border-radius: 8px; font-weight: 600; color: #64748b; box-shadow: 0 1px 3px rgba(0,0,0,0.1); transition: all 0.2s; }
-        .tab-btn.active { background: var(--primary); color: white; }
-        .tab-btn:hover:not(.active) { background: #e0f2fe; color: var(--primary); }
-
-        /* Content */
-        .tab-content { display: none; }
-        .tab-content.active { display: block; animation: fadeIn 0.3s; }
-        
-        /* Sub Navigation */
-        .sub-nav { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 25px; border-bottom: 1px solid var(--border); padding-bottom: 15px; }
-        .sub-nav-btn { font-size: 0.85em; padding: 6px 12px; background: #eff6ff; color: var(--primary); border: 1px solid #bfdbfe; border-radius: 20px; cursor: pointer; text-decoration: none; font-weight: 600; transition: background 0.2s; }
-        .sub-nav-btn:hover { background: #dbeafe; }
-
-        /* Subcategories */
-        .subcat-header { color: #64748b; border-bottom: 2px solid #e2e8f0; padding-bottom: 5px; margin-top: 30px; margin-bottom: 15px; font-size: 1.2em; text-transform: uppercase; letter-spacing: 0.05em; scroll-margin-top: 20px; }
-        .subcat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px; }
-
-        /* Cards */
-        .card { background: var(--surface); border-radius: 12px; padding: 20px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); border: 1px solid var(--border); display: flex; flex-direction: column; }
-        .card h3 { margin-top: 0; color: var(--primary); font-size: 1.1em; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; margin-bottom: 15px; display: flex; align-items: center; justify-content: space-between; }
-        
-        /* Table */
-        table { width: 100%; border-collapse: collapse; font-size: 0.95em; }
-        th { text-align: left; color: #64748b; font-weight: 600; padding-bottom: 8px; font-size: 0.85em; text-transform: uppercase; letter-spacing: 0.05em; }
-        td { padding: 8px 0; border-bottom: 1px solid #f1f5f9; }
-        tr:last-child td { border-bottom: none; }
-        .rank-col { width: 40px; font-weight: bold; color: #94a3b8; }
-        .val-col { text-align: right; font-weight: 700; color: var(--text); }
-        .ctx-col { font-size: 0.85em; color: #64748b; text-align: right; padding-left: 10px; }
-        .active-badge { color: var(--active-streak); font-weight: bold; font-size: 0.9em; margin-left: 5px; }
-        
-        /* INFO ICON STYLE */
-        .info-icon {
-            display: inline-block;
-            margin-left: 6px;
-            color: #64748b;
-            cursor: help;
-            vertical-align: middle;
-            opacity: 0.7;
-            position: relative;
-        }
-        .info-icon:hover { opacity: 1; color: var(--primary); }
-        
-        /* Tooltip Container */
-        .tooltip-container {
-            display: inline-block;
-            position: relative;
-        }
-
-        /* Tooltip Text */
-        .tooltip-text {
-            visibility: hidden;
-            width: 240px;
-            background-color: #1e293b;
-            color: #fff;
-            text-align: center;
-            border-radius: 6px;
-            padding: 10px;
-            position: absolute;
-            z-index: 100;
-            bottom: 135%;
-            left: 50%;
-            margin-left: -120px;
-            opacity: 0;
-            transition: opacity 0.2s, visibility 0.2s, bottom 0.2s;
-            font-size: 0.85rem;
-            line-height: 1.4;
-            font-weight: normal;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            pointer-events: none;
-        }
-
-        .tooltip-text::after {
-            content: "";
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            margin-left: -5px;
-            border-width: 5px;
-            border-style: solid;
-            border-color: #1e293b transparent transparent transparent;
-        }
-
-        .tooltip-container:hover .tooltip-text,
-        .tooltip-container.active .tooltip-text {
-            visibility: visible;
-            opacity: 1;
-            bottom: 125%;
-        }
-
-        /* Hidden Rows */
-        .hidden-rows { display: none; }
-        .show-more-btn { margin-top: auto; padding-top: 15px; background: none; border: none; color: var(--primary); cursor: pointer; font-size: 0.9em; font-weight: 600; width: 100%; text-align: center; }
-        .show-more-btn:hover { text-decoration: underline; }
-
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        
-        @media (max-width: 600px) {
-            .back-btn { position: static; display: inline-block; margin-bottom: 15px; }
-            header { text-align: center; }
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <header>
-            <a href="https://bglcompanion.com" class="back-btn">&larr; Back to BGL</a>
-            <h1>League Analytics Dashboard</h1>
-            <div class="timestamp">Generated: ${new Date().toLocaleString()}</div>
-        </header>
-
-        <div class="tabs" id="tabContainer"></div>
-        <div id="contentContainer"></div>
-    </div>
-
-    <script>
-        // EMBEDDED DATA
-        const LEAGUE_DATA = ${JSON.stringify(data)};
-
-        function init() {
-            const tabsContainer = document.getElementById('tabContainer');
-            const contentContainer = document.getElementById('contentContainer');
-            
-            // Global Click Listener for closing tooltips
-            document.addEventListener('click', function(e) {
-                if (!e.target.closest('.tooltip-container')) {
-                    document.querySelectorAll('.tooltip-container.active').forEach(el => {
-                        el.classList.remove('active');
-                    });
-                }
-            });
-
-            // 1. Group Data by Scope
-            const scopes = {};
-            LEAGUE_DATA.leaderboards.forEach(lb => {
-                if (!scopes[lb.scope]) scopes[lb.scope] = [];
-                scopes[lb.scope].push(lb);
-            });
-
-            // 2. Create Tabs and Content
-            let isFirst = true;
-            for (const [scopeName, boards] of Object.entries(scopes)) {
-                // Button
-                const btn = document.createElement('button');
-                btn.className = \`tab-btn \${isFirst ? 'active' : ''}\`;
-                btn.textContent = scopeName;
-                btn.onclick = () => switchTab(scopeName);
-                tabsContainer.appendChild(btn);
-
-                // Content Wrapper
-                const wrapper = document.createElement('div');
-                wrapper.id = 'scope-' + scopeName.replace(/[^a-zA-Z0-9]/g, '');
-                wrapper.className = \`tab-content \${isFirst ? 'active' : ''}\`;
-                
-                // Group by Subcategory
-                const subcats = {};
-                boards.forEach(b => {
-                    if (!subcats[b.subcategory]) subcats[b.subcategory] = [];
-                    subcats[b.subcategory].push(b);
-                });
-
-                // Create Quick Navigation Bar
-                const navBar = document.createElement('div');
-                navBar.className = 'sub-nav';
-                navBar.innerHTML = '<span style="font-size:0.8em; color:#64748b; align-self:center; margin-right:5px;">JUMP TO:</span>';
-                
-                Object.keys(subcats).forEach(subName => {
-                    const navBtn = document.createElement('button');
-                    navBtn.className = 'sub-nav-btn';
-                    navBtn.textContent = subName;
-                    navBtn.onclick = () => {
-                        const targetId = 'header-' + scopeName.replace(/[^a-zA-Z0-9]/g, '') + '-' + subName.replace(/[^a-zA-Z0-9]/g, '');
-                        const el = document.getElementById(targetId);
-                        if(el) el.scrollIntoView({behavior: 'smooth', block: 'start'});
-                    };
-                    navBar.appendChild(navBtn);
-                });
-                wrapper.appendChild(navBar);
-
-                // Render Subcategories
-                for (const [subName, subBoards] of Object.entries(subcats)) {
-                     const header = document.createElement('h2');
-                     header.textContent = subName;
-                     header.className = 'subcat-header';
-                     // Add ID for navigation
-                     header.id = 'header-' + scopeName.replace(/[^a-zA-Z0-9]/g, '') + '-' + subName.replace(/[^a-zA-Z0-9]/g, '');
-                     wrapper.appendChild(header);
-
-                     const grid = document.createElement('div');
-                     grid.className = 'subcat-grid';
-                     subBoards.forEach(board => {
-                        grid.appendChild(createCard(board));
-                     });
-                     wrapper.appendChild(grid);
-                }
-
-                contentContainer.appendChild(wrapper);
-                isFirst = false;
-            }
-        }
-
-        function createCard(board) {
-            const card = document.createElement('div');
-            card.className = 'card';
-            
-            let rowsHtml = '';
-            const limit = 5;
-            const hasHidden = board.entries.length > limit;
-
-            board.entries.forEach((entry, index) => {
-                const hiddenClass = index >= limit ? 'hidden-rows' : '';
-                const activeHtml = entry.isActive ? '<span class="active-badge" title="Active Streak">🔥 Active</span>' : '';
-                
-                rowsHtml += \`
-                    <tr class="\${hiddenClass}">
-                        <td class="rank-col">#\${entry.rank}</td>
-                        <td class="player-col">\${entry.player}</td>
-                        <td class="val-col">\${entry.value}</td>
-                        <td class="ctx-col">\${entry.context}\${activeHtml}</td>
-                    </tr>
-                \`;
-            });
-
-            let btnHtml = '';
-            if (hasHidden) {
-                btnHtml = \`<button class="show-more-btn" onclick="toggleRows(this)">Show Full Leaderboard (\${board.entries.length})</button>\`;
-            }
-
-            // --- INFO ICON LOGIC ---
-            let infoText = "";
-            // Check board category for specific tooltips
-            if (board.category.includes("Consistent") || board.category.includes("Std Dev")) {
-                infoText = "<strong>Standard Deviation</strong> measures consistency. <br>A lower value means the player's performance is more predictable/consistent (less variance).";
-            } else if (board.category.includes("Differential")) {
-                infoText = "<strong>(+) Positive:</strong> Better at HOME.<br><strong>(-) Negative:</strong> Better AWAY.";
-            } else if (board.category.includes("Strength of Schedule")) {
-                infoText = "Calculated as the average regular season score of all opponents faced.";
-            } else if (board.category.includes("SOS-Adjusted Points per Game")) {
-                infoText = "<strong>Completed regular seasons only.</strong><br><br><strong>Adjusted PPG</strong> = Season PPG + (Season SoS - Season baseline opponent strength) × 0.4.<br><br><strong>SoS</strong> here is average opponent points per game (higher = tougher schedule).";
-            } else if (board.category.includes("Elo Leaderboard")) {
-                infoText = "<strong>Elo rating</strong> is a skill rating system used in chess/sports.<br><br>Everyone starts at <strong>1500</strong>. After each table, we do pairwise updates: you gain rating for finishing ahead of higher-rated opponents and lose rating for finishing behind lower-rated opponents.<br><br><strong>Value</strong> is current Elo. Context shows how many pairwise comparisons contributed.";
-            } else if (board.category.includes("Worst Enemies")) {
-                infoText = "Lowest average score when playing against this specific opponent (Min 3 games).";
-            } else if (board.category.includes("Best Duo")) {
-                infoText = "Highest combined average score per game when playing at the same table (Min 5 games).";
-            }else if (board.category.includes("Hardest Path to Playoffs")) {
-                infoText = "Calculates the toughest strength of schedule for a player that still made playoffs";
-            } else if (board.category.includes("Tiebreaker Games")) {
-                infoText = "Count of pre-playoff tie-break tables played (seed/seeding games). Does not award league points.";
-            }else if (board.category.includes("Worst Enemies")) {
-                infoText = "The first player's average points in games featuring the second";
-            }else if (board.category.includes("Without Losing to")) {
-                infoText = "Counts consecutive games played where at least one opponent of the specific gender was present, and the player finished better than all of them.";
-            } else if (board.scope === "Player Matchups") {
-                if (board.category === "Games vs Each Opponent") {
-                    infoText = "<strong>Regular season only.</strong> Number of games at the same table as each opponent (every shared game counts once). Sorted by most games together.";
-                } else if (board.category.startsWith("Best Against")) {
-                    infoText = "<strong>Regular season only.</strong> Your average league points in games at the same table as this opponent. Opponents need the minimum number of shared games shown in the title.";
-                } else if (board.category.startsWith("Worst Against")) {
-                    infoText = "<strong>Regular season only.</strong> Your average league points when this opponent was at your table. Lower means tougher matchups for you (or worse finishes). Minimum shared games in the title.";
-                } else if (board.category.startsWith("Best With")) {
-                    infoText = "<strong>Regular season only.</strong> Combined average points (you + this player) per game at the same table. Minimum shared games in the title.";
-                } else if (board.category.startsWith("Worst With")) {
-                    infoText = "<strong>Regular season only.</strong> Lowest combined averages with this player at your table. Minimum shared games in the title.";
-                } else if (board.category.includes("Matchup Droughts")) {
-                    infoText = "<strong>Reg + post season.</strong> Only <strong>current</strong> league players appear as opponents. Same rules as Rivalries: weeks since you last shared a table (must be &gt; 6), or if you never have, overlapping weeks where you both played but not together (&gt; 6 chances). Sorted by longest drought.";
-                }
-            }
-
-            // Create SVG icon if tooltip text exists
-            // Using a container to handle hover/click states
-            const infoIconHtml = infoText ? 
-                \`<div class="tooltip-container" onclick="this.classList.toggle('active'); event.stopPropagation();">
-                    <div class="info-icon">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <line x1="12" y1="16" x2="12" y2="12"></line>
-                            <line x1="12" y1="8" x2="12.01" y2="8"></line>
-                        </svg>
-                    </div>
-                    <span class="tooltip-text">\${infoText}</span>
-                  </div>\` : "";
-
-            card.innerHTML = \`
-                <h3>
-                    <span>\${board.category}</span>
-                    \${infoIconHtml}
-                </h3>
-                <table>
-                    <thead><tr><th>Rank</th><th>Player</th><th style="text-align:right">Value</th><th></th></tr></thead>
-                    <tbody>\${rowsHtml}</tbody>
-                </table>
-                \${btnHtml}
-            \`;
-            return card;
-        }
-
-        function switchTab(scopeName) {
-            // Buttons
-            document.querySelectorAll('.tab-btn').forEach(b => {
-                b.classList.toggle('active', b.textContent === scopeName);
-            });
-            // Content
-            document.querySelectorAll('.tab-content').forEach(c => {
-                c.classList.remove('active');
-            });
-            const targetId = 'scope-' + scopeName.replace(/[^a-zA-Z0-9]/g, '');
-            document.getElementById(targetId).classList.add('active');
-        }
-
-        function toggleRows(btn) {
-            const table = btn.previousElementSibling;
-            const hiddenRows = table.querySelectorAll('.hidden-rows');
-            const isExpanding = btn.textContent.includes('Show'); // Simple check
-            
-            hiddenRows.forEach(row => {
-                row.style.display = isExpanding ? 'table-row' : 'none';
-            });
-
-            btn.textContent = isExpanding ? 'Collapse' : 'Show Full Leaderboard';
-        }
-
-        init();
-    </script>
-</body>
-</html>
-    `;
-    fs.writeFileSync(HTML_FILE, htmlContent);
-}
-
-// =============================================
-// LEAGUE ANALYTICS (keep in sync with front-end)
-// =============================================
-// From processStat through the helpers below, this mirrors
-// front-end/src/analytics/leagueAnalyticsEngine.js. main()'s stat pipeline should match
-// computeLeagueAnalytics() there. Edit both when changing calculations or leaderboards.
-// Long-term: require computeLeagueAnalytics from that module; keep only I/O + HTML here.
-
-// =============================================
-// OUTPUT & FORMATTING LOGIC
-// =============================================
+/** Reset each run of computeLeagueAnalytics */
+let jsonOutput;
+let csvRows;
 
 function processStat(category, subcategory, scope, sortedList) {
     if (!sortedList || sortedList.length === 0) return;
@@ -2871,4 +2096,312 @@ function getMatchupDroughtsForPlayer(focalPlayer, games, activePlayersSet) {
     return results.sort((a, b) => b.raw - a.raw);
 }
 
-main();
+export function computeLeagueAnalytics(scheduleData) {
+    if (!scheduleData || typeof scheduleData !== 'object') {
+        return {
+            metadata: { generated_at: new Date().toISOString(), description: 'League Analytics Data' },
+            leaderboards: []
+        };
+    }
+
+    jsonOutput = {
+        metadata: {
+            generated_at: new Date().toISOString(),
+            description: 'League Analytics Data'
+        },
+        leaderboards: []
+    };
+    csvRows = ['Category,Subcategory,Scope,Rank,Player,Value,Context,IsActive'];
+
+    try {
+        const allGames = parseSchedule(scheduleData);
+        if (!allGames.length) {
+            return jsonOutput;
+        }
+        allGames.sort((a, b) => (a.season - b.season) || (a.weekIndex - b.weekIndex));
+
+        const leagueGames = allGames.filter(g => !g.isTieBreak);
+        const tieBreakGames = allGames.filter(g => g.isTieBreak);
+
+        const gamesById = {};
+        leagueGames.forEach(g => {
+            if (!gamesById[g.gameId]) gamesById[g.gameId] = [];
+            gamesById[g.gameId].push(g);
+        });
+
+        const maxSeason = Math.max(...allGames.map(g => g.season));
+        const activePlayersSet = new Set(
+            allGames.filter(g => g.season === maxSeason).map(g => g.player)
+        );
+
+        const inauguralSeason = Math.min(...allGames.map(g => g.season));
+
+        const regSeasonGames = leagueGames.filter(g => !g.isPostSeason);
+        const postSeasonGames = leagueGames.filter(g => g.isPostSeason);
+
+        const seasonsRegularSeasonComplete = buildSeasonsWithRegularSeasonComplete(regSeasonGames);
+
+        const SCOPE_REG = 'All-Time (Regular Season)';
+        const SCOPE_COM = 'All-Time (Reg and Post Season)';
+
+        [SCOPE_COM, SCOPE_REG].forEach(scope => {
+            const dataset = scope === SCOPE_REG ? regSeasonGames : leagueGames;
+
+            processStat('Average Points per Game', 'Averages', scope, getAveragePoints(dataset));
+            processStat('Elo Leaderboard', 'Ratings', scope, getEloLeaderboard(dataset, { activePlayersSet }));
+
+            const minGames = 5;
+            processStat(`% of 1st Place Finishes (Min ${minGames} Games)`, 'Placement Rates', scope, getPlacementRates(dataset, g => g.place === 1, minGames));
+            processStat(`% of 2nd Place Finishes (Min ${minGames} Games)`, 'Placement Rates', scope, getPlacementRates(dataset, g => g.place === 2, minGames));
+            processStat(`% of 3rd Place Finishes (Min ${minGames} Games)`, 'Placement Rates', scope, getPlacementRates(dataset, g => g.place === 3, minGames));
+            processStat(`% of 4th Place Finishes (Min ${minGames} Games)`, 'Placement Rates', scope, getPlacementRates(dataset, g => g.place === 4, minGames));
+            processStat(`% of Top Half Finishes (Min ${minGames} Games)`, 'Placement Rates', scope, getPlacementRates(dataset, g => g.place <= 2, minGames));
+            processStat(`% of Bottom Half Finishes (Min ${minGames} Games)`, 'Placement Rates', scope, getPlacementRates(dataset, g => g.place >= 3, minGames));
+
+            processStat('Points Leaders', 'Totals', scope, getSums(dataset, 'points'));
+            processStat('Most 1st Places', 'Totals', scope, getCounts(dataset, g => g.place === 1));
+            processStat('Most 2nd Places', 'Totals', scope, getCounts(dataset, g => g.place === 2));
+            processStat('Most 3rd Places', 'Totals', scope, getCounts(dataset, g => g.place === 3));
+            processStat('Most 4th Places', 'Totals', scope, getCounts(dataset, g => g.place === 4));
+            processStat('Top Half Finishes (1st/2nd)', 'Totals', scope, getCounts(dataset, g => g.place <= 2));
+            processStat('Bottom Half Finishes (3rd/4th)', 'Totals', scope, getCounts(dataset, g => g.place >= 3));
+
+            processStat('Longest Win Streak', 'Streaks (All-Time)', scope, getStreaks(dataset, g => g.place === 1, activePlayersSet));
+            processStat('Longest 2nd Place Streak', 'Streaks (All-Time)', scope, getStreaks(dataset, g => g.place === 2, activePlayersSet));
+            processStat('Longest 3rd Place Streak', 'Streaks (All-Time)', scope, getStreaks(dataset, g => g.place === 3, activePlayersSet));
+            processStat('Longest 4th Place Streak', 'Streaks (All-Time)', scope, getStreaks(dataset, g => g.place === 4, activePlayersSet));
+            processStat('Longest Streak w/o 4th', 'Streaks (All-Time)', scope, getStreaks(dataset, g => g.place !== 4, activePlayersSet));
+            processStat('Longest Winless Streak', 'Streaks (All-Time)', scope, getStreaks(dataset, g => g.place !== 1, activePlayersSet));
+            processStat('Longest Top Half Streak (1st/2nd)', 'Streaks (All-Time)', scope, getStreaks(dataset, g => g.place <= 2, activePlayersSet));
+            processStat('Longest Bottom Half Streak (3rd/4th)', 'Streaks (All-Time)', scope, getStreaks(dataset, g => g.place >= 3, activePlayersSet));
+            processStat('Longest Streak Without Losing to a Man', 'Streaks (All-Time)', scope, getGenderStreaks(dataset, 'M', gamesById, activePlayersSet, false));
+            processStat('Longest Streak Without Losing to a Woman', 'Streaks (All-Time)', scope, getGenderStreaks(dataset, 'F', gamesById, activePlayersSet, false));
+
+            processStat('Active Win Streak', 'Streaks (Active)', scope, getActiveStreaks(dataset, g => g.place === 1, activePlayersSet));
+            processStat('Active 2nd Place Streak', 'Streaks (Active)', scope, getActiveStreaks(dataset, g => g.place === 2, activePlayersSet));
+            processStat('Active 3rd Place Streak', 'Streaks (Active)', scope, getActiveStreaks(dataset, g => g.place === 3, activePlayersSet));
+            processStat('Active 4th Place Streak', 'Streaks (Active)', scope, getActiveStreaks(dataset, g => g.place === 4, activePlayersSet));
+            processStat('Active Streak w/o 4th', 'Streaks (Active)', scope, getActiveStreaks(dataset, g => g.place !== 4, activePlayersSet));
+            processStat('Active Winless Streak', 'Streaks (Active)', scope, getActiveStreaks(dataset, g => g.place !== 1, activePlayersSet));
+            processStat('Active Top Half Streak', 'Streaks (Active)', scope, getActiveStreaks(dataset, g => g.place <= 2, activePlayersSet));
+            processStat('Active Bottom Half Streak', 'Streaks (Active)', scope, getActiveStreaks(dataset, g => g.place >= 3, activePlayersSet));
+            processStat('Active Streak Without Losing to a Man', 'Streaks (Active)', scope, getGenderStreaks(dataset, 'M', gamesById, activePlayersSet, true));
+            processStat('Active Streak Without Losing to a Woman', 'Streaks (Active)', scope, getGenderStreaks(dataset, 'F', gamesById, activePlayersSet, true));
+
+            [10, 20, 30, 40, 50, 60].forEach(target => {
+                processStat(`Fastest to ${target} Career Points (# Games)`, 'Speed Records', scope, getFastestToCareerPoints(dataset, target));
+            });
+        });
+
+        const SCOPE_SEASON = 'Single Season Records';
+        const playerSeasons = getPlayerSeasonStats(regSeasonGames);
+
+        processStat('Most Points (Season)', 'Totals', SCOPE_SEASON, getRankedRecords(playerSeasons, 'points'));
+        processStat('Most 1st Places', 'Totals', SCOPE_SEASON, getRankedRecords(playerSeasons, 'place_1'));
+        processStat('Most 2nd Places', 'Totals', SCOPE_SEASON, getRankedRecords(playerSeasons, 'place_2'));
+        processStat('Most 3rd Places', 'Totals', SCOPE_SEASON, getRankedRecords(playerSeasons, 'place_3'));
+        processStat('Most 4th Places', 'Totals', SCOPE_SEASON, getRankedRecords(playerSeasons, 'place_4'));
+
+        processStat(
+            'SOS-Adjusted Points per Game (Completed Regular Seasons)',
+            'Averages',
+            SCOPE_SEASON,
+            getSeasonAdjustedPPGLeaderboard(regSeasonGames, seasonsRegularSeasonComplete)
+        );
+
+        processStat('Longest Win Streak (Season)', 'Streaks', SCOPE_SEASON, getSingleSeasonStreaks(regSeasonGames, g => g.place === 1, activePlayersSet));
+        processStat('Longest Streak w/o 4th (Season)', 'Streaks', SCOPE_SEASON, getSingleSeasonStreaks(regSeasonGames, g => g.place !== 4, activePlayersSet));
+        processStat('Longest Top Half Streak (Season)', 'Streaks', SCOPE_SEASON, getSingleSeasonStreaks(regSeasonGames, g => g.place <= 2, activePlayersSet));
+        processStat('Longest Winless Streak (Season)', 'Streaks', SCOPE_SEASON, getSingleSeasonStreaks(regSeasonGames, g => g.place !== 1, activePlayersSet));
+        processStat('Longest Bottom Half Streak (Season)', 'Streaks', SCOPE_SEASON, getSingleSeasonStreaks(regSeasonGames, g => g.place >= 3, activePlayersSet));
+
+        processStat('Longest Streak Without Losing to a Man (Season)', 'Streaks', SCOPE_SEASON, getSingleSeasonGenderStreaks(regSeasonGames, 'M', gamesById, activePlayersSet));
+        processStat('Longest Streak Without Losing to a Girl (Season)', 'Streaks', SCOPE_SEASON, getSingleSeasonGenderStreaks(regSeasonGames, 'F', gamesById, activePlayersSet));
+
+        const rookieRecords = getRookieSeasonRecords(regSeasonGames);
+        processStat('Most Points in Rookie Season (All-Time)', 'Rookie Records', SCOPE_SEASON, rookieRecords);
+
+        const rookieRecordsExcl = rookieRecords.filter(r => r.season > inauguralSeason);
+        processStat(`Most Points in Rookie Season (Excl. ${inauguralSeason})`, 'Rookie Records', SCOPE_SEASON, rookieRecordsExcl);
+
+        const sophRecords = getSophomoreSeasonRecords(regSeasonGames);
+        processStat('Best Sophomore Season (All-Time)', 'Rookie Records', SCOPE_SEASON, sophRecords);
+
+        const sophRecordsExcl = sophRecords.filter(r => r.rookieSeason > inauguralSeason);
+        processStat(`Best Sophomore Season (Excl. Class of ${inauguralSeason})`, 'Rookie Records', SCOPE_SEASON, sophRecordsExcl);
+
+        const SCOPE_POST = 'Post Season Only';
+        processStat('Most Playoff Appearances', 'Totals', SCOPE_POST, getPlayoffAppearances(postSeasonGames));
+        processStat('Most Championship Appearances', 'Totals', SCOPE_POST, getChampionshipAppearances(postSeasonGames));
+        processStat('Most Championship Titles', 'Totals', SCOPE_POST, getChampionshipTitles(postSeasonGames));
+
+        processStat('Most Consecutive Playoff Appearances', 'Streaks', SCOPE_POST, getConsecutivePlayoffAppearances(postSeasonGames, activePlayersSet));
+
+        processStat(
+            'Most Tiebreaker Games Played',
+            'Totals',
+            SCOPE_POST,
+            getTieBreakGamesPlayedLeaderboard(tieBreakGames, leagueGames)
+        );
+
+        const SCOPE_HOME = 'Locations';
+        const homeDataset = leagueGames;
+
+        processStat('Home Win % (Min 5 Home Games)', 'Averages', SCOPE_HOME, getWinRates(homeDataset, true, 5));
+        processStat('Away Win % (Min 5 Away Games)', 'Averages', SCOPE_HOME, getWinRates(homeDataset, false, 5));
+        processStat('Home vs Away Point Differential (Min 5 Games Each)', 'Averages', SCOPE_HOME, getLocationPointDifferential(homeDataset, 5));
+
+        processStat('% of Games Played at Home (Min 5 Games)', 'Averages', SCOPE_HOME, getLocationPercent(homeDataset, true, 5));
+        processStat('% of Games Played Away (Min 5 Games)', 'Averages', SCOPE_HOME, getLocationPercent(homeDataset, false, 5));
+
+        processStat('Average Points at Home (Min 5 Home Games)', 'Averages', SCOPE_HOME, getLocationAveragePoints(homeDataset, true, 5));
+        processStat('Average Points Away (Min 5 Away Games)', 'Averages', SCOPE_HOME, getLocationAveragePoints(homeDataset, false, 5));
+
+        processStat('Most Games Hosted (By Location)', 'Totals', SCOPE_HOME, getLocationCounts(leagueGames));
+        processStat('Most Home Games Played (By Player)', 'Totals', SCOPE_HOME, getCounts(homeDataset, g => g.isHome));
+
+        processStat('Last Hosted (Active Players)', 'Totals', SCOPE_HOME, getLeastRecentHost(leagueGames, activePlayersSet));
+
+        processStat('Most Wins at Home', 'Totals', SCOPE_HOME, getCounts(homeDataset, g => g.isHome && g.place === 1));
+        processStat('Most Wins Away', 'Totals', SCOPE_HOME, getCounts(homeDataset, g => !g.isHome && g.place === 1));
+
+        processStat('Most Home Games Played (Single Season)', 'Single Season', SCOPE_HOME, getMostHomeGamesInSeason(homeDataset));
+        processStat('Fewest Home Games Played (Single Season)', 'Single Season', SCOPE_HOME, getFewestHomeGamesInSeason(homeDataset, seasonsRegularSeasonComplete));
+
+        processStat('Most Games Played at Neutral Sites', 'Neutral Sites', SCOPE_HOME, getNeutralSiteCounts(leagueGames));
+        processStat('Most Popular Neutral Sites', 'Neutral Sites', SCOPE_HOME, getNeutralSiteLocationCounts(leagueGames));
+
+        const SCOPE_CROSS = 'Cross Season';
+        const minRequiredGames = 2;
+        for (let w = 1; w <= 6; w++) {
+            processStat(`Best Week ${w} Performance Avg (Min ${minRequiredGames} games)`, 'Averages by Week', SCOPE_CROSS, getWeeklyAverages(leagueGames, w, minRequiredGames));
+        }
+
+        const openers = getSplitPerformance(regSeasonGames, [1, 2, 3], minRequiredGames);
+        const closers = getSplitPerformance(regSeasonGames, [4, 5, 6], minRequiredGames);
+        processStat(`The Opener (Avg Pts Wks 1-3) (Min ${minRequiredGames} games)`, 'Averages by Week', SCOPE_CROSS, openers);
+        processStat(`The Closer (Avg Pts Wks 4-6) (Min ${minRequiredGames} games)`, 'Averages by Week', SCOPE_CROSS, closers);
+
+        processStat('Biggest Points Jump (Season to Season)', 'Risers and Fallers', SCOPE_CROSS, getBiggestPointJumps(regSeasonGames, seasonsRegularSeasonComplete));
+        processStat('Biggest Points Drop (Season to Season)', 'Risers and Fallers', SCOPE_CROSS, getBiggestPointDrops(regSeasonGames, seasonsRegularSeasonComplete));
+
+        let consistencyDataset = regSeasonGames;
+        if (!seasonsRegularSeasonComplete.has(maxSeason)) {
+            consistencyDataset = regSeasonGames.filter(g => g.season !== maxSeason);
+        }
+
+        processStat('Most Consistent Finishers (Game Finishes Std Dev)', 'Risers and Fallers', SCOPE_CROSS, getPlacementConsistency(consistencyDataset, 5));
+
+        processStat('Most Consistent Scorers (Season Pts Std Dev)', 'Risers and Fallers', SCOPE_CROSS, getPointsConsistency(consistencyDataset, 3));
+
+        processStat('Most Common Matchups (Regular Season Only)', 'Rivalries', SCOPE_CROSS, getMostCommonMatchups(regSeasonGames));
+        processStat('Least Played Matchups (Active Players Only - Max 1 Game)', 'Rivalries', SCOPE_CROSS, getLeastPlayedMatchups(leagueGames, activePlayersSet));
+        processStat('Longest Matchup Droughts (> 6 Weeks Since Last Play)', 'Rivalries', SCOPE_CROSS, getMatchupDroughts(leagueGames, activePlayersSet));
+
+        processStat('Best Duo (Combined Avg Pts > 2.0)', 'Rivalries', SCOPE_CROSS, getBestDuos(regSeasonGames));
+        processStat('Worst Duo (Combined Avg Pts < 2.0)', 'Rivalries', SCOPE_CROSS, getBestDuos(regSeasonGames));
+        processStat('Worst Enemies (Lowest Avg Score vs Opponent)', 'Rivalries', SCOPE_CROSS, getWorstEnemies(regSeasonGames));
+
+        const SCOPE_PLAYER_MATCHUPS = 'Player Matchups';
+        const MIN_VS_OPPONENT = 3;
+        const MIN_WITH_PARTNER = 3;
+        const oppByPlayer = buildOpponentStatsByPlayer(regSeasonGames);
+        const duoByPlayer = buildDuoStatsByPlayer(regSeasonGames);
+        const matchupPlayers = [...new Set(regSeasonGames.map(g => g.player))].sort((a, b) =>
+            a.localeCompare(b)
+        );
+
+        for (const pname of matchupPlayers) {
+            const gamesVsList = getOpponentGameCountsList(pname, oppByPlayer);
+            const droughtList = getMatchupDroughtsForPlayer(pname, leagueGames, activePlayersSet);
+            const bestVs = getRankedOpponentsForPlayer(pname, oppByPlayer, MIN_VS_OPPONENT, true);
+            const worstVs = getRankedOpponentsForPlayer(pname, oppByPlayer, MIN_VS_OPPONENT, false);
+            const bestWith = getRankedPartnersForPlayer(pname, duoByPlayer, MIN_WITH_PARTNER, true);
+            const worstWith = getRankedPartnersForPlayer(pname, duoByPlayer, MIN_WITH_PARTNER, false);
+            if (
+                gamesVsList.length === 0 &&
+                droughtList.length === 0 &&
+                bestVs.length + worstVs.length + bestWith.length + worstWith.length === 0
+            ) {
+                continue;
+            }
+
+            processStat('Games vs Each Opponent', pname, SCOPE_PLAYER_MATCHUPS, gamesVsList);
+
+            processStat(
+                'Longest Matchup Droughts (> 6 Weeks Since Last Play)',
+                pname,
+                SCOPE_PLAYER_MATCHUPS,
+                droughtList
+            );
+            processStat(`Best Against (Avg Pts, Min ${MIN_VS_OPPONENT} Games)`, pname, SCOPE_PLAYER_MATCHUPS, bestVs);
+            processStat(
+                `Worst Against (Avg Pts, Min ${MIN_VS_OPPONENT} Games)`,
+                pname,
+                SCOPE_PLAYER_MATCHUPS,
+                worstVs
+            );
+            processStat(
+                `Best With (Combined Table Avg, Min ${MIN_WITH_PARTNER} Games)`,
+                pname,
+                SCOPE_PLAYER_MATCHUPS,
+                bestWith
+            );
+            processStat(
+                `Worst With (Combined Table Avg, Min ${MIN_WITH_PARTNER} Games)`,
+                pname,
+                SCOPE_PLAYER_MATCHUPS,
+                worstWith
+            );
+        }
+
+        const SCOPE_METRICS = 'Historic Performances';
+        const seasonMetrics = calculateSeasonMetrics(leagueGames);
+
+        processStat('Lowest Points to Qualify for Playoffs', 'Cutoffs', SCOPE_METRICS, seasonMetrics.lowestQualifiers);
+
+        const sosStats = calculateStrengthOfSchedule(regSeasonGames);
+        processStat('Hardest Strength of Schedule (All-Time Avg Opponent Pts)', 'Difficulty', SCOPE_METRICS, sosStats.hardest);
+        processStat('Easiest Strength of Schedule (All-Time Avg Opponent Pts)', 'Difficulty', SCOPE_METRICS, sosStats.easiest);
+        processStat('Hardest Path to Playoffs (Single Season SoS)', 'Difficulty', SCOPE_METRICS, getHardestPathToPlayoffs(regSeasonGames, leagueGames));
+
+        processStat('Worst Start (2 Games) to Make Playoffs', 'Comebacks', SCOPE_METRICS, seasonMetrics.worstStarts2);
+        processStat('Worst Start (3 Games) to Make Playoffs', 'Comebacks', SCOPE_METRICS, seasonMetrics.worstStarts3);
+        processStat('Worst Start (4 Games) to Make Playoffs', 'Comebacks', SCOPE_METRICS, seasonMetrics.worstStarts4);
+
+        processStat('Best Start (2 Games) to Miss Playoffs', 'Collapses', SCOPE_METRICS, seasonMetrics.bestMisses2);
+        processStat('Best Start (3 Games) to Miss Playoffs', 'Collapses', SCOPE_METRICS, seasonMetrics.bestMisses3);
+        processStat('Best Start (4 Games) to Miss Playoffs', 'Collapses', SCOPE_METRICS, seasonMetrics.bestMisses4);
+
+        const SCOPE_TRENDS = 'Trends (Regular Season)';
+
+        const timeframes = [
+            { label: 'Last 5 Games', type: 'games', value: 5 },
+            { label: 'Last 10 Games', type: 'games', value: 10 },
+            { label: 'Last 2 Seasons', type: 'season', value: 2 },
+            { label: 'Last 3 Seasons', type: 'season', value: 3 }
+        ];
+
+        timeframes.forEach(tf => {
+            const tfData = filterDataset(regSeasonGames, tf.type, tf.value, maxSeason);
+
+            const subCat = tf.label;
+
+            const minG = tf.type === 'games' && tf.value <= 5 ? 2 : 3;
+
+            processStat('Average Points per Game', subCat, SCOPE_TRENDS, getAveragePoints(tfData, minG));
+            processStat('Win %', subCat, SCOPE_TRENDS, getPlacementRates(tfData, g => g.place === 1, minG));
+
+            processStat('% of 2nd Place Finishes', subCat, SCOPE_TRENDS, getPlacementRates(tfData, g => g.place === 2, minG));
+            processStat('% of 3rd Place Finishes', subCat, SCOPE_TRENDS, getPlacementRates(tfData, g => g.place === 3, minG));
+            processStat('% of 4th Place Finishes', subCat, SCOPE_TRENDS, getPlacementRates(tfData, g => g.place === 4, minG));
+            processStat('Top Half Finish % (1st/2nd)', subCat, SCOPE_TRENDS, getPlacementRates(tfData, g => g.place <= 2, minG));
+            processStat('Bottom Half Finish % (3rd/4th)', subCat, SCOPE_TRENDS, getPlacementRates(tfData, g => g.place > 2, minG));
+        });
+    } catch (err) {
+        console.error('computeLeagueAnalytics:', err);
+        throw err;
+    }
+
+    return jsonOutput;
+}
